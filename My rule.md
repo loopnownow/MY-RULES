@@ -220,7 +220,7 @@ $env:HTTPS_PROXY = "http://127.0.0.1:10808"; grok
 - 用户明确同意后才 merge。同意包括「同意」「合并」，或同等明确的话。
 - 「直接做」不跳过变更清单，也不跳过 merge 确认。
 - merge 后只把本次改动的文件同步到 `C:\Users\loopn\.grok\skills`。
-- 禁止对 `mounts-cap` 做 `robocopy /MIR` 或 `git clean -xfd`。
+- `mounts-cap` 有改动时，同步到本地仓目录 `D:\0Grok\0doc\GitHub\MY-SKILLS\mounts-cap`（与 `.grok\skills\mounts-cap` 对齐）。只更新变化文件；禁止对 `mounts-cap` 做 `robocopy /MIR` 或 `git clean -xfd`。是否提交远端按用户当次指示。
 - `D:\0Grok\0script` 和 `D:\0Grok\0doc` 不进仓。技能只写路径指针。不放入整棵脚本树，不放挂载包字节。
 - `D:\0Grok\0script` 里的脚本按技能组织。仓内只写指向这些脚本的指针。
 - `D:\0Grok\0script\stats-analysis\modules\` 的改动见第 5 节。先得到用户同意。
@@ -232,6 +232,6 @@ $env:HTTPS_PROXY = "http://127.0.0.1:10808"; grok
 
 只留最近 3 条。写入第 4 条时，删掉最旧的一条。
 
-1. 2026-10-08：临时文件夹只许放在 `D:\0Grok\0del\`。禁止在盘符根、用户主目录、项目根新建。用完移入 `0del`。pytest 缓存指到本次 `0del` 子文件夹。
-2. 2026-10-08：合并 Cline 规则到本文件。文件改为只读免授权、改或移先授权、禁止删除。临时文件改为任务结束时移入 `D:\0Grok\0del\` 的新建子文件夹，或创建时就放在那里。删除了只用于按套餐占用把任务转给别的执行方的旧规则。非代码改动只留最近 3 次大改记录。改前全文在 `D:\0Grok\0del\rules_merge_20261008\My rule.prev.md`。
-3. 2026-10-09：资料整理不再产出 `*.tsv` 索引清单，登记改用 `.xlsx`，说明用 `.md`。`D:\0Grok\0doc\07-ethics\` 批件统一为 PDF，每份一份，多页按页码合并；来源件留底后移 `0del`。`_index\files.tsv` 停用并移入 `0del`。改前全文在 `D:\0Grok\0del\rules_tsv_20261009\My rule.prev.md`。
+1. 2026-10-08：合并 Cline 规则到本文件。文件改为只读免授权、改或移先授权、禁止删除。临时文件改为任务结束时移入 `D:\0Grok\0del\` 的新建子文件夹，或创建时就放在那里。删除了只用于按套餐占用把任务转给别的执行方的旧规则。非代码改动只留最近 3 次大改记录。改前全文在 `D:\0Grok\0del\rules_merge_20261008\My rule.prev.md`。
+2. 2026-10-09：资料整理不再产出 `*.tsv` 索引清单，登记改用 `.xlsx`，说明用 `.md`。`D:\0Grok\0doc\07-ethics\` 批件统一为 PDF，每份一份，多页按页码合并；来源件留底后移 `0del`。`_index\files.tsv` 停用并移入 `0del`。改前全文在 `D:\0Grok\0del\rules_tsv_20261009\My rule.prev.md`。
+3. 2026-10-09：`mounts-cap` 有改动时同步到 `D:\0Grok\0doc\GitHub\MY-SKILLS\mounts-cap`；仍禁止 `/MIR` 与 `git clean -xfd`。GitHub 本地仓在 `D:\0Grok\0doc\GitHub\`。
