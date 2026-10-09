@@ -208,6 +208,11 @@ license: MIT
 $env:HTTPS_PROXY = "http://127.0.0.1:10808"; grok
 ```
 
+- **外挂盯梢（Cline / Cursor / Grok，2026-10-09）**：凡把任务交给 Cline、Cursor Agent 或 Grok Build，Aitor 必须：
+  1. 按工作量预估完成时间，并向用户报 ETA；过程中按实际进度**实时调整** ETA。
+  2. 监控运行：进程是否活着、日志/产物是否推进、卡点与阻塞。Grok Build 另须遵守下面「Grok 盯梢」细则。
+  3. 结束时必须拿到执行方反馈（结果摘要、改了哪些路径、是否验收通过、遗留项）。
+  4. 按规则反馈 token / 额度：汇总本次用量，并报告 Cursor、Grok、Cline 当前周期已用、剩余与下次重置（可由 Bai 打开固定用量页：Cline `https://app.cline.bot/dashboard/usage`；Cursor `https://cursor.com/dashboard/spending`；Grok `https://grok.com/?_s=usage`）。不做成例行 routine。
 - **Grok 盯梢（2026-10-08）**：凡由 Cursor/Auto 调用的 Grok Build 会话，启动后必须：
   1. 每 10 分钟向用户做一次简报。状态写仍在跑或已结束。写本段改了哪些路径。写卡点或阻塞。
   2. 判定卡住时主动处理。无新文件改动且无新实质输出超过约 10 分钟、反复同一工具无进展、进程假死或报错停住，都算卡住。先查原因。可续跑则用 `grok -c` 或 `grok -r` 补指令。不可续则重启会话或收回自做，并在简报里写明处置。
@@ -232,6 +237,6 @@ $env:HTTPS_PROXY = "http://127.0.0.1:10808"; grok
 
 只留最近 3 条。写入第 4 条时，删掉最旧的一条。
 
-1. 2026-10-08：合并 Cline 规则到本文件。文件改为只读免授权、改或移先授权、禁止删除。临时文件改为任务结束时移入 `D:\0Grok\0del\` 的新建子文件夹，或创建时就放在那里。删除了只用于按套餐占用把任务转给别的执行方的旧规则。非代码改动只留最近 3 次大改记录。改前全文在 `D:\0Grok\0del\rules_merge_20261008\My rule.prev.md`。
-2. 2026-10-09：资料整理不再产出 `*.tsv` 索引清单，登记改用 `.xlsx`，说明用 `.md`。`D:\0Grok\0doc\07-ethics\` 批件统一为 PDF，每份一份，多页按页码合并；来源件留底后移 `0del`。`_index\files.tsv` 停用并移入 `0del`。改前全文在 `D:\0Grok\0del\rules_tsv_20261009\My rule.prev.md`。
-3. 2026-10-09：`mounts-cap` 有改动时同步到 `D:\0Grok\0doc\GitHub\MY-SKILLS\mounts-cap`；仍禁止 `/MIR` 与 `git clean -xfd`。GitHub 本地仓在 `D:\0Grok\0doc\GitHub\`。
+1. 2026-10-09：资料整理不再产出 `*.tsv` 索引清单，登记改用 `.xlsx`，说明用 `.md`。`D:\0Grok\0doc\07-ethics\` 批件统一为 PDF，每份一份，多页按页码合并；来源件留底后移 `0del`。`_index\files.tsv` 停用并移入 `0del`。改前全文在 `D:\0Grok\0del\rules_tsv_20261009\My rule.prev.md`。
+2. 2026-10-09：`mounts-cap` 有改动时同步到 `D:\0Grok\0doc\GitHub\MY-SKILLS\mounts-cap`；仍禁止 `/MIR` 与 `git clean -xfd`。GitHub 本地仓在 `D:\0Grok\0doc\GitHub\`。
+3. 2026-10-09：交给 Cline/Cursor/Grok 后必须盯梢、预估并实时调整 ETA；结束要执行方反馈；并按规则汇报 token/额度与剩余。
