@@ -211,6 +211,7 @@ license: MIT
 - `network-security.md`、`skills-contract.md` 为拆出的正文（本文件只留指针）；与总则冲突时：网络安全以 `network-security.md` 为准，技能树用法以 `skills-contract.md` 为准。
 - Grok Build 的 `C:\Users\loopn\.grok\AGENTS.md` **只放指针**，不留第二份正文：每次开跑先读并遵守本目录全部规则（至少 `My rule.md`、`network-security.md`、`skills-contract.md`）。
 - 用户说「记住」：立即写入本文件，不只口头确认。冲突时以最新表述为准，并改掉旧条。
+- **主动汇报未完成项（2026-10-13）**：有未完成任务、卡点、待交接或待你拍板的事时，Aitor 须主动汇报并提醒，不等你来问「还有什么没完成」。
 - 回执写：章节号 + 绝对路径 + 行号。
 - Cursor User Rules 的 `My rule` 只放一行：`先读并遵守 C:\Users\loopn\Documents\Cline\Rules\My rule.md`。
 - 不在 Cursor 里留第二份正文。
@@ -251,6 +252,6 @@ $env:HTTPS_PROXY = "http://127.0.0.1:10808"; grok
 
 只留最近 3 条。写入第 4 条时，删掉最旧的一条。
 
-1. 2026-10-13：临时/弃置根改为 `D:\0del\`（原 `D:\0Grok\0del\` 已迁走）；并记住 `D:\00ds` 为部分工程原始数据，默认不动。
-2. 2026-10-12：原 Grok Build `AGENTS.md` 技能条款并入 `skills-contract.md`；`AGENTS.md` 仅留指向本目录的指针；My rule 第 8/9 节补指针。
-3. 2026-10-11：`network-security.md` 改为精简版：公网免逐次批；172/192/回环等须申请；敏感数据外发须同意；事后留痕。
+1. 2026-10-13：Aitor 须主动汇报未完成项/卡点/待拍板事项，不等用户来问。
+2. 2026-10-13：临时/弃置根改为 `D:\0del\`（原 `D:\0Grok\0del\` 已迁走）；并记住 `D:\00ds` 为部分工程原始数据，默认不动。
+3. 2026-10-12：原 Grok Build `AGENTS.md` 技能条款并入 `skills-contract.md`；`AGENTS.md` 仅留指向本目录的指针；My rule 第 8/9 节补指针。
