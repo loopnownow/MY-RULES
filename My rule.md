@@ -207,6 +207,8 @@ license: MIT
 # 8 按需文件、记住与同步
 
 - 本文件是唯一权威。同目录的 `routing.md`、`manuscript-docx.md`、`workspace-layout.md`、`my-skills-repo.md` 只作指针。
+- `network-security.md`、`skills-contract.md` 为拆出的正文（本文件只留指针）；与总则冲突时：网络安全以 `network-security.md` 为准，技能树用法以 `skills-contract.md` 为准。
+- Grok Build 的 `C:\Users\loopn\.grok\AGENTS.md` **只放指针**，不留第二份正文：每次开跑先读并遵守本目录全部规则（至少 `My rule.md`、`network-security.md`、`skills-contract.md`）。
 - 用户说「记住」：立即写入本文件，不只口头确认。冲突时以最新表述为准，并改掉旧条。
 - 回执写：章节号 + 绝对路径 + 行号。
 - Cursor User Rules 的 `My rule` 只放一行：`先读并遵守 C:\Users\loopn\Documents\Cline\Rules\My rule.md`。
@@ -230,6 +232,7 @@ $env:HTTPS_PROXY = "http://127.0.0.1:10808"; grok
 
 # 9 MY-SKILLS
 
+- 技能目录只读与按需加载：全文见同目录 `skills-contract.md`（由原 Grok `AGENTS.md` 技能条款并入）。
 - 一次任务的改动先在本地分支做完，测试通过。
 - 开 PR 前给用户看完整变更清单。不零散开 PR。不直推 main。
 - 用户明确同意后才 merge。同意包括「同意」「合并」，或同等明确的话。
@@ -245,12 +248,8 @@ $env:HTTPS_PROXY = "http://127.0.0.1:10808"; grok
 
 # 10 最近改动
 
-- 2026-10-11：`network-security.md` 改为精简版：公网免逐次批；172/192/回环等须申请；敏感数据外发须同意；事后留痕；隐性下载与本地 127 预批准保留。
-- 2026-10-11：采用用户修订版 `network-security.md`（授权定义、事后留痕、IDE/连接器、本地服务预批准；172/192 须申请）。
-- 2026-10-11：网络安全从 My rule 拆出为 `network-security.md`；My rule 仅留指针；默认禁止 `172.16.0.0/16`、OA `192.168.137.1`、本任务 loopback（外网仍默认无，按次批）。
-- 2026-10-11：新增「网络操作」：默认拒绝联网；执行前须提交含路径（IP/网关/代理）与风险的清单，用户同意后才可执行；「直接做」不覆盖网络；`pip`/`npm`/`git` 远程与下载同属网络操作。
 只留最近 3 条。写入第 4 条时，删掉最旧的一条。
 
-1. 2026-10-09：`mounts-cap` 有改动时同步到 `D:\0Grok\0doc\GitHub\MY-SKILLS\mounts-cap`；仍禁止 `/MIR` 与 `git clean -xfd`。GitHub 本地仓在 `D:\0Grok\0doc\GitHub\`。
-2. 2026-10-09：交给 Cline/Cursor/Grok 后必须盯梢、预估并实时调整 ETA；结束要执行方反馈；并按规则汇报 token/额度与剩余。
-3. 2026-10-09：外挂用量仅在运行 ≥30 分钟时查，且只查执行该任务的那一家。
+1. 2026-10-12：原 Grok Build `AGENTS.md` 技能条款并入 `skills-contract.md`；`AGENTS.md` 仅留指向本目录的指针；My rule 第 8/9 节补指针。
+2. 2026-10-11：`network-security.md` 改为精简版：公网免逐次批；172/192/回环等须申请；敏感数据外发须同意；事后留痕。
+3. 2026-10-11：网络安全从 My rule 拆出为 `network-security.md`；My rule 仅留指针。
