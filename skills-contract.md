@@ -22,6 +22,7 @@ description: ~/.grok/skills 只读契约与用法。原 Grok Build AGENTS.md 技
 - 遵守技能定义的路由与 QC：`00_orchestrator` → `01_skill-discovery-integration`（每次运行选 fine id）→ `02`–`06` 领域层 → `00` 的 QC 门。
 - 技能文本 = 流程事实来源；已执行的产物（如 `*-results.html`） = 数字事实来源。
 - 技能产出写回项目/工作区，**不写回技能目录**。
+- 挂载包按 `C:\Users\loopn\.grok\skills\01_skill-discovery-integration\SKILL.md` 的 fine id 逐个选。禁止整包批量克隆（bulk-clone packs）。
 
 ## 3. 技能发现位置
 

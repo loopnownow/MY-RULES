@@ -12,6 +12,7 @@ license: MIT
   - A 类：数据处理项目，在 `L:\00used\<项目>\`。
   - B 类：写作子项目，在 `D:\0Grok\<子项目>\`。
 - 目录、清理、产出落点见第 5 节。
+- 稿件与审稿常驻政策见同目录 `manuscript-and-review.md`。第 6 节仍然有效。
 - 优先级：用户最新表述 > 本文件 > 项目 `0doc\`。
 - 只对单个项目有效的约定，写进该项目 `0doc\`，不写进本文件。写入 `0doc\` 须用户说出「放 0doc」。见第 5 节。
 - 改本文件时，同步改掉冲突的旧条。
@@ -145,12 +146,14 @@ license: MIT
 **格式**：
 
 - 表格类结果用 `.xlsx`。
-- 给人看的报告用 `.html`。
+- 给人看的报告用 `.html`。版式细则见 `C:\Users\loopn\.grok\skills\00_orchestrator\references\html-visual-design.md`，不抄入本文件。
 - 给 LLM 读的文件用 `.md`。
 - 论文稿件用 `.docx`。不换成 html。
 - 生成的 PDF 用 Times New Roman 12 pt。
 
 # 6 科研工作规则
+
+稿件与审稿常驻政策见同目录 `manuscript-and-review.md`（正文禁免责声明、Track Changes 归属、缺事实、审稿包、citation-verify）。下列各条仍然有效。
 
 **文献检索**
 
@@ -208,14 +211,14 @@ license: MIT
 # 8 按需文件、记住与同步
 
 - 本文件是唯一权威。同目录的 `routing.md`、`manuscript-docx.md`、`workspace-layout.md`、`my-skills-repo.md` 只作指针。
-- `network-security.md`、`skills-contract.md` 为拆出的正文（本文件只留指针）；与总则冲突时：网络安全以 `network-security.md` 为准，技能树用法以 `skills-contract.md` 为准。
-- Grok Build 的 `C:\Users\loopn\.grok\AGENTS.md` **只放指针**，不留第二份正文：每次开跑先读并遵守本目录全部规则（至少 `My rule.md`、`network-security.md`、`skills-contract.md`）。
+- `network-security.md`、`skills-contract.md`、`manuscript-and-review.md` 为拆出的正文（本文件只留指针）；与总则冲突时：网络安全以 `network-security.md` 为准，技能树用法以 `skills-contract.md` 为准，稿件与审稿常驻政策以 `manuscript-and-review.md` 为准。第 6 节已写的条目仍然有效。
+- Grok Build 的 `C:\Users\loopn\.grok\AGENTS.md` **只放指针**，不留第二份正文：每次开跑先读并遵守本目录全部规则（至少 `My rule.md`、`network-security.md`、`skills-contract.md`、`manuscript-and-review.md`）。
 - 用户说「记住」：立即写入本文件，不只口头确认。冲突时以最新表述为准，并改掉旧条。
 - **主动汇报未完成项（2026-10-13）**：有未完成任务、卡点、待交接或待你拍板的事时，Aitor 须主动汇报并提醒，不等你来问「还有什么没完成」。
 - 回执写：章节号 + 绝对路径 + 行号。
 - Cursor User Rules 的 `My rule` 只放一行：`先读并遵守 C:\Users\loopn\Documents\Cline\Rules\My rule.md`。
 - 不在 Cursor 里留第二份正文。
-- 编码、整理、提取、填写等任务，可以交给 Cursor IDE 里的 Cline。
+- **交接（2026-10-13）**：编码、整理、提取、填写，以及用户说「交给cline」时，优先 Cursor IDE 里的 Cline。只有用户说「交给cursor」才交 Cursor Agent。
 - **Grok Build 启动**：凡交 Grok Build 的活，必须由 Cursor/Auto 在自己的 agent terminal 里启动。不得让用户去开终端。不得让用户手动跑 `grok`。
 
 ```powershell
@@ -252,6 +255,6 @@ $env:HTTPS_PROXY = "http://127.0.0.1:10808"; grok
 
 只留最近 3 条。写入第 4 条时，删掉最旧的一条。
 
-1. 2026-10-13：Aitor 须主动汇报未完成项/卡点/待拍板事项，不等用户来问。
-2. 2026-10-13：临时/弃置根改为 `D:\0del\`（原 `D:\0Grok\0del\` 已迁走）；并记住 `D:\00ds` 为部分工程原始数据，默认不动。
-3. 2026-10-12：原 Grok Build `AGENTS.md` 技能条款并入 `skills-contract.md`；`AGENTS.md` 仅留指向本目录的指针；My rule 第 8/9 节补指针。
+1. 2026-10-13：稿件与审稿常驻政策写入 `manuscript-and-review.md`；交接区分「交给cline」与「交给cursor」；HIS/PACS 登录客户端不入库。
+2. 2026-10-13：Aitor 须主动汇报未完成项/卡点/待拍板事项，不等用户来问。
+3. 2026-10-13：临时/弃置根改为 `D:\0del\`（原 `D:\0Grok\0del\` 已迁走）；并记住 `D:\00ds` 为部分工程原始数据，默认不动。
