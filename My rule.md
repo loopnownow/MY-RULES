@@ -218,22 +218,16 @@ license: MIT
 - 回执写：章节号 + 绝对路径 + 行号。
 - Cursor User Rules 的 `My rule` 只放一行：`先读并遵守 C:\Users\loopn\Documents\Cline\Rules\My rule.md`。
 - 不在 Cursor 里留第二份正文。
-- **交接（2026-10-13）**：编码、整理、提取、填写，以及用户说「交给cline」时，优先 Cursor IDE 里的 Cline。只有用户说「交给cursor」才交 Cursor Agent。
-- **Grok Build 启动**：凡交 Grok Build 的活，必须由 Cursor/Auto 在自己的 agent terminal 里启动。不得让用户去开终端。不得让用户手动跑 `grok`。
-
-```powershell
-$env:HTTPS_PROXY = "http://127.0.0.1:10808"; grok
-```
-
-- **外挂盯梢（Cline / Cursor / Grok，2026-10-09）**：凡把任务交给 Cline、Cursor Agent 或 Grok Build，Aitor 必须：
+- **交接（2026-10-13，用户确认）**：用量池已合并。一个任务只交一个执行方。Aitor 能在本地做完的短任务，不交 Cursor，不交 Cline。
+- **Cursor**：仓库内前端与后端（UI、API、测试、PR）。仅当用户说「交给cursor」才交。
+- **Cline**：数据准备及同类（xlsx 填写、归档、批处理脚本、非仓库数据工作）。用户说「交给cline」，或一般数据/脚本交接，交 Cline。
+- **Aitor（Grok Bot）**：运维、规则、交付路径、Word 修订（Track Changes）与建议类批注、盯梢交接、研究专员路由。
+- **Grok Build（已停用，2026-10-13）**：不再新开 Grok Build 任务。Aitor 不启动 `grok`。上文「`AGENTS.md` 只放指针」仍然有效。用户若自行手动运行 `grok`，属可选、仅手动，不是交接路径。原「代理 + `grok` 启动」与「每 10 分钟 Grok 盯梢」作废，不再执行。
+- **外挂盯梢（Cline / Cursor，2026-10-13）**：凡把任务交给 Cline 或 Cursor Agent，Aitor 必须：
   1. 按工作量预估完成时间，并向用户报 ETA；过程中按实际进度**实时调整** ETA。
-  2. 监控运行：进程是否活着、日志/产物是否推进、卡点与阻塞。Grok Build 另须遵守下面「Grok 盯梢」细则。
+  2. 监控运行：进程是否活着、日志/产物是否推进、卡点与阻塞。
   3. 结束时必须拿到执行方反馈（结果摘要、改了哪些路径、是否验收通过、遗留项）。
-  4. token / 额度：仅当该次外挂任务**实际运行 ≥ 30 分钟**才查用量；且**只查执行该任务的那一家**（Cline 或 Cursor 或 Grok），不要三家一起扫。不足 30 分钟不查。查时可由 Bai 打开对应固定页（Cline `https://app.cline.bot/dashboard/usage`；Cursor `https://cursor.com/dashboard/spending`；Grok `https://grok.com/?_s=usage`），报告已用、剩余与下次重置。不做成例行 routine。
-- **Grok 盯梢（2026-10-08）**：凡由 Cursor/Auto 调用的 Grok Build 会话，启动后必须：
-  1. 每 10 分钟向用户做一次简报。状态写仍在跑或已结束。写本段改了哪些路径。写卡点或阻塞。
-  2. 判定卡住时主动处理。无新文件改动且无新实质输出超过约 10 分钟、反复同一工具无进展、进程假死或报错停住，都算卡住。先查原因。可续跑则用 `grok -c` 或 `grok -r` 补指令。不可续则重启会话或收回自做，并在简报里写明处置。
-  3. 会话正常结束后做最终简报，并停止 10 分钟轮询。
+  4. token / 额度：仅当该次外挂任务**实际运行 ≥ 30 分钟**才查用量；且**只查执行该任务的那一家**（Cline 或 Cursor）。不查 Grok Build。不足 30 分钟不查。查时可由 Bai 打开对应固定页（Cline `https://app.cline.bot/dashboard/usage`；Cursor `https://cursor.com/dashboard/spending`），报告已用、剩余与下次重置。不做成例行 routine。Grok 用量页（`https://grok.com/?_s=usage`）仅当用户明确要求时才打开，不作为交接默认。
 
 # 9 MY-SKILLS
 
@@ -255,6 +249,6 @@ $env:HTTPS_PROXY = "http://127.0.0.1:10808"; grok
 
 只留最近 3 条。写入第 4 条时，删掉最旧的一条。
 
-1. 2026-10-13：稿件与审稿常驻政策写入 `manuscript-and-review.md`；交接区分「交给cline」与「交给cursor」；HIS/PACS 登录客户端不入库。
-2. 2026-10-13：Aitor 须主动汇报未完成项/卡点/待拍板事项，不等用户来问。
-3. 2026-10-13：临时/弃置根改为 `D:\0del\`（原 `D:\0Grok\0del\` 已迁走）；并记住 `D:\00ds` 为部分工程原始数据，默认不动。
+1. 2026-10-13：合并用量后交接重分。Cursor 仅「交给cursor」时做仓库前后端；Cline 做数据准备及同类；Grok Build 停用，不再新开；Aitor 短任务本地做完。额度仍只在运行 ≥30 分钟时查执行方（Cline 或 Cursor）。
+2. 2026-10-13：稿件与审稿常驻政策写入 `manuscript-and-review.md`；交接区分「交给cline」与「交给cursor」；HIS/PACS 登录客户端不入库。
+3. 2026-10-13：Aitor 须主动汇报未完成项/卡点/待拍板事项，不等用户来问。
