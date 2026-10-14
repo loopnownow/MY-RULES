@@ -21,6 +21,10 @@ license: MIT
 
 这些说明只进 Word 批注，作者 **A**。需要补正文时，批注里给出建议英文。
 
+- 批注里给英文建议句时，建议句单独成句，以 `Suggested …` 开头（或同等 Suggested 措辞）；问题说明可用中文。`Suggested …` 与 `cannot_invent` / Undecidable 说明只进批注，不进正文。
+- Undecidable / `cannot_invent`：Word 批注必有（含 `Suggested …` 建议句时写在批注里）。
+- 若本轮同时写回复信：回复对应条须标明未决与待补来源，不得在回复正文假装已解决；建议措辞本身放在批注，不把免责声明写进回复信正文。
+
 ## 2 Track Changes 归属
 
 - 稿件 Track Changes 由 **Aitee（05）** 落笔。
@@ -36,6 +40,7 @@ license: MIT
 - 审稿意见和回复信用 `.docx`。
 - 对审稿人的要求写成 `Please …`。不用 `Please fix:`。
 - 回复收录审稿人评论全文。已完成的修改用过去时（past tense）。禁止 `We agree that…`。已声称改过的地方禁止 `we will…`。
+- Undecidable / `cannot_invent`：建议句写在批注（`Suggested …`）。回复对应条标明未决与待补来源，不得假装已解决，不把免责声明写进回复正文。见第 1 节。
 - `ACCEPT-*.html` 只在用户当轮明确要求时才做。未要求则先问。
 - 用户已把文件放到项目文件夹时，交付物放该处，例如 `D:\0Grok\submitting\<project>\`。
 
