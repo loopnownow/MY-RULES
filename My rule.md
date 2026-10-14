@@ -37,6 +37,8 @@ license: MIT
 - 用户说「直接做」：该任务内，改文件和移动文件可以不再逐项确认。
 - 「直接做」不跳过 MY-SKILLS 的开 PR 和 merge。见第 9 节。
 - 「直接做」不覆盖任何网络操作。网络一律先交风险清单，获同意后再执行。见下文「网络操作」。
+- 需要用户拍板时，优先给出有限选择题（A/B/C），并标推荐项；避免开放式长答才推进。
+- 用户说「继续」：表示按当前已确认计划继续执行任务内步骤。不等于网络操作同意（网络同意规则见 `network-security.md`；「继续」不算网络同意）。
 
 
 ## 网络操作
@@ -104,6 +106,7 @@ license: MIT
 - 跑 pytest 时把缓存目录指到本次 `0del` 子文件夹。
 - 自动清理只针对本次任务的临时文件。
 - 下面这些名字不再单独免授权：0 字节、`*.tmp*`、`*tmp*`、`*.bak`、`*~`、`__pycache__`、`*.pyc`、`Thumbs.db`、`desktop.ini`、同前缀旧时间戳日志、本次任务自造的中间文件。它们或走上面的临时文件规则，或按第 2 节先获授权再移动。
+- 需要本机执行桥接 / CopyToBox，且 `D:\0Grok` 不在可视范围时：先把文件暂存到 `D:\0del\` 下新建任务子文件夹，再复制。不要使用 `Documents\_aitor_xfer`。临时中转仍属本节 `D:\0del` 清理规则。
 
 **其他清理**：
 
@@ -115,7 +118,9 @@ license: MIT
 
 **产出落点**：
 
-- 一次性任务、会话 harvest、升级建议：`C:\Users\loopn\Downloads\<任务名>\`。
+- 有明确项目文件夹时：课题交付物（审稿意见、回复信、改稿 docx、正式结果表）只放项目文件夹（A 类 `0result\` / B 类子项目或 `submitting\<project>`），不放 Downloads。
+- 没有项目文件夹时：可放 `C:\Users\loopn\Downloads\`。
+- `Downloads\<任务名>\` 仍可用于一次性 harvest / 升级建议 / 会话整理。
 - A 类最终结果表：项目 `0result\`。
 - `D:\0Grok\0doc\` 和项目内 `0doc\`：只有用户说「放 0doc」才写入。「直接做」不代替这句话。
 
@@ -147,6 +152,7 @@ license: MIT
 
 - 表格类结果用 `.xlsx`。
 - 给人看的报告用 `.html`。版式细则见 `C:\Users\loopn\.grok\skills\00_orchestrator\references\html-visual-design.md`，不抄入本文件。
+- 同一分析若 `Results*.html`（或已执行产物 HTML）与 `.xlsx` 数字冲突：以 HTML 为准，并在汇报里写明冲突与所采用源。xlsx 作表格式交付，不覆盖 HTML 事实源。
 - 给 LLM 读的文件用 `.md`。
 - 论文稿件用 `.docx`。不换成 html。
 - 生成的 PDF 用 Times New Roman 12 pt。
@@ -195,6 +201,7 @@ license: MIT
 # 7 回复语言与写法
 
 - 给用户看的说明、汇报、QC：中文。期刊方的审稿意见、英文稿件：英文。
+- 汇报、ETA、日志时间戳、用量报告：一律用 Asia/Shanghai（中国标准时间）。不要用 America/New_York 或盒子默认时区当实验室汇报时区。时间旁可标 CST / 上海。
 - 按 ASD-STE100 写：
   - 一句一个意思。英文句子不超过 20 词。
   - 主动语态，一般现在时。
@@ -236,7 +243,7 @@ license: MIT
 - 开 PR 前给用户看完整变更清单。不零散开 PR。不直推 main。
 - 用户明确同意后才 merge。同意包括「同意」「合并」，或同等明确的话。
 - 「直接做」不跳过变更清单，也不跳过 merge 确认。
-- merge 后只把本次改动的文件同步到 `C:\Users\loopn\.grok\skills`。
+- merge 后同步：只同步本次变更文件到 `C:\Users\loopn\.grok\skills`。禁止整树覆盖、禁止借同步改写未改技能正文。
 - `mounts-cap` 有改动时，同步到本地仓目录 `D:\0Grok\0doc\GitHub\MY-SKILLS\mounts-cap`（与 `.grok\skills\mounts-cap` 对齐）。只更新变化文件；禁止对 `mounts-cap` 做 `robocopy /MIR` 或 `git clean -xfd`。是否提交远端按用户当次指示。
 - `D:\0Grok\0script` 和 `D:\0Grok\0doc` 不进仓。技能只写路径指针。不放入整棵脚本树，不放挂载包字节。
 - `D:\0Grok\0script` 里的脚本按技能组织。仓内只写指向这些脚本的指针。
@@ -249,6 +256,6 @@ license: MIT
 
 只留最近 3 条。写入第 4 条时，删掉最旧的一条。
 
-1. 2026-10-13：合并用量后交接重分。Cursor 仅「交给cursor」时做仓库前后端；Cline 做数据准备及同类；Grok Build 停用，不再新开；Aitor 短任务本地做完。额度仍只在运行 ≥30 分钟时查执行方（Cline 或 Cursor）。
-2. 2026-10-13：稿件与审稿常驻政策写入 `manuscript-and-review.md`；交接区分「交给cline」与「交给cursor」；HIS/PACS 登录客户端不入库。
-3. 2026-10-13：Aitor 须主动汇报未完成项/卡点/待拍板事项，不等用户来问。
+1. 2026-10-14：汇报时区 Asia/Shanghai；拍板优先 A/B/C 并标推荐；「继续」只表任务继续，不算网络同意；有项目文件夹的课题交付物不放 Downloads，无项目文件夹可放 Downloads；CopyToBox 暂存 `D:\0del\`，不用 `Documents\_aitor_xfer`；HTML 与 xlsx 冲突以 HTML 为准；merge 后只同步本次变更文件。稿件批注用 Suggested …；Undecidable 只进批注，回复信只标明未决。
+2. 2026-10-13：合并用量后交接重分。Cursor 仅「交给cursor」时做仓库前后端；Cline 做数据准备及同类；Grok Build 停用，不再新开；Aitor 短任务本地做完。额度仍只在运行 ≥30 分钟时查执行方（Cline 或 Cursor）。
+3. 2026-10-13：稿件与审稿常驻政策写入 `manuscript-and-review.md`；交接区分「交给cline」与「交给cursor」；HIS/PACS 登录客户端不入库。
