@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Standing meme / 红线快照 — 2026-10-15</title>
+<style>
+  :root { --bg:#f7f7f5; --card:#fff; --text:#1a1a1a; --muted:#555; --accent:#0b5fff; --border:#e2e2de; }
+  * { box-sizing: border-box; }
+  body { font-family: "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif; margin:0; padding:24px; background:var(--bg); color:var(--text); line-height:1.55; }
+  main { max-width:820px; margin:0 auto; }
+  h1 { font-size:1.55rem; margin:0 0 8px; }
+  .meta { color:var(--muted); font-size:0.92rem; margin-bottom:20px; }
+  section { background:var(--card); border:1px solid var(--border); border-radius:10px; padding:16px 18px; margin-bottom:14px; }
+  h2 { font-size:1.1rem; margin:0 0 10px; color:var(--accent); }
+  ul { margin:0; padding-left:1.2rem; }
+  li { margin:0.35rem 0; }
+  code { background:#eef1f6; padding:0.1em 0.35em; border-radius:4px; font-size:0.92em; }
+  .warn { background:#fff8e6; border-color:#f0d78c; }
+  footer { color:var(--muted); font-size:0.85rem; margin-top:18px; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Standing meme / 红线快照</h1>
+  <p class="meta">日期：2026-10-15（ET） · 仓库公开快照 · <strong>不含</strong>邮箱/密码/ORCID/医院私密号码等敏感 PII<br>
+  权威分层：meme（本机私有） &gt; rules（Cline Rules / MY-RULES） &gt; skills（MY-SKILLS）</p>
+
+  <section class="warn">
+    <h2>0. 分层与敏感边界（最高优先）</h2>
+    <ul>
+      <li><strong>分层</strong>：meme &gt; rules &gt; skills。冲突时以上层为准。</li>
+      <li><strong>PII / 敏感</strong>：仅留在 meme（本机），不写入 rules / skills / 本 HTML。</li>
+      <li>本文件只收录可进仓的政策红线与分层规则；个人联系方式、凭证、卡号等一律不收录。</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>1. 稿件正文 vs 批注</h2>
+    <ul>
+      <li>图/表占位（如 “[Figure N near here]”）→ <strong>只进 Word 批注</strong>，禁止进正文。</li>
+      <li>内部工作说明（pending source / not in the current files / In the present file 等）→ <strong>只进批注</strong>，禁止进正文或回复信正文。</li>
+      <li><strong>禁止否定列举进正文</strong>（was not tested / measured / examined / included 等）；缺口改为「建议下一步做什么」，写在批注里。</li>
+      <li>伦理、作者、资助核对、数字不一致：只进批注，不进正文。</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>2. 禁词 / disentangled</h2>
+    <ul>
+      <li><code>disentangled</code> 及同类 AI 腔/禁词：按 skills 禁词表与 Rules 常驻政策执行（机器源：<code>ban-terms.yaml</code>）。</li>
+      <li>例外：引文直引、学科专名词干碰撞、Keep 列表（指南用语与校准 Discussion 模糊语）——细则见 skills，不在此 fork。</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>3. 清理根目录</h2>
+    <ul>
+      <li><code>del_root</code>：<code>D:\0del</code>（非 A 类临时/废料）</li>
+      <li><code>del_root_a</code>：<code>L:\0del\&lt;project&gt;</code>（A 类项目废料）</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>4. 交付物类型与落点</h2>
+    <ul>
+      <li>按产物类型：报告 / 阶段 QC → <strong>HTML</strong>；稿件与 Track Changes → <strong>DOCX</strong>；数据表 → <strong>XLSX</strong>；用户当轮点名格式则从其点名。</li>
+      <li>阶段终稿：有子工程只放子工程；无子工程放 Downloads。临时一律 <code>D:\0del\</code>。不另交中间稿或 Downloads 平行副本。</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>5. 座位与 Track Changes</h2>
+    <ul>
+      <li><strong>TC 落笔归属</strong>：Aitee（05）。Lee（06）只标问题、写批注，默认不自行改稿。</li>
+      <li><strong>Aitor（00）</strong>：QC / 路由 / 运维 / 盯梢交接；不是 Word 修订落笔方。</li>
+      <li>批注与 Track Changes 作者字段写 <strong>A</strong>；禁止 Grok；禁止黄色填充。</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>6. 交接盯梢</h2>
+    <ul>
+      <li>凡把任务交给 Cline 或 Cursor Agent：仅在该次任务期间盯梢。</li>
+      <li><strong>每 10 分钟</strong>查看该次任务进度（勿等用户问）；任务结束或无活跃外挂即停。</li>
+      <li>一个任务只交一个执行方。短任务 Aitor 本地做完，不另开 Cursor / Cline。</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>7. 网络</h2>
+    <ul>
+      <li>权威文件：<code>network-security.md</code>（Cline Rules / MY-RULES 同名）。</li>
+      <li>仅禁止网段、敏感外发、该文件规定须批情形（先交风险清单）；公网不逐次批。</li>
+    </ul>
+  </section>
+
+  <footer>
+    本地镜像建议路径：<code>D:\0Grok\0doc\meme\standing-meme.html</code> ·
+    仓内路径：<code>MY-RULES/meme/standing-meme-20261015.html</code><br>
+    更新本快照时：勿写入真实邮箱、电话、密码、卡号、ORCID、医院私密编号。
+  </footer>
+</main>
+</body>
+</html>
