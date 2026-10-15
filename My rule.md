@@ -36,7 +36,7 @@ license: MIT
 - 复杂任务先读已有文件和项目 `0doc\`，确认进度。不重做已完成阶段。
 - 用户说「直接做」：该任务内，改文件和移动文件可以不再逐项确认。
 - 「直接做」不跳过 MY-SKILLS 的开 PR 和 merge。见第 9 节。
-- 「直接做」不覆盖任何网络操作。网络一律先交风险清单，获同意后再执行。见下文「网络操作」。
+- 「直接做」不覆盖须审批的网络操作。禁止网段 / 敏感数据外发 / `network-security.md` 规定须批准的情形：先交风险清单，获明确同意后再执行。普通公网操作按 `network-security.md`（不逐次批）。见下文「网络操作」。
 - 需要用户拍板时，优先给出有限选择题（A/B/C），并标推荐项；避免开放式长答才推进。
 - 用户说「继续」：表示按当前已确认计划继续执行任务内步骤。不等于网络操作同意（网络同意规则见 `network-security.md`；「继续」不算网络同意）。
 
@@ -84,7 +84,7 @@ license: MIT
 - 做完自动验证：lint、测试、产物计数核对。
 - 全局库 `D:\0Grok\0script` 的可复用模块写单元测试。一次性脚本用实际运行加计数核对。
 - 收尾时清掉旧路径、过期指针、旧名称。
-- 直接交付最终产物。不交中间稿。不交「先看这个版本」。
+- 直接交付最终产物。不交中间稿。不交「先看这个版本」。用户只要**每个阶段的最终交付物**（按产物类型：报告 / 阶段 QC → HTML；稿件与 Track Changes → DOCX；数据表 → XLSX；用户当轮点名格式则从其点名）；中间稿、草稿、过程文件不算交付，一律按临时文件进 `D:\0del\`。
 - 数字类产物（统计结果、样本量、表格）交付前，与原始数据或原稿核对一次。能回溯时优先核对原始数据。无法回溯时标「基于现有结果复核」。
 
 # 5 收尾、清理与目录
@@ -116,11 +116,13 @@ license: MIT
 - 每次收尾做一次清点。拟移动的非临时文件先列入清单，获授权后再移动。
 - 达到验收指标即停。低收益的优化不主动列。
 
-**产出落点**：
+**产出落点**（2026-10-14）：
 
-- 有明确项目文件夹时：课题交付物（审稿意见、回复信、改稿 docx、正式结果表）只放项目文件夹（A 类 `0result\` / B 类子项目或 `submitting\<project>`），不放 Downloads。
-- 没有项目文件夹时：可放 `C:\Users\loopn\Downloads\`。
-- `Downloads\<任务名>\` 仍可用于一次性 harvest / 升级建议 / 会话整理。
+- 用户只要每个阶段的**最终交付物**，格式按产物类型：**报告 / 阶段 QC → HTML**；**稿件与 Track Changes → DOCX**；**数据表 → XLSX**（填表亦用 XLSX）；用户当轮点名格式则从其点名。不另交中间稿、不另交平行副本给用户看。
+- 有子工程 / 项目文件夹时：最终交付物**只**放该子工程文件夹（A 类 `0result\` / B 类子项目或 `submitting\<project>`，或项目约定目录）。**不**再放一份到 Downloads。
+- 没有子工程 / 项目文件夹时：最终交付物放 `C:\Users\loopn\Downloads\`。
+- 临时文件、中间产物、过程 HTML/JSON/日志：一律在 `D:\0del\<本次任务子文件夹>\` 创建或移入（见上文「临时文件」）。禁止把临时文件留在子工程当交付。
+- `Downloads\<任务名>\` 仅用于无子工程时的最终交付，或用户点名的一次性 harvest / 升级建议 / 会话整理。
 - A 类最终结果表：项目 `0result\`。
 - `D:\0Grok\0doc\` 和项目内 `0doc\`：只有用户说「放 0doc」才写入。「直接做」不代替这句话。
 
@@ -150,11 +152,12 @@ license: MIT
 
 **格式**：
 
-- 表格类结果用 `.xlsx`。
+- 表格类结果用 `.xlsx`（数据表与填表的交付格式）。
 - 给人看的报告用 `.html`。版式细则见 `C:\Users\loopn\.grok\skills\00_orchestrator\references\html-visual-design.md`，不抄入本文件。
 - 同一分析若 `Results*.html`（或已执行产物 HTML）与 `.xlsx` 数字冲突：以 HTML 为准，并在汇报里写明冲突与所采用源。xlsx 作表格式交付，不覆盖 HTML 事实源。
 - 给 LLM 读的文件用 `.md`。
-- 论文稿件用 `.docx`。不换成 html。
+- 论文稿件用 `.docx`（含 Track Changes）。不换成 html。
+- 用户当轮点名格式则从其点名。
 - 生成的 PDF 用 Times New Roman 12 pt。
 
 # 6 科研工作规则
@@ -228,13 +231,15 @@ license: MIT
 - **交接（2026-10-13，用户确认）**：用量池已合并。一个任务只交一个执行方。Aitor 能在本地做完的短任务，不交 Cursor，不交 Cline。
 - **Cursor**：仓库内前端与后端（UI、API、测试、PR）。仅当用户说「交给cursor」才交。
 - **Cline**：数据准备及同类（xlsx 填写、归档、批处理脚本、非仓库数据工作）。用户说「交给cline」，或一般数据/脚本交接，交 Cline。
+- **专员外挂工具（2026-10-14）**：各 bot 均可调用 Cline。常规：Victor、Bai、Loopnow 默认用 Cline；Aitee、Lee 一般不调用 Cursor 或 Cline。任何座位要用 Cursor，须用户先批准（含「交给cursor」本条仍适用）。
 - **Aitor（Grok Bot）**：运维、规则、交付路径、Word 修订（Track Changes）与建议类批注、盯梢交接、研究专员路由。
 - **Grok Build（已停用，2026-10-13）**：不再新开 Grok Build 任务。Aitor 不启动 `grok`。上文「`AGENTS.md` 只放指针」仍然有效。用户若自行手动运行 `grok`，属可选、仅手动，不是交接路径。原「代理 + `grok` 启动」与「每 10 分钟 Grok 盯梢」作废，不再执行。
-- **外挂盯梢（Cline / Cursor，2026-10-13）**：凡把任务交给 Cline 或 Cursor Agent，Aitor 必须：
-  1. 按工作量预估完成时间，并向用户报 ETA；过程中按实际进度**实时调整** ETA。
-  2. 监控运行：进程是否活着、日志/产物是否推进、卡点与阻塞。
-  3. 结束时必须拿到执行方反馈（结果摘要、改了哪些路径、是否验收通过、遗留项）。
-  4. token / 额度：仅当该次外挂任务**实际运行 ≥ 30 分钟**才查用量；且**只查执行该任务的那一家**（Cline 或 Cursor）。不查 Grok Build。不足 30 分钟不查。查时可由 Bai 打开对应固定页（Cline `https://app.cline.bot/dashboard/usage`；Cursor `https://cursor.com/dashboard/spending`），报告已用、剩余与下次重置。不做成例行 routine。Grok 用量页（`https://grok.com/?_s=usage`）仅当用户明确要求时才打开，不作为交接默认。
+- **外挂盯梢（Cline / Cursor，2026-10-14）**：凡把任务交给 Cline 或 Cursor Agent，**仅在该次任务进行期间**，执行该外挂的 bot 与 Aitor 都必须盯梢（**不是**常驻例行 / 全天候 cron）：
+  1. **强制每 10 分钟**查看一次**该次**任务进度（勿等用户问）；任务结束或无活跃外挂时停止盯梢并保持安静。
+  2. 按工作量预估完成时间，并向用户报 ETA；过程中按实际进度**实时调整** ETA。
+  3. 监控运行：进程是否活着、日志/产物是否推进、卡点与阻塞；有里程碑、卡住或完成时才向用户汇报。
+  4. 结束时必须拿到执行方反馈（结果摘要、改了哪些路径、是否验收通过、遗留项），并回报 Aitor。
+  5. token / 额度：仅当该次外挂任务**实际运行 ≥ 30 分钟**才查用量；且**只查执行该任务的那一家**（Cline 或 Cursor）。不查 Grok Build。不足 30 分钟不查。查时可由 Bai 打开对应固定页（Cline `https://app.cline.bot/dashboard/usage`；Cursor `https://cursor.com/dashboard/spending`），报告已用、剩余与下次重置。不做成例行 routine。Grok 用量页（`https://grok.com/?_s=usage`）仅当用户明确要求时才打开，不作为交接默认。
 
 # 9 MY-SKILLS
 
@@ -256,6 +261,6 @@ license: MIT
 
 只留最近 3 条。写入第 4 条时，删掉最旧的一条。
 
-1. 2026-10-14：汇报时区 Asia/Shanghai；拍板优先 A/B/C 并标推荐；「继续」只表任务继续，不算网络同意；有项目文件夹的课题交付物不放 Downloads，无项目文件夹可放 Downloads；CopyToBox 暂存 `D:\0del\`，不用 `Documents\_aitor_xfer`；HTML 与 xlsx 冲突以 HTML 为准；merge 后只同步本次变更文件。稿件批注用 Suggested …；Undecidable 只进批注，回复信只标明未决。
-2. 2026-10-13：合并用量后交接重分。Cursor 仅「交给cursor」时做仓库前后端；Cline 做数据准备及同类；Grok Build 停用，不再新开；Aitor 短任务本地做完。额度仍只在运行 ≥30 分钟时查执行方（Cline 或 Cursor）。
-3. 2026-10-13：稿件与审稿常驻政策写入 `manuscript-and-review.md`；交接区分「交给cline」与「交给cursor」；HIS/PACS 登录客户端不入库。
+1. 2026-10-14：网络总则对齐 network-security——仅禁止网段/敏感外发/该文件规定须批情形先交风险清单；公网不逐次批。交付格式按产物类型：报告/阶段 QC→HTML，稿件与 Track Changes→DOCX，数据表→XLSX；用户当轮点名从其点名。
+2. 2026-10-14：外挂盯梢——仅在单次 Cline/Cursor 任务期间，执行方与 Aitor 每 10 分钟查进度；不做常驻例行；任务结束即停。
+3. 2026-10-14：阶段终稿落点——有子工程只放子工程，无子工程放 Downloads；临时一律 `D:\0del\`；不另交中间稿或 Downloads 平行副本。
