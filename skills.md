@@ -5,7 +5,7 @@ description: 技能库契约、按需加载、演进提案、PR 与合并后部�
 
 # 技能库（契约 · 演进 · 同步）
 
-对所有使用 `{SKILLS}`（`C:\Users\loopn\.grok\skills\`）的执行方生效。
+对所有使用 `{SKILLS}` 的执行方生效（绝对路径仅见 `My rule.md` §1）。
 
 ## 1 只读与写边界
 
@@ -13,7 +13,7 @@ description: 技能库契约、按需加载、演进提案、PR 与合并后部�
 
 **(b) 合并后部署同步（部署例外）**：MY-SKILLS merge 之后，允许把**本次变更文件**从 GitHub 工作副本 `D:\0Grok\0doc\GitHub\MY-SKILLS` **覆盖同步**到 `{SKILLS}`。白名单=该工作副本中本次已 merge 的路径；禁止整树盲盖、禁止借同步改未改技能。验收：目标路径存在 + 抽查文件 hash（或等价校验）与工作副本一致。此例外是部署，不是「改技能内容」。
 
-**(c) INTEGRATION_MAP 例外**：仅当用户明确要求记录有意义演进证据时，可向绝对路径 `C:\Users\loopn\.grok\skills\_medical-research-meta\INTEGRATION_MAP.md` 追加一行，并按月归档到同目录 `history\`。禁止另建 `evolution-log.md`。除此之外 `_medical-research-meta\` 仍按 (a)。
+**(c) INTEGRATION_MAP 例外**：仅当用户明确要求记录有意义演进证据时，可向 `{SKILLS}\_medical-research-meta\INTEGRATION_MAP.md` 追加一行。月度 `history\` 已迁 `{DEL}\00_orchestrator_reorg_20261017\_medical-research-meta_history\`；若需新归档，在该 0del 树追加或按需重建 `history\`，禁止在 live 技能树另建 `evolution-log.md`。除此之外 `_medical-research-meta\` 仍按 (a)。
 
 ## 2 按需使用（USE, not edit）
 
