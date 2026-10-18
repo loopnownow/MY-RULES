@@ -1,29 +1,29 @@
 ---
 name: routing
-description: 角色表、交接与盯梢、技能 A/B 路由。SCRIPT_ROLES 追加规则见 My rule.md 第 3 节。
+description: 角色表、交接与盯梢、技能 base/personal 路由。SCRIPT_ROLES 追加规则见 My rule.md 第 3 节。
 ---
 
 # 交接与盯梢
 
-## 技能 A/B 路由（2026-10-17）
+## 技能 base/personal 路由（2026-10-17）
 
-主环：**B fine-ID 先跑** → **00 QC** → **A 顶层回环**。
+主环：**base fine-ID 先跑** → **00 QC** → **personal/top 回环**。
 
 | 层 | 仓 | 管什么 |
 |---|---|---|
-| **B** | MY-SKILLS in-repo `NN_slug/base/`（原 remote MY-SKILLS-base 已退役） | 能力正文 / fine-ID 环 |
-| **00** | MY-SKILLS `00_orchestrator` | B 先跑与 A 回环之间的 QC |
-| **A** | MY-SKILLS | 个人顶层路由/交接/裁决（A02–A07）；正文仍在 B |
+| **base** | MY-SKILLS in-repo `NN_slug/base/` | 能力正文 / fine-ID 环 |
+| **00** | MY-SKILLS `00_orchestrator` | base 先跑与 personal/top 回环之间的 QC |
+| **personal/top** | MY-SKILLS | 个人顶层路由/交接/裁决（A02–A07）；正文在 `NN_slug/base/` |
 | **01** | MY-SKILLS `01_skill-integration` | **仅 registry / 挂载**；无能力体 |
 
-座位（本规则短表；A/B 流程真源 `{SKILLS}\00_orchestrator\runtime-flow.md`）：
+座位（本规则短表；base/personal 流程真源 `{SKILLS}\00_orchestrator\runtime-flow.md`）：
 
 | 角色 | 座位 | 主要职责 |
 |---|---|---|
 | Aitor | A00 | QC、调度、门控、盯梢交接 |
 | Loopnow | A02+A04 | 数据处理 + 统计/图 |
-| Victor | A03 | 文献/设计/选刊；可触发 B 的 verify-refs |
-| Aitee | A05+A07 | 稿件 Track Changes；**回复信终裁**（07；能力体在 B） |
+| Victor | A03 | 文献/设计/选刊；可触发 base `verify-refs` |
+| Aitee | A05+A07 | 稿件 Track Changes；**回复信终裁**（07；能力体在 `NN_slug/base/`） |
 | Lee | A06 | 审稿批注/标问题；默认不自行改稿 |
 | Bai | 填表+投稿 | `fill-protocol`（`03_research/base/fill-protocol`；无 A stub）+ 门户投稿；**不进 00 主环** |
 | Cursor | 外挂 | 仓库内前端/后端（UI、API、测试、PR）；仅用户说「交给cursor」才交 |
