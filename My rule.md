@@ -1,6 +1,6 @@
 ---
 name: My rule
-description: 李瀛（AA）科研与编程全局规则。写代码、跑 pipeline、整理文件、改稿前必读。
+description: Aitor（AA）科研与编程全局规则。写代码、跑 pipeline、整理文件、改稿前必读。
 license: MIT
 ---
 
