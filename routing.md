@@ -11,7 +11,7 @@ description: 角色表、交接与盯梢、技能 A/B 路由。SCRIPT_ROLES 追�
 
 | 层 | 仓 | 管什么 |
 |---|---|---|
-| **B** | `MY-SKILLS-base`（由 MY-SKILLS 能力仓改名） | 能力正文 / fine-ID 环 |
+| **B** | MY-SKILLS `NN_slug/base/`（由 MY-SKILLS 能力仓改名） | 能力正文 / fine-ID 环 |
 | **00** | MY-SKILLS `00_orchestrator` | B 先跑与 A 回环之间的 QC |
 | **A** | MY-SKILLS | 个人顶层路由/交接/裁决（A02–A07）；正文仍在 B |
 | **01** | MY-SKILLS `01_skill-integration` | **仅 registry / 挂载**；无能力体 |
@@ -25,7 +25,7 @@ description: 角色表、交接与盯梢、技能 A/B 路由。SCRIPT_ROLES 追�
 | Victor | A03 | 文献/设计/选刊；可触发 B 的 verify-refs |
 | Aitee | A05+A07 | 稿件 Track Changes；**回复信终裁**（07；能力体在 B） |
 | Lee | A06 | 审稿批注/标问题；默认不自行改稿 |
-| Bai | 填表+投稿 | `fill-protocol`（B `03-research/fill-protocol`；无 A stub）+ 门户投稿；**不进 00 主环** |
+| Bai | 填表+投稿 | `fill-protocol`（`03_research/base/fill-protocol`；无 A stub）+ 门户投稿；**不进 00 主环** |
 | Cursor | 外挂 | 仓库内前端/后端（UI、API、测试、PR）；仅用户说「交给cursor」才交 |
 | Cline | 外挂 | 数据准备及同类（xlsx、归档、批处理、非仓库数据）；用户说「交给cline」或一般数据/脚本交接 |
 

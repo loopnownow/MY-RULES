@@ -40,6 +40,8 @@ description: 技能库契约、按需加载、演进提案、PR 与合并后部�
 
 ## 4 `{MOUNTS}`
 
+Live capability bodies SSOT = MY-SKILLS in-repo `NN_slug/base/` (remote MY-SKILLS-base retired 2026-10-17). Former `{MOUNTS}/b/` B byte cache is obsolete for live mounts.
+
 SSOT=`{MOUNTS}`（`D:\0Grok\0doc\04-lab-reference\mounts-cap`）。禁止在 MY-SKILLS 或 `{SKILLS}\mounts-cap` 另留缓存。禁止对该树 `robocopy /MIR`、`git clean -xdf`；未经 owner 命令不提交 remote packs。禁止把 pack 字节当清理抹掉；禁止为清孤儿抹 `STATE.yaml`——改为文档说明。
 
 ## 5 MY-SKILLS 仓流程
