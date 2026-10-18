@@ -1,6 +1,6 @@
 ---
 name: My rule
-description: Aitor（AA）科研与编程全局规则。科研与编程全局规则。
+description: Aitor（AA）科研与编程全局规则。
 license: MIT
 ---
 
