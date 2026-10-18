@@ -13,8 +13,6 @@ description: 技能库契约、按需加载、演进门、PR 与合并后部署�
 
 **(b) 合并后部署同步**：白名单=该次 merge 变更路径；从 `D:\0Grok\0doc\GitHub\MY-SKILLS` 覆盖到 `{SKILLS}`；禁止整树盲盖。细则→`{SKILLS}\01_skill-integration\references\lifecycle-cache.md`。
 
-**(c) INTEGRATION_MAP**：仅用户明确要求时，可向 `{SKILLS}\_medical-research-meta\INTEGRATION_MAP.md` 追加一行。月度 history 已迁 `{DEL}\00_orchestrator_reorg_20261017\_medical-research-meta_history\`。
-
 ## 2 按需使用
 
 先读 `<skill>/SKILL.md` 再只读其引用；路由 `00`→`01`→`02`–`07`→`00` QC。细则→`00`/`01` `SKILL.md`。
