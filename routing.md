@@ -11,7 +11,7 @@ description: 角色表、交接与盯梢、技能 A/B 路由。SCRIPT_ROLES 追�
 
 | 层 | 仓 | 管什么 |
 |---|---|---|
-| **B** | MY-SKILLS `NN_slug/base/`（由 MY-SKILLS 能力仓改名） | 能力正文 / fine-ID 环 |
+| **B** | MY-SKILLS in-repo `NN_slug/base/`（原 remote MY-SKILLS-base 已退役） | 能力正文 / fine-ID 环 |
 | **00** | MY-SKILLS `00_orchestrator` | B 先跑与 A 回环之间的 QC |
 | **A** | MY-SKILLS | 个人顶层路由/交接/裁决（A02–A07）；正文仍在 B |
 | **01** | MY-SKILLS `01_skill-integration` | **仅 registry / 挂载**；无能力体 |
