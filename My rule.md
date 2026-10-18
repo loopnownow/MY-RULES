@@ -11,7 +11,7 @@ license: MIT
 - **路径别名**（后文用别名；绝对路径仅此处）：`{RULES}`=`C:\Users\loopn\Documents\Cline\Rules`；`{SKILLS}`=`C:\Users\loopn\.grok\skills`；`{WORK_A}`=`L:\00used`；`{WORK_B}`=`D:\0Grok`；`{RAW}`=`D:\00ds`（只读除非点名）；`{DEL}`=`D:\0del`；`{DEL_A}`=`L:\0del\<项目名>`；`{MOUNTS}`=`D:\0Grok\0doc\04-lab-reference\mounts-cap`
 - **工作区**：`{RAW}` 只读；A 类 `{WORK_A}\<项目>\`；B 类 `{WORK_B}\<子项目>\`；细则见 `workspace-layout.md`（含 0rad）。临时/清理/落点见第 5 节。
 - **术语**：A/B 类=工作区类型（≠作者字段；≠技能 A/B）；作者字段 `A`=批注作者；`[源:skill-id]`=批注源；`00`–`07`=技能层；角色→`routing.md`。
-- **技能 A/B**（短针）：B(`MY-SKILLS-base`) fine-ID→00 QC→A；01=registry only；座位→`routing.md`。
+- **技能 A/B**（短针）：B(in-repo `NN_slug/base/`; former MY-SKILLS-base retired) fine-ID→00 QC→A；01=registry only；座位→`routing.md`。
 - 用户指定条数/范围时从其指定。单项目约定写项目 `0doc\`（须说「放 0doc」，见第 5 节）。改本文件时同步改掉冲突旧条。
 
 # 2 开工前确认
