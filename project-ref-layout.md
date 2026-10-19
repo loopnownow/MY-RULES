@@ -1,28 +1,70 @@
----
-name: project-ref-layout
-description: 项目 ref/ 子目录布局与 ledger 再跑前必读；细则在 MY-SKILLS project-ref-layout。
----
+# Project `ref/` layout (ledgers + artifacts)
 
-# 项目 `ref/` 布局
+**Owner:** `00_orchestrator`.
+**Audience:** any skill that writes QC, citation, Word, gate, or execution artifacts into a project `ref/`.
+**Timestamps in EXECUTION / wrap-ups:** Asia/Shanghai (UTC+08:00).
 
-各课题 `ref/` 采用 MY-SKILLS `00_orchestrator/references/project-ref-layout.md` 子目录布局。
+This is the **folder map and skip/idempotent contract**. It does not invent clinical numbers. No PII in filenames or ledger rows beyond what the project already stores for science (paths, DOI, citekeys).
 
-## 根目录保留
+## Root invariants (do not relocate)
 
-- `ref/settings.ini` — RAD/流水线配置
-- `ref/manuscript-revision.md` — 主变更 ledger（追加）
+Keep these at **`ref/` root** (skills and convention hard-require them):
 
-## 子目录（摘要）
+| Path | Role |
+|---|---|
+| `ref/settings.ini` | RAD / pipeline config only. Do not overwrite casually; do not store secrets. |
+| `ref/manuscript-revision.md` | Append-only main change ledger (owner asks + code/results/Word). After a 05/06 Word pass, append here (`06_review/personal/word-edit.md`). **Do not re-polish logged sections** unless upstream numbers changed, the owner named them, or an unresolved comment was authorized. |
 
-`review/` · `citation/` · `gates/` · `code/` · `results/` · `exec/` — 见上述 layout 文与模板 `project-ref-template/`。
+Optional at root when already in use: `ref/project-state.yaml` (from `00_orchestrator/templates/project-state.yaml`). Prefer keeping it at root until a future contract says otherwise.
 
-## 再跑前必读
+## Subfolder map
 
-助手在**重复**同一 gate / citation layer / Word 润色前，必须先读：
+| Subfolder | Put here | Do not put here |
+|---|---|---|
+| `ref/review/` | Per-round `changelog.md` / `CHANGELOG_*.md`; review handoff YAML; Lee round notes | Main Word change ledger (that stays `manuscript-revision.md`) |
+| `ref/citation/` | `CITATION_AUDIT.json` (or `.jsonl`); citation README / skip notes; journal/citation logs (`ref_journal_log.txt`, `CITATION*`) | Full PDF corpora |
+| `ref/gates/` | `GATE*_report.md`, number-lock, input/output hash reports | Live `settings.ini` |
+| `ref/code/` | Script/path notes, patch pointers (no secrets, no tokens) | Raw credentials |
+| `ref/results/` | Table/figure lock notes and content hashes | Large binary datasets (stay in `0result` / derivatives) |
+| `ref/exec/` | Optional `EXECUTION.md` wrap-ups; ops notes that are not review-round ledgers | Owner-facing ACCEPT reports unless the owner asked |
+| `ref/tmp/` | Project-local **intermediate** Word/PDF/scratch (Claude diffs, superseded TC, `-copy`, merge scratch) held until the owner says clean/收工 | Current finals (stay at project root); closed-round changelogs (`review/`); citation/gates ledgers; secrets |
 
-1. `ref/manuscript-revision.md`
-2. `ref/citation/` 下 citation ledger（若存在）
 
-有 ledger 理由才可跳过；**禁止无 ledger 理由的静默跳过**（与 assurance 六态：`NOT_APPLICABLE` ≠ silent skip）。
+### `ref/tmp/` cleanup
 
-不在本文件展开路径细则；以 MY-SKILLS 正文为准。
+- Create on first need (copy-on-need with the other subfolders).
+- Assistants may stage intermediates here instead of scattering at `ref/` root or project root.
+- **Do not** silent-delete. When the owner says clean / 清理 / 收工 for that project, move the whole `ref/tmp/` tree (or named files) into `D:\0del\_by-project\<project>\` (or `_by-function` when cross-project), keeping relative names when useful.
+- After cleanup, leave an empty `ref/tmp/` or recreate on next write; do not invent clinical content there.
+
+Also keep a short **`ref/README.md`** map (see template) once a project adopts this layout.
+
+## Skip / idempotent rules (read ledgers before re-run)
+
+Assistants **must** read `ref/manuscript-revision.md` and the citation ledger **before** re-running the same gate or layer. Silent skip without a ledger reason is forbidden (see assurance six-state: `NOT_APPLICABLE` ≠ silent skip).
+
+| Domain | Skip when | Else |
+|---|---|---|
+| Literature / citation L4 | Same key (`DOI` **or** citekey) + same **layer** + same **fine_id** (or skill id) already recorded PASS/KEEP in `ref/citation/CITATION_AUDIT.json` (or `.jsonl`) and input hashes unchanged | Re-run; append/update entry; emit six-state verdict |
+| Word / polish | Section or span already logged in `ref/manuscript-revision.md` as revised or review-only | Append new row; do not silent re-polish |
+| Review round | Round marked completed in `ref/review/changelog.md` (Implemented / Not implemented closed) | Open a new round file or append; do not rewrite closed rounds without owner ask |
+| Gates / assurance | Same gate id + matching `audited_input_hashes` already PASS at required assurance level | Re-run if hashes stale or assurance upgraded (`submission` / `conference-ready` forbid silent skip) |
+
+Citation ledger key shape (internal; not a user-facing slogan): `DOI|citekey` + `layer` + `fine_id`. Prefer JSON array or `{"entries":[]}` envelope — see template.
+
+Cross-links:
+
+- Citation L4 / three-axis + six-state → `05_manuscript/qc/citation-audit-gate.md`
+- Assurance six-state → `00_orchestrator/qc/assurance-verdicts.md`
+- Word append rule → `06_review/personal/word-edit.md` + `05_manuscript/SKILL.md`
+- Deliverable drop points → `00_orchestrator/references/standing-delivery.md`
+
+## What this contract does **not** do
+
+- Does not mass-require empty folders on greenfield projects until first artifact write (template exists for copy-on-need).
+- Does not move ethics locked trees or write `personal/`.
+- Does not install ARIS runtime.
+
+## Template
+
+Copy-on-need tree: [`project-ref-template/`](project-ref-template/).

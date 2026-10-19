@@ -42,6 +42,14 @@ license: MIT
 
 「放 0doc」才写 `0doc\`。长表→`{SKILLS}\00_orchestrator\references\standing-delivery.md`。
 
+# 5.1 Word / 审稿回复 / 本机目录（2026-10-19）
+
+- **Word/PDF 格式**：未经当轮点名，禁止改 `.docx`/`.pdf` 版式；改文字用修订模式。词/句级修订，禁止大段覆盖。细则→`{SKILLS}\06_review\personal\word-edit.md`。
+- **统一版式**：手稿、审稿意见、审稿回复同一套——Times New Roman 12、1.5 倍行距、段前后 0、两端对齐、LTR、特殊格式无。→`{SKILLS}\05_manuscript\personal\Aitor-format.md`；`word-edit.md`。
+- **审稿回复**：保留完整原始 comments；不简化；不擅自加小标题；不自创信函格式。→`{SKILLS}\07_response\personal\response.md`。
+- **新建文件夹**：未经同意，禁止在本机新建文件夹；Grok/Cursor/Cline **只许**在 `{DEL}`（`D:\0del\`）下按 `_by-project` / `_by-function` 建夹。
+- **一次性脚本/说明/小补丁**（非课题交付）：只落 `{DEL}`，禁止丢进用户主目录、`.grok\tmp`、或课题根。
+
 # 6 工程决策
 
 - R1 需求优先 · R2 证据排错 · R3 有序简化 · R4 风险比例 · R5 保护不变量 · R6 闭环验证。
