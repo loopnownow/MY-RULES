@@ -19,3 +19,6 @@ description: A类与B类工作区短针。细则在 skills workspace.md；落点
 - 根不留临时/草稿/一次性中间件（例外：当前在改稿）。`stats-analysis\modules\` 增改移须先同意。
 
 **0rad**：`{SKILLS}\02_data-processing\personal\workspace.md`。
+
+**`ref/` 子目录**：见同仓 `project-ref-layout.md`；技能正文 `{SKILLS}\00_orchestrator\references\project-ref-layout.md`。
+

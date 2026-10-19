@@ -65,5 +65,6 @@ license: MIT
 | 派单/盯梢 | `{SKILLS}\00_orchestrator\references\ownership-contract.md`；`{SKILLS}\00_orchestrator\references\handoff-monitor.md` |
 | 技能演进 | `{SKILLS}\00_orchestrator\references\skill-evolution.md`（门在 `skills.md`） |
 | 稿件禁令 | `{SKILLS}\05_manuscript\qc\manuscript-local-qc.md`；`{SKILLS}\05_manuscript\base\vocab\L1\ban-phrases.md` |
+| 项目 `ref/` 布局 / ledger 再跑 | `project-ref-layout.md`；`{SKILLS}\00_orchestrator\references\project-ref-layout.md` |
 
 Cursor User Rules 只一行指向本文件。「记住」：总则→本文件；专题→专题；项目→`0doc\`；技能→提案；敏感→mem（禁写入 MY-RULES/MY-SKILLS）。
