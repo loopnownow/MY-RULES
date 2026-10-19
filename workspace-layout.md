@@ -22,3 +22,8 @@ description: A类与B类工作区短针。细则在 skills workspace.md；落点
 
 **`ref/` 子目录**：见同仓 `project-ref-layout.md`；技能正文 `{SKILLS}\00_orchestrator\references\project-ref-layout.md`。
 
+## Folder create / scratch (2026-10-19)
+
+- Without owner consent, do **not** create new folders outside `{DEL}`.
+- Grok / Cursor / Cline may create folders **only** under `D:\0del\` (`_by-project\` / `_by-function\`).
+- One-off scripts, commit/PR note files, and non-project patches go under `{DEL}` only—not home, not `.grok\tmp`, not project roots.
