@@ -23,9 +23,9 @@ description: 技能库契约、按需加载、演进门、PR 与合并后部署�
 - 默认证据 **E4**（同类重复用户纠正）；单次事件不演进。
 - **delete** 须显式批准。正文→`{SKILLS}\00_orchestrator\references\skill-evolution.md`。
 
-## 4 `{MOUNTS}`
+## 4 mounts（已退役）
 
-Live bodies SSOT = MY-SKILLS in-repo `NN_slug/base/`。缓存边界→`lifecycle-cache.md`。禁止对该树 `robocopy /MIR`。
+`{MOUNTS}` / mounts-cap **已退役**（2026-10-20）：不再维护挂载缓存树；禁止对该路径 `robocopy /MIR` 或重建包字节。Live bodies SSOT = MY-SKILLS in-repo `NN_slug/base/`。缓存边界→`lifecycle-cache.md`。
 
 ## 5 MY-SKILLS 仓流程
 
