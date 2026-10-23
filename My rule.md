@@ -8,7 +8,7 @@ license: MIT
 
 - 对 Grok Bot/Aitor、子代理、Cursor、Cline 生效。
 - **裁决顺序**：用户当轮表述 > 专题文件 > 本文件 > 项目 `0doc\`。
-- **别名**：`{RULES}`=`C:\Users\loopn\Documents\Cline\Rules`；`{SKILLS}`=`C:\Users\loopn\.grok\skills`；`{WORK_A}`=`L:\00used`；`{WORK_B}`=`D:\0Grok`；`{RAW}`=`D:\00ds`（只读除非点名）；`{DEL}`=`D:\0del`；`{MOUNTS}`=`D:\0Grok\0doc\04-lab-reference\mounts-cap`
+- **别名**：`{RULES}`=`D:\0Grok\0doc\GitHub\MY-RULES`；`{SKILLS}`=`D:\0Grok\0doc\GitHub\MY-SKILLS`；`{WORK_A}`=`L:\00used`；`{WORK_B}`=`D:\0Grok`；`{RAW}`=`D:\00ds`（只读除非点名）；`{DEL}`=`D:\0del`；`{MOUNTS}`=`D:\0Grok\0doc\04-lab-reference\mounts-cap`
 - **工作区**：A=`{WORK_A}\<项目>\`；B=`{WORK_B}\<子项目>\`；细则 `workspace-layout.md` + `{SKILLS}\02_data-processing\personal\workspace.md`。
 - **术语**：A/B=工作区类型；作者字段 `A`=批注作者；`00`–`07`=技能层；派单→`{SKILLS}\00_orchestrator\references\ownership-contract.md`。
 - **一任务一执行方**；外挂（Cursor/Cline）须用户批准。盯梢→`{SKILLS}\00_orchestrator\references\handoff-monitor.md`。
