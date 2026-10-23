@@ -1,4 +1,4 @@
-﻿---
+---
 name: My rule
 description: Aitor（AA）科研与编程全局规则。
 license: MIT
@@ -7,12 +7,13 @@ license: MIT
 # 1 适用范围与优先级
 
 - 对 Grok Bot/Aitor、子代理、Cursor、Cline 生效。
-- **裁决顺序**：用户当轮表述 > 专题文件 > 本文件 > 项目 `0doc\`。
-- **别名**：`{RULES}`=`D:\0Grok\0doc\GitHub\MY-RULES`；`{SKILLS}`=`D:\0Grok\0doc\GitHub\MY-SKILLS`；`{WORK_A}`=`L:\00used`；`{WORK_B}`=`D:\0Grok`；`{RAW}`=`D:\00ds`（只读除非点名）；`{DEL}`=`D:\0del`；`{MOUNTS}`=`D:\0Grok\0doc\04-lab-reference\mounts-cap`
-- **工作区**：A=`{WORK_A}\<项目>\`；B=`{WORK_B}\<子项目>\`；细则 `workspace-layout.md` + `{SKILLS}\02_data-processing\personal\workspace.md`。
-- **术语**：A/B=工作区类型；作者字段 `A`=批注作者；`00`–`07`=技能层；派单→`{SKILLS}\00_orchestrator\references\ownership-contract.md`。
+- **裁决顺序**：用户当轮表述 > 专题文件 > 本文件 > 子工程内约定。
+- **别名**：`{RULES}`=`D:\0Grok\0doc\GitHub\MY-RULES`；`{SKILLS}`=`D:\0Grok\0doc\GitHub\MY-SKILLS`；`{RAW}`=`D:\00db`（已组织的原始库，只读除非点名；原 `00ds` 已迁此）；`{DEL}`=`D:\0del`。
+- **本机布局（一行）**：`D:\00db`（organized raw） / `D:\0del`（AI 可操作临时区） / `D:\0Grok\0doc`（语料 + 可复用代码） / `D:\0Grok`（分阶段子工程工作区）。细则 → `workspace-layout.md`。
+- **术语**：作者字段 `A`=批注作者；`00`–`07`=技能层；派单→`{SKILLS}\00_orchestrator\references\ownership-contract.md`。**不再使用** A/B 工作区、`{WORK_A}`/`{WORK_B}`、`{MOUNTS}`（mounts 已退役）。
 - **一任务一执行方**；外挂（Cursor/Cline）须用户批准。盯梢→`{SKILLS}\00_orchestrator\references\handoff-monitor.md`。
-- 单项目约定写 `0doc\`（须「放 0doc」）。
+- **单项目约定**写在该**子工程文件夹**内（如子工程 `0doc\` 或 `ref\`），**不**写入全局 `{RULES}` / `{SKILLS}`。须用户点名「放 0doc」才写 `0doc\`。
+- **交付落点**：子工程交付物进该子工程；其余临时/非交付进 `{DEL}`；Downloads **仅当**当轮点名「下载」或「Downloads」。
 
 # 2 开工前确认
 
@@ -20,11 +21,27 @@ license: MIT
 - **禁删**；移出只进 `{DEL}` 并保留相对路径。
 - 确认：目标与验收；假设≤3；取舍；谁执行。
 - 「直接做」可不逐项确认，但不跳过 MY-SKILLS PR/merge（`skills.md`）与须批网络（`network-security.md`）。「继续」≠网络同意。
-- 盘问/grill-me → `{SKILLS}\00_orchestrator\references\plan-and-grilling.md`。网络红线→`network-security.md`。
+- 网络红线→`network-security.md`。
+
+## 2.1 盘问 / grill-me（SSOT；技能只指针）
+
+本条为 grilling 权威正文。`{SKILLS}\00_orchestrator\references\plan-and-grilling.md` 只保留 Plan card / Q0–Q3 / 流程图，并**指向本条**；勿在技能里复写全文。
+
+- **何时**：多节点任务、新能力、高风险、或用户说 `grill-me` / 「盘问」。单节点且无关键未知 → 不问（对齐技能 Q0）。
+- **一轮批处理**：合并成**一轮**澄清，不要连环单问。
+- **编号 + 默认**：问题编号列出；每题给推荐默认（用户可回「默认」/空确认）。
+- **先查后问**：文件或网页能答的，先自己查；查不到再问（对齐技能 Q3）。
+- **然后出 Plan**：澄清通过后再给计划卡（节点顺序、风险门），等明确点头再派单。
+- 流程图批准、N1–N4 决策点仍由 `plan-and-grilling.md` 管；本条不管挂载包（mounts 已退役）。
 
 # 3 编程准则
 
-简单优先；外科手术式；软编码；模块化；**不写回退**；新脚本 Python 3.13.9；PowerShell 不用 `&&`。细节→`{SKILLS}\02_data-processing\personal\coding.md`。
+简单优先；外科手术式；软编码；模块化；**不写回退**；新脚本 Python 3.13.9；PowerShell 不用 `&&`。
+
+- **dry-run**：批量 IO / 写盘前先试跑，打印将执行的操作供确认；默认 dry-run，显式 `--execute` / `--apply` 才落盘。
+- **断点续传**：已处理结果跳过；以中间文件或完成标记续跑，勿整段重算。
+
+细节（模板、阶梯、QC）→`{SKILLS}\02_data-processing\personal\coding.md`。
 
 # 4 执行与验证
 
@@ -36,9 +53,9 @@ license: MIT
 
 | 产物 | 格式 | 落点 |
 |---|---|---|
-| 报告/QC | HTML | A→`ref\`；B→子项目/`in-review\`；无→Downloads。`0result\` 只放终表 |
-| 稿件/TC | DOCX | 子工程或 Downloads |
-| 数据表 | XLSX | A 终表→`0result\`；其余同稿件 |
+| 报告/QC | HTML | 有子工程→该子工程 `ref\` 或 `in-review\`；无子工程且点名「下载/Downloads」→Downloads；否则→`{DEL}`。终表可进子工程 `0result\`（只放终表） |
+| 稿件/TC | DOCX | 子工程；否则仅当点名 Downloads，否则 `{DEL}` |
+| 数据表 | XLSX | 终表→子工程 `0result\`；其余同稿件 |
 
 「放 0doc」才写 `0doc\`。长表→`{SKILLS}\00_orchestrator\references\standing-delivery.md`。
 
@@ -69,12 +86,13 @@ license: MIT
 |---|---|
 | 网段/敏感外发 | `network-security.md` |
 | 技能/PR 同步 | `skills.md` |
-| A·B 目录 | `workspace-layout.md` |
+| 本机布局 / 子工程 | `workspace-layout.md`（无 A/B 类；见 §1 一行布局） |
 | 派单/盯梢 | `{SKILLS}\00_orchestrator\references\ownership-contract.md`；`{SKILLS}\00_orchestrator\references\handoff-monitor.md` |
 | 0doc 文档库查找 | Bai → `{SKILLS}\03_research\personal\0doc-db.md`；派单 SSOT → ownership-contract §0doc |
 | 技能演进 | `{SKILLS}\00_orchestrator\references\skill-evolution.md`（门在 `skills.md`） |
 | 稿件禁令 | `{SKILLS}\05_manuscript\qc\manuscript-local-qc.md`；`{SKILLS}\05_manuscript\base\vocab\L1\ban-phrases.md` |
 | 项目 `ref/` 布局 / ledger 再跑 | `project-ref-layout.md`；`{SKILLS}\00_orchestrator\references\project-ref-layout.md` |
+| 盘问 / Plan card | 本文件 §2.1；技能 `plan-and-grilling.md`（指针） |
 
-Cursor User Rules 只一行指向本文件。「记住」：总则→本文件；专题→专题；项目→`0doc\`；技能→提案；敏感→mem（禁写入 MY-RULES/MY-SKILLS）。
+Cursor User Rules 只一行指向本文件。「记住」：总则→本文件；专题→专题；项目→子工程约定；技能→提案；敏感→mem（禁写入 MY-RULES/MY-SKILLS）。
 
