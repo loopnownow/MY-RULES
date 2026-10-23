@@ -1,76 +1,74 @@
-# Project `ref/` layout (ledgers + artifacts)
+# 项目 `ref/` 布局（ledger + 产物）
 
-**Owner:** `00_orchestrator`.
-**Audience:** any skill that writes QC, citation, Word, gate, or execution artifacts into a project `ref/`.
-**Timestamps in EXECUTION / wrap-ups:** Asia/Shanghai (UTC+08:00).
+**负责人：** `00_orchestrator`。
+**读者：** 任何把 QC、引用、Word、门控或执行产物写入项目 `ref/` 的技能。
+**EXECUTION / 收工时间戳：** Asia/Shanghai (UTC+08:00)。
 
-This is the **folder map and skip/idempotent contract**. It does not invent clinical numbers. No PII in filenames or ledger rows beyond what the project already stores for science (paths, DOI, citekeys).
+本文是**文件夹地图与跳过/幂等契约**。不编造临床数字。文件名与 ledger 行除课题科学所需（路径、DOI、citekey）外，不含 PII。
 
-## Root invariants (do not relocate)
+## 根目录不变量（勿挪位）
 
-Keep these at **`ref/` root** (skills and convention hard-require them):
+以下必须留在 **`ref/` 根**（技能与约定硬性要求）：
 
-| Path | Role |
+| 路径 | 作用 |
 |---|---|
-| `ref/settings.ini` | RAD / pipeline config only. Do not overwrite casually; do not store secrets. |
-| `ref/manuscript-revision.md` | Append-only main change ledger (owner asks + code/results/Word). After a 05/06 Word pass, append here (`06_review/personal/word-edit.md`). **Do not re-polish logged sections** unless upstream numbers changed, the owner named them, or an unresolved comment was authorized. |
+| `ref/settings.ini` | 仅 RAD / 流水线配置。勿随意覆盖；勿存密钥。 |
+| `ref/manuscript-revision.md` | 只追加的主变更 ledger（主人要求 + 代码/结果/Word）。05/06 Word 轮次后在此追加（`06_review/personal/word-edit.md`）。**已登记段落勿再抛光**，除非上游数字变了、主人点名、或未解决批注已授权。 |
 
-Optional at root when already in use: `ref/project-state.yaml` (from `00_orchestrator/templates/project-state.yaml`). Prefer keeping it at root until a future contract says otherwise.
+根上可选（若已在用）：`ref/project-state.yaml`（来自 `00_orchestrator/templates/project-state.yaml`）。在未来契约另有规定前，优先留在根。
 
-## Subfolder map
+## 子文件夹地图
 
-| Subfolder | Put here | Do not put here |
+| 子文件夹 | 放这里 | 不放这里 |
 |---|---|---|
-| `ref/review/` | Per-round `changelog.md` / `CHANGELOG_*.md`; review handoff YAML; Lee round notes | Main Word change ledger (that stays `manuscript-revision.md`) |
-| `ref/citation/` | `CITATION_AUDIT.json` (or `.jsonl`); citation README / skip notes; journal/citation logs (`ref_journal_log.txt`, `CITATION*`) | Full PDF corpora |
-| `ref/gates/` | `GATE*_report.md`, number-lock, input/output hash reports | Live `settings.ini` |
-| `ref/code/` | Script/path notes, patch pointers (no secrets, no tokens) | Raw credentials |
-| `ref/results/` | Table/figure lock notes and content hashes | Large binary datasets (stay in `0result` / derivatives) |
-| `ref/exec/` | Optional `EXECUTION.md` wrap-ups; ops notes that are not review-round ledgers | Owner-facing ACCEPT reports unless the owner asked |
-| `ref/tmp/` | Project-local **intermediate** Word/PDF/scratch (Claude diffs, superseded TC, `-copy`, merge scratch) held until the owner says clean/收工 | Current finals (stay at project root); closed-round changelogs (`review/`); citation/gates ledgers; secrets |
+| `ref/review/` | 每轮 `changelog.md` / `CHANGELOG_*.md`；审稿交接 YAML；Lee 轮次笔记 | 主 Word 变更 ledger（仍用 `manuscript-revision.md`） |
+| `ref/citation/` | `CITATION_AUDIT.json`（或 `.jsonl`）；引用 README / 跳过说明；期刊/引用日志（`ref_journal_log.txt`、`CITATION*`） | 完整 PDF 语料库 |
+| `ref/gates/` | `GATE*_report.md`、数字锁定、输入/输出哈希报告 | 现役 `settings.ini` |
+| `ref/code/` | 脚本/路径说明、补丁指针（无密钥、无 token） | 原始凭据 |
+| `ref/results/` | 表/图锁定说明与内容哈希 | 大型二进制数据集（留在 `0result` / derivatives） |
+| `ref/exec/` | 可选 `EXECUTION.md` 收工记录；非审稿轮次的运维笔记 | 面向主人的 ACCEPT 报告（除非主人要求） |
+| `ref/tmp/` | 课题本地**中间** Word/PDF/草稿（Claude diff、被替代的 TC、`-copy`、合并草稿），保留到主人说清理/收工 | 当前终稿（留在课题根）；已关闭轮次 changelog（`review/`）；citation/gates ledger；密钥 |
 
+### `ref/tmp/` 清理
 
-### `ref/tmp/` cleanup
+- 首次需要时创建（与其它子夹一样 copy-on-need）。
+- 助手可将中间件暂存于此，避免散落在 `ref/` 根或课题根。
+- **禁止**静默删除。主人说清理 / 收工时，把整个 `ref/tmp/` 树（或点名文件）移入 `D:\0del\_by-project\<project>\`（跨课题则 `_by-function`），有用时保留相对名。
+- 清理后留下空的 `ref/tmp/` 或下次写入时再建；勿在此编造临床内容。
 
-- Create on first need (copy-on-need with the other subfolders).
-- Assistants may stage intermediates here instead of scattering at `ref/` root or project root.
-- **Do not** silent-delete. When the owner says clean / 清理 / 收工 for that project, move the whole `ref/tmp/` tree (or named files) into `D:\0del\_by-project\<project>\` (or `_by-function` when cross-project), keeping relative names when useful.
-- After cleanup, leave an empty `ref/tmp/` or recreate on next write; do not invent clinical content there.
+项目一旦采用本布局，另备一份简短 **`ref/README.md`** 地图（见模板）。
 
-Also keep a short **`ref/README.md`** map (see template) once a project adopts this layout.
+## 跳过 / 幂等规则（再跑前先读 ledger）
 
-## Skip / idempotent rules (read ledgers before re-run)
+助手在**再次**跑同一门控或层之前，**必须**先读 `ref/manuscript-revision.md` 与引用 ledger。无 ledger 理由的静默跳过禁止（见保证六态：`NOT_APPLICABLE` ≠ 静默跳过）。
 
-Assistants **must** read `ref/manuscript-revision.md` and the citation ledger **before** re-running the same gate or layer. Silent skip without a ledger reason is forbidden (see assurance six-state: `NOT_APPLICABLE` ≠ silent skip).
-
-| Domain | Skip when | Else |
+| 领域 | 何时跳过 | 否则 |
 |---|---|---|
-| Literature / citation L4 | Same key (`DOI` **or** citekey) + same **layer** + same **fine_id** (or skill id) already recorded PASS/KEEP in `ref/citation/CITATION_AUDIT.json` (or `.jsonl`) and input hashes unchanged | Re-run; append/update entry; emit six-state verdict |
-| Word / polish | Section or span already logged in `ref/manuscript-revision.md` as revised or review-only | Append new row; do not silent re-polish |
-| Review round | Round marked completed in `ref/review/changelog.md` (Implemented / Not implemented closed) | Open a new round file or append; do not rewrite closed rounds without owner ask |
-| Gates / assurance | Same gate id + matching `audited_input_hashes` already PASS at required assurance level | Re-run if hashes stale or assurance upgraded (`submission` / `conference-ready` forbid silent skip) |
+| 文献 / 引用 L4 | 同键（`DOI` **或** citekey）+ 同 **layer** + 同 **fine_id**（或技能 id）已在 `ref/citation/CITATION_AUDIT.json`（或 `.jsonl`）记为 PASS/KEEP，且输入哈希未变 | 重跑；追加/更新条目；给出六态 verdict |
+| Word / 抛光 | 段落或区间已在 `ref/manuscript-revision.md` 记为已改或仅审阅 | 追加新行；勿静默再抛光 |
+| 审稿轮次 | `ref/review/changelog.md` 已标完成（Implemented / Not implemented 已关） | 开新轮文件或追加；无主人要求勿改写已关闭轮次 |
+| 门控 / 保证 | 同 gate id + 匹配的 `audited_input_hashes` 已在要求保证级别 PASS | 哈希过期或保证升级则重跑（`submission` / `conference-ready` 禁止静默跳过） |
 
-Citation ledger key shape (internal; not a user-facing slogan): `DOI|citekey` + `layer` + `fine_id`. Prefer JSON array or `{"entries":[]}` envelope — see template.
+引用 ledger 键形（内部；非对外口号）：`DOI|citekey` + `layer` + `fine_id`。优先 JSON 数组或 `{"entries":[]}` 信封 — 见模板。
 
-Cross-links:
+交叉链接：
 
-- Citation L4 / three-axis + six-state → `05_manuscript/qc/citation-audit-gate.md`
-- Assurance six-state → `00_orchestrator/qc/assurance-verdicts.md`
-- Word append rule → `06_review/personal/word-edit.md` + `05_manuscript/SKILL.md`
-- Deliverable drop points → `00_orchestrator/references/standing-delivery.md`
+- 引用 L4 / 三轴 + 六态 → `05_manuscript/qc/citation-audit-gate.md`
+- 保证六态 → `00_orchestrator/qc/assurance-verdicts.md`
+- Word 追加规则 → `06_review/personal/word-edit.md` + `05_manuscript/SKILL.md`
+- 交付落点 → `00_orchestrator/references/standing-delivery.md`
 
-## What this contract does **not** do
+## 本契约**不做**的事
 
-- Does not mass-require empty folders on greenfield projects until first artifact write (template exists for copy-on-need).
-- Does not move ethics locked trees or write `personal/`.
-- Does not install ARIS runtime.
+- 不在空课题上批量预建空文件夹，直到首次写入产物（模板供 copy-on-need）。
+- 不移动 ethics 锁定树，不写 `personal/`。
+- 不安装 ARIS runtime。
 
-## Template
+## 模板
 
-Copy-on-need tree: [`project-ref-template/`](project-ref-template/).
+按需拷贝树：[`project-ref-template/`](project-ref-template/)。
 
-## Pre-edit originals (`-org`) (2026-10-19)
+## 编辑前原件（`-org`）（2026-10-19）
 
-- Files named `*-org` / `*org*` (e.g. `comments-org.docx`, `SARC_CT_MRI_manuscript-org.docx`) are **pre-edit originals**. Keep them in the project — typically `ref/review/`.
-- On owner 收工/清理: **do not discard** `-org` originals. Move only true intermediates from `ref/tmp/` to `D:\0del\_by-project\<project>\`. If an `-org` was parked in `tmp/`, promote it to `ref/review/` (or leave at root) before cleaning `tmp/`.
-
+- 名为 `*-org` / `*org*` 的文件（如 `comments-org.docx`、`SARC_CT_MRI_manuscript-org.docx`）是**编辑前原件**。留在课题内——通常 `ref/review/`。
+- 主人收工/清理时：**勿丢弃** `-org` 原件。只把真正的中间件从 `ref/tmp/` 移到 `D:\0del\_by-project\<project>\`。若 `-org` 曾停在 `tmp/`，清理前先提升到 `ref/review/`（或留在根）。
