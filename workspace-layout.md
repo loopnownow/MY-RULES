@@ -15,8 +15,8 @@ description: A类与B类工作区短针。细则在 skills workspace.md；落点
 
 **B 类**（`{WORK_B}\<子项目>\`）：
 
-- 可复用脚本→`{WORK_B}\0script\`；长期规则→`{WORK_B}\0doc\`。
-- 根不留临时/草稿/一次性中间件（例外：当前在改稿）。`stats-analysis\modules\` 增改移须先同意。
+- 可复用脚本→`{WORK_B}\0doc\_code\`；长期规则→`{WORK_B}\0doc\`。
+- 根不留临时/草稿/一次性中间件（例外：当前在改稿）。`0doc\_code\04-analysis\stats-analysis\modules\` 增改移须先同意。
 
 **0rad**：`{SKILLS}\02_data-processing\personal\workspace.md`。
 
