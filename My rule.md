@@ -36,7 +36,7 @@ license: MIT
 
 | 产物 | 格式 | 落点 |
 |---|---|---|
-| 报告/QC | HTML | A→`ref\`；B→子项目/`submitting\`；无→Downloads。`0result\` 只放终表 |
+| 报告/QC | HTML | A→`ref\`；B→子项目/`in-review\`；无→Downloads。`0result\` 只放终表 |
 | 稿件/TC | DOCX | 子工程或 Downloads |
 | 数据表 | XLSX | A 终表→`0result\`；其余同稿件 |
 
