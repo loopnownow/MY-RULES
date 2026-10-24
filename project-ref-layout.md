@@ -25,7 +25,7 @@
 | `ref/citation/` | `CITATION_AUDIT.json`（或 `.jsonl`）；引用 README / 跳过说明；期刊/引用日志（`ref_journal_log.txt`、`CITATION*`） | 完整 PDF 语料库 |
 | `ref/gates/` | `GATE*_report.md`、数字锁定、输入/输出哈希报告 | 现役 `settings.ini` |
 | `ref/code/` | 脚本/路径说明、补丁指针（无密钥、无 token） | 原始凭据 |
-| `ref/results/` | 表/图锁定说明与内容哈希 | 大型二进制数据集（留在 `0result` / derivatives） |
+| `ref/results/` | 表/图锁定说明与内容哈希 | 大型二进制数据集（留在 derivatives）；终表/终稿放**子工程根**（**不建** `0result\`） |
 | `ref/exec/` | 可选 `EXECUTION.md` 收工记录；非审稿轮次的运维笔记 | 面向主人的 ACCEPT 报告（除非主人要求） |
 | `ref/tmp/` | 课题本地**中间** Word/PDF/草稿（Claude diff、被替代的 TC、`-copy`、合并草稿），保留到主人说清理/收工 | 当前终稿（留在课题根）；已关闭轮次 changelog（`review/`）；citation/gates ledger；密钥 |
 

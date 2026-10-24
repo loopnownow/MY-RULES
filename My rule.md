@@ -13,7 +13,7 @@ license: MIT
 - **术语**：作者字段 `A`=批注作者；`00`–`07`=技能层；派单→`{SKILLS}\00_orchestrator\references\ownership-contract.md`。**不再使用** A/B 工作区、`{WORK_A}`/`{WORK_B}`、`{MOUNTS}`（mounts 已退役）。
 - **一任务一执行方**；外挂（Cursor/Cline）须用户批准。盯梢→`{SKILLS}\00_orchestrator\references\handoff-monitor.md`。
 - **单项目约定**写在该**子工程文件夹**内（如子工程 `0doc\` 或 `ref\`），**不**写入全局 `{RULES}` / `{SKILLS}`。须用户点名「放 0doc」才写 `0doc\`。
-- **交付落点**：子工程交付物进该子工程；其余临时/非交付进 `{DEL}`；Downloads **仅当**当轮点名「下载」或「Downloads」。
+- **交付落点**：子工程**没有** `0result\` 文件夹。**最终**交付物 → 该子工程**根目录**（`D:\0Grok\<project>` 下）；**中间**产物 → 按 `project-ref-layout.md` 的 `ref/` 子文件夹地图（`review/` / `citation/` / `gates/` / `code/` / `results/` / `exec/` / `tmp/`）；其余临时/非交付进 `{DEL}`；Downloads **仅当**当轮点名「下载」或「Downloads」。
 
 # 2 开工前确认
 
@@ -38,6 +38,10 @@ license: MIT
 
 简单优先；外科手术式；软编码；模块化；**不写回退**；新脚本 Python 3.13.9；PowerShell 不用 `&&`。
 
+- **配置置顶**：脚本顶部先放配置/常量块（路径、开关、参数），再写逻辑。
+- **仅注释配置和脚本运行说明**：注释只写 (a) 配置字段含义；(b) 如何运行该脚本。不对业务逻辑写长文注释。
+- **不写回退**：禁止 fallback / 静默降级（勿用 try-except 吞失败后走默认路径）；失败要响，暴露错误。
+- **可以写多模块并配置可选**：允许多模块；模块可用配置开关可选启用。
 - **dry-run**：批量 IO / 写盘前先试跑，打印将执行的操作供确认；默认 dry-run，显式 `--execute` / `--apply` 才落盘。
 - **断点续传**：已处理结果跳过；以中间文件或完成标记续跑，勿整段重算。
 
@@ -49,13 +53,15 @@ license: MIT
 
 # 5 交付与清理
 
-**禁删**；临时只进 `{DEL}\<任务>\`。
+**禁删**；临时只进 `{DEL}\<任务>\`。子工程**不建** `0result\`。
 
 | 产物 | 格式 | 落点 |
 |---|---|---|
-| 报告/QC | HTML | 有子工程→该子工程 `ref\` 或 `in-review\`；无子工程且点名「下载/Downloads」→Downloads；否则→`{DEL}`。终表可进子工程 `0result\`（只放终表） |
-| 稿件/TC | DOCX | 子工程；否则仅当点名 Downloads，否则 `{DEL}` |
-| 数据表 | XLSX | 终表→子工程 `0result\`；其余同稿件 |
+| 最终交付（稿件/终表/最终报告等） | 依类型 | **子工程根目录**；无子工程且点名「下载/Downloads」→Downloads；否则→`{DEL}` |
+| 中间产物（QC/ledger/门控/草稿等） | 依类型 | 有子工程→按 `project-ref-layout.md` 的 `ref/` 地图（`review/`/`citation/`/`gates/`/`code/`/`results/`/`exec/`/`tmp/`）；否则→`{DEL}` |
+| 报告/QC（中间） | HTML | 有子工程→该子工程 `ref\`（或阶段夹如 `in-review\`）；无子工程且点名 Downloads→Downloads；否则→`{DEL}` |
+| 稿件/TC（最终） | DOCX | 子工程**根**；否则仅当点名 Downloads，否则 `{DEL}` |
+| 数据表（最终） | XLSX | 子工程**根**（不建 `0result\`）；其余同稿件 |
 
 「放 0doc」才写 `0doc\`。长表→`{SKILLS}\00_orchestrator\references\standing-delivery.md`。
 
