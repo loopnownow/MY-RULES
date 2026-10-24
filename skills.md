@@ -22,7 +22,7 @@ description: 技能库契约、按需加载、演进门、PR 与合并后部署�
 - **只提案，不直接改** live 技能正文（部署同步见 §1b）。
 - 默认证据 **E4**（同类重复用户纠正）；单次事件不演进。
 - **delete** 须显式批准。正文→`{SKILLS}\00_orchestrator\references\skill-evolution.md`。
-- **Harvest 任务流程**由 skill-00 管理（同文件「Harvest 任务流程」）；收集标准 SSOT→`{doc_root}\_corpus\skill-harvest\HARVEST-STANDARD.md`。propose-only 仍适用；不另开 evolution 技能树。
+- **Harvest 任务流程**由 skill-00 管理（同文件「Harvest 任务流程」）；收集标准 SSOT→`{doc_root}\skill-harvest\HARVEST-STANDARD.md`。propose-only 仍适用；不另开 evolution 技能树。
 
 ## 4 mounts（已退役）
 
