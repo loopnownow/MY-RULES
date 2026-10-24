@@ -27,8 +27,9 @@ description: 本机布局与子工程短针（无 A/B 类）。落点见 My rule
 - 数据处理细则 → `{SKILLS}\02_data-processing\personal\workspace.md`。
 - **`ref/` 子目录** → 同仓 `project-ref-layout.md`；技能正文 `{SKILLS}\00_orchestrator\references\project-ref-layout.md`。
 
-## 新建文件夹 / 临时（2026-10-19）
+## 新建文件夹 / 新建文件 / 临时（2026-10-19；文件红线 2026-10-24 · t1098u）
 
 - 未经同意，**禁止**在 `{DEL}` 外新建文件夹。
 - Grok / Cursor / Cline **只许**在 `D:\0del\`（`_by-project\` / `_by-function\`）下建夹。
+- **禁止在 `{DEL}` / `D:\0del` 以外新建文件**；**可改**已有文件。新草稿、ACCEPT、digest、by-fine-id、笔记、中间件 → `{DEL}\_by-function\…` 或 `{DEL}\_by-project\…`。终稿落点仍按 `My rule.md` §5（优先改已有）。权威短述 → `My rule.md` §5.1；mem → `D:\0Grok\0doc\mem\README.md`。
 - 一次性脚本、commit/PR 说明、非课题补丁只进 `{DEL}`——不进主目录、不进 `.grok\tmp`、不进课题根。
