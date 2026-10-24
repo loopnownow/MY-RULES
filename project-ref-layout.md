@@ -36,7 +36,7 @@
 - **禁止**静默删除。主人说清理 / 收工时，把整个 `ref/tmp/` 树（或点名文件）移入 `D:\0del\_by-project\<project>\`（跨课题则 `_by-function`），有用时保留相对名。
 - 清理后留下空的 `ref/tmp/` 或下次写入时再建；勿在此编造临床内容。
 
-项目一旦采用本布局，另备一份简短 **`ref/README.md`** 地图（见模板）。
+项目一旦采用本布局，另备一份简短 **`ref/README.md`** 地图于 `ref/` 根（子夹职责见上表）。
 
 ## 跳过 / 幂等规则（再跑前先读 ledger）
 
@@ -49,7 +49,7 @@
 | 审稿轮次 | `ref/review/changelog.md` 已标完成（Implemented / Not implemented 已关） | 开新轮文件或追加；无主人要求勿改写已关闭轮次 |
 | 门控 / 保证 | 同 gate id + 匹配的 `audited_input_hashes` 已在要求保证级别 PASS | 哈希过期或保证升级则重跑（`submission` / `conference-ready` 禁止静默跳过） |
 
-引用 ledger 键形（内部；非对外口号）：`DOI|citekey` + `layer` + `fine_id`。优先 JSON 数组或 `{"entries":[]}` 信封 — 见模板。
+引用 ledger 键形（内部；非对外口号）：`DOI|citekey` + `layer` + `fine_id`。优先 JSON 数组或 `{"entries":[]}` 信封。
 
 交叉链接：
 
@@ -60,13 +60,9 @@
 
 ## 本契约**不做**的事
 
-- 不在空课题上批量预建空文件夹，直到首次写入产物（模板供 copy-on-need）。
+- 不在空课题上批量预建空文件夹，直到首次写入产物（按需创建子夹 copy-on-need）。
 - 不移动 ethics 锁定树，不写 `personal/`。
 - 不安装 ARIS runtime。
-
-## 模板
-
-按需拷贝树：[`project-ref-template/`](project-ref-template/)。
 
 ## 编辑前原件（`-org`）（2026-10-19）
 
