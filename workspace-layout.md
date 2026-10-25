@@ -13,8 +13,11 @@ description: 本机布局与子工程短针（无 A/B 类）。落点见 My rule
 |---|---|
 | `D:\00db`（`{RAW}`） | 已组织的原始库；只读除非点名 |
 | `D:\0del`（`{DEL}`） | AI 可操作临时/移出区（`_by-project` / `_by-function`） |
-| `D:\0Grok\0doc` | 语料 + 可复用代码（`_library` / `_corpus` / `_code` 等） |
+| `D:\0Grok\0doc` | 语料 + 可复用代码；live tops：`_library` / `_corpus` / `_code` / `templates` / `mem` / `GitHub` / `test` / `skill-harvest`（+ 根 md） |
+| `D:\0Grok\0doc\mem` | bot 记忆导出/更新落点（城城 2026-10-25）；**仅隐私** + 可变数据 SSOT（如 find-journal JCR xlsx）；站立政策不进 mem |
 | `D:\0Grok` | 分阶段子工程工作区（阶段夹见下节） |
+
+**云端 / 本地：** 云端 = Grok Bot box；本地 = 城城本机。详见 `My rule.md` §1。
 
 可选：数据课题也可在上述子工程树内自建文件夹；约定写在该子工程内，不进全局 rules/skills。
 
