@@ -11,11 +11,11 @@ description: 技能库契约、按需加载、演进门、PR 与合并后部署�
 
 **(a)** 禁止 agent 直接改 `{SKILLS}` 技能树任何文件。内容变更只经主人或 GitHub MY-SKILLS PR/merge（§5）。发现缺失/过时：只报告 + 按 §3 提案。
 
-**(b) 合并后部署同步**：`{SKILLS}` = GitHub 克隆 `D:\0Grok\0doc\GitHub\MY-SKILLS`（与 `{skills_runtime}`/`{skills_git}` 同一棵树；旧 `.grok\skills` 已于 2026-10-23 退役）。merge 后对该克隆 `git pull`；禁止再拷到第二棵 runtime 树；禁止整树盲盖。细则→`{SKILLS}\01_skill-integration\references\lifecycle-cache.md`。
+**(b) 合并后部署同步**：`{SKILLS}` = GitHub 克隆 `D:\0Grok\0doc\GitHub\MY-SKILLS`（与 `{skills_runtime}`/`{skills_git}` 同一棵树；旧 `.grok\skills` 已于 2026-10-23 退役）。merge 后对该克隆 `git pull`；禁止再拷到第二棵 runtime 树；禁止整树盲盖。细则→`{SKILLS}\00_orchestrator\references\lifecycle-cache.md`。
 
 ## 2 按需使用
 
-先读 `<skill>/SKILL.md` 再只读其引用；路由 `00`→`01`→`02`–`07`→`00` QC。细则→`00`/`01` `SKILL.md`。
+先读 `<skill>/SKILL.md` 再只读其引用；路由 `00`→`02`–`07`→`00` QC（`01_skill-integration` 已于 2026-10-25 并入 `00_orchestrator`；粗 ID = 执行座位）。细则→`00` `SKILL.md`。
 
 ## 3 演进提案（propose only）
 
