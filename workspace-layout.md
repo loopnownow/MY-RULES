@@ -36,6 +36,8 @@ description: 本机布局与子工程短针（无 A/B 类）。落点见 My rule
 
 | 旧名 | 读作 |
 |---|---|
+> 旧阶段夹名仅作别名阅读；**勿重建** `preparing`/`polishing`/`submitting`/`reseived`。
+
 | `preparing` | `drafting` |
 | `polishing` | `pre-submit` |
 | `submitting` | `in-review` |
