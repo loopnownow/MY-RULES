@@ -15,7 +15,7 @@ description: 技能库契约、按需加载、演进门、PR 与合并后部署�
 
 ## 2 按需使用
 
-先读 `<skill>/SKILL.md` 再只读其引用；路由 `00`→`02`–`07`→`00` QC（`01_skill-integration` 已于 2026-10-25 并入 `00_orchestrator`；粗 ID = 执行座位）。细则→`00` `SKILL.md`。
+先读 `<skill>/SKILL.md` 再只读其引用；路由 `00`→`02`–`07`→`00` QC（`01_skill-integration` 已于 2026-10-25 并入 `00_orchestrator`；粗 ID = 执行座位）。细则→`00` `SKILL.md`。**索引边界（2026-10-26）**：技能正文一律用 `{SKILLS}\…` 绝对路径直读；`D:\0Grok\0doc\.cursorignore` 排除 `GitHub\`，故不得依赖 Cursor/Cline 索引去「找」技能。
 
 ## 3 演进提案（propose only）
 

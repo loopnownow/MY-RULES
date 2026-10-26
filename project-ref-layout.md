@@ -6,6 +6,8 @@
 
 本文是**文件夹地图与跳过/幂等契约**。不编造临床数字。文件名与 ledger 行除课题科学所需（路径、DOI、citekey）外，不含 PII。
 
+**SSOT：** 本文件为**权威中文版**。技能侧镜像（英文）`{SKILLS}\00_orchestrator\references\project-ref-layout.md` 只作运行期读本；两版冲突以本文件为准（2026-10-26）。
+
 ## 根目录不变量（勿挪位）
 
 以下必须留在 **`ref/` 根**（技能与约定硬性要求）：
@@ -13,9 +15,9 @@
 | 路径 | 作用 |
 |---|---|
 | `ref/settings.ini` | 仅 RAD / 流水线配置。勿随意覆盖；勿存密钥。 |
-| `ref/manuscript-revision.md` | 只追加的主变更 ledger（主人要求 + 代码/结果/Word）。05/06 Word 轮次后在此追加（`06_review/personal/word-edit.md`）。**已登记段落勿再抛光**，除非上游数字变了、主人点名、或未解决批注已授权。 |
+| `ref/manuscript-revision.md` | 只追加的主变更 ledger（主人要求 + 代码/结果/Word）。05/06 Word 轮次后在此追加（`{SKILLS}\06_review\personal\word-edit.md`）。**已登记段落勿再抛光**，除非上游数字变了、主人点名、或未解决批注已授权。 |
 
-根上可选（若已在用）：`ref/project-state.yaml`（来自 `00_orchestrator/templates/project-state.yaml`）。在未来契约另有规定前，优先留在根。
+根上可选（若已在用）：`ref/project-state.yaml`（来自 `{SKILLS}\00_orchestrator\templates\project-state.yaml`）。在未来契约另有规定前，优先留在根。
 
 ## 子文件夹地图
 
@@ -53,10 +55,10 @@
 
 交叉链接：
 
-- 引用 L4 / 三轴 + 六态 → `05_manuscript/qc/citation-audit-gate.md`
-- 保证六态 → `00_orchestrator/qc/assurance-verdicts.md`
-- Word 追加规则 → `06_review/personal/word-edit.md` + `05_manuscript/SKILL.md`
-- 交付落点 → `00_orchestrator/references/standing-delivery.md`
+- 引用 L4 / 三轴 + 六态 → `{SKILLS}\05_manuscript\qc\citation-audit-gate.md`
+- 保证六态 → `{SKILLS}\00_orchestrator\qc\assurance-verdicts.md`
+- Word 追加规则 → `{SKILLS}\06_review\personal\word-edit.md` + `{SKILLS}\05_manuscript\SKILL.md`
+- 交付落点 → `{SKILLS}\00_orchestrator\references\standing-delivery.md`
 
 ## 本契约**不做**的事
 
