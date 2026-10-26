@@ -13,9 +13,9 @@
 | 路径 | 作用 |
 |---|---|
 | `ref/settings.ini` | 仅 RAD / 流水线配置。勿随意覆盖；勿存密钥。 |
-| `ref/manuscript-revision.md` | 只追加的主变更 ledger（主人要求 + 代码/结果/Word）。05/06 Word 轮次后在此追加（`06_review/personal/word-edit.md`）。**已登记段落勿再抛光**，除非上游数字变了、主人点名、或未解决批注已授权。 |
+| `ref/manuscript-revision.md` | 只追加的主变更 ledger（主人要求 + 代码/结果/Word）。05/06 Word 轮次后在此追加（`{SKILLS}\06_review\personal\word-edit.md`）。**已登记段落勿再抛光**，除非上游数字变了、主人点名、或未解决批注已授权。 |
 
-根上可选（若已在用）：`ref/project-state.yaml`（来自 `00_orchestrator/templates/project-state.yaml`）。在未来契约另有规定前，优先留在根。
+根上可选（若已在用）：`ref/project-state.yaml`（来自 `{SKILLS}\00_orchestrator\templates\project-state.yaml`）。在未来契约另有规定前，优先留在根。
 
 ## 子文件夹地图
 
@@ -53,10 +53,10 @@
 
 交叉链接：
 
-- 引用 L4 / 三轴 + 六态 → `05_manuscript/qc/citation-audit-gate.md`
-- 保证六态 → `00_orchestrator/qc/assurance-verdicts.md`
-- Word 追加规则 → `06_review/personal/word-edit.md` + `05_manuscript/SKILL.md`
-- 交付落点 → `00_orchestrator/references/standing-delivery.md`
+- 引用 L4 / 三轴 + 六态 → `{SKILLS}\05_manuscript\qc\citation-audit-gate.md`
+- 保证六态 → `{SKILLS}\00_orchestrator\qc\assurance-verdicts.md`
+- Word 追加规则 → `{SKILLS}\06_review\personal\word-edit.md` + `{SKILLS}\05_manuscript\SKILL.md`
+- 交付落点 → `{SKILLS}\00_orchestrator\references\standing-delivery.md`
 
 ## 本契约**不做**的事
 
