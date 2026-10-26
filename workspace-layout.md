@@ -84,4 +84,4 @@ description: 本机布局与子工程短针（无 A/B 类）。落点见 My rule
 
 ## 新建文件夹 / 新建文件
 
-只许建在 `{DEL}` / `D:\0del\` 的 `_by-project\`、`_by-function\`。权威与例外 → `My rule.md` §5.1（含 `0doc` 默认禁止 mkdir、可改已有文件、一次性脚本不进主目录 / `.grok\tmp` / 课题根）。本段不复写。
+只许建在 `{DEL}` / `D:\0del\` 的 `_by-project\`、`_by-function\`。权威与例外 → `My rule.md` §5.1（含 `0doc` 默认禁止 mkdir、可改已有文件、一次性脚本不进主目录 / `.grok\tmp` / 课题根）。本段不复写。bot mem 落点例外（`D:\0Grok\0doc\mem\`）→ `My rule.md` §1 + §5.1。
