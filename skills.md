@@ -31,3 +31,13 @@ description: 技能库契约、按需加载、演进门、PR 与合并后部署�
 ## 5 MY-SKILLS 仓流程
 
 本地分支+测试 → PR 前完整变更清单 → 不直推 main → 用户同意后 merge。「直接做」不跳过清单与 merge 确认。merge 后按 §1b 同步。
+
+## 6 QC 与 archived（2026-10-26 站立）
+
+**凡标 archived / 已归档 / page not on disk 的技能树或指针，在 QC 时一律删除**（删引用；若仍有字节则移入 `{DEL}` 并保留相对路径），**禁止**只改标成 archived 继续留在 live 正文或 SOP 调度表。
+
+- 退休 fine-id **只**保留在 `{SKILLS}\00_orchestrator\legacy_aliases.yaml` → 现行 id；live 路由 / workflow / personal 只写现行 fine-id 与现存路径。
+- 发现「archived … (page not on disk)」残留 = QC **P0/P1**：当场删除或改写为现行能力，不得再扩散 archived 标签。
+- 互指：`{SKILLS}` `INTEGRATION_MAP.md` / `00_orchestrator/references/skill-evolution.md`（outcome 不再以 archive 为可停留态）。
+
+
