@@ -84,6 +84,15 @@ license: MIT
 - **新建文件（2026-10-24 · t1098u）**：AI/助手**不得**在 `{DEL}` / `D:\0del` 以外**新建**文件；**可改**已有文件（含 `{RULES}` / `{SKILLS}` / `0doc\skill-harvest\*` / `0doc\mem\*` / 子工程已有稿）。**唯一例外**：bot 记忆导出/更新可在 `D:\0Grok\0doc\mem\` 内新建（§1「mem 落盘」城城指定）；mem 以外仍禁。新草稿、ACCEPT、digest、by-fine-id lane、笔记、中间件 → 只进 `{DEL}\_by-function\…` 或 `{DEL}\_by-project\…`。优先 patch 已有；用户本轮点名的终稿落点仍按 §5（优先改已有终稿）。全文→`D:\0del\_by-function\encode-0del-standing-20261024\STANDING-no-new-files-outside-0del.md`；mem→`D:\0Grok\0doc\mem\README.md`。
 - **一次性脚本/说明/小补丁**（非课题交付）：只落 `{DEL}`，禁止丢进用户主目录、`.grok\tmp`、或课题根。
 
+## 5.2 每轮 QC 必清 0doc（2026-10-27）
+
+- **每轮质控必须跑一次无用件清理**（`D:\0Grok\0doc`）：`python -B test\cleanup_scan.py --tsv <清单>` → 人工确认 → `python -B test\cleanup_move.py --plan <清单> --apply`，移入 `{DEL}\_by-function\0doc-qc-clean\<YYYYMMDD>\`，保相对路径并落 `MOVED.tsv`。
+- **判据只有三条**：有没有入口 / 有没有真实落点 / 能不能再生。「看起来旧」不是理由；只剩历史价值 → 留档并标注，不计清理成绩。
+- **默认分级**：字节码缓存、垃圾文件名、空目录、历史结构快照、被同名无日期版取代的副本 → 可直接移；重复件、无入口脚本、无读者台账、孤立 `.md`、占位壳 → 出清单等点头；断链与「文中路径全失效」→ 只修指针或就地标注，**不搬**（历史档合法引用过去落点）。
+- **永不自动清**：`_bank\bank`（含 `0doc-bank.db`）、`mem\`、`_library\ethics\`，以及历史档 `MIGRATION.md`、`_bank\GATES.md`、`ACCEPT-*`、`_library\former-*`、`skill-harvest\PLAN-*`。
+- 移出即记台账；收工报告须给「一条命令还原」的路径映射。分类说明→`0doc\test\README.md`。
+
+
 # 6 工程决策
 
 - R1 需求优先 · R2 证据排错 · R3 有序简化 · R4 风险比例 · R5 保护不变量 · R6 闭环验证。
