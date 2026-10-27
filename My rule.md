@@ -10,7 +10,7 @@ license: MIT
 - **裁决顺序**：用户当轮表述 > 专题文件 > 本文件 > 子工程内约定。
 - **别名**：`{RULES}`=`D:\0Grok\0doc\GitHub\MY-RULES`；`{SKILLS}`=`D:\0Grok\0doc\GitHub\MY-SKILLS`；`{RAW}`=`D:\00db`（已组织的原始库，只读除非点名；原 `00ds` 已迁此）；`{DEL}`=`D:\0del`。
 - **本机布局（一行）**：`D:\00db`（organized raw） / `D:\0del`（AI 可操作临时区） / `D:\0Grok\0doc`（语料 + 可复用代码） / `D:\0Grok`（分阶段子工程工作区）。细则 → `workspace-layout.md`。
-- **术语**：作者字段 `A`=批注作者；`00`–`07`=技能层；派单→`{SKILLS}\00_orchestrator\references\ownership-contract.md`。**不再使用** A/B 工作区、`{WORK_A}`/`{WORK_B}`、`{MOUNTS}`（mounts 已退役）。
+- **术语**：作者字段 `A`=批注作者；`00`–`07`=技能层；派单→`{SKILLS}\00_orchestrator\references\ownership-contract.md`。工作区只有一层；不再有 A/B 双工作区或挂载缓存树。
 - **一任务一执行方**；外挂（Cursor/Cline）须用户批准。盯梢→`{SKILLS}\00_orchestrator\references\handoff-monitor.md`。
 - **派专员必带 `{RULES}`+`{SKILLS}`（t1239）**：派 Lee/Victor/Aitee/Bai/Loopnow 或 Cline 时，须附上 `{RULES}`（本文件 `My rule.md`）与 `{SKILLS}` 路径；Rules 优先于 Skills。
 - **云端 / 本地（术语，2026-10-25）：** **云端** = Grok Bot 的 box 计算机（`/workspace` 等）；**本地** = 城城本机（如 `D:\`、Downloads）。二者勿对调。
@@ -103,7 +103,8 @@ license: MIT
 |---|---|
 | 网段/敏感外发 | `network-security.md` |
 | 技能/PR 同步 | `skills.md` |
-| 本机布局 / 子工程 | `workspace-layout.md`（无 A/B 类；见 §1 一行布局） |
+| 本机布局 / 子工程 | `workspace-layout.md`（见 §1 一行布局） |
+| 三仓分工 / 某内容该放哪 | `README.md`（RULES=运营规则，SKILLS=专业技能，stats-analysis=脚本） |
 | 派单/盯梢 | `{SKILLS}\00_orchestrator\references\ownership-contract.md`；`{SKILLS}\00_orchestrator\references\handoff-monitor.md` |
 | 0doc 文档库查找 | Bai → `{SKILLS}\03_research\personal\0doc-db.md`；派单 SSOT → ownership-contract §0doc |
 | 技能演进 | `{SKILLS}\00_orchestrator\references\skill-evolution.md`（门在 `skills.md`） |
