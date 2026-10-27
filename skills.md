@@ -24,9 +24,10 @@ description: 技能库契约、按需加载、演进门、PR 与合并后部署�
 - **delete** 须显式批准。正文→`{SKILLS}\00_orchestrator\references\skill-evolution.md`。
 - **Harvest 任务流程**由 skill-00 管理（`{SKILLS}\00_orchestrator\references\skill-evolution.md`「Harvest 任务流程」）；收集标准 SSOT→`{doc_root}\skill-harvest\HARVEST-STANDARD.md`。改 live 技能须城城点名「进skills」（extract ≠ promote）；propose-only 仍适用；不另开 evolution 技能树。
 
-## 4 mounts（已退役 — 勿再当现行词表 / 勿重建 `{MOUNTS}` 路径）
+## 4 单一技能源（勿重建第二条树）
 
-`{MOUNTS}` / mounts-cap **已退役**（2026-10-20）：不再维护挂载缓存树；禁止对该路径 `robocopy /MIR` 或重建包字节。Live bodies SSOT = MY-SKILLS in-repo `NN_slug/base/`。缓存边界→`lifecycle-cache.md`。
+Live bodies SSOT = MY-SKILLS in-repo `NN_slug/base/`。不得在别处再建第二棵技能树、挂载缓存树或整树副本；
+禁止对任何旧缓存路径 `robocopy /MIR` 或重建包字节。缓存边界→`{SKILLS}\00_orchestrator\references\lifecycle-cache.md`。
 
 ## 5 MY-SKILLS 仓流程
 

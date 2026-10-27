@@ -56,7 +56,7 @@
 交叉链接：
 
 - 引用 L4 / 三轴 + 六态 → `{SKILLS}\05_manuscript\qc\citation-audit-gate.md`
-- 保证六态 → `{SKILLS}\00_orchestrator\qc\assurance-verdicts.md`
+- 保证六态 → `{SKILLS}\06_review\qc\assurance-verdicts.md`
 - Word 追加规则 → `{SKILLS}\06_review\personal\word-edit.md` + `{SKILLS}\05_manuscript\SKILL.md`
 - 交付落点 → `{SKILLS}\00_orchestrator\references\standing-delivery.md`
 
