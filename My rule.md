@@ -12,6 +12,7 @@ license: MIT
 - **本机布局（一行）**：`D:\00db`（organized raw） / `D:\0del`（AI 可操作临时区） / `D:\0Grok\0doc`（语料 + 可复用代码） / `D:\0Grok`（分阶段子工程工作区）。细则 → `workspace-layout.md`。
 - **术语**：作者字段 `A`=批注作者；`00`–`07`=技能层；派单→`{SKILLS}\00_orchestrator\references\ownership-contract.md`。**不再使用** A/B 工作区、`{WORK_A}`/`{WORK_B}`、`{MOUNTS}`（mounts 已退役）。
 - **一任务一执行方**；外挂（Cursor/Cline）须用户批准。盯梢→`{SKILLS}\00_orchestrator\references\handoff-monitor.md`。
+- **派专员必带 `{RULES}`+`{SKILLS}`（t1239）**：派 Lee/Victor/Aitee/Bai/Loopnow 或 Cline 时，须附上 `{RULES}`（本文件 `My rule.md`）与 `{SKILLS}` 路径；Rules 优先于 Skills。
 - **云端 / 本地（术语，2026-10-25）：** **云端** = Grok Bot 的 box 计算机（`/workspace` 等）；**本地** = 城城本机（如 `D:\`、Downloads）。二者勿对调。
 - **mem 落盘：** bot 记忆导出/更新落在本地 `D:\0Grok\0doc\mem`（城城指定；非默认进 `{DEL}`）。mem **仅保留隐私**与可变数据 SSOT（如 JCR xlsx）；站立运营政策进 `{RULES}`，专业技能进 `{SKILLS}`。
 - **单项目约定**写在该**子工程文件夹**内（如子工程 `0doc\` 或 `ref\`），**不**写入全局 `{RULES}` / `{SKILLS}`。须用户点名「放 0doc」才写 `0doc\`。
@@ -79,6 +80,7 @@ license: MIT
 - **批注英文建议句**：单独成句，以 `Suggested …` 起首。字面模板技能落点→`{SKILLS}\06_review\personal\word-edit.md`。`manuscript-and-review.md` 已于 2026-10-18 按 README 迁入 `05_manuscript` / `06_review` / `07_response`。
 - **审稿回复**：保留完整原始 comments；不简化；不擅自加小标题；不自创信函格式。→`{SKILLS}\07_response\personal\response.md`。
 - **新建文件夹（2026-10-24 · t1107u/t1108u/t1109u）**：助手需要的**全部新文件夹**只许建在 `{DEL}` / `D:\0del\`（`_by-project` / `_by-function`）。**默认禁止**在 `D:\0Grok\0doc` 下 mkdir；**唯一例外**：城城**本轮明确同意**才可在 0doc 建新夹。可改已有文件。临时/scratch → `{DEL}`。ACCEPT 备注只落 `{DEL}`。正文以本条为准；短针→`workspace-layout.md`（不复写）。mem→`D:\0Grok\0doc\mem\README.md`；全文→`D:\0del\_by-function\encode-0doc-folder-ban-20261024\STANDING-0doc-no-new-folder.md`。
+- **新建文件/文件夹（2026-10-27 · t1240）**：任何 agent **不得**在 `{DEL}` / `D:\0del` **以外**新建文件或文件夹；若确需新建，**必须事先问城城**。可改已有文件（含子工程根已有终稿的 Track Changes）。审稿交付：优先 **修订现有** 评审意见 `.docx`（Track Changes），禁止另存新稿名、禁止在子工程下新建夹；中间垃圾只进 `{DEL}`，且新建前仍优先问过。本条强化 t1098u/t1107u；路径 SSOT 仍为 `D:\0del`（非 `D:\0Grok\0del`）。
 - **新建文件（2026-10-24 · t1098u）**：AI/助手**不得**在 `{DEL}` / `D:\0del` 以外**新建**文件；**可改**已有文件（含 `{RULES}` / `{SKILLS}` / `0doc\skill-harvest\*` / `0doc\mem\*` / 子工程已有稿）。**唯一例外**：bot 记忆导出/更新可在 `D:\0Grok\0doc\mem\` 内新建（§1「mem 落盘」城城指定）；mem 以外仍禁。新草稿、ACCEPT、digest、by-fine-id lane、笔记、中间件 → 只进 `{DEL}\_by-function\…` 或 `{DEL}\_by-project\…`。优先 patch 已有；用户本轮点名的终稿落点仍按 §5（优先改已有终稿）。全文→`D:\0del\_by-function\encode-0del-standing-20261024\STANDING-no-new-files-outside-0del.md`；mem→`D:\0Grok\0doc\mem\README.md`。
 - **一次性脚本/说明/小补丁**（非课题交付）：只落 `{DEL}`，禁止丢进用户主目录、`.grok\tmp`、或课题根。
 
