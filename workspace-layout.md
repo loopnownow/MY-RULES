@@ -79,7 +79,7 @@ description: 本机布局与子工程短针。落点见 My rule.md §5。
 - 同键终表合并为一张（一段说明，值列加前缀）。把原件移出子工程根须先同意。
 - 移脚本或文档前先搜 `import` / `addpath` / `settings.ini` / README。仍有未改引用则不移。移完后改路径与 `0doc` 示例再测。
 - 课题索引用 `.xlsx`，说明用 `.md`。不用 `*.tsv` 当课题索引。
-- 02 整理 / 清洗 / 同步 / 抽取 → `{SKILLS}\02_data-processing\personal\route.md`（编码 `coding.md`，抽取 `extract.md`）。表先于统计、`exc`、假分类、控制台键位与界面不在本文件展开 → 同目录 `coding.md` / `extract.md`，以及 `{SKILLS}\02_data-processing\personal\analysis\pipeline.md`。
+- 02 整理 / 清洗 / 同步 / 抽取 → `{SKILLS}\02_data-processing\advanced\route.md`（编码 `coding.md`，抽取 `extract.md`）。表先于统计、`exc`、假分类、控制台键位与界面不在本文件展开 → 同目录 `coding.md` / `extract.md`，以及 `{SKILLS}\02_data-processing\advanced\analysis\pipeline.md`。
 - **`ref/` 子目录** → 同仓 `project-ref-layout.md`；技能正文 `{SKILLS}\00_orchestrator\references\project-ref-layout.md`。
 
 ## 新建文件夹 / 新建文件

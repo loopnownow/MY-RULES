@@ -50,7 +50,7 @@ license: MIT
 - **测试→运行→核查→验收**：所有脚本先测试再运行，最后核查，再验收。顺序固定：(1) 先测（unit/smoke/dry-run 视情）；(2) 再跑正式任务；(3) 核查结果；(4) 验收通过后再宣告完成。
 - **断点续传**：已处理结果跳过；以中间文件或完成标记续跑，勿整段重算。
 
-细节（模板、阶梯、QC）→`{SKILLS}\02_data-processing\personal\coding.md`。
+细节（模板、阶梯、QC）→`{SKILLS}\02_data-processing\advanced\coding.md`。
 
 # 4 执行与验证
 
@@ -74,11 +74,11 @@ license: MIT
 
 # 5.1 Word / 审稿回复 / 本机目录（2026-10-19）
 
-- **Word/PDF 格式**：未经当轮点名，禁止改 `.docx`/`.pdf` 版式；改文字用修订模式。词/句级修订，禁止大段覆盖。细则→`{SKILLS}\06_review\personal\word-edit.md`。
+- **Word/PDF 格式**：未经当轮点名，禁止改 `.docx`/`.pdf` 版式；改文字用修订模式。词/句级修订，禁止大段覆盖。细则→`{SKILLS}\06_review\advanced\word-edit.md`。
 - **城城已改先问（全局停）**：若 Word/手稿正文与城城（用户）已编辑文本不同（修订痕迹 / 已知本人改动），**必须先问再改**，禁止擅自覆盖或改回。技能须指针本条，勿只埋在 revise。→`word-edit.md`；`writing-rules-hard.md`；`07_response` revise。（2026-10-24）
-- **统一版式**：手稿、审稿意见、审稿回复同一套——正文 Times New Roman 12、1.5 倍行距、段前后 0、两端对齐、LTR、特殊格式无；**表格单元格 12 pt**；**图内文字 Arial**（与正文双轨）；**流程图首选 PDF**。→`{SKILLS}\05_manuscript\personal\Aitor-format.md`；`word-edit.md`；`draw-flowchart`。（2026-10-24）
-- **批注英文建议句**：单独成句，以 `Suggested …` 起首。字面模板技能落点→`{SKILLS}\06_review\personal\word-edit.md`。`manuscript-and-review.md` 已于 2026-10-18 按 README 迁入 `05_manuscript` / `06_review` / `07_response`。
-- **审稿回复**：保留完整原始 comments；不简化；不擅自加小标题；不自创信函格式。→`{SKILLS}\07_response\personal\response.md`。
+- **统一版式**：手稿、审稿意见、审稿回复同一套——正文 Times New Roman 12、1.5 倍行距、段前后 0、两端对齐、LTR、特殊格式无；**表格单元格 12 pt**；**图内文字 Arial**（与正文双轨）；**流程图首选 PDF**。→`{SKILLS}\05_manuscript\advanced\Aitor-format.md`；`word-edit.md`；`draw-flowchart`。（2026-10-24）
+- **批注英文建议句**：单独成句，以 `Suggested …` 起首。字面模板技能落点→`{SKILLS}\06_review\advanced\word-edit.md`。`manuscript-and-review.md` 已于 2026-10-18 按 README 迁入 `05_manuscript` / `06_review` / `07_response`。
+- **审稿回复**：保留完整原始 comments；不简化；不擅自加小标题；不自创信函格式。→`{SKILLS}\07_response\advanced\response.md`。
 - **新建文件夹（2026-10-24 · t1107u/t1108u/t1109u）**：助手需要的**全部新文件夹**只许建在 `{DEL}` / `D:\0del\`（`_by-project` / `_by-function`）。**默认禁止**在 `D:\0Grok\0doc` 下 mkdir；**唯一例外**：城城**本轮明确同意**才可在 0doc 建新夹。可改已有文件。临时/scratch → `{DEL}`。ACCEPT 备注只落 `{DEL}`。正文以本条为准；短针→`workspace-layout.md`（不复写）。mem→`D:\0Grok\0doc\mem\README.md`；全文→`D:\0del\_by-function\encode-0doc-folder-ban-20261024\STANDING-0doc-no-new-folder.md`。
 - **新建文件/文件夹（2026-10-27 · t1240）**：任何 agent **不得**在 `{DEL}` / `D:\0del` **以外**新建文件或文件夹；若确需新建，**必须事先问城城**。可改已有文件（含子工程根已有终稿的 Track Changes）。审稿交付：优先 **修订现有** 评审意见 `.docx`（Track Changes），禁止另存新稿名、禁止在子工程下新建夹；中间垃圾只进 `{DEL}`，且新建前仍优先问过。本条强化 t1098u/t1107u；路径 SSOT 仍为 `D:\0del`（非 `D:\0Grok\0del`）。
 - **新建文件（2026-10-24 · t1098u）**：AI/助手**不得**在 `{DEL}` / `D:\0del` 以外**新建**文件；**可改**已有文件（含 `{RULES}` / `{SKILLS}` / `0doc\skill-harvest\*` / `0doc\mem\*` / 子工程已有稿）。**唯一例外**：bot 记忆导出/更新可在 `D:\0Grok\0doc\mem\` 内新建（§1「mem 落盘」城城指定）；mem 以外仍禁。新草稿、ACCEPT、digest、by-fine-id lane、笔记、中间件 → 只进 `{DEL}\_by-function\…` 或 `{DEL}\_by-project\…`。优先 patch 已有；用户本轮点名的终稿落点仍按 §5（优先改已有终稿）。全文→`D:\0del\_by-function\encode-0del-standing-20261024\STANDING-no-new-files-outside-0del.md`；mem→`D:\0Grok\0doc\mem\README.md`。
@@ -106,7 +106,7 @@ license: MIT
 | 本机布局 / 子工程 | `workspace-layout.md`（见 §1 一行布局） |
 | 三仓分工 / 某内容该放哪 | `README.md`（RULES=运营规则，SKILLS=专业技能，stats-analysis=脚本） |
 | 派单/盯梢 | `{SKILLS}\00_orchestrator\references\ownership-contract.md`；`{SKILLS}\00_orchestrator\references\handoff-monitor.md` |
-| 0doc 文档库查找 | Bai → `{SKILLS}\03_research\personal\0doc-db.md`；派单 SSOT → ownership-contract §0doc |
+| 0doc 文档库查找 | Bai → `{SKILLS}\03_research\advanced\0doc-db.md`；派单 SSOT → ownership-contract §0doc |
 | 技能演进 | `{SKILLS}\00_orchestrator\references\skill-evolution.md`（门在 `skills.md`） |
 | 稿件禁令 | `{SKILLS}\05_manuscript\qc\manuscript-local-qc.md`；`{SKILLS}\05_manuscript\base\vocab\L1\ban-phrases.md` |
 | 项目 `ref/` 布局 / ledger 再跑 | `project-ref-layout.md`；`{SKILLS}\00_orchestrator\references\project-ref-layout.md` |
