@@ -1,6 +1,6 @@
 # MY-RULES
 
-规范 GitHub 仓为权威源。`{RULES}`=`D:\0Grok\0doc\GitHub\MY-RULES`（绝对路径见 `My rule.md` §1；Cline 的 `Documents\Cline\Rules` 为指向本仓的 junction，勿再维护第二份副本）。先改本仓再经 PR；勿在多处冲突改文。
+规范 GitHub 仓为权威源。`{RULES}`=`D:\0Grok\0doc\GitHub\MY-RULES`（绝对路径见 `My rule.md` §1；若本机仍有 `Documents\Cline\Rules` junction，仅服务 Cursor IDE 内 Cline 插件读规则，勿再维护第二份副本；bot 外挂只交 Cursor）。先改本仓再经 PR；勿在多处冲突改文。
 
 核心 `My rule.md`；现行专题：`skills.md`、`workspace-layout.md`、`network-security.md`、`project-ref-layout.md`。
 
