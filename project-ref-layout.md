@@ -6,7 +6,7 @@
 
 本文是**文件夹地图与跳过/幂等契约**。不编造临床数字。文件名与 ledger 行除课题科学所需（路径、DOI、citekey）外，不含 PII。
 
-**SSOT：** 本文件为**权威中文版**。技能侧镜像（英文）`{SKILLS}\00_orchestrator\references\project-ref-layout.md` 只作运行期读本；两版冲突以本文件为准（2026-10-29；t1316u：取消标准壳 `analysis/` 与 `materials/`，其子项抬到 `ref/` 根；文献与 NLM+摘要列表进 `ref/refer/`；`ref/citation/` 仍只做审计台账；t1309s6268：原 `results/` → 曾用 `analysis/`，现抬到根；t1307u：未被接受投稿包进 `ref/` 根或 `submission-*`；t1303s6243 / t1300u：原 writing-refs+raw-pre、code+gates 合并史）。
+**SSOT：** 本文件为**权威中文版**。技能侧镜像（英文）`{SKILLS}\00_orchestrator\references\project-ref-layout.md` 只作运行期读本；两版冲突以本文件为准（2026-10-29；**t1321u/t1322u**：锁定件 `hashes.tsv`/`MANIFEST.md`/`pipeline_run.log` 落 **`ref/pipeline/`**（不在 ref 根）；写作参考 pptx/doc/docx 可进 **`ref/refer/`**（与文献列表同夹）；分析 `false_classification*` 留**子工程根**（ASL 类临时产物），不进 ref；t1316u：取消标准壳 `analysis/` 与 `materials/`，表图等子项抬到 `ref/`；文献与 NLM+摘要列表进 `ref/refer/`；`ref/citation/` 仍只做审计台账；t1309s6268：原 `results/` → 曾用 `analysis/`；t1307u：未被接受投稿包进 `ref/` 根或 `submission-*`；t1303s6243 / t1300u：原 writing-refs+raw-pre、code+gates 合并史）。
 
 ## 根目录不变量（勿挪位）
 
@@ -21,7 +21,7 @@
 
 根上可选（若已在用）：`ref/project-state.yaml`（来自 `{SKILLS}\00_orchestrator\templates\project-state.yaml`）。
 
-另：统计产物与锁定（原 `analysis/` / 更早 `results/`）抬到根：`tables/` `figures/` `pipeline/` `hashes.tsv` `MANIFEST.md` `pipeline_run.log`（及同类）。写作参考、未被接受投稿包（`submission-*`）、数据底表等原 `materials/` 子项亦抬到根（或保留清晰命名的根级夹，如 `data/`、`submission-<标识>/`）；优先扁平根，仅在撞名时加前缀或保留子夹。
+另：统计**表图**（原 `analysis/` / 更早 `results/`）落 `ref/tables/` `ref/figures/`；流水线夹 `ref/pipeline/`。**锁定件** `hashes.tsv` `MANIFEST.md` `pipeline_run.log` 必须在 **`ref/pipeline/`**（勿放 ref 根）。**写作参考**（pptx/doc/docx 等用作参照的稿件/幻灯/申请书）可进 **`ref/refer/`**（与文献/NLM 列表同夹；勿再造 `writing-refs/` 或 `materials/`）。未被接受投稿包（`submission-*`）、数据底表可在 `ref/` 根或 `data/` / `submission-<标识>/`；优先扁平，仅撞名时加前缀或子夹。
 
 ## 子文件夹地图
 
@@ -31,7 +31,7 @@
 |---|---|---|
 | `ref/review/` | 每轮 `changelog.md` / `CHANGELOG_*.md`；审稿交接 YAML；Lee 轮次笔记 | 主 Word 变更 ledger（仍用 `manuscript-revision.md`） |
 | `ref/citation/` | **仅**审计台账：`CITATION_AUDIT.json`（或 `.jsonl`）；引用 README / 跳过说明；期刊/引用日志（`ref_journal_log.txt`、`CITATION*`） | NLM+摘要列表与文献正文（见 `refer/`）；写作参考草稿 |
-| `ref/refer/` | 项目启动与课题文献：全文/分件、**NLM 引用 + 摘要列表**、文献清单（原「参考文献」/ `materials/citation` / `materials/refer`） | 审计台账（`CITATION_AUDIT` 等仍在 `citation/`） |
+| `ref/refer/` | 项目启动与课题文献：全文/分件、**NLM 引用 + 摘要列表**、文献清单（原「参考文献」/ `materials/citation` / `materials/refer`）；**亦可**放写作参考 pptx/doc/docx（课题申请书/汇报幻灯/三线表等） | 审计台账（`CITATION_AUDIT` 等仍在 `citation/`）；勿把 locks（hashes/MANIFEST/log）放这里 |
 | `ref/code-gates/` | 脚本/路径说明、补丁指针（无密钥）；`GATE*_report.md`、数字锁定、输入/输出哈希报告 | 现役 `settings.ini`；原始凭据。**原并列的 `code/` 与 `gates/` 不再分夹** |
 | `ref/tmp/` | 课题本地**中间** Word/PDF/草稿（Claude diff、被替代的 TC、`-copy`、合并草稿），保留到主人说清理/收工 | 当前终稿（留在课题根）；已关闭轮次 changelog（`review/`）；citation / code-gates ledger；密钥 |
 
@@ -40,7 +40,8 @@
 ### 三区 / 临时结果区
 
 - **分析临时结果**（`ASL/`、`DKI/`、`DTI_IVIM/` 等）放在**子工程根旁**，**不进 `ref/`**。
-- 面向稿件/门控的统计产物与锁定说明/哈希在 **`ref/` 根**（`tables/` `figures/` `pipeline/` `hashes.tsv` `MANIFEST.md` 等）；**勿**与 `ASL/` 等分析树合并。
+- 面向稿件/门控的统计**表图**在 `ref/tables/` `ref/figures/`；**锁定件** `hashes.tsv` `MANIFEST.md` `pipeline_run.log` 在 **`ref/pipeline/`**；**勿**与 `ASL/` 等分析树合并。
+- **分析错分/临时表**（如 `false_classification*`）与 ASL 类临时产物一样，留在**子工程根**，**不进 `ref/`**。
 - **终稿 / 控制台终表**留在子工程根。
 - **已接受**的最终稿件留在子工程根；**未被接受**的投稿包进 `ref/` 根或 `submission-*`（见下「投稿包」）。主人点名时，中间 xlsx 也可留在子工程根，勿擅自挪走。
 
@@ -63,14 +64,14 @@
 **默认可清 → 0del**（先问再移）：
 
 - `ref/tmp/`（整树或点名文件）
-- 已废的旧写作参考 / 过期预清洗表（现位于 `ref/` 根者）
+- 已废的旧写作参考 / 过期预清洗表（现位于 `ref/refer/` 或曾在 `ref/` 根者）
 - **未被接受**的投稿包（`submission-*` 等；先问再移）
 - 合并后残留的空壳：`analysis/`、`materials/`、以及更早的 `exec/` / `code/` / `gates/` / `writing-refs/` / `raw-pre/` / `results/`
 
 **默认保留：**
 
-- `ref/` 根上的当前锁定与终表终图（`tables/` `figures/` `pipeline/` `hashes*` `MANIFEST*` 等）及仍在用的写作参考 / 底表 / `submission-*`
-- 仍在用的 `ref/citation/`（审计台账）与 `ref/refer/`（文献）
+- 当前终表终图（`ref/tables/` `ref/figures/`）与 **`ref/pipeline/`** 内锁定件（`hashes*` `MANIFEST*` `pipeline_run.log`）及仍在用的 `ref/refer/` 写作参考/文献、底表、`submission-*`
+- 仍在用的 `ref/citation/`（审计台账）与 `ref/refer/`（文献 + 写作参考）
 - `ref/code-gates/`
 - 根上 `settings.ini` / `manuscript-revision.md` / `README.md` / `qc.html`（及仍在用的 `project-state.yaml`）
 - `ref/review/` 中未关闭或主人未点名丢弃的轮次材料；`-org` 编辑前原件（见下节）
@@ -82,12 +83,12 @@
 
 项目一旦采用本布局，在 `ref/` 根备一份简短 **`ref/README.md`**，至少各用一行写明：
 
-- `refer/`：文献 + NLM 引用与摘要列表（原「参考文献」/ materials/citation）；与 `citation/` 审计台账分夹。
+- `refer/`：文献 + NLM 引用与摘要列表（原「参考文献」/ materials/citation）；**亦可**写作参考 pptx/doc/docx；与 `citation/` 审计台账分夹。
 - `citation/`：仅 `CITATION_AUDIT*` / 跳过说明 / 期刊引用日志。
 - `code-gates/`：脚本说明 + 门控/哈希报告（原 `code/`+`gates/`）。
-- 根上 `tables/` `figures/` `pipeline/` / hashes / MANIFEST：统计产物与锁定（原 `analysis/`/`results/`）；`qc.html` 仍在 `ref/` 根。
-- 根上写作参考、`submission-*`、数据底表：原 `materials/` 子项（D-1：今后移底表先问）。
-- 并注明：「分析临时结果在子工程根 `<Modality>/`，不在 ref」。
+- 根上 `tables/` `figures/` `pipeline/`：统计表图与流水线夹；**hashes / MANIFEST / pipeline_run.log 在 `ref/pipeline/`**（原 `analysis/`/`results/` locks）；`qc.html` 仍在 `ref/` 根。
+- 写作参考（可在 `refer/`）、`submission-*`、数据底表：原 `materials/` 子项（D-1：今后移底表先问）。
+- 并注明：「分析临时结果与 `false_classification*` 在子工程根（`<Modality>/` 或根上），不在 ref」。
 
 ## 跳过 / 幂等规则（再跑前先读 ledger）
 
