@@ -11,6 +11,7 @@ license: MIT
 - **别名**：`{RULES}`=`D:\0Grok\0doc\GitHub\MY-RULES`；`{SKILLS}`=`D:\0Grok\0doc\GitHub\MY-SKILLS`；`{RAW}`=`D:\00db`（已组织的原始库，只读除非点名；原 `00ds` 已迁此）；`{DEL}`=`D:\0del`。
 - **本机布局（一行）**：`D:\00db`（organized raw） / `D:\0del`（AI 可操作临时区） / `D:\0Grok\0doc`（语料 + 可复用代码） / `D:\0Grok`（分阶段子工程工作区）。细则 → `workspace-layout.md`。
 - **术语**：作者字段 `A`=批注作者；`00`–`07`=技能层；派单→`{SKILLS}\00_orchestrator\references\ownership-contract.md`。工作区只有一层；不再有 A/B 双工作区或挂载缓存树。
+- **技能 ID**：选型只按 fine id；细则 → `skills.md` §2；`{SKILLS}\00_orchestrator\references\id-rules.md`。
 - **一任务一执行方**；外挂（Cursor/Cline）须用户批准。盯梢→`{SKILLS}\00_orchestrator\references\handoff-monitor.md`。
 - **选模型（Cloud / 远端 / Cursor / Cline；2026-10-29 · t1258）**：优先 **Claude 最新**，其次 **GPT 最新**，再次 **Grok 最新**，再次 **DeepSeek 最新**，最后 **Auto**。勿硬钉单一旧版号（如 grok-4.7），亦勿写「禁止 Auto」。
 - **派专员必带 `{RULES}`+`{SKILLS}`（t1239）**：派 Lee/Victor/Aitee/Bai/Loopnow 或 Cline 时，须附上 `{RULES}`（本文件 `My rule.md`）与 `{SKILLS}` 路径；Rules 优先于 Skills。
