@@ -6,7 +6,7 @@ license: MIT
 
 # 1 适用范围与优先级
 
-- 对 Grok Bot/Aitor、子代理、Cursor、Cline 生效。
+- 对 Grok Bot/Aitor、子代理、Cursor 生效（本机编码入口仅 Cursor IDE；其中 Cline 为 IDE 插件，由城城自用，bot 不单独调用 Cline）。
 - **数据底表移动（D-1 · 2026-10-29 · t1309s6268）：** 原始/预清洗数据底表默认落 `ref/` 根（或 `ref/data/`）。**移动底表前必须先问城城**（D-1）；勿静默挪走。布局说明见 `project-ref-layout.md`。
 
 - **裁决顺序**：用户当轮表述 > 专题文件 > 本文件 > 子工程内约定。
@@ -14,9 +14,9 @@ license: MIT
 - **本机布局（一行）**：`D:\00db`（organized raw） / `D:\0del`（AI 可操作临时区） / `D:\0Grok\0doc`（语料 + 可复用代码） / `D:\0Grok`（分阶段子工程工作区）。细则 → `workspace-layout.md`。
 - **术语**：作者字段 `A`=批注作者；`00`–`07`=技能层；派单→`{SKILLS}\00_orchestrator\references\ownership-contract.md`。工作区只有一层；不再有 A/B 双工作区或挂载缓存树。
 - **技能 ID**：选型只按 fine id；细则 → `skills.md` §2；`{SKILLS}\00_orchestrator\references\id-rules.md`。
-- **一任务一执行方**；外挂（Cursor/Cline）须用户批准。盯梢→`{SKILLS}\00_orchestrator\references\handoff-monitor.md`。
-- **选模型（Cloud / 远端 / Cursor / Cline；2026-10-29 · t1258 / t1317u）**：**Bai / Victor / Loopnow** 经 bot 调用 Cursor（含 Cline / cursor-IDE-line）时，**默认选 DeepSeek 最新**；**其他 bot**（Aitor / Aitee / Lee 等）仍用：优先 **Claude 最新** → **GPT 最新** → **Grok 最新** → **DeepSeek 最新** → 最后 **Auto**。勿硬钉单一旧版号（如 grok-4.7），亦勿写「禁止 Auto」。
-- **派专员必带 `{RULES}`+`{SKILLS}`（t1239）**：派 Lee/Victor/Aitee/Bai/Loopnow 或 Cline 时，须附上 `{RULES}`（本文件 `My rule.md`）与 `{SKILLS}` 路径；Rules 优先于 Skills。
+- **一任务一执行方**；外挂仅 **Cursor**（须用户批准或说「交给cursor」）。bot **不得**再派「交给cline」/独立 Cline CLI。盯梢→`{SKILLS}\00_orchestrator\references\handoff-monitor.md`。
+- **选模型（Cloud / 远端 / Cursor；2026-10-30 · t1356u）**：**Bai / Victor / Loopnow** 经 bot 调用 **Cursor** 时，**默认选 DeepSeek 最新**；**其他 bot**（Aitor / Aitee / Lee 等）仍用：优先 **Claude 最新** → **GPT 最新** → **Grok 最新** → **DeepSeek 最新** → 最后 **Auto**。勿硬钉单一旧版号（如 grok-4.7），亦勿写「禁止 Auto」。
+- **派专员必带 {RULES}+{SKILLS}（t1239）**：派 Lee/Victor/Aitee/Bai/Loopnow 或交 Cursor 时，须附上 {RULES}（本文件 My rule.md）与 {SKILLS} 路径；Rules 优先于 Skills。
 - **云端 / 本地（术语，2026-10-25）：** **云端** = Grok Bot 的 box 计算机（`/workspace` 等）；**本地** = 城城本机（如 `D:\`、Downloads）。二者勿对调。
 - **mem 落盘：** bot 记忆导出/更新落在本地 `D:\0Grok\0doc\mem`（城城指定；非默认进 `{DEL}`）。mem **仅保留隐私**与可变数据 SSOT（如 JCR xlsx）；站立运营政策进 `{RULES}`，专业技能进 `{SKILLS}`。
 - **单项目约定**写在该**子工程文件夹**内（如子工程 `0doc\` 或 `ref\`），**不**写入全局 `{RULES}` / `{SKILLS}`。须用户点名「放 0doc」才写 `0doc\`。
