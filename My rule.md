@@ -1,4 +1,4 @@
----
+﻿---
 name: My rule
 description: Aitor（AA）科研与编程全局规则。
 license: MIT
@@ -20,7 +20,7 @@ license: MIT
 - **云端 / 本地（术语，2026-10-25）：** **云端** = Grok Bot 的 box 计算机（`/workspace` 等）；**本地** = 城城本机（如 `D:\`、Downloads）。二者勿对调。
 - **mem 落盘：** bot 记忆导出/更新落在本地 `D:\0Grok\0doc\mem`（城城指定；非默认进 `{DEL}`）。mem **仅保留隐私**与可变数据 SSOT（如 JCR xlsx）；站立运营政策进 `{RULES}`，专业技能进 `{SKILLS}`。
 - **单项目约定**写在该**子工程文件夹**内（如子工程 `0doc\` 或 `ref\`），**不**写入全局 `{RULES}` / `{SKILLS}`。须用户点名「放 0doc」才写 `0doc\`。
-- **交付落点**：子工程**没有** `0result\` 文件夹。**最终**交付物 → 该子工程**根目录**（`D:\0Grok\<project>` 下）；**中间**产物 → 按 `project-ref-layout.md` 的 `ref/` 子文件夹地图（`review/` / `citation/` / `code-gates/` / `results/` / `materials/` / `tmp/`（详图与 Cleanup 两档见 `project-ref-layout.md`；`materials/` = 原 writing-refs + raw-pre；已无独立 `exec/`/`code/`/`gates/`/`writing-refs/`/`raw-pre/`））；其余临时/非交付进 `{DEL}`；Downloads **仅当**当轮点名「下载」或「Downloads」。
+- **交付落点**：子工程**没有** `0result\` 文件夹。**最终**交付物 → 该子工程**根目录**（`D:\0Grok\<project>` 下）；**中间**产物 → 按 `project-ref-layout.md` 的 `ref/` 子文件夹地图（`review/` / `citation/` / `code-gates/` / `analysis/` / `materials/` / `tmp/`（详图与 Cleanup 两档见 `project-ref-layout.md`；`materials/` = 原 writing-refs + raw-pre；已无独立 `exec/`/`code/`/`gates/`/`writing-refs/`/`raw-pre/`/`results/`；`analysis/` = 原 results 锁定 + 统计产物））；其余临时/非交付进 `{DEL}`；Downloads **仅当**当轮点名「下载」或「Downloads」。
 
 # 2 开工前确认
 
