@@ -7,7 +7,7 @@ license: MIT
 # 1 适用范围与优先级
 
 - 对 Grok Bot/Aitor、子代理、Cursor、Cline 生效。
-- **数据底表移动（D-1 · 2026-10-29 · t1309s6268）：** 原始/预清洗数据底表默认落 `ref/materials/`（或 `materials/data/`）。**移动底表前必须先问城城**；勿静默挪走。布局说明见 `project-ref-layout.md` 的 `materials/` 行。
+- **数据底表移动（D-1 · 2026-10-29 · t1309s6268）：** 原始/预清洗数据底表默认落 `ref/` 根（或 `ref/data/`）。**移动底表前必须先问城城**（D-1）；勿静默挪走。布局说明见 `project-ref-layout.md`。
 
 - **裁决顺序**：用户当轮表述 > 专题文件 > 本文件 > 子工程内约定。
 - **别名**：`{RULES}`=`D:\0Grok\0doc\GitHub\MY-RULES`；`{SKILLS}`=`D:\0Grok\0doc\GitHub\MY-SKILLS`；`{RAW}`=`D:\00db`（已组织的原始库，只读除非点名；原 `00ds` 已迁此）；`{DEL}`=`D:\0del`。
@@ -15,12 +15,12 @@ license: MIT
 - **术语**：作者字段 `A`=批注作者；`00`–`07`=技能层；派单→`{SKILLS}\00_orchestrator\references\ownership-contract.md`。工作区只有一层；不再有 A/B 双工作区或挂载缓存树。
 - **技能 ID**：选型只按 fine id；细则 → `skills.md` §2；`{SKILLS}\00_orchestrator\references\id-rules.md`。
 - **一任务一执行方**；外挂（Cursor/Cline）须用户批准。盯梢→`{SKILLS}\00_orchestrator\references\handoff-monitor.md`。
-- **选模型（Cloud / 远端 / Cursor / Cline；2026-10-29 · t1258）**：优先 **Claude 最新**，其次 **GPT 最新**，再次 **Grok 最新**，再次 **DeepSeek 最新**，最后 **Auto**。勿硬钉单一旧版号（如 grok-4.7），亦勿写「禁止 Auto」。
+- **选模型（Cloud / 远端 / Cursor / Cline；2026-10-29 · t1258 / t1317u）**：**Bai / Victor / Loopnow** 经 bot 调用 Cursor（含 Cline / cursor-IDE-line）时，**默认选 DeepSeek 最新**；**其他 bot**（Aitor / Aitee / Lee 等）仍用：优先 **Claude 最新** → **GPT 最新** → **Grok 最新** → **DeepSeek 最新** → 最后 **Auto**。勿硬钉单一旧版号（如 grok-4.7），亦勿写「禁止 Auto」。
 - **派专员必带 `{RULES}`+`{SKILLS}`（t1239）**：派 Lee/Victor/Aitee/Bai/Loopnow 或 Cline 时，须附上 `{RULES}`（本文件 `My rule.md`）与 `{SKILLS}` 路径；Rules 优先于 Skills。
 - **云端 / 本地（术语，2026-10-25）：** **云端** = Grok Bot 的 box 计算机（`/workspace` 等）；**本地** = 城城本机（如 `D:\`、Downloads）。二者勿对调。
 - **mem 落盘：** bot 记忆导出/更新落在本地 `D:\0Grok\0doc\mem`（城城指定；非默认进 `{DEL}`）。mem **仅保留隐私**与可变数据 SSOT（如 JCR xlsx）；站立运营政策进 `{RULES}`，专业技能进 `{SKILLS}`。
 - **单项目约定**写在该**子工程文件夹**内（如子工程 `0doc\` 或 `ref\`），**不**写入全局 `{RULES}` / `{SKILLS}`。须用户点名「放 0doc」才写 `0doc\`。
-- **交付落点**：子工程**没有** `0result\` 文件夹。**最终**交付物 → 该子工程**根目录**（`D:\0Grok\<project>` 下）；**中间**产物 → 按 `project-ref-layout.md` 的 `ref/` 子文件夹地图（`review/` / `citation/` / `code-gates/` / `analysis/` / `materials/` / `tmp/`（详图与 Cleanup 两档见 `project-ref-layout.md`；`materials/` = 原 writing-refs + raw-pre；已无独立 `exec/`/`code/`/`gates/`/`writing-refs/`/`raw-pre/`/`results/`；`analysis/` = 原 results 锁定 + 统计产物））；其余临时/非交付进 `{DEL}`；Downloads **仅当**当轮点名「下载」或「Downloads」。
+- **交付落点**：子工程**没有** `0result\` 文件夹。**最终**交付物 → 该子工程**根目录**（`D:\0Grok\<project>` 下）；**中间**产物 → 按 `project-ref-layout.md` 的 `ref/` 子文件夹地图（`review/` / `citation/` / `refer/` / `code-gates/` / `tmp/` + 根上 tables/figures/pipeline/hashes/MANIFEST、写作参考、`submission-*`、底表（详图与 Cleanup 两档见 `project-ref-layout.md`；已退役 `analysis/`/`materials/`/`results/`/`exec/`/`code/`/`gates/`/`writing-refs/`/`raw-pre/`））；其余临时/非交付进 `{DEL}`；Downloads **仅当**当轮点名「下载」或「Downloads」。
 
 # 2 开工前确认
 
@@ -67,7 +67,7 @@ license: MIT
 | 产物 | 格式 | 落点 |
 |---|---|---|
 | 最终交付（稿件/终表/最终报告等） | 依类型 | **子工程根目录**；无子工程且点名「下载/Downloads」→Downloads；否则→`{DEL}` |
-| 中间产物（QC/ledger/门控/草稿等） | 依类型 | 有子工程→按 `project-ref-layout.md` 的 `ref/` 地图（`review/`/`citation/`/`code-gates/`/`analysis/`/`materials/`/`tmp/`（详图见 `project-ref-layout.md`））；否则→`{DEL}` |
+| 中间产物（QC/ledger/门控/草稿等） | 依类型 | 有子工程→按 `project-ref-layout.md` 的 `ref/` 地图（`review/`/`citation/`/`refer/`/`code-gates/`/`tmp/` + 根上统计产物/写作参考/`submission-*`（详图见 `project-ref-layout.md`））；否则→`{DEL}` |
 | 报告/QC（中间） | HTML | 有子工程→该子工程 `ref\`（或阶段夹如 `in-review\`）；无子工程且点名 Downloads→Downloads；否则→`{DEL}` |
 | 稿件/TC（最终） | DOCX | 子工程**根**；否则仅当点名 Downloads，否则 `{DEL}` |
 | 数据表（最终） | XLSX | 子工程**根**（不建 `0result\`）；其余同稿件 |
