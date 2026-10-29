@@ -1,4 +1,4 @@
----
+﻿---
 name: My rule
 description: Aitor（AA）科研与编程全局规则。
 license: MIT
@@ -7,6 +7,8 @@ license: MIT
 # 1 适用范围与优先级
 
 - 对 Grok Bot/Aitor、子代理、Cursor、Cline 生效。
+- **数据底表移动（D-1 · 2026-10-29 · t1309s6268）：** 原始/预清洗数据底表默认落 `ref/materials/`（或 `materials/data/`）。**移动底表前必须先问城城**；勿静默挪走。布局说明见 `project-ref-layout.md` 的 `materials/` 行。
+
 - **裁决顺序**：用户当轮表述 > 专题文件 > 本文件 > 子工程内约定。
 - **别名**：`{RULES}`=`D:\0Grok\0doc\GitHub\MY-RULES`；`{SKILLS}`=`D:\0Grok\0doc\GitHub\MY-SKILLS`；`{RAW}`=`D:\00db`（已组织的原始库，只读除非点名；原 `00ds` 已迁此）；`{DEL}`=`D:\0del`。
 - **本机布局（一行）**：`D:\00db`（organized raw） / `D:\0del`（AI 可操作临时区） / `D:\0Grok\0doc`（语料 + 可复用代码） / `D:\0Grok`（分阶段子工程工作区）。细则 → `workspace-layout.md`。
@@ -18,7 +20,7 @@ license: MIT
 - **云端 / 本地（术语，2026-10-25）：** **云端** = Grok Bot 的 box 计算机（`/workspace` 等）；**本地** = 城城本机（如 `D:\`、Downloads）。二者勿对调。
 - **mem 落盘：** bot 记忆导出/更新落在本地 `D:\0Grok\0doc\mem`（城城指定；非默认进 `{DEL}`）。mem **仅保留隐私**与可变数据 SSOT（如 JCR xlsx）；站立运营政策进 `{RULES}`，专业技能进 `{SKILLS}`。
 - **单项目约定**写在该**子工程文件夹**内（如子工程 `0doc\` 或 `ref\`），**不**写入全局 `{RULES}` / `{SKILLS}`。须用户点名「放 0doc」才写 `0doc\`。
-- **交付落点**：子工程**没有** `0result\` 文件夹。**最终**交付物 → 该子工程**根目录**（`D:\0Grok\<project>` 下）；**中间**产物 → 按 `project-ref-layout.md` 的 `ref/` 子文件夹地图（`review/` / `citation/` / `code-gates/` / `results/` / `materials/` / `tmp/`（详图与 Cleanup 两档见 `project-ref-layout.md`；`materials/` = 原 writing-refs + raw-pre；已无独立 `exec/`/`code/`/`gates/`/`writing-refs/`/`raw-pre/`））；其余临时/非交付进 `{DEL}`；Downloads **仅当**当轮点名「下载」或「Downloads」。
+- **交付落点**：子工程**没有** `0result\` 文件夹。**最终**交付物 → 该子工程**根目录**（`D:\0Grok\<project>` 下）；**中间**产物 → 按 `project-ref-layout.md` 的 `ref/` 子文件夹地图（`review/` / `citation/` / `code-gates/` / `analysis/` / `materials/` / `tmp/`（详图与 Cleanup 两档见 `project-ref-layout.md`；`materials/` = 原 writing-refs + raw-pre；已无独立 `exec/`/`code/`/`gates/`/`writing-refs/`/`raw-pre/`/`results/`；`analysis/` = 原 results 锁定 + 统计产物））；其余临时/非交付进 `{DEL}`；Downloads **仅当**当轮点名「下载」或「Downloads」。
 
 # 2 开工前确认
 
@@ -65,7 +67,7 @@ license: MIT
 | 产物 | 格式 | 落点 |
 |---|---|---|
 | 最终交付（稿件/终表/最终报告等） | 依类型 | **子工程根目录**；无子工程且点名「下载/Downloads」→Downloads；否则→`{DEL}` |
-| 中间产物（QC/ledger/门控/草稿等） | 依类型 | 有子工程→按 `project-ref-layout.md` 的 `ref/` 地图（`review/`/`citation/`/`code-gates/`/`results/`/`materials/`/`tmp/`（详图见 `project-ref-layout.md`））；否则→`{DEL}` |
+| 中间产物（QC/ledger/门控/草稿等） | 依类型 | 有子工程→按 `project-ref-layout.md` 的 `ref/` 地图（`review/`/`citation/`/`code-gates/`/`analysis/`/`materials/`/`tmp/`（详图见 `project-ref-layout.md`））；否则→`{DEL}` |
 | 报告/QC（中间） | HTML | 有子工程→该子工程 `ref\`（或阶段夹如 `in-review\`）；无子工程且点名 Downloads→Downloads；否则→`{DEL}` |
 | 稿件/TC（最终） | DOCX | 子工程**根**；否则仅当点名 Downloads，否则 `{DEL}` |
 | 数据表（最终） | XLSX | 子工程**根**（不建 `0result\`）；其余同稿件 |
@@ -79,6 +81,8 @@ license: MIT
 - **Word/PDF 格式**：未经当轮点名，禁止改 `.docx`/`.pdf` 版式；改文字用修订模式。词/句级修订，禁止大段覆盖。细则→`{SKILLS}\06_review\advanced\word-edit.md`。
 - **城城已改先问（全局停）**：若 Word/手稿正文与城城（用户）已编辑文本不同（修订痕迹 / 已知本人改动），**必须先问再改**，禁止擅自覆盖或改回。技能须指针本条，勿只埋在 revise。→`word-edit.md`；`writing-rules-hard.md`；`07_response` revise。（2026-10-24）
 - **统一版式**：手稿、审稿意见、审稿回复同一套——正文 Times New Roman 12、1.5 倍行距、段前后 0、两端对齐、LTR、特殊格式无；**表格单元格 12 pt**；**图内文字 Arial**（与正文双轨）；**流程图首选 PDF**。→`{SKILLS}\05_manuscript\advanced\Aitor-format.md`；`word-edit.md`；`draw-flowchart`。（2026-10-24）
+
+- **图表编号（C-1 · 指针，2026-10-29 · t1309s6268）：** Table 1 = 基线；**不**单独放 logistic 系数表或 score-correlation 表（Aitor-format §209）；ROC 操作特性作表；图按适用放 workflow / US / heatmap / nomogram+校准 / ROC / DCA。细则勿在本文件复写，指针 → `{SKILLS}\05_manuscript\advanced\Aitor-format.md` §200 / §209 / §213。
 - **批注英文建议句**：单独成句，以 `Suggested …` 起首。字面模板技能落点→`{SKILLS}\06_review\advanced\word-edit.md`。`manuscript-and-review.md` 已于 2026-10-18 按 README 迁入 `05_manuscript` / `06_review` / `07_response`。
 - **审稿回复**：保留完整原始 comments；不简化；不擅自加小标题；不自创信函格式。→`{SKILLS}\07_response\advanced\response.md`。
 - **新建文件夹（2026-10-24 · t1107u/t1108u/t1109u）**：助手需要的**全部新文件夹**只许建在 `{DEL}` / `D:\0del\`（`_by-project` / `_by-function`）。**默认禁止**在 `D:\0Grok\0doc` 下 mkdir；**唯一例外**：城城**本轮明确同意**才可在 0doc 建新夹。可改已有文件。临时/scratch → `{DEL}`。ACCEPT 备注只落 `{DEL}`。正文以本条为准；短针→`workspace-layout.md`（不复写）。mem→`D:\0Grok\0doc\mem\README.md`；全文→`D:\0del\_by-function\encode-0doc-folder-ban-20261024\STANDING-0doc-no-new-folder.md`。

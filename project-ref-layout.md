@@ -1,4 +1,4 @@
-# 项目 `ref/` 布局（ledger + 产物）
+﻿# 项目 `ref/` 布局（ledger + 产物）
 
 **负责人：** `00_orchestrator`。
 **读者：** 任何把 QC、引用、Word、门控或执行产物写入项目 `ref/` 的技能。
@@ -6,7 +6,7 @@
 
 本文是**文件夹地图与跳过/幂等契约**。不编造临床数字。文件名与 ledger 行除课题科学所需（路径、DOI、citekey）外，不含 PII。
 
-**SSOT：** 本文件为**权威中文版**。技能侧镜像（英文）`{SKILLS}\00_orchestrator\references\project-ref-layout.md` 只作运行期读本；两版冲突以本文件为准（2026-10-29；t1303s6243：`writing-refs/` + `raw-pre/` 合并为 `materials/`；保留 `review/` 与 `citation/` 分夹；t1300u：去 `exec/`，`code`+`gates` 合并为 `code-gates/`；Cleanup 两档，非「除 results 外全清」；t1307u：未被接受的投稿包进 `materials/`，接受稿留子工程根）。
+**SSOT：** 本文件为**权威中文版**。技能侧镜像（英文）`{SKILLS}\00_orchestrator\references\project-ref-layout.md` 只作运行期读本；两版冲突以本文件为准（2026-10-29；t1303s6243：`writing-refs/` + `raw-pre/` 合并为 `materials/`；保留 `review/` 与 `citation/` 分夹；t1300u：去 `exec/`，`code`+`gates` 合并为 `code-gates/`；Cleanup 两档，非「除 results 外全清」；t1307u：未被接受的投稿包进 `materials/`，接受稿留子工程根；t1309s6268：取消 `ref/results/`，统计产物与锁定哈希进 `ref/analysis/`）。
 
 ## 根目录不变量（勿挪位）
 
@@ -21,23 +21,23 @@
 
 ## 子文件夹地图
 
-尽量少的 `ref/` 子夹。现用地图（按需创建，**不预建空夹**）：
+尽量少的 `ref/` 子夹。六夹精简图：`review/` `citation/` `code-gates/` **`analysis/`** `materials/` `tmp/`（按需创建，**不预建空夹**）：
 
 | 子文件夹 | 放这里 | 不放这里 |
 |---|---|---|
 | `ref/review/` | 每轮 `changelog.md` / `CHANGELOG_*.md`；审稿交接 YAML；Lee 轮次笔记 | 主 Word 变更 ledger（仍用 `manuscript-revision.md`） |
 | `ref/citation/` | `CITATION_AUDIT.json`（或 `.jsonl`）；引用 README / 跳过说明；期刊/引用日志（`ref_journal_log.txt`、`CITATION*`） | 完整 PDF 语料库；写作参考草稿与预清洗表（见 `materials/`） |
 | `ref/code-gates/` | 脚本/路径说明、补丁指针（无密钥）；`GATE*_report.md`、数字锁定、输入/输出哈希报告 | 现役 `settings.ini`；原始凭据。**原并列的 `code/` 与 `gates/` 不再分夹** |
-| `ref/results/` | 表/图锁定说明与内容哈希（稿件/门控用） | 大型二进制数据集（留在 derivatives）；分析临时结果树（见下「三区」）；终表/终稿放**子工程根**（**不建** `0result\`） |
+| `ref/analysis/` | 统计分析产物与锁定：`hashes.tsv`、`MANIFEST.md`、`tables/`、`figures/`、`pipeline/`、`pipeline_run.log`（稿件/门控用） | 大型二进制数据集（留在 derivatives）；分析临时结果树（见下「三区」）；终表/终稿放**子工程根**（**不建** `0result\`）；`qc.html` 留在 **`ref/` 根**（不进本夹） |
 | `ref/materials/` | 写作参考草稿/PDF（论文分件、丁*、QIANG* 等 refs 版本）**以及**本子工程预清洗/导入表（xls/xlsx/csv）；**未被接受**的投稿包（cover letter / title page / highlights / 声明 / 入稿图件等成套分件）。可用文件名或可选松散子夹区分；成套投稿包建议 `materials/submission-<标识>/`（或多包时 `materials/submission-packs/`）；不强制子夹。移动时保留人类可读文件名；去标识后缀 `_noName` / `_deid` 可保留 | **已接受**的最终正文稿（留在子工程根）；citation PDF 语料库（`citation/` 只放 audit/日志）；大体量已整理 raw（留在 `{RAW}`=`D:\00db`） |
 | `ref/tmp/` | 课题本地**中间** Word/PDF/草稿（Claude diff、被替代的 TC、`-copy`、合并草稿），保留到主人说清理/收工 | 当前终稿（留在课题根）；已关闭轮次 changelog（`review/`）；citation / code-gates ledger；密钥 |
 
-**已退役（勿再新建）：** 独立 `ref/exec/`、`ref/code/`、`ref/gates/`、`ref/writing-refs/`、`ref/raw-pre/`。旧树若仍存在，按主人点名迁入 `code-gates/` 或 `materials/`，或走 Cleanup；本轮**不**自动迁 live 文件。
+**已退役（勿再新建）：** 独立 `ref/exec/`、`ref/code/`、`ref/gates/`、`ref/writing-refs/`、`ref/raw-pre/`、`ref/results/`。旧树若仍存在：原 `results/` 并入 `analysis/`；其余按主人点名迁入 `code-gates/` 或 `materials/`，或走 Cleanup；本轮布局迁移另见主人点名。
 
 ### 三区 / 临时结果区
 
 - **分析临时结果**（`ASL/`、`DKI/`、`DTI_IVIM/` 等）放在**子工程根旁**，**不进 `ref/`**。
-- `ref/results/` = 面向稿件/门控的锁定说明与哈希；**勿**与 `ASL/` 等分析树合并。
+- `ref/analysis/` = 面向稿件/门控的统计产物与锁定说明/哈希；**勿**与 `ASL/` 等分析树合并。
 - **终稿 / 控制台终表**留在子工程根。
 - **已接受**的最终稿件留在子工程根；**未被接受**的投稿包进 `ref/materials/`（见下「投稿包」）。主人点名时，中间 xlsx（如分析中间表）也可留在子工程根，勿擅自挪走。
 
@@ -48,9 +48,9 @@
 - **已接受**：最终稿件（及当前仍在用的修回件）**留在子工程根**，不因整理进 `materials/`。
 - **清理**：`materials/` 里的未被接受投稿包，过后清理时可经询问移入 `D:\0del\_by-project\<project>\`；禁止静默删除。
 
-### Cleanup（过后可清；两档，非「除 results 外全清」）
+### Cleanup（过后可清；两档，非「除 analysis 外全清」）
 
-**禁止**静默删除。清理时**先问城城再移**；优先移入 `D:\0del\_by-project\<project>\`（跨课题则 `_by-function`），有用时保留相对名。**不要**把「除 `results/` 以外的整棵 `ref/`」一律清掉。
+**禁止**静默删除。清理时**先问城城再移**；优先移入 `D:\0del\_by-project\<project>\`（跨课题则 `_by-function`），有用时保留相对名。**不要**把「除 `analysis/` 以外的整棵 `ref/`」一律清掉。
 
 **默认可清 → 0del**（先问再移）：
 
@@ -61,7 +61,7 @@
 
 **默认保留：**
 
-- `ref/results/`
+- `ref/analysis/`（当前锁定与终表终图；同原 `results/` 的 KEEP）
 - 仍在用的 `ref/citation/`
 - `ref/code-gates/`
 - 当前仍在用的 `materials/`
@@ -77,6 +77,7 @@
 
 - `materials/`：写作参考草稿/PDF + 本子工程预清洗/导入表（原 `writing-refs/` + `raw-pre/`）；用文件名或可选子夹区分；大体量 raw 在 `{RAW}`。
 - `code-gates/`：脚本说明 + 门控/哈希报告（原 `code/`+`gates/`）。
+- `analysis/`：统计产物 + 锁定哈希（原 `results/`；`qc.html` 仍在 `ref/` 根）。
 - 并注明：「分析临时结果在子工程根 `<Modality>/`，不在 ref」。
 
 ## 跳过 / 幂等规则（再跑前先读 ledger）
