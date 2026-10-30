@@ -6,7 +6,7 @@
 
 本文是**文件夹地图与跳过/幂等契约**。不编造临床数字。文件名与 ledger 行除课题科学所需（路径、DOI、citekey）外，不含 PII。
 
-**SSOT：** 本文件为**权威中文版**。技能侧镜像（英文）`{SKILLS}\00_orchestrator\references\project-ref-layout.md` 只作运行期读本；两版冲突以本文件为准（2026-10-29；**t1321u/t1322u**：锁定件 `hashes.tsv`/`MANIFEST.md`/`pipeline_run.log` 落 **`ref/pipeline/`**（不在 ref 根）；写作参考 pptx/doc/docx 可进 **`ref/refer/`**（与文献列表同夹）；分析 `false_classification*` 留**子工程根**（ASL 类临时产物），不进 ref；t1316u：取消标准壳 `analysis/` 与 `materials/`，表图等子项抬到 `ref/`；文献与 NLM+摘要列表进 `ref/refer/`；`ref/citation/` 仍只做审计台账；t1309s6268：原 `results/` → 曾用 `analysis/`；t1307u：未被接受投稿包进 `ref/` 根或 `submission-*`；t1303s6243 / t1300u：原 writing-refs+raw-pre、code+gates 合并史；**t1450u**：子工程内临时/中间默认 `ref/tmp/`（非默认 `{DEL}`）；旧版 SCI 稿亦落 `ref/tmp/`，现行 `Vn` 在子工程根）。
+**SSOT：** 本文件为**权威中文版**。技能侧镜像（英文）`{SKILLS}\00_orchestrator\references\project-ref-layout.md` 只作运行期读本；两版冲突以本文件为准（2026-10-29；**t1321u/t1322u**：锁定件 `hashes.tsv`/`MANIFEST.md`/`pipeline_run.log` 落 **`ref/pipeline/`**（不在 ref 根）；写作参考 pptx/doc/docx 可进 **`ref/refer/`**（与文献列表同夹）；分析 `false_classification*` 留**子工程根**（ASL 类临时产物），不进 ref；t1316u：取消标准壳 `analysis/` 与 `materials/`，表图等子项抬到 `ref/`；文献与 NLM+摘要列表进 `ref/refer/`；`ref/citation/` 仍只做审计台账；t1309s6268：原 `results/` → 曾用 `analysis/`；t1307u：未被接受投稿包进 `ref/` 根或 `submission-*`；t1303s6243 / t1300u：原 writing-refs+raw-pre、code+gates 合并史；**t1450u**：子工程内临时/中间默认 `ref/tmp/`（非默认 `{DEL}`）；旧版 SCI 稿亦落 `ref/tmp/`，现行 `Vn` 在子工程根；**t1455u**：文献全文（PDF/HTML）实体 SSOT = `D:\0Grok\0doc\_library\references\<L1>\<L2>\`，子工程 `ref/refer/` 只留 `DOI_*.md` 指针，`_library\lit-bank` 仍只存书目）。
 
 ## 根目录不变量（勿挪位）
 
@@ -31,7 +31,7 @@
 |---|---|---|
 | `ref/review/` | 每轮 `changelog.md` / `CHANGELOG_*.md`；审稿交接 YAML；Lee 轮次笔记 | 主 Word 变更 ledger（仍用 `manuscript-revision.md`） |
 | `ref/citation/` | **仅**审计台账：`CITATION_AUDIT.json`（或 `.jsonl`）；引用 README / 跳过说明；期刊/引用日志（`ref_journal_log.txt`、`CITATION*`） | NLM+摘要列表与文献正文（见 `refer/`）；写作参考草稿 |
-| `ref/refer/` | 项目启动与课题文献：全文/分件、**NLM 引用 + 摘要列表**、文献清单（原「参考文献」/ `materials/citation` / `materials/refer`）；**亦可**放写作参考 pptx/doc/docx（课题申请书/汇报幻灯/三线表等） | 审计台账（`CITATION_AUDIT` 等仍在 `citation/`）；勿把 locks（hashes/MANIFEST/log）放这里 |
+| `ref/refer/` | **文献指针 + NLM 引用与摘要列表**：每篇一个 `DOI_*.md`（`fulltext:` 指向 `_library\references`）；文献清单（原「参考文献」/ `materials/citation` / `materials/refer`）；**亦可**放写作参考 pptx/doc/docx（课题申请书/汇报幻灯/三线表等） | 文献全文实体（PDF/HTML → `D:\0Grok\0doc\_library\references\<L1>\<L2>\`，t1455u）；审计台账（`CITATION_AUDIT` 等仍在 `citation/`）；勿把 locks（hashes/MANIFEST/log）放这里 |
 | `ref/code-gates/` | 脚本/路径说明、补丁指针（无密钥）；`GATE*_report.md`、数字锁定、输入/输出哈希报告 | 现役 `settings.ini`；原始凭据。**原并列的 `code/` 与 `gates/` 不再分夹** |
 | `ref/tmp/` | 子工程内**临时/中间**默认落点（**非**先丢 `{DEL}`）：中间 Word/PDF/草稿（Claude diff、被替代的 TC、`-copy`、合并草稿）；**旧版 SCI 稿**（如 `Manuscript_<slug>_V1.docx`）；保留到主人说清理/收工 | 现行终稿 / `Manuscript_<slug>_Vn`（子工程根）；已关闭轮次 changelog（`review/`）；citation / code-gates ledger；密钥 |
 
@@ -43,6 +43,7 @@
 - **分析临时结果**（`ASL/`、`DKI/`、`DTI_IVIM/` 等）放在**子工程根旁**，**不进 `ref/`**。
 - 面向稿件/门控的统计**表图**在 `ref/tables/` `ref/figures/`；**锁定件** `hashes.tsv` `MANIFEST.md` `pipeline_run.log` 在 **`ref/pipeline/`**；**勿**与 `ASL/` 等分析树合并。
 - **分析错分/临时表**（如 `false_classification*`）与 ASL 类临时产物一样，留在**子工程根**，**不进 `ref/`**。
+- **文献全文（t1455u）：** PDF/HTML 实体一律进 `D:\0Grok\0doc\_library\references\<L1>\<L2>\`（命名、索引、指针契约见该库 `README.md`）；子工程 `ref/refer/` 只写 `DOI_*.md` 指针，`ref/citation/` 不放全文，`_library\lit-bank` 只存书目。
 - **终稿 / 控制台终表**留在子工程根。
 - **已接受**的最终稿件留在子工程根；**未被接受**的投稿包进 `ref/` 根或 `submission-*`（见下「投稿包」）。主人点名时，中间 xlsx 也可留在子工程根，勿擅自挪走。
 
@@ -95,7 +96,7 @@ SCI 相关文件统一命名：`<Stem>_<子项目名>_<版本号>`。
 
 项目一旦采用本布局，在 `ref/` 根备一份简短 **`ref/README.md`**，至少各用一行写明：
 
-- `refer/`：文献 + NLM 引用与摘要列表（原「参考文献」/ materials/citation）；**亦可**写作参考 pptx/doc/docx；与 `citation/` 审计台账分夹。
+- `refer/`：文献**指针**（每篇 `DOI_*.md`，`fulltext:` 指向 `_library\references`）+ NLM 引用与摘要列表（原「参考文献」/ materials/citation）；**亦可**写作参考 pptx/doc/docx；与 `citation/` 审计台账分夹；全文实体在 `_library\references`（t1455u）。
 - `citation/`：仅 `CITATION_AUDIT*` / 跳过说明 / 期刊引用日志。
 - `code-gates/`：脚本说明 + 门控/哈希报告（原 `code/`+`gates/`）。
 - 根上 `tables/` `figures/` `pipeline/`：统计表图与流水线夹；**hashes / MANIFEST / pipeline_run.log 在 `ref/pipeline/`**（原 `analysis/`/`results/` locks）；`qc.html` 仍在 `ref/` 根。
