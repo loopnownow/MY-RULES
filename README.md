@@ -23,3 +23,11 @@
 | `manuscript-and-review.md` | `{SKILLS}\05_manuscript\qc\`（正文禁令/版式）+ `{SKILLS}\06_review\advanced\`（批注/修订）+ `{SKILLS}\07_response\advanced\`（回信） |
 | `routing.md` | `{SKILLS}\00_orchestrator\references\ownership-contract.md`（座位/派单）+ `handoff-monitor.md`（盯梢） |
 | `engineering-decision.md` | `My rule.md` §6（R1–R6 + 大变更门） |
+
+## Local check (E3)
+
+`ash
+python -B check_paths.py --check
+`
+
+Verifies Rules docs cite live MY-SKILLS seats/files when the sibling clone is present. Cross-repo layout/retired-id checks live in MY-SKILLS 	ests/test_cross_repo_contract.py.
