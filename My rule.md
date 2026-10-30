@@ -86,9 +86,7 @@ license: MIT
 - **图表编号（C-1 · 指针，2026-10-29 · t1309s6268）：** Table 1 = 基线；**不**单独放 logistic 系数表或 score-correlation 表（Aitor-format §209）；ROC 操作特性作表；图按适用放 workflow / US / heatmap / nomogram+校准 / ROC / DCA。细则勿在本文件复写，指针 → `{SKILLS}\05_manuscript\advanced\Aitor-format.md` §200 / §209 / §213。
 - **批注英文建议句**：单独成句，以 `Suggested …` 起首。字面模板技能落点→`{SKILLS}\06_review\advanced\word-edit.md`。`manuscript-and-review.md` 已于 2026-10-18 按 README 迁入 `05_manuscript` / `06_review` / `07_response`。
 - **审稿回复**：保留完整原始 comments；不简化；不擅自加小标题；不自创信函格式。→`{SKILLS}\07_response\advanced\response.md`。
-- **新建文件夹（2026-10-24 · t1107u/t1108u/t1109u）**：助手需要的**全部新文件夹**只许建在 `{DEL}` / `D:\0del\`（`_by-project` / `_by-function`）。**默认禁止**在 `D:\0Grok\0doc` 下 mkdir；**唯一例外**：城城**本轮明确同意**才可在 0doc 建新夹。可改已有文件。临时/scratch → `{DEL}`。ACCEPT 备注只落 `{DEL}`。正文以本条为准；短针→`workspace-layout.md`（不复写）。mem→`D:\0Grok\0doc\mem\README.md`；全文→`D:\0del\_by-function\encode-0doc-folder-ban-20261024\STANDING-0doc-no-new-folder.md`。
-- **新建文件/文件夹（2026-10-27 · t1240）**：任何 agent **不得**在 `{DEL}` / `D:\0del` **以外**新建文件或文件夹；若确需新建，**必须事先问城城**。可改已有文件（含子工程根已有终稿的 Track Changes）。审稿交付：优先 **修订现有** 评审意见 `.docx`（Track Changes），禁止另存新稿名、禁止在子工程下新建夹；中间垃圾只进 `{DEL}`，且新建前仍优先问过。本条强化 t1098u/t1107u；路径 SSOT 仍为 `D:\0del`（非 `D:\0Grok\0del`）。
-- **新建文件（2026-10-24 · t1098u）**：AI/助手**不得**在 `{DEL}` / `D:\0del` 以外**新建**文件；**可改**已有文件（含 `{RULES}` / `{SKILLS}` / `0doc\skill-harvest\*` / `0doc\mem\*` / 子工程已有稿）。**唯一例外**：bot 记忆导出/更新可在 `D:\0Grok\0doc\mem\` 内新建（§1「mem 落盘」城城指定）；mem 以外仍禁。新草稿、ACCEPT、digest、by-fine-id lane、笔记、中间件 → 只进 `{DEL}\_by-function\…` 或 `{DEL}\_by-project\…`。优先 patch 已有；用户本轮点名的终稿落点仍按 §5（优先改已有终稿）。全文→`D:\0del\_by-function\encode-0del-standing-20261024\STANDING-no-new-files-outside-0del.md`；mem→`D:\0Grok\0doc\mem\README.md`。
+- **新建文件/文件夹（权威；合并 t1098u/t1107u/t1240 · 2026-10-30 · t1442u）**：默认只能在 `{DEL}` / `D:\0del`（`_by-project` / `_by-function`）新建文件与文件夹；路径 SSOT 为 `D:\0del`（非 `D:\0Grok\0del`）。在其他位置新建前必须本轮明确问城城并获准。**唯一常设例外**：bot 记忆导出/更新可在 `D:\0Grok\0doc\mem\` 内新建（§1「mem 落盘」）。**可改**已有文件（含 `{RULES}` / `{SKILLS}` / `0doc\skill-harvest\*` / `0doc\mem\*` / 子工程已有稿含 Track Changes）。默认禁止在 `D:\0Grok\0doc` 下 mkdir（除 mem 例外与本轮明确同意）。新草稿、ACCEPT、digest、by-fine-id lane、笔记、中间件、临时/scratch、ACCEPT 备注 → 只进 `{DEL}`。审稿交付：优先修订现有评审意见 `.docx`（Track Changes），禁止另存新稿名、禁止在子工程下新建夹。用户本轮点名的终稿落点仍按 §5（优先改已有终稿）。短针→`workspace-layout.md`（不复写）；mem→`D:\0Grok\0doc\mem\README.md`；全文→`D:\0del\_by-function\encode-0del-standing-20261024\STANDING-no-new-files-outside-0del.md` 与 `D:\0del\_by-function\encode-0doc-folder-ban-20261024\STANDING-0doc-no-new-folder.md`。
 - **一次性脚本/说明/小补丁**（非课题交付）：只落 `{DEL}`，禁止丢进用户主目录、`.grok\tmp`、或课题根。
 
 ## 5.2 每轮 QC 必清 0doc（2026-10-27）
@@ -107,7 +105,7 @@ license: MIT
 
 # 7 科研
 
-文献只引真实来源（找不到写「未找到」）。统计不为跑通改 outcome/纳入/cutoff/协变量/缺失/模型。细则→03/04 `qc/`。
+文献只引真实来源（找不到写「未找到」）。统计不为跑通改 outcome/纳入/cutoff/协变量/缺失/模型。细则→`{SKILLS}\02_data-processing\qc\`（`method-validation-gate.md` / `report-checks.md` / `html-results.md`）。
 
 # 8 语言与汇报
 
