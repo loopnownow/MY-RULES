@@ -26,8 +26,8 @@
 
 ## Local check (E3)
 
-`ash
+```bash
 python -B check_paths.py --check
-`
+```
 
-Verifies Rules docs cite live MY-SKILLS seats/files when the sibling clone is present. Cross-repo layout/retired-id checks live in MY-SKILLS 	ests/test_cross_repo_contract.py.
+Verifies Rules docs cite live MY-SKILLS seats/files when MY-SKILLS is present (sibling or `SKILLS_ROOT` / `MY_SKILLS`). Missing skills root fails loud (exit 1) unless `--allow-missing-skills`. Also scans Rules MD for stale live path claims (DEL SSOT / retired stats path). Cross-repo layout/retired-id checks live in MY-SKILLS `tests/test_cross_repo_contract.py`.
