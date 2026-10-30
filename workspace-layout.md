@@ -34,10 +34,10 @@ description: 本机布局与子工程短针。落点见 My rule.md §5。
 
 已有文件夹若仍用旧名，按下表阅读。**不改写**这些夹。**不新建** `DER`。
 
+旧阶段夹名仅作别名阅读；**勿重建** `preparing`/`polishing`/`submitting`/`reseived`。
+
 | 旧名 | 读作 |
 |---|---|
-> 旧阶段夹名仅作别名阅读；**勿重建** `preparing`/`polishing`/`submitting`/`reseived`。
-
 | `preparing` | `drafting` |
 | `polishing` | `pre-submit` |
 | `submitting` | `in-review` |
