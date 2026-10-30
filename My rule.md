@@ -20,7 +20,7 @@ license: MIT
 - **云端 / 本地（术语，2026-10-25）：** **云端** = Grok Bot 的 box 计算机（`/workspace` 等）；**本地** = 城城本机（如 `D:\`、Downloads）。二者勿对调。
 - **mem 落盘：** bot 记忆导出/更新落在本地 `D:\0Grok\0doc\mem`（城城指定；非默认进 `{DEL}`）。mem **仅保留隐私**与可变数据 SSOT（如 JCR xlsx）；站立运营政策进 `{RULES}`，专业技能进 `{SKILLS}`。
 - **单项目约定**写在该**子工程文件夹**内（如子工程 `0doc\` 或 `ref\`），**不**写入全局 `{RULES}` / `{SKILLS}`。须用户点名「放 0doc」才写 `0doc\`。
-- **交付落点**：子工程**没有** `0result\` 文件夹。**最终**交付物 → 该子工程**根目录**（`D:\0Grok\<project>` 下）；**中间**产物 → 按 `project-ref-layout.md` 的 `ref/` 子文件夹地图（`review/` / `citation/` / `refer/`（文献+写作参考 pptx/doc/docx） / `code-gates/` / `tmp/` + 根上 tables/figures/pipeline；**hashes/MANIFEST/pipeline_run.log 在 `ref/pipeline/`**；`submission-*`、底表；分析 `false_classification*` 留子工程根（详图与 Cleanup 两档见 `project-ref-layout.md`；已退役 `analysis/`/`materials/`/`results/`/`exec/`/`code/`/`gates/`/`writing-refs/`/`raw-pre/`））；其余临时/非交付进 `{DEL}`；Downloads **仅当**当轮点名「下载」或「Downloads」。
+- **交付落点**：子工程**没有** `0result\` 文件夹。**最终**交付物 → 该子工程**根目录**（`D:\0Grok\<project>` 下）；**中间**产物 → 按 `project-ref-layout.md` 的 `ref/` 子文件夹地图（`review/` / `citation/` / `refer/`（文献+写作参考 pptx/doc/docx） / `code-gates/` / `tmp/` + 根上 tables/figures/pipeline；**hashes/MANIFEST/pipeline_run.log 在 `ref/pipeline/`**；`submission-*`、底表；分析 `false_classification*` 留子工程根（详图与 Cleanup 两档见 `project-ref-layout.md`；已退役 `analysis/`/`materials/`/`results/`/`exec/`/`code/`/`gates/`/`writing-refs/`/`raw-pre/`））；**子工程内临时/中间默认 `ref/tmp/`**（**非**默认 `{DEL}`；旧版 `Manuscript_*_V*` 亦然，现行 `Vn` 在根；详 → `project-ref-layout.md`）；无子工程或不属课题树的临时进 `{DEL}`；Downloads **仅当**当轮点名「下载」或「Downloads」。
 
 # 2 开工前确认
 
@@ -62,7 +62,7 @@ license: MIT
 
 # 5 交付与清理
 
-**禁删**；临时只进 `{DEL}\<任务>\`。旧稿/旧产物清理＝移入 `{DEL}`，不静默永久删。子工程**不建** `0result\`。
+**禁删**；子工程内临时/中间默认 `ref/tmp/`（非默认 `{DEL}`）；无子工程或跨课题一次性临时进 `{DEL}\<任务>\`。旧稿/旧产物清理＝移入 `{DEL}`，不静默永久删。子工程**不建** `0result\`。
 
 | 产物 | 格式 | 落点 |
 |---|---|---|
@@ -70,7 +70,7 @@ license: MIT
 | 中间产物（QC/ledger/门控/草稿等） | 依类型 | 有子工程→按 `project-ref-layout.md` 的 `ref/` 地图（`review/`/`citation/`/`refer/`（含写作参考）/`code-gates/`/`tmp/` + tables/figures/pipeline；locks 在 `ref/pipeline/`；`submission-*`；`false_classification*` 在子工程根（详图见 `project-ref-layout.md`））；否则→`{DEL}` |
 | 报告/QC（中间） | HTML | 有子工程→该子工程 `ref\`（或阶段夹如 `in-review\`）；无子工程且点名 Downloads→Downloads；否则→`{DEL}` |
 | 稿件/TC（最终） | DOCX | 子工程**根**；否则仅当点名 Downloads，否则 `{DEL}` |
-| SCI 稿件文件名 | DOCX（md/pdf 同 stem） | **`Manuscript_` / `Comments_` / `Response_` / `Supplementary_`** + `_<子项目名>_V<n>`；版本与对应修回轮次一致。权威 → `project-ref-layout.md`「SCI 稿件文件名」；技能指针 → `{SKILLS}\05_manuscript\advanced\Aitor-format.md` / `handoff.md`、`06_review\advanced\handoff.md`、`07_response\advanced\handoff.md`（t1428u/t1429u/t1430u） |
+| SCI 稿件文件名 | DOCX（md/pdf 同 stem） | **`Manuscript_` / `Comments_` / `Response_` / `Supplementary_`** + `_<子项目名>_V<n>`；版本与对应修回轮次一致。**现行 `Vn` → 子工程根**；**旧版 → `ref/tmp/`**（t1450u）。权威 → `project-ref-layout.md`「SCI 稿件文件名」；技能指针 → `{SKILLS}\05_manuscript\advanced\Aitor-format.md` / `handoff.md`、`06_review\advanced\handoff.md`、`07_response\advanced\handoff.md`（t1428u/t1429u/t1430u） |
 | 数据表（最终） | XLSX | 子工程**根**（不建 `0result\`）；其余同稿件 |
 
 同一分析若 `Results*.html`（或已执行产物 HTML）与 `.xlsx` 数字冲突：以 HTML 为准，并在汇报里写明冲突与所采用源。
@@ -86,7 +86,7 @@ license: MIT
 - **图表编号（C-1 · 指针，2026-10-29 · t1309s6268）：** Table 1 = 基线；**不**单独放 logistic 系数表或 score-correlation 表（Aitor-format §209）；ROC 操作特性作表；图按适用放 workflow / US / heatmap / nomogram+校准 / ROC / DCA。细则勿在本文件复写，指针 → `{SKILLS}\05_manuscript\advanced\Aitor-format.md` §200 / §209 / §213。
 - **批注英文建议句**：单独成句，以 `Suggested …` 起首。字面模板技能落点→`{SKILLS}\06_review\advanced\word-edit.md`。`manuscript-and-review.md` 已于 2026-10-18 按 README 迁入 `05_manuscript` / `06_review` / `07_response`。
 - **审稿回复**：保留完整原始 comments；不简化；不擅自加小标题；不自创信函格式。→`{SKILLS}\07_response\advanced\response.md`。
-- **新建文件/文件夹（权威；合并 t1098u/t1107u/t1240 · 2026-10-30 · t1442u）**：默认只能在 `{DEL}` / `D:\0del`（`_by-project` / `_by-function`）新建文件与文件夹；路径 SSOT 为 `D:\0del`（非 `D:\0Grok\0del`）。在其他位置新建前必须本轮明确问城城并获准。**唯一常设例外**：bot 记忆导出/更新可在 `D:\0Grok\0doc\mem\` 内新建（§1「mem 落盘」）。**可改**已有文件（含 `{RULES}` / `{SKILLS}` / `0doc\skill-harvest\*` / `0doc\mem\*` / 子工程已有稿含 Track Changes）。默认禁止在 `D:\0Grok\0doc` 下 mkdir（除 mem 例外与本轮明确同意）。新草稿、ACCEPT、digest、by-fine-id lane、笔记、中间件、临时/scratch、ACCEPT 备注 → 只进 `{DEL}`。审稿交付：优先修订现有评审意见 `.docx`（Track Changes），禁止另存新稿名、禁止在子工程下新建夹。用户本轮点名的终稿落点仍按 §5（优先改已有终稿）。短针→`workspace-layout.md`（不复写）；mem→`D:\0Grok\0doc\mem\README.md`；全文→`D:\0del\_by-function\encode-0del-standing-20261024\STANDING-no-new-files-outside-0del.md` 与 `D:\0del\_by-function\encode-0doc-folder-ban-20261024\STANDING-0doc-no-new-folder.md`。
+- **新建文件/文件夹（权威；合并 t1098u/t1107u/t1240 · 2026-10-30 · t1442u/t1450u）**：默认只能在 `{DEL}` / `D:\0del`（`_by-project` / `_by-function`）新建文件与文件夹；路径 SSOT 为 `D:\0del`（非 `D:\0Grok\0del`）。在其他位置新建前必须本轮明确问城城并获准。**常设例外**：(1) bot 记忆导出/更新可在 `D:\0Grok\0doc\mem\` 内新建（§1「mem 落盘」）；(2) 子工程内 `ref/tmp/` 按需写入临时/中间（含旧版稿；详 → `project-ref-layout.md`）。**可改**已有文件（含 `{RULES}` / `{SKILLS}` / `0doc\skill-harvest\*` / `0doc\mem\*` / 子工程已有稿含 Track Changes）。默认禁止在 `D:\0Grok\0doc` 下 mkdir（除 mem 例外与本轮明确同意）。新草稿、ACCEPT、digest、by-fine-id lane、笔记、中间件、临时/scratch、ACCEPT 备注 → 只进 `{DEL}`。审稿交付：优先修订现有评审意见 `.docx`（Track Changes），禁止另存新稿名、禁止在子工程下新建夹。用户本轮点名的终稿落点仍按 §5（优先改已有终稿）。短针→`workspace-layout.md`（不复写）；mem→`D:\0Grok\0doc\mem\README.md`；全文→`D:\0del\_by-function\encode-0del-standing-20261024\STANDING-no-new-files-outside-0del.md` 与 `D:\0del\_by-function\encode-0doc-folder-ban-20261024\STANDING-0doc-no-new-folder.md`。
 - **一次性脚本/说明/小补丁**（非课题交付）：只落 `{DEL}`，禁止丢进用户主目录、`.grok\tmp`、或课题根。
 
 ## 5.2 每轮 QC 必清 0doc（2026-10-27）

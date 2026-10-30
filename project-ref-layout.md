@@ -6,7 +6,7 @@
 
 本文是**文件夹地图与跳过/幂等契约**。不编造临床数字。文件名与 ledger 行除课题科学所需（路径、DOI、citekey）外，不含 PII。
 
-**SSOT：** 本文件为**权威中文版**。技能侧镜像（英文）`{SKILLS}\00_orchestrator\references\project-ref-layout.md` 只作运行期读本；两版冲突以本文件为准（2026-10-29；**t1321u/t1322u**：锁定件 `hashes.tsv`/`MANIFEST.md`/`pipeline_run.log` 落 **`ref/pipeline/`**（不在 ref 根）；写作参考 pptx/doc/docx 可进 **`ref/refer/`**（与文献列表同夹）；分析 `false_classification*` 留**子工程根**（ASL 类临时产物），不进 ref；t1316u：取消标准壳 `analysis/` 与 `materials/`，表图等子项抬到 `ref/`；文献与 NLM+摘要列表进 `ref/refer/`；`ref/citation/` 仍只做审计台账；t1309s6268：原 `results/` → 曾用 `analysis/`；t1307u：未被接受投稿包进 `ref/` 根或 `submission-*`；t1303s6243 / t1300u：原 writing-refs+raw-pre、code+gates 合并史）。
+**SSOT：** 本文件为**权威中文版**。技能侧镜像（英文）`{SKILLS}\00_orchestrator\references\project-ref-layout.md` 只作运行期读本；两版冲突以本文件为准（2026-10-29；**t1321u/t1322u**：锁定件 `hashes.tsv`/`MANIFEST.md`/`pipeline_run.log` 落 **`ref/pipeline/`**（不在 ref 根）；写作参考 pptx/doc/docx 可进 **`ref/refer/`**（与文献列表同夹）；分析 `false_classification*` 留**子工程根**（ASL 类临时产物），不进 ref；t1316u：取消标准壳 `analysis/` 与 `materials/`，表图等子项抬到 `ref/`；文献与 NLM+摘要列表进 `ref/refer/`；`ref/citation/` 仍只做审计台账；t1309s6268：原 `results/` → 曾用 `analysis/`；t1307u：未被接受投稿包进 `ref/` 根或 `submission-*`；t1303s6243 / t1300u：原 writing-refs+raw-pre、code+gates 合并史；**t1450u**：子工程内临时/中间默认 `ref/tmp/`（非默认 `{DEL}`）；旧版 SCI 稿亦落 `ref/tmp/`，现行 `Vn` 在子工程根）。
 
 ## 根目录不变量（勿挪位）
 
@@ -33,12 +33,13 @@
 | `ref/citation/` | **仅**审计台账：`CITATION_AUDIT.json`（或 `.jsonl`）；引用 README / 跳过说明；期刊/引用日志（`ref_journal_log.txt`、`CITATION*`） | NLM+摘要列表与文献正文（见 `refer/`）；写作参考草稿 |
 | `ref/refer/` | 项目启动与课题文献：全文/分件、**NLM 引用 + 摘要列表**、文献清单（原「参考文献」/ `materials/citation` / `materials/refer`）；**亦可**放写作参考 pptx/doc/docx（课题申请书/汇报幻灯/三线表等） | 审计台账（`CITATION_AUDIT` 等仍在 `citation/`）；勿把 locks（hashes/MANIFEST/log）放这里 |
 | `ref/code-gates/` | 脚本/路径说明、补丁指针（无密钥）；`GATE*_report.md`、数字锁定、输入/输出哈希报告 | 现役 `settings.ini`；原始凭据。**原并列的 `code/` 与 `gates/` 不再分夹** |
-| `ref/tmp/` | 课题本地**中间** Word/PDF/草稿（Claude diff、被替代的 TC、`-copy`、合并草稿），保留到主人说清理/收工 | 当前终稿（留在课题根）；已关闭轮次 changelog（`review/`）；citation / code-gates ledger；密钥 |
+| `ref/tmp/` | 子工程内**临时/中间**默认落点（**非**先丢 `{DEL}`）：中间 Word/PDF/草稿（Claude diff、被替代的 TC、`-copy`、合并草稿）；**旧版 SCI 稿**（如 `Manuscript_<slug>_V1.docx`）；保留到主人说清理/收工 | 现行终稿 / `Manuscript_<slug>_Vn`（子工程根）；已关闭轮次 changelog（`review/`）；citation / code-gates ledger；密钥 |
 
 **已退役（勿再新建）：** `ref/analysis/`、`ref/materials/`、独立 `ref/exec/`、`ref/code/`、`ref/gates/`、`ref/writing-refs/`、`ref/raw-pre/`、`ref/results/`。旧树：`analysis/` 子项 → `ref/` 根；`materials/` 内 lit/`citation`/`参考文献` → `refer/`，其余 → `ref/` 根；空壳移入 `{DEL}`（见 Cleanup）。本轮布局迁移另见主人点名。
 
 ### 三区 / 临时结果区
 
+- **站立（t1450u）：** 子工程内临时与中间文件默认进 `ref/tmp/`，**不**默认进 `{DEL}` / `D:\0del`。过后清理（先问）再移 `{DEL}`。
 - **分析临时结果**（`ASL/`、`DKI/`、`DTI_IVIM/` 等）放在**子工程根旁**，**不进 `ref/`**。
 - 面向稿件/门控的统计**表图**在 `ref/tables/` `ref/figures/`；**锁定件** `hashes.tsv` `MANIFEST.md` `pipeline_run.log` 在 **`ref/pipeline/`**；**勿**与 `ASL/` 等分析树合并。
 - **分析错分/临时表**（如 `false_classification*`）与 ASL 类临时产物一样，留在**子工程根**，**不进 `ref/`**。
@@ -61,7 +62,7 @@ SCI 相关文件统一命名：`<Stem>_<子项目名>_<版本号>`。
 - **版本号** = `V` + 整数（`V1`, `V2`, …）；`Comments` / `Response` / `Supplementary` 的版本号与对应稿件修回轮次一致
 - 优先 `.docx`；若有 md/pdf 伴生件，**同 stem**
 - 例：`Manuscript_lxf_PP_V1.docx`、`Comments_lxf_PP_V1.docx`、`Response_lxf_PP_V1.docx`、`Supplementary_lxf_PP_V1.docx`（或 `.pdf`）
-- **落点不变：** 已接受终稿（及现行修回件）在子工程根；未被接受的投稿包仍按上节进 `ref/` / `submission-*`。本条只管**文件名**，不改落点契约。（原 `materials/` 已退役，勿再新建。）
+- **落点：** 现行 `Manuscript_<slug>_Vn`（及配套 Comments/Response/Supplementary 现行版）在**子工程根**；**旧版** `V1`..`V(n-1)` → `ref/tmp/`。未被接受的投稿包仍按上节进 `ref/` / `submission-*`。本条管文件名 + 旧版落点；详 → 上表 `ref/tmp/`。（原 `materials/` 已退役，勿再新建。）
 
 ### 数据底表（D-1）
 
