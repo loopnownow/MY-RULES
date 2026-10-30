@@ -53,7 +53,7 @@ description: 本机布局与子工程短针。落点见 My rule.md §5。
 
 | 种类 | 落点 |
 |---|---|
-| 草稿 / 旧稿 / 一次性脚本 | `{DEL}` 的 `_by-project\` / `_by-function\`。不当现行结果。`{DEL}` 定期清空，值得长期保留的不放这里。细则 → `My rule.md` §5.1。 |
+| 草稿 / 旧稿 / 一次性脚本 | 子工程内临时/中间/旧版稿 → `ref/tmp/`（非默认 `{DEL}`；t1450u）。跨课题或无子工程一次性 → `{DEL}` 的 `_by-project\` / `_by-function\`。`{DEL}` 定期清空，值得长期保留的不放这里。细则 → `My rule.md` §5 / `project-ref-layout.md`。 |
 | 共享统计库 | `{code_modules}`（`D:\0Grok\0doc\GitHub\stats-analysis\modules`）。入口：`PYTHONPATH={code_stats}` 后 `python -m modules.pipeline`。课题只指向该树，不在课题内再放 `modules\`。未点名则不改该库。技能正文（怎么用、按什么规则）在 `{SKILLS}\02_data-processing\`；本仓只管代码。 |
 | 02 运维（整理 / 清洗 / 同步） | `D:\0Grok\0doc\_code\02-data-processing\`（`{code_data_processing}`；其下无 `base\`）。统计引擎与建模 CLI 在 `D:\0Grok\0doc\GitHub\stats-analysis`（2026-10-25 起独立主库）。 |
 | 参考包 / 锁定笔记 | 课题 `ref/`。运行键只在 `ref/settings.ini`。可选 `ref/project-state.yaml` 只记设计与稿件进度。 |
@@ -72,9 +72,9 @@ description: 本机布局与子工程短针。落点见 My rule.md §5。
 ## 子工程约定
 
 - 写入 `0doc\` 须用户点名「放 0doc」。
-- **最终**→子工程根；**中间**→`ref/` 地图；**无** `0result\`；临时进 `{DEL}`；Downloads 仅当点名。权威 → `My rule.md` §5。
+- **最终**→子工程根；**中间**→`ref/` 地图；**无** `0result\`；子工程内临时 → `ref/tmp/`（非默认 `{DEL}`）；无子工程/跨课题临时进 `{DEL}`；Downloads 仅当点名。权威 → `My rule.md` §5。
 - 可复用脚本 → `D:\0Grok\0doc\_code\`（`{code_root}`）；统计引擎与建模 CLI → `{code_stats}`。`0script\` 已退休，不在课题根重建。长期规则/语料 → `0doc` 相应层。
-- 根不留临时/草稿/一次性中间件（例外：当前在改稿）。改稿中的稿件留在根，不进 `{DEL}`、分析输出或 `ref/`。`0doc\GitHub\stats-analysis\modules\` 增改移须先同意。
+- 根不留临时/草稿/一次性中间件（例外：现行在改稿 / 现行 `Vn`）。旧版稿与中间件进 `ref/tmp/`，不进 `{DEL}`（除非过后清理先问）。`0doc\GitHub\stats-analysis\modules\` 增改移须先同意。
 - 数据课题根可留：`rawdata`、`derivatives`、`atlases`、索引/manifest、`ref`。`0doc` 仅当点名「放 0doc」。默认从 `derivatives` 拷出要用的结果，原件留在原处；终稿落子工程根。不建 `0result\`，不重建 `0script\`。
 - 同键终表合并为一张（一段说明，值列加前缀）。把原件移出子工程根须先同意。
 - 移脚本或文档前先搜 `import` / `addpath` / `settings.ini` / README。仍有未改引用则不移。移完后改路径与 `0doc` 示例再测。
