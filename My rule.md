@@ -70,6 +70,7 @@ license: MIT
 | 中间产物（QC/ledger/门控/草稿等） | 依类型 | 有子工程→按 `project-ref-layout.md` 的 `ref/` 地图（`review/`/`citation/`/`refer/`（含写作参考）/`code-gates/`/`tmp/` + tables/figures/pipeline；locks 在 `ref/pipeline/`；`submission-*`；`false_classification*` 在子工程根（详图见 `project-ref-layout.md`））；否则→`{DEL}` |
 | 报告/QC（中间） | HTML | 有子工程→该子工程 `ref\`（或阶段夹如 `in-review\`）；无子工程且点名 Downloads→Downloads；否则→`{DEL}` |
 | 稿件/TC（最终） | DOCX | 子工程**根**；否则仅当点名 Downloads，否则 `{DEL}` |
+| SCI 稿件文件名 | DOCX（md/pdf 同 stem） | **`Manuscript_` / `Comments_` / `Response_` / `Supplementary_`** + `_<子项目名>_V<n>`；版本与对应修回轮次一致。权威 → `project-ref-layout.md`「SCI 稿件文件名」；技能指针 → `{SKILLS}\05_manuscript\advanced\Aitor-format.md` / `handoff.md`、`06_review\advanced\handoff.md`、`07_response\advanced\handoff.md`（t1428u/t1429u/t1430u） |
 | 数据表（最终） | XLSX | 子工程**根**（不建 `0result\`）；其余同稿件 |
 
 同一分析若 `Results*.html`（或已执行产物 HTML）与 `.xlsx` 数字冲突：以 HTML 为准，并在汇报里写明冲突与所采用源。
