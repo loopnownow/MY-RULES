@@ -52,6 +52,17 @@
 - **已接受**：最终稿件（及当前仍在用的修回件）**留在子工程根**，不因整理进 `ref/` 投稿夹。
 - **清理**：`ref/` 里的未被接受投稿包，过后清理时可经询问移入 `D:\0del\_by-project\<project>\`；禁止静默删除。
 
+### SCI 稿件文件名（Manuscript / Comments / Response / Supplementary）
+
+SCI 相关文件统一命名：`<Stem>_<子项目名>_<版本号>`。
+
+- **Stem：** `Manuscript` | `Comments` | `Response` | `Supplementary`（仅当确有补充材料时建 Supplementary）
+- **子项目名** = project slug（如 `lxf_PP`）
+- **版本号** = `V` + 整数（`V1`, `V2`, …）；`Comments` / `Response` / `Supplementary` 的版本号与对应稿件修回轮次一致
+- 优先 `.docx`；若有 md/pdf 伴生件，**同 stem**
+- 例：`Manuscript_lxf_PP_V1.docx`、`Comments_lxf_PP_V1.docx`、`Response_lxf_PP_V1.docx`、`Supplementary_lxf_PP_V1.docx`（或 `.pdf`）
+- **落点不变：** 已接受终稿（及现行修回件）在子工程根；未被接受的投稿包仍按上节进 `ref/` / `submission-*`。本条只管**文件名**，不改落点契约。（原 `materials/` 已退役，勿再新建。）
+
 ### 数据底表（D-1）
 
 - 原始/预清洗数据底表可落在 `ref/` 根或 `ref/data/`（撞名或更清晰时保留 `data/`）。
