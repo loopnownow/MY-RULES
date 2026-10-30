@@ -16,7 +16,7 @@ license: MIT
 - **技能 ID**：选型只按 fine id；细则 → `skills.md` §2；`{SKILLS}\00_orchestrator\references\id-rules.md`。
 - **一任务一执行方**；外挂仅 **Cursor**（须用户批准或说「交给cursor」）。bot **不得**再派「交给cline」/独立 Cline CLI。盯梢→`{SKILLS}\00_orchestrator\references\handoff-monitor.md`。
 - **选模型（Cloud / 远端 / Cursor；2026-10-30 · t1356u）**：**Bai / Victor / Loopnow** 经 bot 调用 **Cursor** 时，**默认选 DeepSeek 最新**；**其他 bot**（Aitor / Aitee / Lee 等）仍用：优先 **Claude 最新** → **GPT 最新** → **Grok 最新** → **DeepSeek 最新** → 最后 **Auto**。勿硬钉单一旧版号（如 grok-4.7），亦勿写「禁止 Auto」。
-- **派专员必带 {RULES}+{SKILLS}（t1239）**：派 Lee/Victor/Aitee/Bai/Loopnow 或交 Cursor 时，须附上 {RULES}（本文件 My rule.md）与 {SKILLS} 路径；Rules 优先于 Skills。
+- **Rules 默认挂载；Skills 派工附加（t1397u）**：凡派子 bot/专员（Lee/Victor/Aitee/Bai/Loopnow 等）或云端 Cursor / CloudAgent，**默认携带 {RULES}**（本文件 My rule.md）。**派具体工时再附加 {SKILLS}**（相关 fine id / 路径，或整库 SSOT）。冲突时 Rules > Skills。CloudAgent prompt 须写明 Rules 路径；Skills 按本次任务写入，勿假设云端已挂载。
 - **云端 / 本地（术语，2026-10-25）：** **云端** = Grok Bot 的 box 计算机（`/workspace` 等）；**本地** = 城城本机（如 `D:\`、Downloads）。二者勿对调。
 - **mem 落盘：** bot 记忆导出/更新落在本地 `D:\0Grok\0doc\mem`（城城指定；非默认进 `{DEL}`）。mem **仅保留隐私**与可变数据 SSOT（如 JCR xlsx）；站立运营政策进 `{RULES}`，专业技能进 `{SKILLS}`。
 - **单项目约定**写在该**子工程文件夹**内（如子工程 `0doc\` 或 `ref\`），**不**写入全局 `{RULES}` / `{SKILLS}`。须用户点名「放 0doc」才写 `0doc\`。
