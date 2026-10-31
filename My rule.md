@@ -102,6 +102,7 @@ license: MIT
 - **默认分级**：字节码缓存、垃圾文件名、空目录、历史结构快照、被同名无日期版取代的副本 → 可直接移；重复件、无入口脚本、无读者台账、孤立 `.md`、占位壳 → 出清单等点头；断链与「文中路径全失效」→ 只修指针或就地标注，**不搬**（历史档合法引用过去落点）。
 - **永不自动清**：`_bank\bank`（含 `0doc-bank.db`）、`mem\`、`_library\ethics\`，以及历史档 `MIGRATION.md`、`_bank\GATES.md`、`ACCEPT-*`、`_library\former-*`、`skill-harvest\PLAN-*`。
 - 移出即记台账；收工报告须给「一条命令还原」的路径映射。分类说明→`0doc\test\README.md`。
+- **skip / archive 不是停放位**：口径见 §4 与 `skills.md` §6（t1463u）；0doc 侧由 `test\structure_check.py` S4 与 `test\cleanup_scan.py` C2 强制，契约/规则定义的年度存档例外见 `0doc\STRUCTURE.md` §7。
 
 
 # 6 工程决策
