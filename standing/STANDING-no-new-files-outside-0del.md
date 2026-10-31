@@ -1,4 +1,4 @@
-﻿# STANDING — 禁止在 0del 以外新建文件（2026-10-24 · t1098u）
+# STANDING — 禁止在 0del 以外新建文件（2026-10-24 · t1098u）
 
 **Owner:** 城城 via Aitor · Asia/Shanghai  
 **Machine:** a87819bb-bf54-4af5-bc08-86e9e08c4029

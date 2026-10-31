@@ -1,4 +1,4 @@
-﻿# STANDING — 0doc 禁止新建文件夹（唯一例外：城城本轮同意）（2026-10-24 · t1107u/t1108u/t1109u）
+# STANDING — 0doc 禁止新建文件夹（唯一例外：城城本轮同意）（2026-10-24 · t1107u/t1108u/t1109u）
 
 **Owner:** 城城 via Aitor · Asia/Shanghai  
 **Machine:** a87819bb-bf54-4af5-bc08-86e9e08c4029
@@ -10,7 +10,7 @@
 3. 可改已有文件（含 MY-RULES / MY-SKILLS / `0doc\skill-harvest\*` / `0doc\mem\*` / 子工程已有稿）。
 4. 临时 / scratch → `D:\0del`。
 5. **ACCEPT 备注只落 `D:\0del`**（本夹即例）。
-6. 与既有「禁止在 0del 以外新建文件」（t1098u）并存；见 sibling `encode-0del-standing-20261024\STANDING-no-new-files-outside-0del.md`。
+6. 与既有「禁止在 0del 以外新建文件」（t1098u）并存；见 sibling `{RULES}\standing\STANDING-no-new-files-outside-0del.md`。
 
 ## Encoded into
 
