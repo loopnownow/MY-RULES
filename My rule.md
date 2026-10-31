@@ -105,6 +105,22 @@ license: MIT
 - **skip / archive 不是停放位**：口径见 §4 与 `skills.md` §6（t1463u）；0doc 侧由 `test\structure_check.py` S4 与 `test\cleanup_scan.py` C2 强制，**无存档例外**（年报/年表同样移 `{DEL}`，见 `0doc\STRUCTURE.md` §7）。
 
 
+## 5.3 0del 三档（2026-10-31）
+
+`{DEL}` 内移出件按可弃度分三档，**不得混放**；每档一个落点，搬移必留 `MOVED.tsv` 并保相对路径。
+
+| 档 | 落点 | 判据 | 处置 |
+|---|---|---|---|
+| park | `_by-function\<批次>\` / `_by-project\<课题>\` | 有活指针、台账价值，或一次任务的全套件（旧稿、ACCEPT 回执、`MOVED.tsv`） | 留到城城点名；**不得**整夹清 |
+| harvest-park | `_by-function\harvest-0doc-<YYYYMMDD>\<原相对路径>` | `0doc` 新建件的收尾归档（草稿已「进skills」收编，或已过时） | 留档；下次 QC 复核后再定留或降 junk |
+| junk | `_by-function\junk\`（平铺，不建日期子夹） | 字节码/缓存、拼写错件、本机配置备份、Downloads 残留、**无任何文本引用**的产物 | 下次清 `{DEL}` 时整夹清空（须当轮点名） |
+
+- **课题件优先** `_by-project\<slug>\`（park）；**0doc 收尾件**（草稿已收编进 skills、或已过时）才进 harvest-park。两档不得互替堆放。
+- 落 junk 前必须：① 全库 grep 确认无活文本引用（`0doc` + `D:\0Grok` 课题树）；② 同名异字节不覆盖；③ 写 `junk\MOVED.tsv`。
+- **junk 是唯一可整夹清空的档**；park / harvest-park 不得整夹清。**整夹清空须当轮城城 widget/口头点名**，禁止 bot 自作主张。
+- `0doc` 侧的判定与落盘仍由 `test\cleanup_scan.py`（判据）与 `test\cleanup_move.py --dest <落点>`（落点）负责；本条只定**落点与可弃度**，不另造脚本。
+- **整理 0del 前先 grep 活路径**：`_code` 多个脚本把输出写死到 `D:\0del\<子夹>`（`smoke_test`、`modules_bak`、`cln_fill_supplement`、`yt_RDL`、`batch_rerun_status.json`、`batch_rerun.log`），这些不是移出件，搬走即破坏脚本；新增写死路径须同轮补入本节清单。
+
 # 6 工程决策
 
 - R1 需求优先 · R2 证据排错 · R3 有序简化 · R4 风险比例 · R5 保护不变量 · R6 闭环验证。
