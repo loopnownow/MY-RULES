@@ -74,7 +74,7 @@ license: MIT
 | SCI 稿件文件名 | DOCX（md/pdf 同 stem） | **`Manuscript_` / `Comments_` / `Response_` / `Supplementary_`** + `_<子项目名>_V<n>`；版本与对应修回轮次一致。**现行 `Vn` → 子工程根**；**旧版 → `ref/tmp/`**（t1450u）。权威 → `project-ref-layout.md`「SCI 稿件文件名」；技能指针 → `{SKILLS}\05_manuscript\advanced\Aitor-format.md` / `handoff.md`、`06_review\advanced\handoff.md`、`07_response\advanced\handoff.md`（t1428u/t1429u/t1430u） |
 | 数据表（最终） | XLSX | 子工程**根**（不建 `0result\`）；其余同稿件 |
 | 文献全文（PDF/HTML） | PDF/HTML | **`D:\0Grok\0doc\_library\references\<L1>\<L2>\`**（一文一物理文件，名用 DOI；t1455u）。子工程 `ref/refer\` 只写 `DOI_*.md` 指针；书目仍进 `_library\lit-bank`（不存 PDF） |
-| 期刊池 / 批件 | CSV/XLSX/PDF | `_library\journals\index.csv`(+`xlsx`)；`_library\ethics\approvals\<L1>\<L2>\` + `approvals-index.xlsx`（t1458u）。子工程候选刊只写 `ref\citation\journals.csv` + `_notes.md`；批件只挂指针。口径 → `library-taxonomy.md` |
+| 期刊池 / 批件 | CSV/XLSX/PDF | `_library\journals\index.csv`（单表，2026-10-31 起不再留 xlsx）；`_library\ethics\approvals\<L1>\<L2>\` + `approvals-index.xlsx`（t1458u）。子工程候选刊只写 `ref\citation\journals.csv` + `_notes.md`；批件只挂指针。口径 → `library-taxonomy.md` |
 
 同一分析若 `Results*.html`（或已执行产物 HTML）与 `.xlsx` 数字冲突：以 HTML 为准，并在汇报里写明冲突与所采用源。
 
@@ -113,7 +113,7 @@ license: MIT
 |---|---|---|---|
 | park | `_by-function\<批次>\` / `_by-project\<课题>\` | 有活指针、台账价值，或一次任务的全套件（旧稿、ACCEPT 回执、`MOVED.tsv`） | 留到城城点名；**不得**整夹清 |
 | harvest-park | `_by-function\harvest-0doc-<YYYYMMDD>\<原相对路径>` | `0doc` 新建件的收尾归档（草稿已「进skills」收编，或已过时） | 留档；下次 QC 复核后再定留或降 junk |
-| junk | `_by-function\junk\`（平铺，不建日期子夹） | 字节码/缓存、拼写错件、本机配置备份、Downloads 残留、**无任何文本引用**的产物 | 下次清 `{DEL}` 时整夹清空（须当轮点名） |
+| junk | `junk\`（平铺，不建日期子夹） | 字节码/缓存、拼写错件、本机配置备份、Downloads 残留、**无任何文本引用**的产物 | 下次清 `{DEL}` 时整夹清空（须当轮点名） |
 
 - **课题件优先** `_by-project\<slug>\`（park）；**0doc 收尾件**（草稿已收编进 skills、或已过时）才进 harvest-park。两档不得互替堆放。
 - 落 junk 前必须：① 全库 grep 确认无活文本引用（`0doc` + `D:\0Grok` 课题树）；② 同名异字节不覆盖；③ 写 `junk\MOVED.tsv`。

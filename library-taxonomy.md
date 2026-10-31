@@ -35,7 +35,7 @@
 |---|---|---|
 | `_library\references\<L1>\<L2>\` | 文献全文实体（PDF/HTML），一文一文件，文件名用 DOI（`/` -> `_`）；`index.csv` 记 `doi,pmid,l1,l2,rel_path,sha256,source_project,fetched_at,notes` | 书目卡片、批件、稿件、第二份副本 |
 | `_library\lit-bank\` | 书目 SSOT：`index.csv`（NLM 引用 + 结论 + 主题），**无 PDF** | 全文实体 |
-| `_library\journals\` | 期刊池 `index.csv` / `index.xlsx` / `l1-l2-map.csv`（旧表按年重建时移 `{DEL}`，不留 `archive\`） | 全文、`submission-urls.csv`、名单本体 |
+| `_library\journals\` | 期刊池 `index.csv`（单表；2026-10-31 起不再留 xlsx）/ `l1-l2-map.csv`（旧表按年重建时移 `{DEL}`，不留 `archive\`） | 全文、`submission-urls.csv`、名单本体 |
 | `_library\ethics\` | `approvals\<L1>\<L2>\` 批件 PDF + `approvals-index.xlsx` + `extract\` | 已填申请材料原件（在 `D:\0del`）、第二份全文副本 |
 
 子工程侧：`ref\refer\` 只放**文献指针**（`DOI_*.md`，`fulltext:` 指向 `_library\references`）+ NLM 引用与摘要列表 + 写作参考；
@@ -53,7 +53,7 @@
 
 ## 4 journals 契约
 
-- `_library\journals\index.csv`（+ `index.xlsx`）列见该库 `README.md`；关键：`jcr_year`（版本年）、`metric_year`（指标年）、`layer`、`l1/l2`、`whitelist`（含 `bmc`）、`queried_at`。
+- `_library\journals\index.csv` 列见该库 `README.md`（单表，2026-10-31 起不再派生 xlsx）；关键：`jcr_year`（版本年）、`metric_year`（指标年）、`layer`、`l1/l2`、`whitelist`（含 `bmc`）、`queried_at`。
 - **每年跨年后 7 月**按新 JCR 年版整表重建一次；旧表连同压缩前分层 CSV 移 `{DEL}`（2026-10-31 起不再保留 `archive\<year>\`），不逐行手改。
 - `jcr\<year>\` 存选刊侧私有数据（投过白名单、投稿先验）；逐年 `jcr\<year>\`。
 - 名单本体（blacklist/graylist/whitelist-bmc/submission-urls）仍在 MY-SKILLS `find-journal/data\<year>\`。
