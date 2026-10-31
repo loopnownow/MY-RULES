@@ -59,7 +59,7 @@ license: MIT
 
 # 4 执行与验证
 
-优先 diff；lint/测试后交终稿。**不编造**事实/数字/文献/DOI/路径。稿件禁令→`{SKILLS}\05_manuscript\qc\manuscript-local-qc.md`。技能树 **archived → QC 时删除**（不留 archived 标签）→`skills.md` §6。脚本站立流程见 §3「测试→运行→核查→验收」。
+优先 diff；lint/测试后交终稿。**不编造**事实/数字/文献/DOI/路径。稿件禁令→`{SKILLS}\05_manuscript\qc\manuscript-local-qc.md`。技能树 QC：**禁止 skip/archived 停放**；skipped/archived 残留为清理对象→`skills.md` §6。脚本站立流程见 §3「测试→运行→核查→验收」。
 
 # 5 交付与清理
 
