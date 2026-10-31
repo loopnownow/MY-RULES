@@ -13,7 +13,7 @@ description: 本机布局与子工程短针。落点见 My rule.md §5。
 |---|---|
 | `D:\00db`（`{RAW}`） | 已组织的原始库；只读除非点名 |
 | `D:\0del`（`{DEL}`） | AI 可操作临时/移出区（`_by-project` / `_by-function`） |
-| `D:\0Grok\0doc` | 语料 + 可复用代码；live tops：`_library`（含 `references` 文献全文、`lit-bank` 书目、`ethics`、`find-journal`、`jcr2026`、`lab-ref-ranges`） / `_bank` / `_code` / `templates` / `mem` / `GitHub` / `test` / `skill-harvest`（+ 根 md） |
+| `D:\0Grok\0doc` | 语料 + 可复用代码；live tops：`_library`（含 `references` 文献全文、`lit-bank` 书目、`journals` 期刊池、`ethics\approvals` 批件、`jcr\<year>\`、`lab-ref-ranges`） / `_bank` / `_code` / `templates` / `mem` / `GitHub` / `test` / `skill-harvest`（+ 根 md） |
 | `D:\0Grok\0doc\mem` | bot 记忆导出/更新落点（城城 2026-10-25）；**仅隐私** + 可变数据 SSOT（如 find-journal JCR xlsx）；站立政策不进 mem |
 | `D:\0Grok` | 分阶段子工程工作区（阶段夹见下节） |
 
@@ -58,6 +58,7 @@ description: 本机布局与子工程短针。落点见 My rule.md §5。
 | 02 运维（整理 / 清洗 / 同步） | `D:\0Grok\0doc\_code\02-data-processing\`（`{code_data_processing}`；其下无 `base\`）。统计引擎与建模 CLI 在 `D:\0Grok\0doc\GitHub\stats-analysis`（2026-10-25 起独立主库）。 |
 | 参考包 / 锁定笔记 | 课题 `ref/`。运行键只在 `ref/settings.ini`。可选 `ref/project-state.yaml` 只记设计与稿件进度。 |
 | 文献全文（PDF/HTML） | `D:\0Grok\0doc\_library\references\<L1>\<L2>\`（一文一文件，名用 DOI；t1455u）；子工程 `ref/refer\` 只写 `DOI_*.md` 指针；书目进 `_library\lit-bank`（不存 PDF） |
+| 期刊池 / 批件 | `_library\journals\index.csv`(+`xlsx`)；`_library\ethics\approvals\<L1>\<L2>\` + `approvals-index.xlsx`（t1458u）；子工程候选刊只写 `ref\citation\journals.csv` + `_notes.md`。口径 → `library-taxonomy.md` |
 | 现行分析数字 | `<project>/<endpoint>/`；成对比较再套 `<positive_display>_vs_<negative_display>/`。稿件活数字只来自该处 `Results*.html`（新写 `Results{subproject}.html`）。旧 `{endpoint}-results.html`、`results.html` 仍可读取。与 `.xlsx` 冲突以 HTML 为准（`My rule.md` §5）。 |
 | 课题 QC | 主 QC：`<project>/ref/qc.html`。外部 QC：`<project>/ref/qc-ext-*.html`（文件名不用 `qc.html`）。 |
 
@@ -86,3 +87,5 @@ description: 本机布局与子工程短针。落点见 My rule.md §5。
 ## 新建文件夹 / 新建文件
 
 只许建在 `{DEL}` / `D:\0del\` 的 `_by-project\`、`_by-function\`。权威与例外 → `My rule.md` §5.1（含 `0doc` 默认禁止 mkdir、可改已有文件、一次性脚本不进主目录 / `.grok\tmp` / 课题根）。本段不复写。bot mem 落点例外（`D:\0Grok\0doc\mem\`）→ `My rule.md` §1 + §5.1。
+
+**目录命名（t1458u）**：`0doc` 下目录一律 ASCII 英文（`approvals` / `journals` / `jcr`）；中文目录发现即当轮 rename，并在 `_library\MOVED-FROM.md` 记一行。库分类与 L1/L2 → `library-taxonomy.md`。
