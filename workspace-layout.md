@@ -90,4 +90,4 @@ description: 本机布局与子工程短针。落点见 My rule.md §5。
 
 **目录命名（t1458u）**：`0doc` 下目录一律 ASCII 英文（`approvals` / `journals` / `jcr`）；中文目录发现即当轮 rename，并在 `_library\MOVED-FROM.md` 记一行。库分类与 L1/L2 → `library-taxonomy.md`。
 
-**0del 内部三档**（park / harvest-park / junk）与落 junk 前的 grep 要求 → `My rule.md` §5.3。
+**0del 内部三档**（park / harvest-park / harvested，原 junk）与落 harvested 前的 grep 要求 → `My rule.md` §5.3。
