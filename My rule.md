@@ -120,7 +120,7 @@ license: MIT
 - **harvested 是唯一的终弃档，且只由城城手动清空**（bot 不清、不代清、不自作主张）；park / harvest-park 不得整夹清。
 - `0doc` 侧的判定与落盘仍由 `test\cleanup_scan.py`（判据）与 `test\cleanup_move.py --dest <落点>`（落点）负责；本条只定**落点与可弃度**，不另造脚本。
 - **禁止活指针引用 `{DEL}`（2026-10-31）**：`{RULES}` / `{SKILLS}` / `0doc` 文档与脚本**不得**把 `D:\0del\...` 当作当前落点或路径解析目标（0del 会周期性清空）。需要长期存在的全文/台账/脚本一律放耐久位置（`{RULES}` / `{SKILLS}` / `0doc` / `project root`）；历史记录里的 0del 路径由 `test\path_audit.py` 归 `HISTORIC`，但**不得新增**活指针；要清空 0del 前先把活指针重指。
-- **整理 0del 前先 grep 活路径**：`_code` 多个脚本把输出写死到 `D:\0del\<子夹>`（`harvested\smoke`、`modules_bak`、`cln_fill_supplement`、`yt_RDL`、`batch_rerun_status.json`、`batch_rerun.log`），这些不是移出件，搬走即破坏脚本；新增写死路径须同轮补入本节清单。
+- **整理 0del 前先 grep 活路径**：`_code` 多个脚本把输出写死到 `D:\0del\<子夹>`（一律在 `harvested\` 下：`smoke`、`modules_bak`、`cln_fill_supplement`、`yt_RDL`、`batch_rerun_status.json`、`batch_rerun.log`；t1490u），这些不是移出件，搬走即破坏脚本；新增写死路径须同轮补入本节清单。
 
 # 6 工程决策
 
