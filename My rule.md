@@ -12,6 +12,7 @@ license: MIT
 - **裁决顺序**：用户当轮表述 > 专题文件 > 本文件 > 子工程内约定。
 - **别名**：`{RULES}`=`D:\0Grok\0doc\GitHub\MY-RULES`；`{SKILLS}`=`D:\0Grok\0doc\GitHub\MY-SKILLS`；`{RAW}`=`D:\00db`（已组织的原始库，只读除非点名；原 `00ds` 已迁此）；`{DEL}`=`D:\0del`。
 - **本机布局（一行）**：`D:\00db`（organized raw） / `D:\0del`（AI 可操作临时区） / `D:\0Grok\0doc`（语料 + 可复用代码） / `D:\0Grok`（分阶段子工程工作区）。细则 → `workspace-layout.md`。
+- **库分类（t1458u）**：L1/L2 与三库分工的权威正文 → `library-taxonomy.md`。`_library` 下 `references`（全文实体）/ `lit-bank`（书目，无 PDF）/ `journals`（期刊池）/ `ethics\approvals`（批件）、`jcr\<year>\`；不设 radiology 一级，按临床专科归类。
 - **术语**：作者字段 `A`=批注作者；`00`–`07`=技能层；派单→`{SKILLS}\00_orchestrator\references\ownership-contract.md`。工作区只有一层；不再有 A/B 双工作区或挂载缓存树。
 - **技能 ID**：选型只按 fine id；细则 → `skills.md` §2；`{SKILLS}\00_orchestrator\references\id-rules.md`。
 - **一任务一执行方**；外挂仅 **Cursor**（须用户批准或说「交给cursor」）。bot **不得**再派「交给cline」/独立 Cline CLI。盯梢→`{SKILLS}\00_orchestrator\references\handoff-monitor.md`。
@@ -73,6 +74,7 @@ license: MIT
 | SCI 稿件文件名 | DOCX（md/pdf 同 stem） | **`Manuscript_` / `Comments_` / `Response_` / `Supplementary_`** + `_<子项目名>_V<n>`；版本与对应修回轮次一致。**现行 `Vn` → 子工程根**；**旧版 → `ref/tmp/`**（t1450u）。权威 → `project-ref-layout.md`「SCI 稿件文件名」；技能指针 → `{SKILLS}\05_manuscript\advanced\Aitor-format.md` / `handoff.md`、`06_review\advanced\handoff.md`、`07_response\advanced\handoff.md`（t1428u/t1429u/t1430u） |
 | 数据表（最终） | XLSX | 子工程**根**（不建 `0result\`）；其余同稿件 |
 | 文献全文（PDF/HTML） | PDF/HTML | **`D:\0Grok\0doc\_library\references\<L1>\<L2>\`**（一文一物理文件，名用 DOI；t1455u）。子工程 `ref/refer\` 只写 `DOI_*.md` 指针；书目仍进 `_library\lit-bank`（不存 PDF） |
+| 期刊池 / 批件 | CSV/XLSX/PDF | `_library\journals\index.csv`(+`xlsx`)；`_library\ethics\approvals\<L1>\<L2>\` + `approvals-index.xlsx`（t1458u）。子工程候选刊只写 `ref\citation\journals.csv` + `_notes.md`；批件只挂指针。口径 → `library-taxonomy.md` |
 
 同一分析若 `Results*.html`（或已执行产物 HTML）与 `.xlsx` 数字冲突：以 HTML 为准，并在汇报里写明冲突与所采用源。
 
@@ -89,6 +91,9 @@ license: MIT
 - **审稿回复**：保留完整原始 comments；不简化；不擅自加小标题；不自创信函格式。→`{SKILLS}\07_response\advanced\response.md`。
 - **新建文件/文件夹（权威；合并 t1098u/t1107u/t1240 · 2026-10-30 · t1442u/t1450u）**：默认只能在 `{DEL}` / `D:\0del`（`_by-project` / `_by-function`）新建文件与文件夹；路径 SSOT 为 `D:\0del`（非 `D:\0Grok\0del`）。在其他位置新建前必须本轮明确问城城并获准。**常设例外**：(1) bot 记忆导出/更新可在 `D:\0Grok\0doc\mem\` 内新建（§1「mem 落盘」）；(2) 子工程内 `ref/tmp/` 按需写入临时/中间（含旧版稿；详 → `project-ref-layout.md`）。**可改**已有文件（含 `{RULES}` / `{SKILLS}` / `0doc\skill-harvest\*` / `0doc\mem\*` / 子工程已有稿含 Track Changes）。默认禁止在 `D:\0Grok\0doc` 下 mkdir（除 mem 例外与本轮明确同意）。新草稿、ACCEPT、digest、by-fine-id lane、笔记、中间件、临时/scratch、ACCEPT 备注 → 只进 `{DEL}`。审稿交付：优先修订现有评审意见 `.docx`（Track Changes），禁止另存新稿名、禁止在子工程下新建夹。用户本轮点名的终稿落点仍按 §5（优先改已有终稿）。短针→`workspace-layout.md`（不复写）；mem→`D:\0Grok\0doc\mem\README.md`；全文→`D:\0del\_by-function\encode-0del-standing-20261024\STANDING-no-new-files-outside-0del.md` 与 `D:\0del\_by-function\encode-0doc-folder-ban-20261024\STANDING-0doc-no-new-folder.md`。
 - **一次性脚本/说明/小补丁**（非课题交付）：只落 `{DEL}`，禁止丢进用户主目录、`.grok\tmp`、或课题根。
+- **0doc 目录名英文化（t1458u）**：`0doc` 下新建目录一律 ASCII 英文（如 `approvals` / `journals` / `jcr`）；发现中文目录当轮 rename，并在 `_library\MOVED-FROM.md` 记一行。文件名可保留中文原名，但须在对应索引列留映射（如 `original_name_zh`）。库分类口径 → `library-taxonomy.md`。
+
+
 
 ## 5.2 每轮 QC 必清 0doc（2026-10-27）
 
@@ -125,6 +130,7 @@ license: MIT
 | 技能演进 | `{SKILLS}\00_orchestrator\references\skill-evolution.md`（门在 `skills.md`） |
 | 稿件禁令 | `{SKILLS}\05_manuscript\qc\manuscript-local-qc.md`；`{SKILLS}\05_manuscript\base\vocab\L1\ban-phrases.md` |
 | 项目 `ref/` 布局 / ledger 再跑 | `project-ref-layout.md`；`{SKILLS}\00_orchestrator\references\project-ref-layout.md` |
+| 库分类 / L1-L2 / 三库(references·lit-bank·journals·ethics) / 批件与期刊池 | `library-taxonomy.md` |
 | 盘问 / Plan card | 本文件 §2.1；技能 `plan-and-grilling.md`（指针） |
 
 Cursor User Rules 只一行指向本文件。「记住」：总则→本文件；专题→专题；项目→子工程约定；技能→提案；敏感→mem（禁写入 MY-RULES/MY-SKILLS）。
