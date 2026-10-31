@@ -35,7 +35,7 @@ Live bodies SSOT = MY-SKILLS in-repo `NN_slug/base/`。不得在别处再建第�
 
 本地分支+测试 → PR 前完整变更清单 → 不直推 main → 用户同意后 merge。「直接做」不跳过清单与 merge 确认。merge 后按 §1b 同步。
 
-## 6 QC、精简与 skip/archived（2026-10-26；t1432u 2026-10-30；t1463u 2026-10-31）
+## 6 QC、精简与 skip/archived / 退役仅指针（2026-10-26；t1432u 2026-10-30；t1463u 2026-10-31；t1520u 2026-11-01）
 
 **QC 精简（站立）**：能合并的合并、能删除的删除、去重、去旧、尽量精简。删除的字节进 `{DEL}`（本机 `D:\0del`，保留相对路径）；不得只改标签继续堆在 live 树。
 
@@ -44,6 +44,8 @@ Live bodies SSOT = MY-SKILLS in-repo `NN_slug/base/`。不得在别处再建第�
 **QC 处置（站立）**：对文件 / 技能树 / 文档做 QC 时，**不得**以 skip / skipped / archive / archived / 已归档（及同名文件夹、标签、路径段）作为「暂不处理」的停放处。合法处置只有：**合并**、**删除**、**就地改写**。QC **禁止**新造 skip 或 archive 停放位；已存在的 skipped / archived 残留一律视为**清理对象**（删 live 引用；若仍有字节则移入 `{DEL}`，保留相对路径），不是可继续堆问题的合法落点。
 
 **凡标 skip / skipped / archived / 已归档 / page not on disk 的技能树、文件或指针，在 QC 时一律删除或并入现行能力**（删引用；若仍有字节则移入 `{DEL}`），**禁止**只改标成 skipped / archived 继续留在 live 正文或 SOP 调度表。
+
+**退役且仅剩指针 = QC 清理对象（t1520u）**：能力已并入现行座位 / fine-id / 路径后，live 树只剩「已退役→见某某」、空 README、SUPERSEDED / retired / page-not-on-disk 等**无实现字节**的壳或单向指针时，与 skip/archived **同档 P0/P1**：删壳、删活引用；必要的一句并入现行文档；若仍有字节则移 `{DEL}`（保相对路径）。**禁止**新造「仅指针」壳当停放。**不算壳（勿误清）**：`legacy_aliases.yaml` 路由表；现行契约指针（如 `DOI_*.md`→`_library/references`、批件指针、`journals.csv`）；`HISTORIC` 审计记录（只标历史、不新建活链到 `{DEL}`）。
 
 - 退休 fine-id **只**保留在 `{SKILLS}\00_orchestrator\legacy_aliases.yaml` → 现行 id；live 路由 / workflow / advanced 只写现行 fine-id 与现存路径。
 - 发现 skip / skipped / archived / 已归档 /「archived … (page not on disk)」等残留 = QC **P0/P1**：当场删除、合并或改写为现行能力，不得再扩散 skipped / archived 标签。
