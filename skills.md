@@ -39,7 +39,7 @@ Live bodies SSOT = MY-SKILLS in-repo `NN_slug/base/`。不得在别处再建第�
 
 **QC 精简（站立）**：能合并的合并、能删除的删除、去重、去旧、尽量精简。删除的字节进 `{DEL}`（本机 `D:\0del`，保留相对路径）；不得只改标签继续堆在 live 树。
 
-**0del 三档落点（站立）**：park / harvest-park / junk 的落点与可弃度 → `My rule.md` §5.3（本条不复写）。
+**0del 三档落点（站立）**：park / harvest-park / harvested 的落点与可弃度 → `My rule.md` §5.3（本条不复写；harvested 只由城城手动清）。
 
 **QC 处置（站立）**：对文件 / 技能树 / 文档做 QC 时，**不得**以 skip / skipped / archive / archived / 已归档（及同名文件夹、标签、路径段）作为「暂不处理」的停放处。合法处置只有：**合并**、**删除**、**就地改写**。QC **禁止**新造 skip 或 archive 停放位；已存在的 skipped / archived 残留一律视为**清理对象**（删 live 引用；若仍有字节则移入 `{DEL}`，保留相对路径），不是可继续堆问题的合法落点。
 
