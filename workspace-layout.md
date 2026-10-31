@@ -89,3 +89,5 @@ description: 本机布局与子工程短针。落点见 My rule.md §5。
 只许建在 `{DEL}` / `D:\0del\` 的 `_by-project\`、`_by-function\`。权威与例外 → `My rule.md` §5.1（含 `0doc` 默认禁止 mkdir、可改已有文件、一次性脚本不进主目录 / `.grok\tmp` / 课题根）。本段不复写。bot mem 落点例外（`D:\0Grok\0doc\mem\`）→ `My rule.md` §1 + §5.1。
 
 **目录命名（t1458u）**：`0doc` 下目录一律 ASCII 英文（`approvals` / `journals` / `jcr`）；中文目录发现即当轮 rename，并在 `_library\MOVED-FROM.md` 记一行。库分类与 L1/L2 → `library-taxonomy.md`。
+
+**0del 内部三档**（park / harvest-park / junk）与落 junk 前的 grep 要求 → `My rule.md` §5.3。
