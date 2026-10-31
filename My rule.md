@@ -142,7 +142,7 @@ license: MIT
 | 网段/敏感外发 | `network-security.md` |
 | 技能/PR 同步 | `skills.md` |
 | 本机布局 / 子工程 | `workspace-layout.md`（见 §1 一行布局） |
-| 三仓分工 / 某内容该放哪 | `README.md`（RULES=运营规则，SKILLS=专业技能，stats-analysis=脚本） |
+| 三仓分工 / 某内容该放哪 | `README.md`（RULES=运营规则，SKILLS=专业技能，MY-CODES=脚本） |
 | 派单/盯梢 | `{SKILLS}\00_orchestrator\references\ownership-contract.md`；`{SKILLS}\00_orchestrator\references\handoff-monitor.md` |
 | 0doc 文档库查找 | Bai → `{SKILLS}\03_research\advanced\0doc-db.md`；派单 SSOT → ownership-contract §0doc |
 | 技能演进 | `{SKILLS}\00_orchestrator\references\skill-evolution.md`（门在 `skills.md`） |

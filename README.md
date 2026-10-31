@@ -9,11 +9,11 @@
 | 仓 | 放什么 | 不放什么 |
 |---|---|---|
 | **MY-RULES**（本仓） | 站立运营政策：本机布局、交付落点、新建禁区、网络红线、技能库契约、`ref/` 地图 | 专业技能正文、可运行代码 |
-| **MY-SKILLS** | 专业技能：`NN_slug/base/` 能力正文 + `advanced/` 个人层 + `qc/` 门控标准（正文 prose SSOT）；席位 `**/scripts/` 与 `00_orchestrator/scripts/` 可放轻量 helper | 重分析/清洗/建模代码（→ stats-analysis / `{code_root}`）；患者数据 |
-| **stats-analysis** | 可运行代码：`modules/` 算法库 + `model-validation/` CLI，即 02 席位的脚本半 | skill 正文；课题配置；患者数据 |
+| **MY-SKILLS** | 专业技能：`NN_slug/base/` 能力正文 + `advanced/` 个人层 + `qc/` 门控标准（正文 prose SSOT）；席位 `**/scripts/` 与 `00_orchestrator/scripts/` 可放轻量 helper | 重分析/清洗/建模代码（→ MY-CODES / `{code_root}`）；患者数据 |
+| **MY-CODES** | 可运行代码：`modules/` 算法库 + `model-validation/` CLI + `tools/`，即 02 席位的脚本半 | skill 正文；课题配置；患者数据 |
 
-判据：**经常用的运营规则进 RULES，专业技能进 SKILLS，能跑的脚本进 stats-analysis。**
-一句话以上、每次开工都要看的写 RULES；只在特定席位上展开的写法写 SKILLS；要 `python` 跑起来的进 stats-analysis。
+判据：**经常用的运营规则进 RULES，专业技能进 SKILLS，能跑的脚本进 MY-CODES。**
+一句话以上、每次开工都要看的写 RULES；只在特定席位上展开的写法写 SKILLS；要 `python` 跑起来的进 MY-CODES。
 三仓互指只用路径别名（`{RULES}` / `{SKILLS}` / `{code_stats}`），不复制正文。
 
 ## 迁移对照（2026-10-18）
