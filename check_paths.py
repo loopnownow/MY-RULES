@@ -40,12 +40,30 @@ RULES_SKILL_PATH_RE = re.compile(
 SEAT_RE = re.compile(r"`((?:00|02|03|05|06|07)_[a-z0-9-]+)`")
 
 # Live claims that conflict with check_paths / project-ref-layout / My rule SSOT.
-# Lines matching allow_if are historical / negation and are ignored.
+# Lines matching stale_line_allowed are historical / negation and are ignored.
+HISTORIC_LINE_MARKERS = re.compile(
+    r"HISTORIC:|SUPERSEDED:|former\s+path:|retired\s+path:",
+    re.I,
+)
+# Explicit negation or historic cue immediately before the stale path token (not whole-line "not").
+PATH_NEGATION_BEFORE = re.compile(
+    r"(?:HISTORIC|SUPERSEDED|former\s+path|retired\s+path|"
+    r"非|不是|勿用|勿|禁止|≠|!\s*=|"
+    r"formerly|retired(?:\s+live)?|historical|legacy|archived|"
+    r"relocated|moved\s+to|was\s)\s*[`「\"'（(]*\s*$",
+    re.I,
+)
+RETIRED_STATS_PATH_CONTEXT = re.compile(
+    r"retired|former|formerly|historical|legacy|archived|pruned|relocated|"
+    r"absorbed|勿建|do not recreate|归档|历史|moved to|was\s",
+    re.I,
+)
+
 STALE_RULES = (
     (
         re.compile(r"D:\\0Grok\\0del", re.I),
         r"D:\0Grok\0del",
-        re.compile(r"非|not\s+|勿|禁止|不是|≠|!\s*=|SSOT\s*为", re.I),
+        "0grok_0del",
     ),
     (
         re.compile(
@@ -53,13 +71,28 @@ STALE_RULES = (
             re.I,
         ),
         r"_code\04-analysis\stats-analysis (retired; use {code_stats})",
-        re.compile(
-            r"retired|former|formerly|historical|legacy|archived|pruned|relocated|"
-            r"absorbed|勿建|do not recreate|归档|历史|moved to|was\s",
-            re.I,
-        ),
+        "retired_stats",
     ),
 )
+
+
+def stale_line_allowed(line: str, pat: re.Pattern[str], rule_kind: str) -> bool:
+    """True when a stale-path hit on this line is clearly historic / negated."""
+    if HISTORIC_LINE_MARKERS.search(line):
+        return True
+    m = pat.search(line)
+    if not m:
+        return True
+    tail = line[: m.start()]
+    window = tail[-80:] if len(tail) > 80 else tail
+    if PATH_NEGATION_BEFORE.search(window):
+        return True
+    if rule_kind == "retired_stats" and RETIRED_STATS_PATH_CONTEXT.search(line):
+        # Retired stats path: allow only when the qualifier precedes the path token.
+        ctx = RETIRED_STATS_PATH_CONTEXT.search(line)
+        if ctx and ctx.end() <= m.start():
+            return True
+    return False
 
 
 def resolve_skills() -> Path | None:
@@ -106,10 +139,10 @@ def check_stale_md_paths() -> list[str]:
             bad.append(f"scan target missing: {name}")
             continue
         for i, line in enumerate(path.read_text(encoding="utf-8").splitlines(), 1):
-            for pat, label, allow_if in STALE_RULES:
+            for pat, label, rule_kind in STALE_RULES:
                 if not pat.search(line):
                     continue
-                if allow_if.search(line):
+                if stale_line_allowed(line, pat, rule_kind):
                     continue
                 bad.append(
                     f"{name}:{i}: stale live path {label}: {line.strip()[:100]}"
