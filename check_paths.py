@@ -58,6 +58,11 @@ RETIRED_STATS_PATH_CONTEXT = re.compile(
     r"absorbed|勿建|do not recreate|归档|历史|moved to|was\s",
     re.I,
 )
+# Repo renamed 2026-11-01: live text must say MY-CODES; old name only in historic notes.
+RENAMED_CODES_REPO_CONTEXT = re.compile(
+    r"更名|改名|renamed|redirect|旧名|旧\s*URL|HISTORIC|SUPERSEDED",
+    re.I,
+)
 
 STALE_RULES = (
     (
@@ -72,6 +77,11 @@ STALE_RULES = (
         ),
         r"_code\04-analysis\stats-analysis (retired; use {code_stats})",
         "retired_stats",
+    ),
+    (
+        re.compile(r"GitHub\\+stats-analysis|GitHub/+stats-analysis", re.I),
+        r"GitHub\stats-analysis (repo renamed 2026-11-01 -> MY-CODES)",
+        "renamed_codes_repo",
     ),
 )
 
@@ -92,6 +102,9 @@ def stale_line_allowed(line: str, pat: re.Pattern[str], rule_kind: str) -> bool:
         ctx = RETIRED_STATS_PATH_CONTEXT.search(line)
         if ctx and ctx.end() <= m.start():
             return True
+    if rule_kind == "renamed_codes_repo" and RENAMED_CODES_REPO_CONTEXT.search(line):
+        # Old repo name is fine when the same line marks the rename / redirect.
+        return True
     return False
 
 
