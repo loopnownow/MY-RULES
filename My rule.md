@@ -12,7 +12,7 @@ license: MIT
 - **裁决顺序**：用户当轮表述 > 专题文件 > 本文件 > 子工程内约定。
 - **别名**：`{RULES}`=`D:\0Grok\0doc\GitHub\MY-RULES`；`{SKILLS}`=`D:\0Grok\0doc\GitHub\MY-SKILLS`；`{RAW}`=`D:\00db`（已组织的原始库，只读除非点名；原 `00ds` 已迁此）；`{DEL}`=`D:\0del`。
 - **本机布局（一行）**：`D:\00db`（organized raw） / `D:\0del`（AI 可操作临时区） / `D:\0Grok\0doc`（语料 + 可复用代码） / `D:\0Grok`（分阶段子工程工作区）。细则 → `workspace-layout.md`。
-- **库分类（t1458u）**：L1/L2 与三库分工的权威正文 → `library-taxonomy.md`。`_library` 下 `references`（全文实体）/ `lit-bank`（书目，无 PDF）/ `journals`（期刊池）/ `ethics\approvals`（批件）、`jcr\<year>\`；不设 radiology 一级，按临床专科归类。
+- **库分类（t1458u）**：L1/L2 与三库分工的权威正文 → `library-taxonomy.md`。`_library` 下 `references`（全文实体）/ `lit-bank`（书目，无 PDF）/ `journals`（期刊池，含选刊侧私有 `whitelist-submitted.csv` / `submission-prior.jsonl`）/ `ethics\approvals`（批件）；不设 radiology 一级，按临床专科归类。
 - **术语**：作者字段 `A`=批注作者；`00`–`07`=技能层；派单→`{SKILLS}\00_orchestrator\references\ownership-contract.md`。工作区只有一层；不再有 A/B 双工作区或挂载缓存树。
 - **技能 ID**：选型只按 fine id；细则 → `skills.md` §2；`{SKILLS}\00_orchestrator\references\id-rules.md`。
 - **一任务一执行方**；外挂仅 **Cursor**（须用户批准或说「交给cursor」）。bot **不得**再派「交给cline」/独立 Cline CLI。盯梢→`{SKILLS}\00_orchestrator\references\handoff-monitor.md`。
@@ -91,7 +91,7 @@ license: MIT
 - **审稿回复**：保留完整原始 comments；不简化；不擅自加小标题；不自创信函格式。→`{SKILLS}\07_response\advanced\response.md`。
 - **新建文件/文件夹（权威；合并 t1098u/t1107u/t1240 · 2026-10-30 · t1442u/t1450u）**：默认只能在 `{DEL}` / `D:\0del`（`_by-project` / `_by-function`）新建文件与文件夹；路径 SSOT 为 `D:\0del`（非 `D:\0Grok\0del`）。在其他位置新建前必须本轮明确问城城并获准。**常设例外**：(1) bot 记忆导出/更新可在 `D:\0Grok\0doc\mem\` 内新建（§1「mem 落盘」）；(2) 子工程内 `ref/tmp/` 按需写入临时/中间（含旧版稿；详 → `project-ref-layout.md`）。**可改**已有文件（含 `{RULES}` / `{SKILLS}` / `0doc\skill-harvest\*` / `0doc\mem\*` / 子工程已有稿含 Track Changes）。默认禁止在 `D:\0Grok\0doc` 下 mkdir（除 mem 例外与本轮明确同意）。新草稿、ACCEPT、digest、by-fine-id lane、笔记、中间件、临时/scratch、ACCEPT 备注 → 只进 `{DEL}`。审稿交付：优先修订现有评审意见 `.docx`（Track Changes），禁止另存新稿名、禁止在子工程下新建夹。用户本轮点名的终稿落点仍按 §5（优先改已有终稿）。短针→`workspace-layout.md`（不复写）；mem→`D:\0Grok\0doc\mem\README.md`；全文→`D:\0del\_by-function\encode-0del-standing-20261024\STANDING-no-new-files-outside-0del.md` 与 `D:\0del\_by-function\encode-0doc-folder-ban-20261024\STANDING-0doc-no-new-folder.md`。
 - **一次性脚本/说明/小补丁**（非课题交付）：只落 `{DEL}`，禁止丢进用户主目录、`.grok\tmp`、或课题根。
-- **0doc 目录名英文化（t1458u）**：`0doc` 下新建目录一律 ASCII 英文（如 `approvals` / `journals` / `jcr`）；发现中文目录当轮 rename，并在 `_library\MOVED-FROM.md` 记一行。文件名可保留中文原名，但须在对应索引列留映射（如 `original_name_zh`）。库分类口径 → `library-taxonomy.md`。
+- **0doc 目录名英文化（t1458u）**：`0doc` 下新建目录一律 ASCII 英文（如 `approvals` / `journals` / `jcr` 这类英文短名）；发现中文目录当轮 rename，并在 `_library\MOVED-FROM.md` 记一行。文件名可保留中文原名，但须在对应索引列留映射（如 `original_name_zh`）。库分类口径 → `library-taxonomy.md`。
 
 
 
