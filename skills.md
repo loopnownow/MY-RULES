@@ -31,6 +31,9 @@ description: 技能库契约、按需加载、演进门、PR 与合并后部署�
 Live bodies SSOT = MY-SKILLS in-repo `NN_slug/base/`。不得在别处再建第二棵技能树、挂载缓存树或整树副本；
 禁止对任何旧缓存路径 `robocopy /MIR` 或重建包字节。缓存边界→`{SKILLS}\00_orchestrator\references\lifecycle-cache.md`。
 
+
+**写作语料席位（证据，非判据）**：`GLOSSARY_ROOT` = `0doc\_library\glossary`。口径与 glossary README 对齐为 **四层**（`words` / `sentences` / `paragraphs` + `sections` 指针页）+ `index.csv`；`banks\` 只作证据。判据 SSOT 在 `{SKILLS}\05_manuscript\base\vocab\`（+ 具名 advanced，如 `preferred-advanced.md` / `ai_patterns.md` / de-AI lexicons）。Rules 只写短指针；细则与路由见 MY-SKILLS `05_manuscript/SKILL.md`。
+
 ## 5 MY-SKILLS 仓流程
 
 本地分支+测试 → PR 前完整变更清单 → 不直推 main → 用户同意后 merge。「直接做」不跳过清单与 merge 确认。merge 后按 §1b 同步。
