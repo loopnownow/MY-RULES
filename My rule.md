@@ -134,6 +134,7 @@ license: MIT
 # 8 语言与汇报
 
 说明/QC 中文；期刊英文稿英文。汇报时区 Asia/Shanghai (UTC+08:00)。「；」=两任务；「|」=同任务并列。STE→`{SKILLS}\05_manuscript\base\vocab\L3\lab-ste.md`。
+写作证据席位：`GLOSSARY_ROOT`=`0doc\_library\glossary`（**四层** md + `index.csv`；`banks\` 只作证据）。判据 SSOT = `{SKILLS}\05_manuscript\base\vocab\`（+ 具名 advanced）；`rule_ptr` 指回技能，不复制规则正文。
 
 # 9 按需文件
 
