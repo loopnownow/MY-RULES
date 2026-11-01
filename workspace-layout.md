@@ -13,7 +13,7 @@ description: 本机布局与子工程短针。落点见 My rule.md §5。
 |---|---|
 | `D:\00db`（`{RAW}`） | 已组织的原始库；只读除非点名 |
 | `D:\0del`（`{DEL}`） | AI 可操作临时/移出区（`_by-project` / `_by-function`） |
-| `D:\0Grok\0doc` | 语料 + 可复用代码；live tops：`_library`（含 `references` 文献全文、`lit-bank` 书目、`journals` 期刊池与选刊侧私有、`ethics\approvals` 批件、`lab-ref-ranges`） / `_bank` / `_code` / `templates` / `mem` / `GitHub` / `test` / `skill-harvest`（+ 根 md） |
+| `D:\0Grok\0doc` | 语料 + 可复用代码；live tops：`_library`（含 `references` 文献全文、`lit-bank` 书目、`journals` 期刊池与选刊侧私有、`ethics\approvals` 批件、`lab-ref-ranges`） / `_bank` / `templates` / `mem` / `GitHub` / `test` / `skill-harvest`（+ 根 md） |
 | `D:\0Grok\0doc\mem` | bot 记忆导出/更新落点（城城 2026-10-25）；**仅隐私** + 可变数据 SSOT（如 find-journal JCR xlsx）；站立政策不进 mem |
 | `D:\0Grok` | 分阶段子工程工作区（阶段夹见下节） |
 
@@ -75,7 +75,7 @@ description: 本机布局与子工程短针。落点见 My rule.md §5。
 
 - 写入 `0doc\` 须用户点名「放 0doc」。
 - **最终**→子工程根；**中间**→`ref/` 地图；**无** `0result\`；子工程内临时 → `ref/tmp/`（非默认 `{DEL}`）；无子工程/跨课题临时进 `{DEL}`；Downloads 仅当点名。权威 → `My rule.md` §5。
-- 可复用脚本 → 统计引擎与建模 CLI 在 `{code_stats}`（`modules/` + `model-validation/`），运维/加工脚本在 `{code_stats}\tools\<fine-id>\`（`_code` 已于 2026-11-01 并入 MY-CODES，仅剩 README 壳待 P4 清理）。`0script\` 已退休，不在课题根重建。长期规则/语料 → `0doc` 相应层。
+- 可复用脚本 → 统计引擎与建模 CLI 在 `{code_stats}`（`modules/` + `model-validation/`），运维/加工脚本在 `{code_stats}\tools\<fine-id>\`（`_code` 已于 2026-11-01 整层退役：脚本在 MY-CODES，壳与索引移至 {DEL}）。`0script\` 已退休，不在课题根重建。长期规则/语料 → `0doc` 相应层。
 - 根不留临时/草稿/一次性中间件（例外：现行在改稿 / 现行 `Vn`）。旧版稿与中间件进 `ref/tmp/`，不进 `{DEL}`（除非过后清理先问）。`0doc\GitHub\MY-CODES\modules\` 增改移须先同意。
 - 数据课题根可留：`rawdata`、`derivatives`、`atlases`、索引/manifest、`ref`。`0doc` 仅当点名「放 0doc」。默认从 `derivatives` 拷出要用的结果，原件留在原处；终稿落子工程根。不建 `0result\`，不重建 `0script\`。
 - 同键终表合并为一张（一段说明，值列加前缀）。把原件移出子工程根须先同意。
