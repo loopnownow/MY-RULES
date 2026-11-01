@@ -36,7 +36,7 @@
 | `_library\references\<L1>\<L2>\` | 文献全文实体（PDF/HTML），一文一文件，文件名用 DOI（`/` -> `_`）；`index.csv` 记 `doi,pmid,l1,l2,rel_path,sha256,source_project,fetched_at,notes` | 书目卡片、批件、稿件、第二份副本 |
 | `_library\lit-bank\` | 书目 SSOT：`index.csv`（NLM 引用 + 结论 + 主题），**无 PDF** | 全文实体 |
 | `_library\journals\` | 期刊池 `index.csv`（单表；2026-10-31 起不再留 xlsx）/ `l1-l2-map.csv` / 选刊侧私有 `whitelist-submitted.csv` + `submission-prior.jsonl`（旧表按年重建时移 `{DEL}`，不留 `archive\`） | 全文、`submission-urls.csv`、名单本体 |
-| `_library\ethics\` | `approvals\<L1>\<L2>\` 批件 PDF + `approvals-index.xlsx` + `extract\` | 已填申请材料原件（在 `D:\0del`）、第二份全文副本 |
+| `_library\ethics\` | `approvals\<L1>\<L2>\` 批件 PDF + `approvals-index.xlsx` + `extract\`（briefs/phrases/doc-role/held-out 提取层） + **`sections\`**（2026-11-01：按伦理表格 section 的分节取用层，`protocol\`/`icf\` 细、`other\` 粗；生成物） | 已填申请材料原件（在 `D:\00db\_lab\ethics\raw-20261023\`，只读）、第二份全文副本 |
 | `_library\glossary\`（2026-11-01，原 `0doc\_bank`） | **自有写作语料 + 三层条目** `words\` / `sentences\` / `paragraphs\` + `sections\*.md` **指针页**（无正文）+ `index.csv`（**13 列**，含 `sections` 列，**由 md 生成**）；证据层 `banks\`（jsonl + `glossary.db`，gitignore；`GATES.md` 已清） | **他人文献**（不进 `references`/`lit-bank`）、L1/L2 归类、规则/词表本体（判据在 `{SKILLS}\05_manuscript\base\vocab\`，此处只放实例 + `rule_ptr`） |
 
 子工程侧：`ref\refer\` 只放**文献指针**（`DOI_*.md`，`fulltext:` 指向 `_library\references`）+ NLM 引用与摘要列表 + 写作参考；
