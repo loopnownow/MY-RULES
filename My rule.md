@@ -100,7 +100,7 @@ license: MIT
 - **每轮质控必须跑一次无用件清理**（`D:\0Grok\0doc`）：`python -B test\cleanup_scan.py --tsv <清单>` → 人工确认 → `python -B test\cleanup_move.py --plan <清单> --apply`，移入 `{DEL}\_by-function\0doc-qc-clean\<YYYYMMDD>\`，保相对路径并落 `MOVED.tsv`。
 - **判据只有三条**：有没有入口 / 有没有真实落点 / 能不能再生。「看起来旧」不是理由；只剩历史价值 → 留档并标注，不计清理成绩。
 - **默认分级**：字节码缓存、垃圾文件名、空目录、历史结构快照、被同名无日期版取代的副本 → 可直接移；重复件、无入口脚本、无读者台账、孤立 `.md`、占位壳 → 出清单等点头；断链与「文中路径全失效」→ 只修指针或就地标注，**不搬**（历史档合法引用过去落点）。
-- **永不自动清**：`_library\glossary\banks`（含 `glossary.db`）、`mem\`、`_library\ethics\`，以及历史档 `MIGRATION.md`、`_library\glossary\banks\GATES.md`、`ACCEPT-*`、`_library\former-*`、`skill-harvest\PLAN-*`。
+- **永不自动清**：`_library\glossary\banks`（含 `glossary.db`）、`mem\`、`_library\ethics\`，以及历史档 `MIGRATION.md`、`ACCEPT-*`、`_library\former-*`、`skill-harvest\PLAN-*`。
 - 移出即记台账；收工报告须给「一条命令还原」的路径映射。分类说明→`0doc\test\README.md`。
 - **skip / archive / 退役仅指针 不是停放位**：口径见 §4 与 `skills.md` §6（t1463u；t1520u）；0doc 侧由 `test\structure_check.py` S4 与 `test\cleanup_scan.py` C2 强制，**无存档例外**（年报/年表同样移 `{DEL}`，见 `0doc\STRUCTURE.md` §7）。
 
