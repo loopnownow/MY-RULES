@@ -59,7 +59,7 @@ license: MIT
 
 # 4 执行与验证
 
-优先 diff；lint/测试后交终稿。**不编造**事实/数字/文献/DOI/路径。稿件禁令→`{SKILLS}\05_manuscript\qc\manuscript-local-qc.md`。技能树 QC：**禁止 skip/archived 停放**；skipped/archived 与**退役仅指针壳**均为清理对象→`skills.md` §6（t1520u）。脚本站立流程见 §3「测试→运行→核查→验收」。
+优先 diff；lint/测试后交终稿。**不编造**事实/数字/文献/DOI/路径。稿件禁令→`{SKILLS}\05_manuscript\qc\manuscript-local-qc.md`。技能树 QC：**禁止 skip/archived 停放**；skipped/archived 与**退役仅指针壳**均为清理对象→`skills.md` §6（t1520u）。**QC 不得 ignore / 跳过**→`skills.md` §6（t1559u）。脚本站立流程见 §3「测试→运行→核查→验收」。
 
 # 5 交付与清理
 
@@ -102,7 +102,7 @@ license: MIT
 - **默认分级**：字节码缓存、垃圾文件名、空目录、历史结构快照、被同名无日期版取代的副本 → 可直接移；重复件、无入口脚本、无读者台账、孤立 `.md`、占位壳 → 出清单等点头；断链与「文中路径全失效」→ 只修指针或就地标注，**不搬**（历史档合法引用过去落点）。
 - **永不自动清**：`_library\glossary\banks`（含 `glossary.db`）、`mem\`、`_library\ethics\`，以及历史档 `MIGRATION.md`、`ACCEPT-*`、`_library\former-*`、`skill-harvest\PLAN-*`。
 - 移出即记台账；收工报告须给「一条命令还原」的路径映射。分类说明→`0doc\test\README.md`。
-- **skip / archive / 退役仅指针 不是停放位**：口径见 §4 与 `skills.md` §6（t1463u；t1520u）；0doc 侧由 `test\structure_check.py` S4 与 `test\cleanup_scan.py` C2 强制，**无存档例外**（年报/年表同样移 `{DEL}`，见 `0doc\STRUCTURE.md` §7）。
+- **skip / archive / 退役仅指针 不是停放位**：口径见 §4 与 `skills.md` §6（t1463u；t1520u；**t1559u 不得 ignore/跳过假绿**）；0doc 侧由 `test\structure_check.py` S4 与 `test\cleanup_scan.py` C2 强制，**无存档例外**（年报/年表同样移 `{DEL}`，见 `0doc\STRUCTURE.md` §7）。
 
 
 ## 5.3 0del 三档（2026-10-31）
