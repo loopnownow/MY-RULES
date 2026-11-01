@@ -37,6 +37,7 @@
 | `_library\lit-bank\` | 书目 SSOT：`index.csv`（NLM 引用 + 结论 + 主题），**无 PDF** | 全文实体 |
 | `_library\journals\` | 期刊池 `index.csv`（单表；2026-10-31 起不再留 xlsx）/ `l1-l2-map.csv` / 选刊侧私有 `whitelist-submitted.csv` + `submission-prior.jsonl`（旧表按年重建时移 `{DEL}`，不留 `archive\`） | 全文、`submission-urls.csv`、名单本体 |
 | `_library\ethics\` | `approvals\<L1>\<L2>\` 批件 PDF + `approvals-index.xlsx` + `extract\` | 已填申请材料原件（在 `D:\0del`）、第二份全文副本 |
+| `_library\glossary\`（2026-11-01，原 `0doc\_bank`） | **自有写作语料 + 四层条目**：`words\`（词）/ `sentences\`（句式 writing·review·reply）/ `paragraphs\`（段落逻辑）/ `sections\`（特殊格式）+ `index.csv`（机读索引，**由 md 生成**）；证据层 `banks\`（9 个 jsonl + `glossary.db`，gitignore） | **他人文献**（不进 `references`/`lit-bank`）、L1/L2 归类、规则/词表本体（判据在 `{SKILLS}\05_manuscript\base\vocab\`，此处只放实例 + `rule_ptr`） |
 
 子工程侧：`ref\refer\` 只放**文献指针**（`DOI_*.md`，`fulltext:` 指向 `_library\references`）+ NLM 引用与摘要列表 + 写作参考；
 `ref\citation\` 放**审计台账 + 期刊/候选刊**（见 `project-ref-layout.md`）。
@@ -62,7 +63,7 @@
 ## 5 索引与巡检（harvest-watch）
 
 `_library\INDEX.md` 的 Harvest watch 段是**索引清单**：只列路径、形态、计数、复查节奏
-（`lit-bank/index.csv`、`references/index.csv`、`journals/index.csv`、`journals/l1-l2-map.csv`、`journals/whitelist-submitted.csv`、`journals/submission-prior.jsonl`、`ethics/approvals-index.xlsx`）。
+（`lit-bank/index.csv`、`references/index.csv`、`journals/index.csv`、`journals/l1-l2-map.csv`、`journals/whitelist-submitted.csv`、`journals/submission-prior.jsonl`、`ethics/approvals-index.xlsx`、`glossary/index.csv` + `glossary/banks/` 的 jsonl 与 `glossary.db`）。
 
 **禁止**把 PDF 全文、批件扫描、期刊全量行抽进技能正文；技能只引用路径与列名。
 
