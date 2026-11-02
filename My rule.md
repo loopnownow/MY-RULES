@@ -29,7 +29,7 @@ license: MIT
 - **禁删**；移出只进 `{DEL}` 并保留相对路径。**旧稿清理**＝移入 `{DEL}` / `D:\0del`（可按 `_by-project` / `_by-function`），禁止静默永久删除。
 - 确认：目标与验收；假设≤3；取舍；谁执行。
 - 「直接做」可不逐项确认，但不跳过 MY-SKILLS PR/merge（`skills.md`）与须批网络（`network-security.md`）。「继续」≠网络同意。
-- 网络红线→`network-security.md`。
+- 网络红线→`network-security.md`（含本机出站代理常设 `127.0.0.1:10808`）。
 
 ## 2.1 盘问 / grill-me（SSOT；技能只指针）
 
@@ -140,7 +140,7 @@ license: MIT
 
 | 触发 | 读 |
 |---|---|
-| 网段/敏感外发 | `network-security.md` |
+| 网段/敏感外发 / 本机出站代理 | `network-security.md` |
 | 技能/PR 同步 | `skills.md` |
 | 本机布局 / 子工程 | `workspace-layout.md`（见 §1 一行布局） |
 | 三仓分工 / 某内容该放哪 | `README.md`（RULES=运营规则，SKILLS=专业技能，MY-CODES=脚本） |
