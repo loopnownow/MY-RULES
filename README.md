@@ -1,6 +1,6 @@
 # MY-RULES
 
-规范 GitHub 仓为权威源。`{RULES}`=`D:\0Grok\0doc\GitHub\MY-RULES`（绝对路径见 `My rule.md` §1；若本机仍有 `Documents\Cline\Rules` junction，仅服务 Cursor IDE 内 Cline 插件读规则，勿再维护第二份副本；bot 外挂只交 Cursor）。先改本仓再经 PR；勿在多处冲突改文。
+规范 GitHub 仓为权威源。`{RULES}`=`D:\0Grok\0doc\GitHub\MY-RULES`（绝对路径见 `My rule.md` §1；若本机仍有 `Documents\Cline\Rules` junction，仅服务 Cursor IDE 内 Cline 插件读规则，勿再维护第二份副本）。先改本仓再经 PR；勿在多处冲突改文。**派工默认 Loopnow**（编码 / 脚本 / MY-CODES → 粗席位 `02_data-processing`）；外部 Cursor IDE 仅在城城批准或说「交给cursor」时使用（t1595u）。
 
 核心 `My rule.md`；现行专题：`skills.md`、`workspace-layout.md`、`network-security.md`、`project-ref-layout.md`、`library-taxonomy.md`（库分类 L1/L2 + 三库契约，t1458u）。
 
@@ -10,7 +10,7 @@
 |---|---|---|
 | **MY-RULES**（本仓） | 站立运营政策：本机布局、交付落点、新建禁区、网络红线、技能库契约、`ref/` 地图 | 专业技能正文、可运行代码 |
 | **MY-SKILLS** | 专业技能：`NN_slug/base/` 能力正文 + `advanced/` 个人层 + `qc/` 门控标准（正文 prose SSOT）；席位 `**/scripts/` 与 `00_orchestrator/scripts/` 可放轻量 helper | 重分析/清洗/建模代码（→ MY-CODES / `{code_root}`）；患者数据 |
-| **MY-CODES** | 可运行代码：`modules/` 算法库 + `model-validation/` CLI + `tools/`，即 02 席位的脚本半 | skill 正文；课题配置；患者数据 |
+| **MY-CODES** | 可运行代码：`modules/` 算法库 + `model-validation/` CLI + `tools/`，即 02 席位的脚本半（**编码默认席位 = Loopnow（`02_data-processing`）**，t1595u） | skill 正文；课题配置；患者数据 |
 
 判据：**经常用的运营规则进 RULES，专业技能进 SKILLS，能跑的脚本进 MY-CODES。**
 一句话以上、每次开工都要看的写 RULES；只在特定席位上展开的写法写 SKILLS；要 `python` 跑起来的进 MY-CODES。

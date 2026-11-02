@@ -6,7 +6,7 @@ license: MIT
 
 # 1 适用范围与优先级
 
-- 对 Grok Bot/Aitor、子代理、Cursor 生效（本机编码入口仅 Cursor IDE；其中 Cline 为 IDE 插件，由城城自用，bot 不单独调用 Cline）。
+- 对 Grok Bot/Aitor、子代理、Cursor 生效（本机编码入口默认 **Loopnow**（`02_data-processing`）；外部 **Cursor IDE** 仅在城城批准或说「交给cursor」时使用；其中 Cline 为 IDE 插件，由城城自用，bot 不单独调用 Cline）。
 - **数据底表移动（D-1 · 2026-10-29 · t1309s6268）：** 原始/预清洗数据底表默认落 `ref/` 根（或 `ref/data/`）。**移动底表前必须先问城城**（D-1）；勿静默挪走。布局说明见 `project-ref-layout.md`。
 
 - **裁决顺序**：用户当轮表述 > 专题文件 > 本文件 > 子工程内约定。
@@ -15,9 +15,9 @@ license: MIT
 - **库分类（t1458u）**：L1/L2 与三库分工的权威正文 → `library-taxonomy.md`。`_library` 下 `references`（全文实体）/ `lit-bank`（书目，无 PDF）/ `journals`（期刊池，含选刊侧私有 `whitelist-submitted.csv` / `submission-prior.jsonl`）/ `ethics\approvals`（批件）；不设 radiology 一级，按临床专科归类。
 - **术语**：作者字段 `A`=批注作者；`00`–`07`=技能层；派单→`{SKILLS}\00_orchestrator\references\ownership-contract.md`。工作区只有一层；不再有 A/B 双工作区或挂载缓存树。
 - **技能 ID**：选型只按 fine id；细则 → `skills.md` §2；`{SKILLS}\00_orchestrator\references\id-rules.md`。
-- **一任务一执行方**；外挂仅 **Cursor**（须用户批准或说「交给cursor」）。bot **不得**再派「交给cline」/独立 Cline CLI。盯梢→`{SKILLS}\00_orchestrator\references\handoff-monitor.md`。
+- **一任务一执行方（t1595u）**：**编码 / 脚本 / MY-CODES 工作交给 Loopnow**（粗席位 `02_data-processing`；`{code_root}` / `{code_stats}` 落码）。外部包 **Cursor IDE** 仅在城城批准、或城城说「交给cursor」时使用，且限于整理 / 提取 / 填写 / IDE 本机操作；未经批准不得把编码默认派给 Cursor。bot **不得**调用 Cline，也不得调用独立 Cline CLI。盯梢→`{SKILLS}\00_orchestrator\references\handoff-monitor.md`。
 - **选模型（Cursor；2026-10-30 · t1452u）**：经 bot 调用 **Cursor** 时，默认 **composer**。
-- **Rules 默认挂载；Skills 派工附加（t1397u）**：凡派子 bot/专员（Lee/Victor/Aitee/Bai/Loopnow 等）或云端 Cursor / CloudAgent，**默认携带 {RULES}**（本文件 My rule.md）。**派具体工时再附加 {SKILLS}**（相关 fine id / 路径，或整库 SSOT）。冲突时 Rules > Skills。CloudAgent prompt 须写明 Rules 路径；Skills 按本次任务写入，勿假设云端已挂载。
+- **Rules 必须挂载并必须遵守；Skills 仅在派工时附加（t1397u；t1595u 强化）**：`{RULES}`＝`D:\0Grok\0doc\GitHub\MY-RULES`（本文件 `My rule.md` + 专题文件）。**Aitor 与全部专员 bot（Loopnow / Victor / Aitee / Lee / Bai 等）以及云端 Cursor / CloudAgent 一律必须遵守**，无例外、无需再问。**派子 bot/专员或云端执行时默认携带 `{RULES}`**；**仅当派具体 fine id / 工作包时，才附加 `{SKILLS}`**（相关 fine id / 路径，或整库 SSOT）。冲突裁决：**Rules > Skills**。**「Skills 未挂载」不得作为跳过 Rules 的理由**（Skills 缺省只影响该任务能否用该技能，不影响 Rules 生效）。CloudAgent prompt **必须写明 Rules 路径**；Skills 按本次任务写入，勿假设云端已挂载。
 - **云端 / 本地（术语，2026-10-25）：** **云端** = Grok Bot 的 box 计算机（`/workspace` 等）；**本地** = 城城本机（如 `D:\`、Downloads）。二者勿对调。
 - **mem 落盘：** bot 记忆导出/更新落在本地 `D:\0Grok\0doc\mem`（城城指定；非默认进 `{DEL}`）。mem **仅保留隐私**与可变数据 SSOT（如 JCR xlsx）；站立运营政策进 `{RULES}`，专业技能进 `{SKILLS}`。
 - **单项目约定**写在该**子工程文件夹**内（如子工程 `0doc\` 或 `ref\`），**不**写入全局 `{RULES}` / `{SKILLS}`。须用户点名「放 0doc」才写 `0doc\`。
