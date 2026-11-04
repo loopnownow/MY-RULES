@@ -24,6 +24,14 @@
 | `routing.md` | `{SKILLS}\00_orchestrator\references\ownership-contract.md`（座位/派单）+ `handoff-monitor.md`（盯梢） |
 | `engineering-decision.md` | `My rule.md` §6（R1–R6 + 大变更门） |
 
+## 开发辅助脚本（`tools/`，2026-11-04 固化）
+
+排错/质检用的小工具（只读、不联网、不进交付物）：`grepfile.py`（正则 grep）、`scope_check.py`（AST 作用域自查，抓 `NameError` 隐患）、`extract_inline.py`（html 内联 JS 抽出）、`check_html.py`（标签配平）、`smoke_page.js`（假 DOM 跑页面顶层脚本，抓「删了声明忘了引用」导致整页点不动）、`sync_project_page.py`（金版 → 课题起始页注入 token/modules）。
+
+用哪个、什么时候跑 → `tools/README.md`。
+**改 `modules/console/project.html` 后固定四步**：`extract_inline.py` → `node --check` → `smoke_page.js` → `check_html.py`，再 `sync_project_page.py` 同步课题页。
+（本仓其余仍是政策正文；这些脚本属于「开发辅助」，不是交付代码，也不是可复用算法库——算法/清洗脚本仍进 MY-CODES。）
+
 ## Local check (E3)
 
 ```bash
