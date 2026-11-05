@@ -25,10 +25,11 @@ license: MIT
 
 # 2 开工前确认
 
-- 只读不用授权；改/移须先授权。
+- **写盘总闸（t1672u）：只读不用授权；任何写盘先问。**除非城城 / owner**当轮明确要求**该项改动（点名文件 / 路径 / 任务，或对该项工作说「改 / 写 / 更新 / 修 / 推合 / 直接做」），agent 在**新建、编辑、覆盖、移动、删除任何文件**前必须**先问并等到「是」**；未获授权即停，不静默落盘。范围覆盖全部 bot / CloudAgent / Cursor，及 `{RULES}` / `{SKILLS}` / MY-CODES / `0doc` / 子工程 / `{DEL}` / mem 等任何位置。
+- **授权按项按轮（t1672u）**：当轮点名目标的授权**只覆盖该项**（如「改 A 第 3 节」只授权 A 的该处）；「直接做」只授权当轮那件事。**「继续」/ 未点名写盘的泛泛「好」≠ 写盘许可**，不得当全库放行。既有须问条款（D-1 移底表先问；网络须批；MY-SKILLS PR/merge 确认；Word「城城已改先问」）**继续有效**；本条是**所有**写盘的默认线。
 - **禁删**；移出只进 `{DEL}` 并保留相对路径。**旧稿清理**＝移入 `{DEL}` / `D:\0del`（可按 `_by-project` / `_by-function`），禁止静默永久删除。
 - 确认：目标与验收；假设≤3；取舍；谁执行。
-- 「直接做」可不逐项确认，但不跳过 MY-SKILLS PR/merge（`skills.md`）与须批网络（`network-security.md`）。「继续」≠网络同意。
+- 「直接做」可不逐项确认（**写盘仍只限该项**，见上条 t1672u），但不跳过 MY-SKILLS PR/merge（`skills.md`）与须批网络（`network-security.md`）。「继续」≠网络同意。
 - 网络红线→`network-security.md`（含本机出站代理常设 `127.0.0.1:10808`）。
 
 ## 2.1 盘问 / grill-me（SSOT；技能只指针）
@@ -92,7 +93,7 @@ license: MIT
 - **图表编号（C-1 · 指针，2026-10-29 · t1309s6268）：** Table 1 = 基线；**不**单独放 logistic 系数表或 score-correlation 表（Aitor-format §209）；ROC 操作特性作表；图按适用放 workflow / US / heatmap / nomogram+校准 / ROC / DCA。细则勿在本文件复写，指针 → `{SKILLS}\05_manuscript\advanced\Aitor-format.md` §200 / §209 / §213。
 - **批注英文建议句**：单独成句，以 `Suggested …` 起首。字面模板技能落点→`{SKILLS}\06_review\advanced\word-edit.md`。`manuscript-and-review.md` 已于 2026-10-18 按 README 迁入 `05_manuscript` / `06_review` / `07_response`。
 - **审稿回复**：保留完整原始 comments；不简化；不擅自加小标题；不自创信函格式。→`{SKILLS}\07_response\advanced\response.md`。
-- **新建文件/文件夹（权威；合并 t1098u/t1107u/t1240 · 2026-10-30 · t1442u/t1450u）**：默认只能在 `{DEL}` / `D:\0del`（`_by-project` / `_by-function`）新建文件与文件夹；路径 SSOT 为 `D:\0del`（非 `D:\0Grok\0del`）。在其他位置新建前必须本轮明确问城城并获准。**常设例外**：(1) bot 记忆导出/更新可在 `D:\0Grok\0doc\mem\` 内新建（§1「mem 落盘」）；(2) 子工程内 `ref/tmp/` 按需写入临时/中间（含旧版稿；详 → `project-ref-layout.md`）。**可改**已有文件（含 `{RULES}` / `{SKILLS}` / `0doc\skill-harvest\*` / `0doc\mem\*` / 子工程已有稿含 Track Changes）。默认禁止在 `D:\0Grok\0doc` 下 mkdir（除 mem 例外与本轮明确同意）。新草稿、ACCEPT、digest、by-fine-id lane、笔记、中间件、临时/scratch、ACCEPT 备注 → 只进 `{DEL}`。审稿交付：优先修订现有评审意见 `.docx`（Track Changes），禁止另存新稿名、禁止在子工程下新建夹。用户本轮点名的终稿落点仍按 §5（优先改已有终稿）。短针→`workspace-layout.md`（不复写）；mem→`D:\0Grok\0doc\mem\README.md`；全文→`{RULES}\standing\STANDING-no-new-files-outside-0del.md` 与 `{RULES}\standing\STANDING-0doc-no-new-folder.md`（2026-10-31 从 0del 移入本仓；**0del 不再承载任何全文/指针**）。
+- **新建文件/文件夹（权威；合并 t1098u/t1107u/t1240 · 2026-10-30 · t1442u/t1450u）**：默认只能在 `{DEL}` / `D:\0del`（`_by-project` / `_by-function`）新建文件与文件夹；路径 SSOT 为 `D:\0del`（非 `D:\0Grok\0del`）。在其他位置新建前必须本轮明确问城城并获准。**常设例外（仅限新建）**：(1) bot 记忆导出/更新可在 `D:\0Grok\0doc\mem\` 内新建（§1「mem 落盘」）；(2) 子工程内 `ref/tmp/` 按需写入临时/中间（含旧版稿；详 → `project-ref-layout.md`）。以上只是**新建路径**的例外，**不是编辑许可**：这些位置已有文件的编辑 / 覆盖 / 移动仍按 §2 写盘总闸，须当轮点名或先问（t1672u）。**改已有文件同样先问（t1672u）**：`{RULES}` / `{SKILLS}` / `0doc\skill-harvest\*` / `0doc\mem\*` / 子工程已有稿（含 Track Changes）**均不豁免**——除非城城当轮已点名要改该文件 / 该处，否则先问再改，不得以「属可改区」为由静默编辑。默认禁止在 `D:\0Grok\0doc` 下 mkdir（除 mem 例外与本轮明确同意）。新草稿、ACCEPT、digest、by-fine-id lane、笔记、中间件、临时/scratch、ACCEPT 备注 → 只进 `{DEL}`。审稿交付：优先修订现有评审意见 `.docx`（Track Changes），禁止另存新稿名、禁止在子工程下新建夹。用户本轮点名的终稿落点仍按 §5（优先改已有终稿）。短针→`workspace-layout.md`（不复写）；mem→`D:\0Grok\0doc\mem\README.md`；全文→`{RULES}\standing\STANDING-no-new-files-outside-0del.md` 与 `{RULES}\standing\STANDING-0doc-no-new-folder.md`（2026-10-31 从 0del 移入本仓；**0del 不再承载任何全文/指针**）。
 - **一次性脚本/说明/小补丁**（非课题交付）：只落 `{DEL}`，禁止丢进用户主目录、`.grok\tmp`、或课题根。
 - **0doc 目录名英文化（t1458u）**：`0doc` 下新建目录一律 ASCII 英文（如 `approvals` / `journals` / `jcr` 这类英文短名）；发现中文目录当轮 rename，并在 `_library\MOVED-FROM.md` 记一行。文件名可保留中文原名，但须在对应索引列留映射（如 `original_name_zh`）。库分类口径 → `library-taxonomy.md`。
 
