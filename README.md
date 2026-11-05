@@ -26,10 +26,12 @@
 
 ## 开发辅助脚本（`tools/`，2026-11-04 固化）
 
-排错/质检用的小工具（只读、不联网、不进交付物）：`grepfile.py`（正则 grep）、`scope_check.py`（AST 作用域自查，抓 `NameError` 隐患）、`extract_inline.py`（html 内联 JS 抽出）、`check_html.py`（标签配平）、`smoke_page.js`（假 DOM 跑页面顶层脚本，抓「删了声明忘了引用」导致整页点不动）、`sync_project_page.py`（金版 → 课题起始页注入 token/modules）。
+排错/质检用的小工具（只读、不联网、不进交付物）：`grepfile.py`（正则 grep）、`scope_check.py`（AST 作用域自查，抓 `NameError` 隐患）、`extract_inline.py`（html 内联 JS 抽出）、`check_html.py`（标签配平）、`smoke_page.js`（假 DOM 跑页面顶层脚本，抓「删了声明忘了引用」导致整页点不动）、`sync_project_page.py`（金版 → 课题起始页注入 token/modules）、`fill_start_placeholders.py`（只补起始页漏替的 `__MODULES_DEFAULT__`，不动版式与 token）。
 
 用哪个、什么时候跑 → `tools/README.md`。
 **改 `modules/console/project.html` 后固定四步**：`extract_inline.py` → `node --check` → `smoke_page.js` → `check_html.py`，再 `sync_project_page.py` 同步课题页。
+
+**起始页（`<project>/<project>.html`）不许直接拷金版**（2026-11-05）：金版带两处占位符——`__CONSOLE_TOKEN__`（登记项目时注入）、`__MODULES_DEFAULT__`（算法库路径）。漏替后者会让内联脚本**第一行** `ReferenceError: __MODULES_DEFAULT__ is not defined`，整页初始化中断，所有按钮（含「开启服务」）点了没反应——看着像「服务起不来」，其实是页面死了（2026-11-05 一次性 41 个课题页全中）。生成走 `sync_project_page.py`（整套重生成）或从运行中的 `http://127.0.0.1:<port>/start.html` 另存（服务端会替换两处）；只补这一处用 `fill_start_placeholders.py`。**核查必须真浏览器**：四步里的 `node --check` / `smoke_page.js` **抓不到**（smoke 把该占位符自动换成空串）；`firefox --headless --screenshot <png> file:///<page>`，标题应等于项目名、课题栏应预填。
 （本仓其余仍是政策正文；这些脚本属于「开发辅助」，不是交付代码，也不是可复用算法库——算法/清洗脚本仍进 MY-CODES。）
 
 ## Local check (E3)
