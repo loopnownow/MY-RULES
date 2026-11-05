@@ -7,7 +7,7 @@
 
 1. **全部新文件夹**助手需要的 → 只许建在 `{DEL}` / `D:\0del`（`_by-project` / `_by-function`）。（t1109u）
 2. **`D:\0Grok\0doc`：默认禁止 mkdir**；**唯一例外**：城城**本轮明确同意**才可在 0doc 建新夹。（t1107u/t1108u）
-3. 可改已有文件（含 MY-RULES / MY-SKILLS / `0doc\skill-harvest\*` / `0doc\mem\*` / 子工程已有稿）。
+3. **改已有文件也须当轮点名或先问**（含 MY-RULES / MY-SKILLS / `0doc\skill-harvest\*` / `0doc\mem\*` / 子工程已有稿）；本条不是自由编辑区（t1672u 写盘总闸 → `My rule.md` §2）。
 4. 临时 / scratch → `D:\0del`。
 5. **ACCEPT 备注只落 `D:\0del`**（本夹即例）。
 6. 与既有「禁止在 0del 以外新建文件」（t1098u）并存；见 sibling `{RULES}\standing\STANDING-no-new-files-outside-0del.md`。
