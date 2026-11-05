@@ -21,7 +21,7 @@ license: MIT
 - **云端 / 本地（术语，2026-10-25）：** **云端** = Grok Bot 的 box 计算机（`/workspace` 等）；**本地** = 城城本机（如 `D:\`、Downloads）。二者勿对调。
 - **mem 落盘：** bot 记忆导出/更新落在本地 `D:\0Grok\0doc\mem`（城城指定；非默认进 `{DEL}`）。mem **仅保留隐私**与可变数据 SSOT（如 JCR xlsx）；站立运营政策进 `{RULES}`，专业技能进 `{SKILLS}`。
 - **单项目约定**写在该**子工程文件夹**内（如子工程 `0doc\` 或 `ref\`），**不**写入全局 `{RULES}` / `{SKILLS}`。须用户点名「放 0doc」才写 `0doc\`。
-- **交付落点**：子工程**没有** `0result\` 文件夹。**最终**交付物 → 该子工程**根目录**（`D:\0Grok\<project>` 下）；**中间**产物 → 按 `project-ref-layout.md` 的 `ref/` 子文件夹地图（`review/` / `citation/` / `refer/`（文献+写作参考 pptx/doc/docx） / `code-gates/` / `tmp/` + 根上 tables/figures/pipeline；**hashes/MANIFEST/pipeline_run.log 在 `ref/pipeline/`**；`submission-*`、底表；分析 `false_classification*` 留子工程根（详图与 Cleanup 两档见 `project-ref-layout.md`；已退役 `analysis/`/`materials/`/`results/`/`exec/`/`code/`/`gates/`/`writing-refs/`/`raw-pre/`））；**子工程内临时/中间默认 `ref/tmp/`**（**非**默认 `{DEL}`；旧版 `Manuscript_*_V*` 亦然，现行 `Vn` 在根；详 → `project-ref-layout.md`）；无子工程或不属课题树的临时进 `{DEL}`；Downloads **仅当**当轮点名「下载」或「Downloads」。**文献全文（PDF/HTML）SSOT = `D:\0Grok\0doc\_library\references\<L1>\<L2>\`**（t1455u）：子工程 `ref/refer/` 只留 `DOI_*.md` 指针 + NLM/摘要 + 写作参考，不再存第二份全文；`_library\lit-bank` 只存书目。
+- **交付落点**：子工程**没有** `0result\` 文件夹。**最终**交付物 → 该子工程**根目录**（`D:\0Grok\<project>` 下）；**中间**产物 → 按 `project-ref-layout.md` 的 `ref/` 子文件夹地图（`review/` / `citation/` / `refer/`（文献+写作参考 pptx/doc/docx） / `code-gates/` / `tmp/` + 根上 tables/figures/pipeline；**hashes/MANIFEST/pipeline_run.log 在 `ref/pipeline/`**；`submission-*`、底表；分析 `false_classification*` 落**当次结果夹** `<project>/<endpoint>/`（**非**子工程根，亦不进 `ref/`；详图与 Cleanup 两档见 `project-ref-layout.md`；已退役 `analysis/`/`materials/`/`results/`/`exec/`/`code/`/`gates/`/`writing-refs/`/`raw-pre/`））；**子工程内临时/中间默认 `ref/tmp/`**（**非**默认 `{DEL}`；旧版 `Manuscript_*_V*` 亦然，现行 `Vn` 在根；详 → `project-ref-layout.md`）；无子工程或不属课题树的临时进 `{DEL}`；Downloads **仅当**当轮点名「下载」或「Downloads」。**文献全文（PDF/HTML）SSOT = `D:\0Grok\0doc\_library\references\<L1>\<L2>\`**（t1455u）：子工程 `ref/refer/` 只留 `DOI_*.md` 指针 + NLM/摘要 + 写作参考，不再存第二份全文；`_library\lit-bank` 只存书目。
 
 # 2 开工前确认
 
@@ -69,7 +69,7 @@ license: MIT
 | 产物 | 格式 | 落点 |
 |---|---|---|
 | 最终交付（稿件/终表/最终报告等） | 依类型 | **子工程根目录**；无子工程且点名「下载/Downloads」→Downloads；否则→`{DEL}` |
-| 中间产物（QC/ledger/门控/草稿等） | 依类型 | 有子工程→按 `project-ref-layout.md` 的 `ref/` 地图（`review/`/`citation/`/`refer/`（含写作参考）/`code-gates/`/`tmp/` + tables/figures/pipeline；locks 在 `ref/pipeline/`；`submission-*`；`false_classification*` 在子工程根（详图见 `project-ref-layout.md`））；否则→`{DEL}` |
+| 中间产物（QC/ledger/门控/草稿等） | 依类型 | 有子工程→按 `project-ref-layout.md` 的 `ref/` 地图（`review/`/`citation/`/`refer/`（含写作参考）/`code-gates/`/`tmp/` + tables/figures/pipeline；locks 在 `ref/pipeline/`；`submission-*`；`false_classification*` 在 `<project>/<endpoint>/` 结果夹（**非**子工程根；详图见 `project-ref-layout.md`））；否则→`{DEL}` |
 | 报告/QC（中间） | HTML | 有子工程→该子工程 `ref\`（或阶段夹如 `in-review\`）；无子工程且点名 Downloads→Downloads；否则→`{DEL}` |
 | 稿件/TC（最终） | DOCX | 子工程**根**；否则仅当点名 Downloads，否则 `{DEL}` |
 | SCI 稿件文件名 | DOCX（md/pdf 同 stem） | **`Manuscript_` / `Comments_` / `Response_` / `Supplementary_`** + `_<子项目名>_V<n>`；版本与对应修回轮次一致。**现行 `Vn` → 子工程根**；**旧版 → `ref/tmp/`**（t1450u）。权威 → `project-ref-layout.md`「SCI 稿件文件名」；技能指针 → `{SKILLS}\05_manuscript\advanced\Aitor-format.md` / `handoff.md`、`06_review\advanced\handoff.md`、`07_response\advanced\handoff.md`（t1428u/t1429u/t1430u） |
@@ -78,6 +78,8 @@ license: MIT
 | 期刊池 / 批件 | CSV/XLSX/PDF | `_library\journals\index.csv`（单表，2026-10-31 起不再留 xlsx）；`_library\ethics\approvals\<L1>\<L2>\` + `approvals-index.xlsx`（t1458u）。子工程候选刊只写 `ref\citation\journals.csv` + `_notes.md`；批件只挂指针。口径 → `library-taxonomy.md` |
 
 同一分析若 `Results*.html`（或已执行产物 HTML）与 `.xlsx` 数字冲突：以 HTML 为准，并在汇报里写明冲突与所采用源。
+
+**结果 HTML 落点（t1660u）**：分析结果 HTML 只落该次结果夹 `<project>/<endpoint>/`（或解析出的 OUT_DIR / `SUBPROJECT_BY_OUTCOME` 夹），文件名 `Results*.html`（见 `workspace-layout.md`）。**不**把 `{slug}_results.html`、旧 `{endpoint}-results.html` / `results.html` 提升到子工程根；子工程根上已有的旧结果 HTML 属错位，后续整理时先问再移入 `{DEL}`。
 
 「放 0doc」才写 `0doc\`。长表→`{SKILLS}\00_orchestrator\references\standing-delivery.md`。
 

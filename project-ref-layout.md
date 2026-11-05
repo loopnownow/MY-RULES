@@ -6,7 +6,7 @@
 
 本文是**文件夹地图与跳过/幂等契约**。不编造临床数字。文件名与 ledger 行除课题科学所需（路径、DOI、citekey）外，不含 PII。
 
-**SSOT：** 本文件为**权威中文版**。技能侧镜像（英文）`{SKILLS}\00_orchestrator\references\project-ref-layout.md` 只作运行期读本；两版冲突以本文件为准（2026-10-29；**t1458u（2026-10-31）**：`ref/citation/` 增「期刊/候选刊 `journals.csv` + `_notes.md`」、`ref/refer/` 明确不放期刊，两者分工以本条为准；库内 L1/L2 与三库契约见 `library-taxonomy.md`。此前：**t1321u/t1322u**：锁定件 `hashes.tsv`/`MANIFEST.md`/`pipeline_run.log` 落 **`ref/pipeline/`**（不在 ref 根）；写作参考 pptx/doc/docx 可进 **`ref/refer/`**（与文献列表同夹）；分析 `false_classification*` 留**子工程根**（ASL 类临时产物），不进 ref；t1316u：取消标准壳 `analysis/` 与 `materials/`，表图等子项抬到 `ref/`；文献与 NLM+摘要列表进 `ref/refer/`；`ref/citation/` 仍只做审计台账；t1309s6268：原 `results/` → 曾用 `analysis/`；t1307u：未被接受投稿包进 `ref/` 根或 `submission-*`；t1303s6243 / t1300u：原 writing-refs+raw-pre、code+gates 合并史；**t1450u**：子工程内临时/中间默认 `ref/tmp/`（非默认 `{DEL}`）；旧版 SCI 稿亦落 `ref/tmp/`，现行 `Vn` 在子工程根；**t1455u**：文献全文（PDF/HTML）实体 SSOT = `D:\0Grok\0doc\_library\references\<L1>\<L2>\`，子工程 `ref/refer/` 只留 `DOI_*.md` 指针，`_library\lit-bank` 仍只存书目）。
+**SSOT：** 本文件为**权威中文版**。技能侧镜像（英文）`{SKILLS}\00_orchestrator\references\project-ref-layout.md` 只作运行期读本；两版冲突以本文件为准（2026-10-29；**t1660u（2026-11-05）**：`false_classification*` 与同类 ASL 分析临时表改落**当次结果夹** `<project>/<endpoint>/`（或解析出的 OUT_DIR / `SUBPROJECT_BY_OUTCOME` 夹），**不在**子工程根，仍**不进** `ref/`；结果 HTML 同落该结果夹为 `Results*.html`（见 `workspace-layout.md`），**不**提升到子工程根。此条取代 t1321u/t1322u 的「`false_classification*` 留子工程根」半句；**t1458u（2026-10-31）**：`ref/citation/` 增「期刊/候选刊 `journals.csv` + `_notes.md`」、`ref/refer/` 明确不放期刊，两者分工以本条为准；库内 L1/L2 与三库契约见 `library-taxonomy.md`。此前：**t1321u/t1322u**：锁定件 `hashes.tsv`/`MANIFEST.md`/`pipeline_run.log` 落 **`ref/pipeline/`**（不在 ref 根）；写作参考 pptx/doc/docx 可进 **`ref/refer/`**（与文献列表同夹）；~~分析 `false_classification*` 留**子工程根**（ASL 类临时产物），不进 ref~~（此半句已被 **t1660u（2026-11-05）** 取代：`false_classification*` 及同类 ASL 临时表落**当次结果夹** `<project>/<endpoint>/`，非子工程根，亦不进 `ref/`）；t1316u：取消标准壳 `analysis/` 与 `materials/`，表图等子项抬到 `ref/`；文献与 NLM+摘要列表进 `ref/refer/`；`ref/citation/` 仍只做审计台账；t1309s6268：原 `results/` → 曾用 `analysis/`；t1307u：未被接受投稿包进 `ref/` 根或 `submission-*`；t1303s6243 / t1300u：原 writing-refs+raw-pre、code+gates 合并史；**t1450u**：子工程内临时/中间默认 `ref/tmp/`（非默认 `{DEL}`）；旧版 SCI 稿亦落 `ref/tmp/`，现行 `Vn` 在子工程根；**t1455u**：文献全文（PDF/HTML）实体 SSOT = `D:\0Grok\0doc\_library\references\<L1>\<L2>\`，子工程 `ref/refer/` 只留 `DOI_*.md` 指针，`_library\lit-bank` 仍只存书目）。
 
 ## 根目录不变量（勿挪位）
 
@@ -42,7 +42,7 @@
 - **站立（t1450u）：** 子工程内临时与中间文件默认进 `ref/tmp/`，**不**默认进 `{DEL}` / `D:\0del`。过后清理（先问）再移 `{DEL}`。
 - **分析临时结果**（`ASL/`、`DKI/`、`DTI_IVIM/` 等）放在**子工程根旁**，**不进 `ref/`**。
 - 面向稿件/门控的统计**表图**在 `ref/tables/` `ref/figures/`；**锁定件** `hashes.tsv` `MANIFEST.md` `pipeline_run.log` 在 **`ref/pipeline/`**；**勿**与 `ASL/` 等分析树合并。
-- **分析错分/临时表**（如 `false_classification*`）与 ASL 类临时产物一样，留在**子工程根**，**不进 `ref/`**。
+- **分析错分/临时表（t1660u）**：`false_classification*` 与同类 ASL 分析临时表落**当次结果夹** `<project>/<endpoint>/`（或解析出的 OUT_DIR / `SUBPROJECT_BY_OUTCOME` 夹），**不在子工程根**，也**不进 `ref/`**。结果 HTML 同落该结果夹为 `Results*.html`（见 `workspace-layout.md`）；**不**把 `{slug}_results.html` 或旧结果 HTML 提升到子工程根——根上已有的旧副本属错位。
 - **文献全文（t1455u）：** PDF/HTML 实体一律进 `D:\0Grok\0doc\_library\references\<L1>\<L2>\`（命名、索引、指针契约见该库 `README.md`）；子工程 `ref/refer/` 只写 `DOI_*.md` 指针，`ref/citation/` 不放全文，`_library\lit-bank` 只存书目。
 - **终稿 / 控制台终表**留在子工程根。
 - **已接受**的最终稿件留在子工程根；**未被接受**的投稿包进 `ref/` 根或 `submission-*`（见下「投稿包」）。主人点名时，中间 xlsx 也可留在子工程根，勿擅自挪走。
@@ -101,7 +101,7 @@ SCI 相关文件统一命名：`<Stem>_<子项目名>_<版本号>`。
 - `code-gates/`：脚本说明 + 门控/哈希报告（原 `code/`+`gates/`）。
 - 根上 `tables/` `figures/` `pipeline/`：统计表图与流水线夹；**hashes / MANIFEST / pipeline_run.log 在 `ref/pipeline/`**（原 `analysis/`/`results/` locks）；`qc.html` 仍在 `ref/` 根。
 - 写作参考（可在 `refer/`）、`submission-*`、数据底表：原 `materials/` 子项（D-1：今后移底表先问）。
-- 并注明：「分析临时结果与 `false_classification*` 在子工程根（`<Modality>/` 或根上），不在 ref」。
+- 并注明：「分析错分/临时表 `false_classification*` 与结果 HTML（`Results*.html`）落当次结果夹 `<project>/<endpoint>/`（或 OUT_DIR / `SUBPROJECT_BY_OUTCOME`），不在子工程根，也不在 ref」（t1660u）
 
 ## 跳过 / 幂等规则（再跑前先读 ledger）
 
