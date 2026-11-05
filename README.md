@@ -32,6 +32,8 @@
 **改 `modules/console/project.html` 后固定四步**：`extract_inline.py` → `node --check` → `smoke_page.js` → `check_html.py`，再 `sync_project_page.py` 同步课题页。
 
 **起始页（`<project>/<project>.html`）不许直接拷金版**（2026-11-05）：金版带两处占位符——`__CONSOLE_TOKEN__`（登记项目时注入）、`__MODULES_DEFAULT__`（算法库路径）。漏替后者会让内联脚本**第一行** `ReferenceError: __MODULES_DEFAULT__ is not defined`，整页初始化中断，所有按钮（含「开启服务」）点了没反应——看着像「服务起不来」，其实是页面死了（2026-11-05 一次性 41 个课题页全中）。生成走 `sync_project_page.py`（整套重生成）或从运行中的 `http://127.0.0.1:<port>/start.html` 另存（服务端会替换两处）；只补这一处用 `fill_start_placeholders.py`。**核查必须真浏览器**：四步里的 `node --check` / `smoke_page.js` **抓不到**（smoke 把该占位符自动换成空串）；`firefox --headless --screenshot <png> file:///<page>`，标题应等于项目名、课题栏应预填。
+
+**token 只写 meta，JS 哨兵保留占位符**（2026-11-05，lya_CTA 那次踩到）：页面里 `__CONSOLE_TOKEN__` 出现 3 次——1 处 `<meta name="console-token">`（真 token 写这里）+ 2 处 JS 哨兵（`metaTok !== "__CONSOLE_TOKEN__"` 一类「本页是否已登记」判定，**必须一直是占位符**）。`sync_project_page.py <gold> <dest> <token|""> <modules_dir>` 传空串 = 保持未登记；`registry.inject_token()` 也只改 meta。此前是「有占位符就全量替换」，于是第一次注入把哨兵写成具体 token，之后 `register --rotate` 只改得到 meta，页面就永久留着上一枚旧 token（判定失效，注销后还会把占位符当有效 token 发进 `X-Console-Token`）。同轮修了写盘 `newline="\n"`（原来 Windows 文本模式把页面写成 CRLF，金版与其它页都是 LF）。42 个课题页已于 2026-11-05 统一刷到 HEAD 金版（正文规范化后全等，仅 meta token 不同）。
 （本仓其余仍是政策正文；这些脚本属于「开发辅助」，不是交付代码，也不是可复用算法库——算法/清洗脚本仍进 MY-CODES。）
 
 ## Local check (E3)
