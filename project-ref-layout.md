@@ -60,10 +60,11 @@ SCI 相关文件统一命名：`<Stem>_<子项目名>_<版本号>`。
 
 - **Stem：** `Manuscript` | `Comments` | `Response` | `Supplementary`（仅当确有补充材料时建 Supplementary）
 - **子项目名** = project slug（如 `lxf_PP`）
-- **版本号** = `V` + 整数（`V1`, `V2`, …）；`Comments` / `Response` / `Supplementary` 的版本号与对应稿件修回轮次一致
+- **版本号** = `V` + `主版本`.`次版本`（`V1.1`、`V1.2`、…、`V1.10`；小数位不补零，**排序按数值不按字符串**，2026-11-05）；`Comments` / `Response` / `Supplementary` 的版本号与对应稿件同轮
+- **阶段映射（2026-11-05）：** `V1.xx` 起草/自改（投稿前；投出的那一版保持 `V1.xx` 不重命名）→ `V2.xx` 投稿中修改（在审、未收到审稿意见）→ `V3.xx` 第 1 轮审稿回复 → `V4.xx` 第 2 轮审稿回复（依次 `V5.` …）→ `V9.xx` 接收后校样（可选）。每次实质改动 `+0.1`，不跳号；每次升版在 `ref/manuscript-revision.md` 追加一行。
 - 优先 `.docx`；若有 md/pdf 伴生件，**同 stem**
-- 例：`Manuscript_lxf_PP_V1.docx`、`Comments_lxf_PP_V1.docx`、`Response_lxf_PP_V1.docx`、`Supplementary_lxf_PP_V1.docx`（或 `.pdf`）
-- **落点：** 现行 `Manuscript_<slug>_Vn`（及配套 Comments/Response/Supplementary 现行版）在**子工程根**；**旧版** `V1`..`V(n-1)` → `ref/tmp/`。未被接受的投稿包仍按上节进 `ref/` / `submission-*`。本条管文件名 + 旧版落点；详 → 上表 `ref/tmp/`。（原 `materials/` 已退役，勿再新建。）
+- 例：`Manuscript_lxf_PP_V1.1.docx`、`Comments_lxf_PP_V1.1.docx`、`Response_lxf_PP_V1.1.docx`、`Supplementary_lxf_PP_V1.1.docx`（或 `.pdf`）
+- **落点：** 现行 `Manuscript_<slug>_V<主>.<次>`（及配套 Comments/Response/Supplementary 同号版）在**子工程根**；**旧版**（含更早主版本，如 `V1.1`..`V1.9`、旧 `V4`）→ `ref/tmp/`。未被接受的投稿包仍按上节进 `ref/` / `submission-*`。本条管文件名 + 旧版落点；详 → 上表 `ref/tmp/`。（原 `materials/` 已退役，勿再新建。）
 
 ### 数据底表（D-1）
 
