@@ -11,7 +11,7 @@ license: MIT
 
 - **裁决顺序**：用户当轮表述 > 专题文件 > 本文件 > 子工程内约定。
 - **别名**：`{RULES}`=`D:\0Grok\0doc\GitHub\MY-RULES`；`{SKILLS}`=`D:\0Grok\0doc\GitHub\MY-SKILLS`；`{RAW}`=`D:\00db`（已组织的原始库，只读除非点名；`00ds` 为旧名/QC 对象——活路径·夹名·filter 见 `00ds` 须改 `00db`，勿当 legacy 保留；细则 → `workspace-layout.md`「`{RAW}` = `D:\00db`」）；`{DEL}`=`D:\0del`。
-- **本机布局（一行）**：`D:\00db`（organized raw） / `D:\0del`（AI 可操作临时区） / `D:\0Grok\0doc`（语料 + 可复用代码） / `D:\0Grok`（分阶段子工程工作区）。细则 → `workspace-layout.md`。
+- **本机布局（一行）**：`D:\00db`（organized raw） / `D:\0del`（AI 可操作临时区） / `D:\0Grok\0doc`（语料 + 可复用代码） / `D:\0Grok`（分阶段子工程工作区） / `D:\0Grok\R&P`（formerly `proposal`；申请/立项材料，**非**稿件阶段）。细则 → `workspace-layout.md`。
 - **库分类（t1458u）**：L1/L2 与三库分工的权威正文 → `library-taxonomy.md`。`_library` 下 `references`（全文实体）/ `lit-bank`（书目，无 PDF）/ `journals`（期刊池，含选刊侧私有 `whitelist-submitted.csv` / `submission-prior.jsonl`）/ `ethics\approvals`（批件）；不设 radiology 一级，按临床专科归类。
 - **术语**：作者字段 `A`=批注作者；`00`–`07`=技能层；派单→`{SKILLS}\00_orchestrator\references\ownership-contract.md`。工作区只有一层；不再有 A/B 双工作区或挂载缓存树。
 - **技能 ID**：选型只按 fine id；细则 → `skills.md` §2；`{SKILLS}\00_orchestrator\references\id-rules.md`。

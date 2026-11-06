@@ -16,6 +16,7 @@ description: 本机布局与子工程短针。落点见 My rule.md §5。
 | `D:\0Grok\0doc` | 语料 + 可复用代码；live tops：`_library`（含 `references` 文献全文、`lit-bank` 书目、`journals` 期刊池与选刊侧私有、`ethics\approvals` 批件、`lab-ref-ranges`、`glossary` 自有语料+四层（words/sentences/paragraphs + sections 指针页；`GLOSSARY_ROOT`）） / `templates` / `mem` / `GitHub` / `test` / `skill-harvest`（+ 根 md；`_bank` 2026-11-01 并入 `_library\glossary`，`_code` 2026-11-01 退役） |
 | `D:\0Grok\0doc\mem` | bot 记忆导出/更新落点（城城 2026-10-25）；**仅隐私** + 可变数据 SSOT（如 find-journal JCR xlsx）；站立政策不进 mem |
 | `D:\0Grok` | 分阶段子工程工作区（阶段夹见下节） |
+| `D:\0Grok\R&P`（formerly `proposal`） | 申请/立项及相关材料包；**非**稿件阶段夹（见下「兄弟根」） |
 
 ### `{RAW}` = `D:\00db`（原始库契约 · t1705u）
 
@@ -56,6 +57,10 @@ description: 本机布局与子工程短针。落点见 My rule.md §5。
 别名表在 `{SKILLS}\00_orchestrator\templates\project-state.yaml` 的 `study_folder_stage_aliases`（路径段别名，不是 `pipeline.stage`）。
 
 课题夹名：`lowercase_UPPERCASE`（如 `fyh_CAC`、`xlm_LG`）。旧式 `CAC_fyh`、`lung_xlm` 已退休。
+
+## 兄弟根：`R&P`（非阶段）
+
+`D:\0Grok\R&P`（formerly `proposal`）存放 grants / proposals / related packets。**不是**稿件流水线的第五阶段：不要写入上方 `drafting` / `pre-submit` / `in-review` / `accepted` 阶段表，也不进 `study_folder_stage_aliases`。路径写作 `R&P`（含 `&`）；历史叙述可写「was / formerly proposal」。
 
 ## 文件落点
 
