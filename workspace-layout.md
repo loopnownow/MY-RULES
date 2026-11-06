@@ -16,16 +16,23 @@ description: 本机布局与子工程短针。落点见 My rule.md §5。
 | `D:\0Grok\0doc` | 语料 + 可复用代码；live tops：`_library`（含 `references` 文献全文、`lit-bank` 书目、`journals` 期刊池与选刊侧私有、`ethics\approvals` 批件、`lab-ref-ranges`、`glossary` 自有语料+四层（words/sentences/paragraphs + sections 指针页；`GLOSSARY_ROOT`）） / `templates` / `mem` / `GitHub` / `test` / `skill-harvest`（+ 根 md；`_bank` 2026-11-01 并入 `_library\glossary`，`_code` 2026-11-01 退役） |
 | `D:\0Grok\0doc\mem` | bot 记忆导出/更新落点（城城 2026-10-25）；**仅隐私** + 可变数据 SSOT（如 find-journal JCR xlsx）；站立政策不进 mem |
 | `D:\0Grok` | 分阶段子工程工作区（阶段夹见下节） |
-| `D:\0Grok\R&P`（formerly `proposal`） | 申请/立项及相关材料包；**非**稿件阶段夹（见下「兄弟根」） |
+| `D:\0Grok\R&P`（formerly `proposal`） | (1) 课题申请 / grant-or-project application packets；(2) 主人评阅他人稿；**非**稿件阶段夹（见下「兄弟根」） |
 
-### `{RAW}` = `D:\00db`（原始库契约 · t1705u）
+### `{RAW}` = `D:\00db`（原始库契约 · t1705u；ZIP 偏好 t1719u）
 
-- **落点：** 大体量原始文件放 `D:\00db\<slug>\`（`<slug>` 与课题夹名一致）：DICOM 序列、NIfTI/NII.GZ、未处理的 4D/导出包、按序列存的影像树等。
+- **落点：** `D:\00db\<slug>\`（`<slug>` 与课题夹名一致）存放该 0Grok 子工程的**原始数据与原始影像**：DICOM 树、未压缩导出、作为源数据的原始照片、NIfTI/NII.GZ、未处理的 4D/导出包等。衍生图/表/统计仍在课题侧（见下条）。
 - **子工程只留指针：** 在 `ref/settings.ini` 写 data path；**不要**把原始体拷进 `D:\0Grok\…` 或三仓（MY-RULES / MY-SKILLS / MY-CODES）。
 - **衍生件仍在课题侧：** 衍生物 / 图 / 表按本文件与 `project-ref-layout.md` 落在子工程；勿塞进 `00db`。
 - **临床底表 ≠ 影像 raw：** Excel/CSV 底表仍落 `ref/` 或 `ref/data/`（D-1：移动前先问）。**不要**把所有「data」都倒进 `00db`。
 - **现行名只写 `00db`；活 `00ds` = QC 对象：** `D:\00ds` / 夹名 `00ds` 已退役。任何活路径、夹名、过滤器/默认项仍写 `00ds` 的，视为 QC 发现，**必须更正为 `00db`**；**不要**在活 allowlist/filter 里把 `00ds` 留作「legacy」。changelog 里「曾用/原 `00ds`」的历史叙述可留。不另造第三个 raw 根。**更正活引用 ≠ 搬迁磁盘树**；本票不 bulk 迁移 `D:\00ds` / `D:\00db`（两边若都在，维持原状，等主人另批搬迁）。
 - **禁止进 git：** 原始影像二进制**不要**进 git（含 Git LFS）或任何 GitHub remote（DICOM 头含 PHI；二进制无有效 delta）。可选轻量清单（相对路径 + 大小 + SHA-256 + 入库日）可放子工程 `ref/pipeline/`（同 `hashes.tsv` / `MANIFEST.md` 思路）。该清单若需版本，可用**无 remote 的本地 git**；备份 = 拷到另一块盘，不是 git。
+- **ZIP 偏好（t1719u；包装偏好，非加密）：** 多文件 raw 序列默认用 **ZIP** 作容器（Windows 可便携）。优先按 **subject / session / modality**（或一次采集单元）一档，**不要**整 slug 打成一个 mega-zip。
+  - **值得 deflate：** 未压缩 DICOM 夹、未压缩 `.nii`、BMP/TIFF 栈。
+  - **勿再压缩：** 已压缩对象（`.nii.gz`、JPEG/JPEG-LS/JPEG2000 DICOM、PNG）——保持原样；若需容器则用 zip **store**（不二次压缩）。避免 zip-in-zip。
+  - **归档后：** 不要在 `00db` 或 `D:\0Grok` 下再留第二份解压树（重复）。处理仍走既有 copy-on-need：需要时抽到工作区，**不要**长期解压在 archive 旁。
+  - **清单：** 可选在课题 `ref/pipeline/` 记 archive（相对路径 + 大小 + SHA-256 + 入库日）；内文件清单可选，非必须。
+  - ZIP 只是打包，**不是**加密；DICOM 头 PHI 与禁止进 git/LFS 仍适用。**不**强制密码 zip。
+  - 本条为**今后偏好**；本票不 bulk 转换已有解压树。仅当主人点名某树时再转。
 - **只读默认：** `{RAW}` 只读，除非主人点名写入。**不预建空夹**（用到再拷 / copy-on-need）。
 
 **云端 / 本地：** 云端 = Grok Bot box；本地 = 城城本机。详见 `My rule.md` §1。
@@ -60,7 +67,7 @@ description: 本机布局与子工程短针。落点见 My rule.md §5。
 
 ## 兄弟根：`R&P`（非阶段）
 
-`D:\0Grok\R&P`（formerly `proposal`）存放 grants / proposals / related packets。**不是**稿件流水线的第五阶段：不要写入上方 `drafting` / `pre-submit` / `in-review` / `accepted` 阶段表，也不进 `study_folder_stage_aliases`。路径写作 `R&P`（含 `&`）；历史叙述可写「was / formerly proposal」。
+`D:\0Grok\R&P`（formerly `proposal`）存放两类材料：（1）**课题申请** / grant-or-project application packets；（2）主人对**他人稿件**的评阅（评阅他人稿）。**仍是**兄弟工作区根，**不是**稿件流水线第五阶段：不要写入上方 `drafting` / `pre-submit` / `in-review` / `accepted` 阶段表，也不进 `study_folder_stage_aliases`。本实验室自己的期刊草稿 / R&R / 校样**不要**放这里——仍走四阶段夹。不另造内层子夹 schema（现有 `R&P\2026\…` 维持原状）。路径写作 `R&P`（含 `&`）；历史叙述可写「was / formerly proposal」。
 
 ## 文件落点
 
