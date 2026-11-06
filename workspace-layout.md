@@ -11,11 +11,21 @@ description: 本机布局与子工程短针。落点见 My rule.md §5。
 
 | 根 | 角色 |
 |---|---|
-| `D:\00db`（`{RAW}`） | 已组织的原始库；只读除非点名 |
+| `D:\00db`（`{RAW}`） | 已组织的原始库（大体量影像等按 slug）；只读除非点名；细则见下节 |
 | `D:\0del`（`{DEL}`） | AI 可操作临时/移出区（`_by-project` / `_by-function`） |
 | `D:\0Grok\0doc` | 语料 + 可复用代码；live tops：`_library`（含 `references` 文献全文、`lit-bank` 书目、`journals` 期刊池与选刊侧私有、`ethics\approvals` 批件、`lab-ref-ranges`、`glossary` 自有语料+四层（words/sentences/paragraphs + sections 指针页；`GLOSSARY_ROOT`）） / `templates` / `mem` / `GitHub` / `test` / `skill-harvest`（+ 根 md；`_bank` 2026-11-01 并入 `_library\glossary`，`_code` 2026-11-01 退役） |
 | `D:\0Grok\0doc\mem` | bot 记忆导出/更新落点（城城 2026-10-25）；**仅隐私** + 可变数据 SSOT（如 find-journal JCR xlsx）；站立政策不进 mem |
 | `D:\0Grok` | 分阶段子工程工作区（阶段夹见下节） |
+
+### `{RAW}` = `D:\00db`（原始库契约 · t1705u）
+
+- **落点：** 大体量原始文件放 `D:\00db\<slug>\`（`<slug>` 与课题夹名一致）：DICOM 序列、NIfTI/NII.GZ、未处理的 4D/导出包、按序列存的影像树等。
+- **子工程只留指针：** 在 `ref/settings.ini` 写 data path；**不要**把原始体拷进 `D:\0Grok\…` 或三仓（MY-RULES / MY-SKILLS / MY-CODES）。
+- **衍生件仍在课题侧：** 衍生物 / 图 / 表按本文件与 `project-ref-layout.md` 落在子工程；勿塞进 `00db`。
+- **临床底表 ≠ 影像 raw：** Excel/CSV 底表仍落 `ref/` 或 `ref/data/`（D-1：移动前先问）。**不要**把所有「data」都倒进 `00db`。
+- **现行名只写 `00db`：** `D:\00ds` 为旧名/已退役写法；活文档指针一律写 `D:\00db`。不另造第三个 raw 根。**本票不迁移磁盘上的 `00ds`/`00db` 目录树**（两边若都在，维持原状，等主人另批搬迁）。
+- **禁止进 git：** 原始影像二进制**不要**进 git（含 Git LFS）或任何 GitHub remote（DICOM 头含 PHI；二进制无有效 delta）。可选轻量清单（相对路径 + 大小 + SHA-256 + 入库日）可放子工程 `ref/pipeline/`（同 `hashes.tsv` / `MANIFEST.md` 思路）。该清单若需版本，可用**无 remote 的本地 git**；备份 = 拷到另一块盘，不是 git。
+- **只读默认：** `{RAW}` 只读，除非主人点名写入。**不预建空夹**（用到再拷 / copy-on-need）。
 
 **云端 / 本地：** 云端 = Grok Bot box；本地 = 城城本机。详见 `My rule.md` §1。
 
