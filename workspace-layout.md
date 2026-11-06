@@ -23,7 +23,7 @@ description: 本机布局与子工程短针。落点见 My rule.md §5。
 - **子工程只留指针：** 在 `ref/settings.ini` 写 data path；**不要**把原始体拷进 `D:\0Grok\…` 或三仓（MY-RULES / MY-SKILLS / MY-CODES）。
 - **衍生件仍在课题侧：** 衍生物 / 图 / 表按本文件与 `project-ref-layout.md` 落在子工程；勿塞进 `00db`。
 - **临床底表 ≠ 影像 raw：** Excel/CSV 底表仍落 `ref/` 或 `ref/data/`（D-1：移动前先问）。**不要**把所有「data」都倒进 `00db`。
-- **现行名只写 `00db`：** `D:\00ds` 为旧名/已退役写法；活文档指针一律写 `D:\00db`。不另造第三个 raw 根。**本票不迁移磁盘上的 `00ds`/`00db` 目录树**（两边若都在，维持原状，等主人另批搬迁）。
+- **现行名只写 `00db`；活 `00ds` = QC 对象：** `D:\00ds` / 夹名 `00ds` 已退役。任何活路径、夹名、过滤器/默认项仍写 `00ds` 的，视为 QC 发现，**必须更正为 `00db`**；**不要**在活 allowlist/filter 里把 `00ds` 留作「legacy」。changelog 里「曾用/原 `00ds`」的历史叙述可留。不另造第三个 raw 根。**更正活引用 ≠ 搬迁磁盘树**；本票不 bulk 迁移 `D:\00ds` / `D:\00db`（两边若都在，维持原状，等主人另批搬迁）。
 - **禁止进 git：** 原始影像二进制**不要**进 git（含 Git LFS）或任何 GitHub remote（DICOM 头含 PHI；二进制无有效 delta）。可选轻量清单（相对路径 + 大小 + SHA-256 + 入库日）可放子工程 `ref/pipeline/`（同 `hashes.tsv` / `MANIFEST.md` 思路）。该清单若需版本，可用**无 remote 的本地 git**；备份 = 拷到另一块盘，不是 git。
 - **只读默认：** `{RAW}` 只读，除非主人点名写入。**不预建空夹**（用到再拷 / copy-on-need）。
 
