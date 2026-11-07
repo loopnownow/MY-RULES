@@ -140,6 +140,7 @@ license: MIT
 
 说明/QC 中文；期刊英文稿英文。汇报时区 Asia/Shanghai (UTC+08:00)。「；」=两任务；「|」=同任务并列。STE→`{SKILLS}\05_manuscript\base\vocab\L3\lab-ste.md`。
 写作证据席位：`GLOSSARY_ROOT`=`0doc\_library\glossary`（**四层** md + `index.csv`；`banks\` 只作证据）。判据 SSOT = `{SKILLS}\05_manuscript\base\vocab\`（+ 具名 advanced）；`rule_ptr` 指回技能，不复制规则正文。
+标点：允许 Unicode minus U+2212 `−`（负号/有符号数/如 Q3−Q1）；ASCII `-` 与 en dash U+2013 `–` 仍可用。仍禁 em dash U+2014 `—` 与 spaced `--`；`≈` 仍禁。细则 → `{SKILLS}\05_manuscript\base\vocab\L1\ban-phrases.md`（owner t1761u / 2026-11-07）。
 
 # 9 按需文件
 
