@@ -73,6 +73,14 @@ SCI 相关文件统一命名：`<Stem>_<子项目名>_<版本号>`。（本条 2
 - 例：`Manuscript_lxf_PP_V1.10.docx`（投出稿）；`Manuscript_lxf_PP_R1.1.docx`、`Comments_lxf_PP_R1.1.docx`、`Response_lxf_PP_R1.1.docx`、`Supplementary_lxf_PP_R1.1.docx`
 - **落点：** 现行 `Manuscript_<slug>_V…` 或 `_R…`（及同号配套）在**子工程根**；**旧版** → `ref/tmp/`。未被接受的投稿包仍按上节进 `ref/` / `submission-*`。本条管文件名 + 旧版落点；详 → 上表 `ref/tmp/`。（原 `materials/` 已退役，勿再新建。）
 
+### 城城手改识别（仅靠版本号抬升 · t1757u）
+
+- 城城每次手改并保存后，在**文件名**（及文内版本号，若有）抬升 patch（例：`Manuscript_*_V1.2.docx` → `V1.3`；`R` / `P` 同理）。
+- 助手：子工程**根**上最新的 `Manuscript_*_V…` / `_R…` / `_P…`，若其版本号**大于**该课题上次助手记录的已落地版本，**必须**视为**城城手改 live 稿**。
+- 此时：**禁止**从更旧的 bak / `-org` / collapsed 副本整文件还原或覆盖；只允许 **Track Changes（作者 A）增量**合并；**禁止**降低版本号；**禁止**用 bak 整文件替换现行稿。
+- **不要**为此新建 `OWNER.md`、`.owner.docx`、lock txt 或其它标记文件——识别信号**仅**是文件名（及文内）版本号抬升。
+
+
 ### 数据底表（D-1）
 
 - 原始/预清洗数据底表可落在 `ref/` 根或 `ref/data/`（撞名或更清晰时保留 `data/`）。
