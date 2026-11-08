@@ -6,7 +6,7 @@ import / 参数 / 赋值。内层函数的 import 不会让外层函数"看得�
 用法:
     python -B scope_check.py <dir> [alias1 alias2 ...]
 例:
-    python -B scope_check.py D:/0Grok/0doc/GitHub/MY-CODES/modules pd np plt os sys json re
+    python -B scope_check.py D:/MyProjects/_Docs/GitHub/MY-CODES/modules pd np plt os sys json re
 """
 import ast
 import os
