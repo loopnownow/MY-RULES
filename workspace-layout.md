@@ -16,7 +16,7 @@ description: 本机布局与子工程短针。落点见 My rule.md §5。
 | `D:\MyProjects\_Docs` | 语料 + 可复用代码；live tops：`_library`（含 `references` 文献全文、`lit-bank` 书目、`journals` 期刊池与选刊侧私有、`ethics\approvals` 批件、`lab-ref-ranges`、`glossary` 自有语料+四层（words/sentences/paragraphs + sections 指针页；`GLOSSARY_ROOT`）） / `templates` / `mem` / `GitHub` / `test` / `skill-harvest`（+ 根 md；`_bank` 2026-11-01 并入 `_library\glossary`，`_code` 2026-11-01 退役） |
 | `D:\MyProjects\_Docs\mem` | bot 记忆导出/更新落点（城城 2026-10-25）；**仅隐私** + 可变数据 SSOT（如 find-journal JCR xlsx）；站立政策不进 mem |
 | `D:\MyProjects` | 分阶段子工程工作区（阶段夹见下节） |
-| `D:\MyProjects\archived` | 已完结项目冷库（`archived\<suffix>\<prefix_suffix>\`；与 `_DataBase` 同后缀分桶）；**非**阶段夹 |
+| `D:\MyProjects\archived` | 已完结项目冷库（`archived\<suffix>\<prefix_suffix>\`；L1=基码短码，与 `_DataBase` 同后缀分桶；全称见 `_diseases.csv`）；**非**阶段夹 |
 | （无活兄弟根 `R&P`） | 申请包 → `_DataBase\_grants\`；评阅他人稿 → `_DataBase\_reviews\`；`R&P` 已退役（t1813/t1815；见下「R&P 退役」） |
 
 ### 同步（t1794u / t1796u / 2026-11-08）
@@ -46,7 +46,7 @@ description: 本机布局与子工程短针。落点见 My rule.md §5。
 
 ### `{RAW}` 非课题分支与后缀分桶（t1791u / 2026-11-08）
 `D:\MyProjects\_DataBase`（旧名 **00db**）内存三类：① 课题原始件（按后缀分桶）；② `_lab`（历史档，**只读**，不再新增；**留根**、不分桶）；③ `_` 开头的非课题归档分支（新件落这里；**留根**、不分桶）。
-- **按后缀分桶（t1791u；覆写同日早先「不分后缀层」拍板）：** 课题原始件路径为 `_DataBase\<suffix>\<prefix_suffix>\`（例 `RC\lxf_RC`、`SSD\dyf_SSD`）。`<prefix>` = sub-PI 缩写，`<suffix>` = 项目短码。
+- **按后缀分桶（t1791u；L1 基码 t1822u）：** 课题原始件路径为 `_DataBase\<suffix>\<prefix_suffix>\`（例 `RC\lxf_RC`、`SSD\dyf_SSD_1`）。`<prefix>` = sub-PI 缩写；`<suffix>` = **基码**短码（剥末尾 `_\d+` 实例；语义复合如 `SCH_HE`/`SSD_DKI` 整段保留）。实例号只在叶子夹名。疾病全称 SSOT → `_diseases.csv`（见「archived 冷库」）。本票不批量改已有编号 DB 桶名（如存量 `SSD_1\`）；新落点用基码。
 
 | 分支 | 放 | 不放 |
 |---|---|---|
@@ -60,6 +60,7 @@ description: 本机布局与子工程短针。落点见 My rule.md §5。
 
 - **硬规则：** 课题原始数据不得进 `_` 分支；`_` 分支不得被课题 `ref/settings.ini` 当数据源。
 - **`目录说明.md`：** 每个 `_` 分支根与 `_lab` 根必须有（放什么、谁维护、更新日）。
+- **`D:\MyProjects\_DataBase\_diseases.csv`（疾病短码 SSOT · t1821u / t1822u）：** 列 `suffix,name_en,name_zh,l1,l2,aliases`；`suffix`=基码（无 `_\d+` 实例）；编号形式进 `aliases`；library `l1`/`l2` 对照 ethics/references。全称不进路径规则。
 - **`D:\MyProjects\_DataBase\_index.csv`（唯一可写台账）：** 一行一个 slug/分支，列 `kind,slug,prefix,suffix,title,l1,l2,stage,owner,indexed_on,note`；新建/改名当轮更新。
 - **只读不变：** 除 `_index.csv` 外 `_DataBase` 默认只读；新建分支/子夹属写盘，须当轮点名（§5.1 不豁免）。
 - 不预建空夹。
@@ -147,9 +148,13 @@ description: 本机布局与子工程短针。落点见 My rule.md §5。
 - syn：`D:\MyProjects`→`E:\Aitor` 仅 `/XD .Del`。
 - harvest-skill-library ≠ closeout：harvest 只抽「怎么做」；closeout 是落点；勿把 closeout 写成 harvest 步骤。
 
-## archived 冷库（非阶段；2026-11-08）
+## archived 冷库（非阶段；2026-11-08；t1821u / t1822u）
 
-`D:\MyProjects\archived` 放**已完结**项目：`D:\MyProjects\archived\<suffix>\<prefix_suffix>\`（L1=`<suffix>` 短码，与 `_DataBase\<suffix>\<prefix_suffix>\` 同后缀分桶；第二层与课题夹名一致）。中英文疾病全称只进 `_DataBase\_index.csv`（可选 `_diseases.csv`：code,name_en,name_zh；未建则不强制）。不按年份分层。
+`D:\MyProjects\archived` 放**已完结**项目：`D:\MyProjects\archived\<suffix>\<prefix_suffix>\`（L1=`<suffix>` **基码**短码，与 `_DataBase\<suffix>\<prefix_suffix>\` 同后缀分桶；第二层 = 完整课题夹名）。不按年份分层。
+
+- **L1 = 基码（t1822u）：** `<suffix>` 去掉末尾实例号 `_\d+`（例 `SSD_1`→`SSD`，`EC_1`→`EC`，`RDL_1`→`RDL`）。实例号只留在叶子夹名 `<prefix_suffix>`（例 `archived\SSD\dyf_SSD_1\`）。语义复合短码整段保留，不剥：`SSD_DKI`、`SCH_HE`、`PCOSMRS` 等。
+- **疾病短码 SSOT：** `_DataBase\_diseases.csv`（UTF-8；列 `suffix,name_en,name_zh,l1,l2,aliases`）。`suffix` = 基码；编号形式进 `aliases`（如 `SSD_1`）。中英文全称**只**进本表（及 `_index.csv` 可抄空值）；路径规则不写长病名。
+- **ethics / references** 仍用 library L1/L2（`library-taxonomy.md`）；靠 `_diseases.csv` 的 `suffix`↔`l1`/`l2` 对照，不另造路径层。
 
 - **进场（四条全满足）：** ① 在 `accepted` 且该稿流程结束（接收/校样完成）；② skill 已提取或已按 `skills.md` §3 提案（`skill-harvest` 有记录，无则记 `none`）；③ rule 候选已提交（无则记 `none`）；④ `_DataBase\_index.csv` 行与 `_Docs\mem\people.csv` 行已更新。
 - **历史旧论文（如 `000-vip\科研\文章`）：** 先进 `accepted`，按 `<prefix>_<suffix>` 建项目；抽取（skill/rule/_DataBase/_Docs）完成后再按上条进冷库。**先 accepted，后 archived**，不直进冷库。
