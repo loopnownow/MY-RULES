@@ -16,8 +16,8 @@ description: 本机布局与子工程短针。落点见 My rule.md §5。
 | `D:\MyProjects\_Docs` | 语料 + 可复用代码；live tops：`_library`（含 `references` 文献全文、`lit-bank` 书目、`journals` 期刊池与选刊侧私有、`ethics\approvals` 批件、`lab-ref-ranges`、`glossary` 自有语料+四层（words/sentences/paragraphs + sections 指针页；`GLOSSARY_ROOT`）） / `templates` / `mem` / `GitHub` / `test` / `skill-harvest`（+ 根 md；`_bank` 2026-11-01 并入 `_library\glossary`，`_code` 2026-11-01 退役） |
 | `D:\MyProjects\_Docs\mem` | bot 记忆导出/更新落点（城城 2026-10-25）；**仅隐私** + 可变数据 SSOT（如 find-journal JCR xlsx）；站立政策不进 mem |
 | `D:\MyProjects` | 分阶段子工程工作区（阶段夹见下节） |
-| `D:\MyProjects\archived` | 已完结项目冷库（`archived\<prefix>\<prefix_suffix>\`）；**非**阶段夹 |
-| `D:\MyProjects\R&P`（formerly `proposal`） | (1) 课题申请 / grant-or-project application packets；(2) 主人评阅他人稿；**非**稿件阶段夹（见下「兄弟根」） |
+| `D:\MyProjects\archived` | 已完结项目冷库（`archived\<suffix>\<prefix_suffix>\`；与 `_DataBase` 同后缀分桶）；**非**阶段夹 |
+| （无活兄弟根 `R&P`） | 申请包 → `_DataBase\_grants\`；评阅他人稿 → `_DataBase\_reviews\`；`R&P` 已退役（t1813/t1815；见下「R&P 退役」） |
 
 ### 同步（t1794u / t1796u / 2026-11-08）
 - `syn.bat`：`D:\MyProjects` → **`E:\Aitor`**（镜像到 Aitor **根**；**不是** `E:\Aitor\MyProjects`）。
@@ -54,8 +54,8 @@ description: 本机布局与子工程短针。落点见 My rule.md §5。
 | `_ethics\<code>\` | 伦理申报包与表格原件 | 批件 PDF（实体在 `_library\ethics\approvals`，只挂指针） |
 | `_med\{gcp,meeting,year-end,rules}\` | 医疗行政 | 科研数据 |
 | `_books\<year>\` | 书稿/章节 | 课题原稿 |
-| `_grants\<year>\` | 已结题课题申请包 | 进行中的申请（仍在 `R&P`） |
-| `_reviews\{peer,grants,thesis}\<year>\` | 已完成的他人稿 / 标书 / 毕业论文评阅 | 本组稿件（走四阶段） |
+| `_grants\<year>\` | 课题申请包（进行中与已结题；原 `R&P` 申请侧） | 本组期刊稿（走四阶段） |
+| `_reviews\{peer,grants,thesis}\<year>\` | 他人稿 / 标书 / 毕业论文评阅（原 `R&P` 评阅侧） | 本组稿件（走四阶段） |
 | `_personal\` | 个人材料（进修/签证） | 任何课题数据 |
 
 - **硬规则：** 课题原始数据不得进 `_` 分支；`_` 分支不得被课题 `ref/settings.ini` 当数据源。
@@ -76,7 +76,7 @@ description: 本机布局与子工程短针。落点见 My rule.md §5。
 |---|---|
 | `drafting` | 选题 / 数据 / house 稿 |
 | `pre-submit` | 投目标刊前打磨 |
-| `in-review` | 已投 / 在审 / 修回再投（收到审稿意见是事件，不是阶段） |
+| `reviewing` | 已投 / 在审 / 修回再投（收到审稿意见是事件，不是阶段） |
 | `accepted` | 接收 / 校样 |
 
 已有文件夹若仍用旧名，按下表阅读。**不改写**这些夹。**不新建** `DER`。
@@ -87,7 +87,8 @@ description: 本机布局与子工程短针。落点见 My rule.md §5。
 |---|---|
 | `preparing` | `drafting` |
 | `polishing` | `pre-submit` |
-| `submitting` | `in-review` |
+| `submitting` | `reviewing` |
+| `in-review` | `reviewing`（历史别名；活路径只写 `reviewing`） |
 | `reseived`、`received` | `accepted` |
 
 别名表在 `{SKILLS}\00_orchestrator\templates\project-state.yaml` 的 `study_folder_stage_aliases`（路径段别名，不是 `pipeline.stage`）。
@@ -100,7 +101,7 @@ description: 本机布局与子工程短针。落点见 My rule.md §5。
 
 ## accepted 收工（精简后进 archived · t1806u / t1809u / 2026-11-08）
 
-**目标：** harvest 后尽量精简 `accepted\<prefix_suffix>\`，再搬进 `archived\<prefix>\<prefix_suffix>\` + `ARCHIVED.md`。accepted 不长期堆满。本条是**落点契约**，不是 harvest 步骤（harvest-skill-library 只抽「怎么做」；closeout ≠ harvest）。
+**目标：** harvest 后尽量精简 `accepted\<prefix_suffix>\`，再搬进 `archived\<suffix>\<prefix_suffix>\` + `ARCHIVED.md`。accepted 不长期堆满。本条是**落点契约**，不是 harvest 步骤（harvest-skill-library 只抽「怎么做」；closeout ≠ harvest）。
 
 ### 课题树精简后硬留
 1. 终稿一份：`Manuscript_<slug>_{V|R|P}…`（旧名先问再改名；旧版→`ref/tmp/`）。根上只留这份**文件**，不要把整夹 `R*` / `P*` 留在根。
@@ -148,7 +149,7 @@ description: 本机布局与子工程短针。落点见 My rule.md §5。
 
 ## archived 冷库（非阶段；2026-11-08）
 
-`D:\MyProjects\archived` 放**已完结**项目：`D:\MyProjects\archived\<prefix>\<prefix_suffix>\`（第二层与课题夹名一致）；不按病种/年份分层。
+`D:\MyProjects\archived` 放**已完结**项目：`D:\MyProjects\archived\<suffix>\<prefix_suffix>\`（L1=`<suffix>` 短码，与 `_DataBase\<suffix>\<prefix_suffix>\` 同后缀分桶；第二层与课题夹名一致）。中英文疾病全称只进 `_DataBase\_index.csv`（可选 `_diseases.csv`：code,name_en,name_zh；未建则不强制）。不按年份分层。
 
 - **进场（四条全满足）：** ① 在 `accepted` 且该稿流程结束（接收/校样完成）；② skill 已提取或已按 `skills.md` §3 提案（`skill-harvest` 有记录，无则记 `none`）；③ rule 候选已提交（无则记 `none`）；④ `_DataBase\_index.csv` 行与 `_Docs\mem\people.csv` 行已更新。
 - **历史旧论文（如 `000-vip\科研\文章`）：** 先进 `accepted`，按 `<prefix>_<suffix>` 建项目；抽取（skill/rule/_DataBase/_Docs）完成后再按上条进冷库。**先 accepted，后 archived**，不直进冷库。
@@ -159,9 +160,13 @@ description: 本机布局与子工程短针。落点见 My rule.md §5。
 - **命名：** `name_zh → prefix` 进 `D:\MyProjects\_Docs\mem\people.csv`（`/mem/` 已 gitignore、_Docs 仓无 remote）。
 - 不预建空夹；同一 `<prefix_suffix>` 不重复。
 
-## 兄弟根：`R&P`（非阶段）
+## R&P 退役（t1813 / t1815 / t1817u）
 
-`D:\MyProjects\R&P`（formerly `proposal`）存放两类材料：（1）**课题申请** / grant-or-project application packets；（2）主人对**他人稿件**的评阅（评阅他人稿）。**仍是**兄弟工作区根，**不是**稿件流水线第五阶段：不要写入上方 `drafting` / `pre-submit` / `in-review` / `accepted` 阶段表，也不进 `study_folder_stage_aliases`。本实验室自己的期刊草稿 / R&R / 校样**不要**放这里——仍走四阶段夹。不另造内层子夹 schema（现有 `R&P\2026\…` 维持原状）。路径写作 `R&P`（含 `&`）；历史叙述可写「was / formerly proposal」。
+活兄弟根 `D:\MyProjects\R&P`（formerly `proposal`）**已退役**：磁盘 stub 已移 `.Del`（t1815）；勿重建。材料落点改为：
+- **课题申请包** → `_DataBase\_grants\<year>\`
+- **评阅他人稿**（peer / grants / thesis）→ `_DataBase\_reviews\{peer,grants,thesis}\<year>\`
+
+二者**不是**稿件流水线阶段：不要写入上方 `drafting` / `pre-submit` / `reviewing` / `accepted` 阶段表，也不进 `study_folder_stage_aliases`。本组期刊草稿 / R&R / 校样仍走四阶段夹。历史叙述可写「was / formerly proposal / R&P」。
 
 ## 文件落点
 
