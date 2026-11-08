@@ -10,9 +10,9 @@ license: MIT
 - **数据底表移动（D-1 · 2026-10-29 · t1309s6268）：** 原始/预清洗数据底表默认落 `ref/` 根（或 `ref/data/`）。**移动底表前必须先问城城**（D-1）；勿静默挪走。布局说明见 `project-ref-layout.md`。
 
 - **裁决顺序**：用户当轮表述 > 专题文件 > 本文件 > 子工程内约定。
-- **别名**：`{RULES}`=`D:\MyProjects\_Docs\GitHub\MY-RULES`；`{SKILLS}`=`D:\MyProjects\_Docs\GitHub\MY-SKILLS`；`{RAW}`=`D:\MyProjects\_DataBase`（已组织的原始库 = 课题原始件 + `_` 非课题归档分支；除 `_index.csv` 外只读；`00ds` 为旧名/QC 对象——活路径·夹名·filter 见 `00ds` 须改 `00db`，勿当 legacy 保留；细则 → `workspace-layout.md`「`{RAW}` = `D:\MyProjects\_DataBase`」）；`{DEL}`=`D:\0del`。
-- **本机布局（一行）**：`D:\MyProjects\_DataBase`（organized raw） / `D:\0del`（AI 可操作临时区） / `D:\MyProjects\_Docs`（语料 + 可复用代码） / `D:\MyProjects`（分阶段子工程工作区） / `D:\MyProjects\R&P`（formerly `proposal`；课题申请 + 评阅他人稿，**非**稿件阶段） / `D:\MyProjects\archived`（已完结项目冷库，**非**阶段）。细则 → `workspace-layout.md`。
-- **根路径更名（t1791u / 2026-11-08）：** 工程根 `D:\MyProjects`（原 `D:\0Grok`）；文档库 `D:\MyProjects\_Docs`（旧名 **0doc** = `_Docs`）；原始库 `{RAW}`=`D:\MyProjects\_DataBase`（旧名 **00db** = `_DataBase`）。E 镜像 `E:\Aitor\MyProjects`、`E:\Aitor\MyProjects\_DataBase`。课题原始件按后缀分桶：`_DataBase\<suffix>\<prefix_suffix>\`；`_lab` 与其他 `_` 非课题分支留 `_DataBase` 根。冷库 `D:\MyProjects\archived\<prefix>\<prefix_suffix>\`（进场条件见 `workspace-layout.md`）。同步：`syn.bat` 镜像工程树（`/XD _DataBase`），`synDB.bat` 镜像 `_DataBase`；`DB.lnk` 指向 `_DataBase`。
+- **别名**：`{RULES}`=`D:\MyProjects\_Docs\GitHub\MY-RULES`；`{SKILLS}`=`D:\MyProjects\_Docs\GitHub\MY-SKILLS`；`{RAW}`=`D:\MyProjects\_DataBase`（已组织的原始库 = 课题原始件 + `_` 非课题归档分支；除 `_index.csv` 外只读；`00ds` 为旧名/QC 对象——活路径·夹名·filter 见 `00ds` 须改 `00db`，勿当 legacy 保留；细则 → `workspace-layout.md`「`{RAW}` = `D:\MyProjects\_DataBase`」）；`{DEL}`=`D:\MyProjects\.Del`（旧名 **0del** / `D:\0del` = `.Del`）。
+- **本机布局（一行）**：`D:\MyProjects\_DataBase`（organized raw） / `D:\MyProjects\.Del`（AI 可操作临时区；旧名 **0del**） / `D:\MyProjects\_Docs`（语料 + 可复用代码） / `D:\MyProjects`（分阶段子工程工作区） / `D:\MyProjects\R&P`（formerly `proposal`；课题申请 + 评阅他人稿，**非**稿件阶段） / `D:\MyProjects\archived`（已完结项目冷库，**非**阶段）。细则 → `workspace-layout.md`。
+- **根路径更名（t1791u / t1794u / 2026-11-08）：** 工程根 `D:\MyProjects`（原 `D:\0Grok`）；文档库 `D:\MyProjects\_Docs`（旧名 **0doc** = `_Docs`）；原始库 `{RAW}`=`D:\MyProjects\_DataBase`（旧名 **00db** = `_DataBase`）；移出区 `{DEL}`=`D:\MyProjects\.Del`（旧名 **0del** / `D:\0del`）。**syn 镜像目标 = `E:\Aitor` 根**（不是 `E:\Aitor\MyProjects`）；`synDB.bat` 仍镜像 `_DataBase`（E 侧按 synDB 惯例）。课题原始件按后缀分桶：`_DataBase\<suffix>\<prefix_suffix>\`；`_lab` 与其他 `_` 非课题分支留 `_DataBase` 根。冷库 `D:\MyProjects\archived\<prefix>\<prefix_suffix>\`（进场条件见 `workspace-layout.md`）。同步：`syn.bat`：`D:\MyProjects` → `E:\Aitor`，`/XD _DataBase .Del`（**不同步** `_DataBase` 与 `.Del`）；`synDB.bat` 镜像 `_DataBase`；`DB.lnk` → `_DataBase`；`DEL.lnk` → `.Del`。
 - **库分类（t1458u）**：L1/L2 与三库分工的权威正文 → `library-taxonomy.md`。`_library` 下 `references`（全文实体）/ `lit-bank`（书目，无 PDF）/ `journals`（期刊池，含选刊侧私有 `whitelist-submitted.csv` / `submission-prior.jsonl`）/ `ethics\approvals`（批件）；不设 radiology 一级，按临床专科归类。
 - **术语**：作者字段 `A`=批注作者；`00`–`07`=技能层；派单→`{SKILLS}\00_orchestrator\references\ownership-contract.md`。工作区只有一层；不再有 A/B 双工作区或挂载缓存树。
 - **技能 ID**：选型只按 fine id；细则 → `skills.md` §2；`{SKILLS}\00_orchestrator\references\id-rules.md`。
@@ -28,7 +28,7 @@ license: MIT
 
 - **写盘总闸（t1672u）：只读不用授权；任何写盘先问。**除非城城 / owner**当轮明确要求**该项改动（点名文件 / 路径 / 任务，或对该项工作说「改 / 写 / 更新 / 修 / 推合 / 直接做」），agent 在**新建、编辑、覆盖、移动、删除任何文件**前必须**先问并等到「是」**；未获授权即停，不静默落盘。范围覆盖全部 bot / CloudAgent / Cursor，及 `{RULES}` / `{SKILLS}` / MY-CODES / `0doc` / 子工程 / `{DEL}` / mem 等任何位置。
 - **授权按项按轮（t1672u）**：当轮点名目标的授权**只覆盖该项**（如「改 A 第 3 节」只授权 A 的该处）；「直接做」只授权当轮那件事。**「继续」/ 未点名写盘的泛泛「好」≠ 写盘许可**，不得当全库放行。既有须问条款（D-1 移底表先问；网络须批；MY-SKILLS PR/merge 确认；Word「城城已改先问」）**继续有效**；本条是**所有**写盘的默认线。
-- **禁删**；移出只进 `{DEL}` 并保留相对路径。**旧稿清理**＝移入 `{DEL}` / `D:\0del`（可按 `_by-project` / `_by-function`），禁止静默永久删除。
+- **禁删**；移出只进 `{DEL}` 并保留相对路径。**旧稿清理**＝移入 `{DEL}` / `D:\MyProjects\.Del`（可按 `_by-project` / `_by-function`），禁止静默永久删除。
 - 确认：目标与验收；假设≤3；取舍；谁执行。
 - 「直接做」可不逐项确认（**写盘仍只限该项**，见上条 t1672u），但不跳过 MY-SKILLS PR/merge（`skills.md`）与须批网络（`network-security.md`）。「继续」≠网络同意。
 - 网络红线→`network-security.md`（含本机出站代理常设 `127.0.0.1:10808`）。
@@ -95,7 +95,7 @@ license: MIT
 - **图表编号（C-1 · 指针，2026-10-29 · t1309s6268）：** Table 1 = 基线；**不**单独放 logistic 系数表或 score-correlation 表（Aitor-format §209）；ROC 操作特性作表；图按适用放 workflow / US / heatmap / nomogram+校准 / ROC / DCA。细则勿在本文件复写，指针 → `{SKILLS}\05_manuscript\advanced\Aitor-format.md` §200 / §209 / §213。
 - **批注英文建议句**：单独成句，以 `Suggested …` 起首。字面模板技能落点→`{SKILLS}\06_review\advanced\word-edit.md`。`manuscript-and-review.md` 已于 2026-10-18 按 README 迁入 `05_manuscript` / `06_review` / `07_response`。
 - **审稿回复**：保留完整原始 comments；不简化；不擅自加小标题；不自创信函格式。→`{SKILLS}\07_response\advanced\response.md`。
-- **新建文件/文件夹（权威；合并 t1098u/t1107u/t1240 · 2026-10-30 · t1442u/t1450u）**：默认只能在 `{DEL}` / `D:\0del`（`_by-project` / `_by-function`）新建文件与文件夹；路径 SSOT 为 `D:\0del`（非 `D:\MyProjects\0del`）。在其他位置新建前必须本轮明确问城城并获准。**常设例外（仅限新建）**：(1) bot 记忆导出/更新可在 `D:\MyProjects\_Docs\mem\` 内新建（§1「mem 落盘」）；(2) 子工程内 `ref/tmp/` 按需写入临时/中间（含旧版稿；详 → `project-ref-layout.md`）。以上只是**新建路径**的例外，**不是编辑许可**：这些位置已有文件的编辑 / 覆盖 / 移动仍按 §2 写盘总闸，须当轮点名或先问（t1672u）。**改已有文件同样先问（t1672u）**：`{RULES}` / `{SKILLS}` / `0doc\skill-harvest\*` / `0doc\mem\*` / 子工程已有稿（含 Track Changes）**均不豁免**——除非城城当轮已点名要改该文件 / 该处，否则先问再改，不得以「属可改区」为由静默编辑。默认禁止在 `D:\MyProjects\_Docs` 下 mkdir（除 mem 例外与本轮明确同意）。新草稿、ACCEPT、digest、by-fine-id lane、笔记、中间件、临时/scratch、ACCEPT 备注 → 只进 `{DEL}`。审稿交付：优先修订现有评审意见 `.docx`（Track Changes），禁止另存新稿名、禁止在子工程下新建夹。用户本轮点名的终稿落点仍按 §5（优先改已有终稿）。短针→`workspace-layout.md`（不复写）；mem→`D:\MyProjects\_Docs\mem\README.md`；全文→`{RULES}\standing\STANDING-no-new-files-outside-0del.md` 与 `{RULES}\standing\STANDING-0doc-no-new-folder.md`（2026-10-31 从 0del 移入本仓；**0del 不再承载任何全文/指针**）。
+- **新建文件/文件夹（权威；合并 t1098u/t1107u/t1240 · 2026-10-30 · t1442u/t1450u）**：默认只能在 `{DEL}` / `D:\MyProjects\.Del`（`_by-project` / `_by-function`）新建文件与文件夹；路径 SSOT 为 `D:\MyProjects\.Del`（旧名 `D:\0del`；非 `D:\MyProjects\0del`）。在其他位置新建前必须本轮明确问城城并获准。**常设例外（仅限新建）**：(1) bot 记忆导出/更新可在 `D:\MyProjects\_Docs\mem\` 内新建（§1「mem 落盘」）；(2) 子工程内 `ref/tmp/` 按需写入临时/中间（含旧版稿；详 → `project-ref-layout.md`）。以上只是**新建路径**的例外，**不是编辑许可**：这些位置已有文件的编辑 / 覆盖 / 移动仍按 §2 写盘总闸，须当轮点名或先问（t1672u）。**改已有文件同样先问（t1672u）**：`{RULES}` / `{SKILLS}` / `0doc\skill-harvest\*` / `0doc\mem\*` / 子工程已有稿（含 Track Changes）**均不豁免**——除非城城当轮已点名要改该文件 / 该处，否则先问再改，不得以「属可改区」为由静默编辑。默认禁止在 `D:\MyProjects\_Docs` 下 mkdir（除 mem 例外与本轮明确同意）。新草稿、ACCEPT、digest、by-fine-id lane、笔记、中间件、临时/scratch、ACCEPT 备注 → 只进 `{DEL}`。审稿交付：优先修订现有评审意见 `.docx`（Track Changes），禁止另存新稿名、禁止在子工程下新建夹。用户本轮点名的终稿落点仍按 §5（优先改已有终稿）。短针→`workspace-layout.md`（不复写）；mem→`D:\MyProjects\_Docs\mem\README.md`；全文→`{RULES}\standing\STANDING-no-new-files-outside-0del.md` 与 `{RULES}\standing\STANDING-0doc-no-new-folder.md`（2026-10-31 从 0del 移入本仓；**0del 不再承载任何全文/指针**）。
 - **一次性脚本/说明/小补丁**（非课题交付）：只落 `{DEL}`，禁止丢进用户主目录、`.grok\tmp`、或课题根。
 - **0doc 目录名英文化（t1458u）**：`0doc` 下新建目录一律 ASCII 英文（如 `approvals` / `journals` / `jcr` 这类英文短名）；发现中文目录当轮 rename，并在 `_library\MOVED-FROM.md` 记一行。文件名可保留中文原名，但须在对应索引列留映射（如 `original_name_zh`）。库分类口径 → `library-taxonomy.md`。
 
@@ -111,7 +111,7 @@ license: MIT
 - **skip / archive / 退役仅指针 不是停放位**：口径见 §4 与 `skills.md` §6（t1463u；t1520u；**t1559u 不得 ignore/跳过假绿**）；0doc 侧由 `test\structure_check.py` S4 与 `test\cleanup_scan.py` C2 强制，**无存档例外**（年报/年表同样移 `{DEL}`，见 `0doc\STRUCTURE.md` §7）。
 
 
-## 5.3 0del 三档（2026-10-31）
+## 5.3 `.Del` 三档（旧名 0del · 2026-10-31；路径 t1794u）
 
 `{DEL}` 内移出件按可弃度分三档，**不得混放**；每档一个落点，搬移必留 `MOVED.tsv` 并保相对路径。
 
@@ -125,8 +125,8 @@ license: MIT
 - 落 harvested 前必须：① 全库 grep 确认无活文本引用（`0doc` + `D:\MyProjects` 课题树）；② 同名异字节不覆盖；③ 写 `harvested\MOVED.tsv`。
 - **harvested 是唯一的终弃档，且只由城城手动清空**（bot 不清、不代清、不自作主张）；park / harvest-park 不得整夹清。
 - `0doc` 侧的判定与落盘仍由 `test\cleanup_scan.py`（判据）与 `test\cleanup_move.py --dest <落点>`（落点）负责；本条只定**落点与可弃度**，不另造脚本。
-- **禁止活指针引用 `{DEL}`（2026-10-31）**：`{RULES}` / `{SKILLS}` / `0doc` 文档与脚本**不得**把 `D:\0del\...` 当作当前落点或路径解析目标（0del 会周期性清空）。需要长期存在的全文/台账/脚本一律放耐久位置（`{RULES}` / `{SKILLS}` / `0doc` / `project root`）；历史记录里的 0del 路径由 `test\path_audit.py` 归 `HISTORIC`，但**不得新增**活指针；要清空 0del 前先把活指针重指。
-- **整理 0del 前先 grep 活路径**：`_code` 多个脚本把输出写死到 `D:\0del\<子夹>`（一律在 `harvested\` 下：`smoke`、`modules_bak`、`cln_fill_supplement`、`yt_RDL`、`batch_rerun_status.json`、`batch_rerun.log`；t1490u），这些不是移出件，搬走即破坏脚本；新增写死路径须同轮补入本节清单。
+- **禁止活指针引用 `{DEL}`（2026-10-31）**：`{RULES}` / `{SKILLS}` / `0doc` 文档与脚本**不得**把 `D:\MyProjects\.Del\...`（或旧字面 `D:\0del\...`）当作当前落点或路径解析目标（0del 会周期性清空）。需要长期存在的全文/台账/脚本一律放耐久位置（`{RULES}` / `{SKILLS}` / `0doc` / `project root`）；历史记录里的 0del 路径由 `test\path_audit.py` 归 `HISTORIC`，但**不得新增**活指针；要清空 `.Del` 前先把活指针重指。
+- **整理 `.Del`（旧 0del）前先 grep 活路径**：`_code` 多个脚本把输出写死到 `{DEL}\<子夹>` / `D:\MyProjects\.Del\<子夹>`（一律在 `harvested\` 下：`smoke`、`modules_bak`、`cln_fill_supplement`、`yt_RDL`、`batch_rerun_status.json`、`batch_rerun.log`；t1490u），这些不是移出件，搬走即破坏脚本；新增写死路径须同轮补入本节清单。
 
 # 6 工程决策
 

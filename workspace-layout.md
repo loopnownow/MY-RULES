@@ -12,12 +12,17 @@ description: 本机布局与子工程短针。落点见 My rule.md §5。
 | 根 | 角色 |
 |---|---|
 | `D:\MyProjects\_DataBase`（`{RAW}`；旧名 00db） | 课题原始件（`<suffix>\<prefix_suffix>`）+ `_` 非课题归档分支 + `_lab` 历史档只读；除 `_index.csv` 外只读除非点名；细则见下节 |
-| `D:\0del`（`{DEL}`） | AI 可操作临时/移出区（`_by-project` / `_by-function`） |
+| `D:\MyProjects\.Del`（`{DEL}`；旧名 **0del** / `D:\0del`） | AI 可操作临时/移出区（`_by-project` / `_by-function`）；**syn 不同步**（`/XD .Del`） |
 | `D:\MyProjects\_Docs` | 语料 + 可复用代码；live tops：`_library`（含 `references` 文献全文、`lit-bank` 书目、`journals` 期刊池与选刊侧私有、`ethics\approvals` 批件、`lab-ref-ranges`、`glossary` 自有语料+四层（words/sentences/paragraphs + sections 指针页；`GLOSSARY_ROOT`）） / `templates` / `mem` / `GitHub` / `test` / `skill-harvest`（+ 根 md；`_bank` 2026-11-01 并入 `_library\glossary`，`_code` 2026-11-01 退役） |
 | `D:\MyProjects\_Docs\mem` | bot 记忆导出/更新落点（城城 2026-10-25）；**仅隐私** + 可变数据 SSOT（如 find-journal JCR xlsx）；站立政策不进 mem |
 | `D:\MyProjects` | 分阶段子工程工作区（阶段夹见下节） |
 | `D:\MyProjects\archived` | 已完结项目冷库（`archived\<prefix>\<prefix_suffix>\`）；**非**阶段夹 |
 | `D:\MyProjects\R&P`（formerly `proposal`） | (1) 课题申请 / grant-or-project application packets；(2) 主人评阅他人稿；**非**稿件阶段夹（见下「兄弟根」） |
+
+### 同步（t1794u / 2026-11-08）
+- `syn.bat`：`D:\MyProjects` → **`E:\Aitor`**（镜像到 Aitor **根**；**不是** `E:\Aitor\MyProjects`）。
+- `/XD _DataBase .Del`：不同步 `_DataBase` 与 `.Del`（旧 0del）。
+- `synDB.bat`：单独镜像 `_DataBase`；`DB.lnk` → `_DataBase`；`DEL.lnk` → `D:\MyProjects\.Del`。
 
 ### `{RAW}` = `D:\MyProjects\_DataBase`（原始库契约 · t1705u；ZIP 偏好 t1719u；根更名+后缀分桶 t1791u；旧名 **00db**）
 
@@ -147,8 +152,8 @@ description: 本机布局与子工程短针。落点见 My rule.md §5。
 
 ## 新建文件夹 / 新建文件
 
-只许建在 `{DEL}` / `D:\0del\` 的 `_by-project\`、`_by-function\`。权威与例外 → `My rule.md` §5.1（含 `_Docs`（旧名 0doc）默认禁止 mkdir、**改已有文件须当轮点名或先问**（§2 总闸 t1672u）、一次性脚本不进主目录 / `.grok\tmp` / 课题根）。本段不复写。bot mem 落点例外（`D:\MyProjects\_Docs\mem\`）→ `My rule.md` §1 + §5.1。
+只许建在 `{DEL}` / `D:\MyProjects\.Del\` 的 `_by-project\`、`_by-function\`。权威与例外 → `My rule.md` §5.1（含 `_Docs`（旧名 0doc）默认禁止 mkdir、**改已有文件须当轮点名或先问**（§2 总闸 t1672u）、一次性脚本不进主目录 / `.grok\tmp` / 课题根）。本段不复写。bot mem 落点例外（`D:\MyProjects\_Docs\mem\`）→ `My rule.md` §1 + §5.1。
 
 **目录命名（t1458u）**：`0doc` 下目录一律 ASCII 英文（`approvals` / `journals` / `jcr`）；中文目录发现即当轮 rename，并在 `_library\MOVED-FROM.md` 记一行。库分类与 L1/L2 → `library-taxonomy.md`。
 
-**0del 内部三档**（park / harvest-park / harvested，原 junk）与落 harvested 前的 grep 要求 → `My rule.md` §5.3。
+**`.Del` 内部三档**（旧名 0del）（park / harvest-park / harvested，原 junk）与落 harvested 前的 grep 要求 → `My rule.md` §5.3。
