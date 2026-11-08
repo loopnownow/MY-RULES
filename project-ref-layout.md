@@ -85,7 +85,7 @@ SCI 相关文件统一命名：`<Stem>_<子项目名>_<版本号>`。（本条 2
 
 - 原始/预清洗数据底表可落在 `ref/` 根或 `ref/data/`（撞名或更清晰时保留 `data/`）。
 - **今后移动底表前必须先问城城**（D-1）；本契约迁移轮次已获准将原 `materials/` 内容上抬时除外。勿静默挪走。
-- 大体量影像 raw（DICOM/NIfTI 等）≠ 本条底表：落 `{RAW}`=`D:\MyProjects\_DataBase\<slug>\`，见 `workspace-layout.md`「`{RAW}` = `D:\MyProjects\_DataBase`」（多文件 raw 序列 ZIP 偏好同节 t1719u）。
+- 大体量影像 raw（DICOM/NIfTI 等）≠ 本条底表：落 `{RAW}`=`D:\MyProjects\_DataBase\<slug>\`，见 `workspace-layout.md`「`{RAW}` = `D:\MyProjects\_DataBase`」（进库多文件先压缩同节 t1800u；单元粒度仍见 t1719u）。
 
 ### Cleanup（过后可清；两档）
 
