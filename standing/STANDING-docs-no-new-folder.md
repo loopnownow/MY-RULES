@@ -10,7 +10,7 @@
 3. **改已有文件也须当轮点名或先问**（含 MY-RULES / MY-SKILLS / `_Docs\skill-harvest\*` / `_Docs\mem\*` / 子工程已有稿）；本条不是自由编辑区（t1672u 写盘总闸 → `My rule.md` §2）。
 4. 临时 / scratch → `D:\MyProjects\.Del`。
 5. **ACCEPT 备注只落 `D:\MyProjects\.Del`**（本夹即例）。
-6. 与既有「禁止在 0del 以外新建文件」（t1098u）并存；见 sibling `{RULES}\standing\STANDING-no-new-files-outside-0del.md`。
+6. 与既有「禁止在 `{DEL}` 以外新建文件」（t1098u）并存；见 sibling `{RULES}\standing\STANDING-no-new-files-outside-Del.md`。
 
 ## Encoded into
 
