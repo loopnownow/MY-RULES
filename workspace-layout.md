@@ -11,11 +11,12 @@ description: 本机布局与子工程短针。落点见 My rule.md §5。
 
 | 根 | 角色 |
 |---|---|
-| `D:\00db`（`{RAW}`） | 已组织的原始库（大体量影像等按 slug）；只读除非点名；细则见下节 |
+| `D:\00db`（`{RAW}`） | 课题原始件（`<slug>`）+ `_` 非课题归档分支 + `_lab` 历史档只读；除 `_index.csv` 外只读除非点名；细则见下节 |
 | `D:\0del`（`{DEL}`） | AI 可操作临时/移出区（`_by-project` / `_by-function`） |
 | `D:\0Grok\0doc` | 语料 + 可复用代码；live tops：`_library`（含 `references` 文献全文、`lit-bank` 书目、`journals` 期刊池与选刊侧私有、`ethics\approvals` 批件、`lab-ref-ranges`、`glossary` 自有语料+四层（words/sentences/paragraphs + sections 指针页；`GLOSSARY_ROOT`）） / `templates` / `mem` / `GitHub` / `test` / `skill-harvest`（+ 根 md；`_bank` 2026-11-01 并入 `_library\glossary`，`_code` 2026-11-01 退役） |
 | `D:\0Grok\0doc\mem` | bot 记忆导出/更新落点（城城 2026-10-25）；**仅隐私** + 可变数据 SSOT（如 find-journal JCR xlsx）；站立政策不进 mem |
 | `D:\0Grok` | 分阶段子工程工作区（阶段夹见下节） |
+| `D:\0Grok\archived` | 已完结项目冷库（`archived\<prefix>\<prefix_suffix>\`）；**非**阶段夹 |
 | `D:\0Grok\R&P`（formerly `proposal`） | (1) 课题申请 / grant-or-project application packets；(2) 主人评阅他人稿；**非**稿件阶段夹（见下「兄弟根」） |
 
 ### `{RAW}` = `D:\00db`（原始库契约 · t1705u；ZIP 偏好 t1719u）
@@ -34,6 +35,28 @@ description: 本机布局与子工程短针。落点见 My rule.md §5。
   - ZIP 只是打包，**不是**加密；DICOM 头 PHI 与禁止进 git/LFS 仍适用。**不**强制密码 zip。
   - 本条为**今后偏好**；本票不 bulk 转换已有解压树。仅当主人点名某树时再转。
 - **只读默认：** `{RAW}` 只读，除非主人点名写入。**不预建空夹**（用到再拷 / copy-on-need）。
+
+### `{RAW}` 非课题分支（2026-11-08）
+
+`D:\00db` 一级三类并存：① `<prefix>_<suffix>` 课题原始件（上节契约）；② `_lab`（历史档，**只读**，不再新增）；③ `_` 开头的非课题归档分支（新件落这里）。
+
+- **不分后缀层（2026-11-08 拍板）：** 一级保持扁平；`suffix` 维度只由 `00db\_index.csv` 承载；某后缀出现 ≥2 个课题再议分层（另批）。
+
+| 分支 | 放 | 不放 |
+|---|---|---|
+| `_teach\<topic-slug>\` | 教学语料（课件/病例/试题/模板）；slug 用英文小写连字符 | 课题原始影像 |
+| `_ethics\<code>\` | 伦理申报包与表格原件 | 批件 PDF（实体在 `_library\ethics\approvals`，只挂指针） |
+| `_med\{gcp,meeting,year-end,rules}\` | 医疗行政 | 科研数据 |
+| `_books\<year>\` | 书稿/章节 | 课题原稿 |
+| `_grants\<year>\` | 已结题课题申请包 | 进行中的申请（仍在 `R&P`） |
+| `_reviews\{peer,grants,thesis}\<year>\` | 已完成的他人稿 / 标书 / 毕业论文评阅 | 本组稿件（走四阶段） |
+| `_personal\` | 个人材料（进修/签证） | 任何课题数据 |
+
+- **硬规则：** 课题原始数据不得进 `_` 分支；`_` 分支不得被课题 `ref/settings.ini` 当数据源。
+- **`目录说明.md`：** 每个 `_` 分支根与 `_lab` 根必须有（放什么、谁维护、更新日）。
+- **`D:\00db\_index.csv`（唯一可写台账）：** 一行一个 slug/分支，列 `kind,slug,prefix,suffix,title,l1,l2,stage,owner,indexed_on,note`；新建/改名当轮更新。
+- **只读不变：** 除 `_index.csv` 外 00db 默认只读；新建分支/子夹属写盘，须当轮点名（§5.1 不豁免）。
+- 不预建空夹。
 
 **云端 / 本地：** 云端 = Grok Bot box；本地 = 城城本机。详见 `My rule.md` §1。
 
@@ -64,6 +87,23 @@ description: 本机布局与子工程短针。落点见 My rule.md §5。
 别名表在 `{SKILLS}\00_orchestrator\templates\project-state.yaml` 的 `study_folder_stage_aliases`（路径段别名，不是 `pipeline.stage`）。
 
 课题夹名：`lowercase_UPPERCASE`（如 `fyh_CAC`、`xlm_LG`）。旧式 `CAC_fyh`、`lung_xlm` 已退休。
+
+**命名（2026-11-08）：** `<prefix>_<suffix>`——`<prefix>` = sub-PI 小写拼音首字母（如 `lxf`），`<suffix>` = 项目短码（大写或约定写法，如 `RC`/`CID`）。一人多题、一题多人都不改名；同后缀多例加 `_1`/`_2`（如 `llj_OV_1`）。中文人名只进台账（`0doc\mem\people.csv`），路径与正文不写中文名。
+
+**`archived` 不是第五阶段：** 不进上表、不进 `study_folder_stage_aliases`；见「archived 冷库」。
+
+## archived 冷库（非阶段；2026-11-08）
+
+`D:\0Grok\archived` 放**已完结**项目：`D:\0Grok\archived\<prefix>\<prefix_suffix>\`（第二层与课题夹名一致）；不按病种/年份分层。
+
+- **进场（四条全满足）：** ① 在 `accepted` 且该稿流程结束（接收/校样完成）；② skill 已提取或已按 `skills.md` §3 提案（`skill-harvest` 有记录，无则记 `none`）；③ rule 候选已提交（无则记 `none`）；④ `00db\_index.csv` 行与 `0doc\mem\people.csv` 行已更新。
+- **历史旧论文（如 `000-vip\科研\文章`）：** 先进 `accepted`，按 `<prefix>_<suffix>` 建项目；抽取（skill/rule/00db/0doc）完成后再按上条进冷库。**先 accepted，后 archived**，不直进冷库。
+- **`ARCHIVED.md`（每个项目根一份）：** `archived_on`、`from_stage`、`slug`、`skill_ref`、`rule_ref`、`index_row`、`note`；缺项不进。
+- **非阶段：** 不进阶段表、不进 `study_folder_stage_aliases`；`project-state.yaml` 的 `stage` 保持 `accepted`（不加 `archived` 枚举，避免 MY-SKILLS PR）。
+- **与 QC 禁令消歧：** `My rule.md` §4 与 `skills.md` §6 的 skip/archived 禁令只约束**技能树/文档 QC**，**不适用**项目冷库；冷库 = 已完成，不是未处理。
+- **只读默认：** 冷库不参与日常检索/改写；解冻 = 移回对应阶段夹 + 移除 `ARCHIVED.md`（须当轮点名）。
+- **命名：** `name_zh → prefix` 进 `D:\0Grok\0doc\mem\people.csv`（`/mem/` 已 gitignore、0doc 仓无 remote）。
+- 不预建空夹；同一 `<prefix_suffix>` 不重复。
 
 ## 兄弟根：`R&P`（非阶段）
 
