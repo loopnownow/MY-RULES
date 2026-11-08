@@ -19,9 +19,9 @@ description: 本机布局与子工程短针。落点见 My rule.md §5。
 | `D:\MyProjects\archived` | 已完结项目冷库（`archived\<prefix>\<prefix_suffix>\`）；**非**阶段夹 |
 | `D:\MyProjects\R&P`（formerly `proposal`） | (1) 课题申请 / grant-or-project application packets；(2) 主人评阅他人稿；**非**稿件阶段夹（见下「兄弟根」） |
 
-### 同步（t1794u / 2026-11-08）
+### 同步（t1794u / t1796u / 2026-11-08）
 - `syn.bat`：`D:\MyProjects` → **`E:\Aitor`**（镜像到 Aitor **根**；**不是** `E:\Aitor\MyProjects`）。
-- `/XD _DataBase .Del`：不同步 `_DataBase` 与 `.Del`（旧 0del）。
+- `/XD .Del`：不同步 `.Del`（旧 0del）；`_DataBase` 随主树同步（t1796u 取消 /XD `_DataBase`）。
 - `synDB.bat`：单独镜像 `_DataBase`；`DB.lnk` → `_DataBase`；`DEL.lnk` → `D:\MyProjects\.Del`。
 
 ### `{RAW}` = `D:\MyProjects\_DataBase`（原始库契约 · t1705u；ZIP 偏好 t1719u；根更名+后缀分桶 t1791u；旧名 **00db**）
