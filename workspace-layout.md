@@ -24,7 +24,7 @@ description: 本机布局与子工程短针。落点见 My rule.md §5。
 - `/XD .Del`：不同步 `.Del`（旧 0del）；`_DataBase` 随主树同步（t1796u 取消 /XD `_DataBase`）。
 - `synDB.bat`：单独镜像 `_DataBase`；`DB.lnk` → `_DataBase`；`DEL.lnk` → `D:\MyProjects\.Del`。
 
-### `{RAW}` = `D:\MyProjects\_DataBase`（原始库契约 · t1705u；ZIP 偏好 t1719u；根更名+后缀分桶 t1791u；旧名 **00db**）
+### `{RAW}` = `D:\MyProjects\_DataBase`（原始库契约 · t1705u；ZIP/进库压缩 t1719u/t1800u；根更名+后缀分桶 t1791u；旧名 **00db**）
 
 - **落点：** `D:\MyProjects\_DataBase\<suffix>\<prefix_suffix>\`（与课题夹名一致；旧扁平 `\<slug>\` 已退役）存放该 MyProjects 子工程的**原始数据与原始影像**：DICOM 树、未压缩导出、作为源数据的原始照片、NIfTI/NII.GZ、未处理的 4D/导出包等。衍生图/表/统计仍在课题侧（见下条）。
 - **子工程只留指针：** 在 `ref/settings.ini` 写 data path；**不要**把原始体拷进 `D:\MyProjects\…` 或三仓（MY-RULES / MY-SKILLS / MY-CODES）。
@@ -32,13 +32,16 @@ description: 本机布局与子工程短针。落点见 My rule.md §5。
 - **临床底表 ≠ 影像 raw：** Excel/CSV 底表仍落 `ref/` 或 `ref/data/`（D-1：移动前先问）。**不要**把所有「data」都倒进 `_DataBase`。
 - **现行名只写 `_DataBase`（旧名 00db）；活 `00ds` = QC 对象：** `D:\00ds` / 夹名 `00ds` 已退役。任何活路径、夹名、过滤器/默认项仍写 `00ds` 的，视为 QC 发现，**必须更正为 `_DataBase`**；**不要**在活 allowlist/filter 里把 `00ds` 留作「legacy」。changelog 里「曾用/原 `00ds`」的历史叙述可留。不另造第三个 raw 根。**更正活引用 ≠ 搬迁磁盘树**；本票（t1705u 叙述）不 bulk 迁移 `D:\00ds`；磁盘根更名见 t1791u（两边若都在，维持原状，等主人另批搬迁）。
 - **禁止进 git：** 原始影像二进制**不要**进 git（含 Git LFS）或任何 GitHub remote（DICOM 头含 PHI；二进制无有效 delta）。可选轻量清单（相对路径 + 大小 + SHA-256 + 入库日）可放子工程 `ref/pipeline/`（同 `hashes.tsv` / `MANIFEST.md` 思路）。该清单若需版本，可用**无 remote 的本地 git**；备份 = 拷到另一块盘，不是 git。
-- **ZIP 偏好（t1719u；包装偏好，非加密）：** 多文件 raw 序列默认用 **ZIP** 作容器（Windows 可便携）。优先按 **subject / session / modality**（或一次采集单元）一档，**不要**整 slug 打成一个 mega-zip。
-  - **值得 deflate：** 未压缩 DICOM 夹、未压缩 `.nii`、BMP/TIFF 栈。
-  - **勿再压缩：** 已压缩对象（`.nii.gz`、JPEG/JPEG-LS/JPEG2000 DICOM、PNG）——保持原样；若需容器则用 zip **store**（不二次压缩）。避免 zip-in-zip。
-  - **归档后：** 不要在 `_DataBase` 或 `D:\MyProjects` 下再留第二份解压树（重复）。处理仍走既有 copy-on-need：需要时抽到工作区，**不要**长期解压在 archive 旁。
-  - **清单：** 可选在课题 `ref/pipeline/` 记 archive（相对路径 + 大小 + SHA-256 + 入库日）；内文件清单可选，非必须。
-  - ZIP 只是打包，**不是**加密；DICOM 头 PHI 与禁止进 git/LFS 仍适用。**不**强制密码 zip。
-  - 本条为**今后偏好**；本票不 bulk 转换已有解压树。仅当主人点名某树时再转。
+- **进 `_DataBase` 多文件先压缩（t1800u；入库闸；承接 t1719u）：** 进 `D:\MyProjects\_DataBase\…`（或其 E 镜）时，若某目录内「单独文件」≥20，或明显是大量小文件堆（DICOM 序列、切片导出、逐例中间件、碎日志），先压成**一个**归档再入库；单文件或本来就少的目录不压。
+  - **格式：** 优先 `7z`（`-mx=5`；固态 DICOM 可 `-m0=LZMA2`）；无 7z 用 `zip`。归档名=`<原目录名>.7z`，放在该 `prefix_suffix` 桶内；旁路留 `<名>.files.txt`（相对路径清单）。
+  - **原目录：** 压缩校验通过（文件数/抽样 hash）后，原散目录移入 `D:\MyProjects\.Del`；不要两边长期并存。工作中的热数据先不压；定稿/冷存再压。
+  - **例外不压：** 根上索引与表（`settings.ini`、`*.xlsx`、`console.html`、README）；已是单一大文件（`.nii.gz`、整包 `.dcm`、现成 `.7z/.zip`）；主人点名要随时打开的活数据集。
+  - **单元粒度（t1719u 仍有效）：** 优先按 subject / session / modality（或一次采集单元）一档，**不要**整 slug 打成一个 mega-zip。
+  - **值得 deflate：** 未压缩 DICOM 夹、未压缩 `.nii`、BMP/TIFF 栈。已压缩对象（JPEG/JPEG-LS/JPEG2000 DICOM、PNG 等）若只需容器，用 zip **store**（不二次压缩）；避免 zip-in-zip。
+  - **归档后：** 不要在 `_DataBase` 或 `D:\MyProjects` 下再留第二份解压树。处理仍走 copy-on-need：需要时抽到工作区，**不要**长期解压在 archive 旁。
+  - **清单：** 桶内 `<名>.files.txt` 为相对路径清单（t1800u 必留）；课题 `ref/pipeline/` 可选再记 archive（相对路径 + 大小 + SHA-256 + 入库日）。
+  - 归档只是打包，**不是**加密；DICOM 头 PHI 与禁止进 git/LFS 仍适用。**不**强制密码。本条为**今后入库闸**；本票不 bulk 转换已有解压树。
+  - **syn：** 压完后 `_DataBase` 仍随主树同步；`syn` 仅 `/XD .Del`（与 t1796u 一致）。
 - **只读默认：** `{RAW}` 只读，除非主人点名写入。**不预建空夹**（用到再拷 / copy-on-need）。
 
 ### `{RAW}` 非课题分支与后缀分桶（t1791u / 2026-11-08）
