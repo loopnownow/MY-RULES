@@ -12,7 +12,7 @@
 
 参数:
     page.html    课题起始页（`<project>/<project>.html`）
-    modules_dir  算法库路径，写进 `DEFAULT_MODULES`（如 <GROK_ROOT>\\0doc\\GitHub\\MY-CODES\\modules）
+    modules_dir  算法库路径，写进 `DEFAULT_MODULES`（如 <GROK_ROOT>\\_Docs\\GitHub\\MY-CODES\\modules）
 
 退出码: 0 = 已替换或 dry-run 通过；1 = 占位符不是恰好 1 处（须人工看）；2 = 参数不足。
 """

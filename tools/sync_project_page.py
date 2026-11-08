@@ -91,7 +91,7 @@ def main() -> int:
         formatter_class=argparse.RawDescriptionHelpFormatter,
     )
     ap.add_argument("gold", help="金版 project.html 路径")
-    ap.add_argument("dest", help="目标课题页（如 D:\\0Grok\\drafting\\zyj_OV\\zyj_OV.html）")
+    ap.add_argument("dest", help="目标课题页（如 D:\\MyProjects\\drafting\\zyj_OV\\zyj_OV.html）")
     ap.add_argument("token", help='控制台 token；传空串 "" = 保持未登记')
     ap.add_argument("modules_dir", help="共享算法库 modules 目录（写进页面的默认路径）")
     ap.add_argument("--ini", default="", help="顺带把版本戳写进该课题 ref/settings.ini 的 [console] 段")

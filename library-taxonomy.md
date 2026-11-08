@@ -50,7 +50,7 @@
 - 索引 `approvals-index.xlsx` 19 列：`seq,l1,l2,approval_id,id_year,approval_date,valid_until,project_title,institution,file_name,rel_path,pages,size_kb,sha256,archive_name,original_name_zh,id_source,needs_owner,note`。
 - `approval_date` 与 `valid_until`（**批件有效期**）必录；扫描件无文本层时用本机 OCR 出候选 + **人工确认**，只补空、不覆盖人工值。
 - 子工程只挂指针（批号 + 路径），不存批件副本。
-- 0doc 目录名一律 ASCII 英文；中文原名只留索引列。
+- _Docs 目录名一律 ASCII 英文；中文原名只留索引列。
 - 申请包/申报原件不是批件：落 `D:\MyProjects\_DataBase\_ethics\<code>\`（非库分支 → `workspace-layout.md`）；`_library\ethics` 只收批件 PDF + 索引 + 提取层。
 
 ## 4 journals 契约
