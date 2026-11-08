@@ -39,7 +39,7 @@
 
 ### 三区 / 临时结果区
 
-- **站立（t1450u）：** 子工程内临时与中间文件默认进 `ref/tmp/`，**不**默认进 `{DEL}` / `D:\0del`。过后清理（先问）再移 `{DEL}`。
+- **站立（t1450u）：** 子工程内临时与中间文件默认进 `ref/tmp/`，**不**默认进 `{DEL}` / `D:\MyProjects\.Del`。过后清理（先问）再移 `{DEL}`。
 - **分析临时结果**（`ASL/`、`DKI/`、`DTI_IVIM/` 等）放在**子工程根旁**，**不进 `ref/`**。
 - 面向稿件/门控的统计**表图**在 `ref/tables/` `ref/figures/`；**锁定件** `hashes.tsv` `MANIFEST.md` `pipeline_run.log` 在 **`ref/pipeline/`**；**勿**与 `ASL/` 等分析树合并。
 - **分析错分/临时表（t1660u）**：`false_classification*` 与同类 ASL 分析临时表落**当次结果夹** `<project>/<endpoint>/`（或解析出的 OUT_DIR / `SUBPROJECT_BY_OUTCOME` 夹），**不在子工程根**，也**不进 `ref/`**。结果 HTML 同落该结果夹为 `Results*.html`（见 `workspace-layout.md`）；**不**把 `{slug}_results.html` 或旧结果 HTML 提升到子工程根——根上已有的旧副本属错位。
@@ -52,7 +52,7 @@
 - **定义**：某次投稿按期刊要求准备的分件（cover letter、title page、highlights、各类声明、补充表、入稿图件、graphical abstract 等）。
 - **未被接受**（投过未中、历史轮次包）：落在 `ref/` 根；成套（约 5 件及以上）建 `submission-<标识>/`（标识可用原夹名或期刊短名）；单件不成套可直接放 `ref/` 根。
 - **已接受**：最终稿件（及当前仍在用的修回件）**留在子工程根**，不因整理进 `ref/` 投稿夹。
-- **清理**：`ref/` 里的未被接受投稿包，过后清理时可经询问移入 `D:\0del\_by-project\<project>\`；禁止静默删除。
+- **清理**：`ref/` 里的未被接受投稿包，过后清理时可经询问移入 `D:\MyProjects\.Del\_by-project\<project>\`；禁止静默删除。
 
 ### SCI 稿件文件名（Manuscript / Comments / Response / Supplementary）
 
@@ -89,7 +89,7 @@ SCI 相关文件统一命名：`<Stem>_<子项目名>_<版本号>`。（本条 2
 
 ### Cleanup（过后可清；两档）
 
-**禁止**静默删除。清理时**先问城城再移**；优先移入 `D:\0del\_by-project\<project>\`（跨课题则 `_by-function`），有用时保留相对名。
+**禁止**静默删除。清理时**先问城城再移**；优先移入 `D:\MyProjects\.Del\_by-project\<project>\`（跨课题则 `_by-function`），有用时保留相对名。
 
 **默认可清 → 0del**（先问再移）：
 
@@ -150,4 +150,4 @@ SCI 相关文件统一命名：`<Stem>_<子项目名>_<版本号>`。（本条 2
 ## 编辑前原件（`-org`）（2026-10-19）
 
 - 名为 `*-org` / `*org*` 的文件（如 `comments-org.docx`、`SARC_CT_MRI_manuscript-org.docx`）是**编辑前原件**。留在课题内 (通常 `ref/review/`)。
-- 主人收工/清理时：**勿丢弃** `-org` 原件。只把真正的中间件从 `ref/tmp/` 移到 `D:\0del\_by-project\<project>\`。若 `-org` 曾停在 `tmp/`，清理前先提升到 `ref/review/`（或留在根）。
+- 主人收工/清理时：**勿丢弃** `-org` 原件。只把真正的中间件从 `ref/tmp/` 移到 `D:\MyProjects\.Del\_by-project\<project>\`。若 `-org` 曾停在 `tmp/`，清理前先提升到 `ref/review/`（或留在根）。
