@@ -46,7 +46,7 @@ description: 本机布局与子工程短针。落点见 My rule.md §5。
 
 ### `{RAW}` 非课题分支与后缀分桶（t1791u / 2026-11-08）
 `D:\MyProjects\_DataBase`（旧名 **00db**）内存三类：① 课题原始件（按后缀分桶）；② `_lab`（历史档，**只读**，不再新增；**留根**、不分桶）；③ `_` 开头的非课题归档分支（新件落这里；**留根**、不分桶）。
-- **按后缀分桶（t1791u；L1 基码 t1822u）：** 课题原始件路径为 `_DataBase\<suffix>\<prefix_suffix>\`（例 `RC\lxf_RC`、`SSD\dyf_SSD_1`）。`<prefix>` = sub-PI 缩写；`<suffix>` = **基码**短码（剥末尾 `_\d+` 实例；语义复合如 `SCH_HE`/`SSD_DKI` 整段保留）。实例号只在叶子夹名。疾病全称 SSOT → `_diseases.csv`（见「archived 冷库」）。本票不批量改已有编号 DB 桶名（如存量 `SSD_1\`）；新落点用基码。
+- **按后缀分桶（t1791u；L1 基码 t1822u）：** 课题原始件路径为 `_DataBase\<suffix>\<prefix_suffix>\`（例 `RC\lxf_RC`、`SSD\dyf_SSD_1`）。`<prefix>` = sub-PI 缩写；`<suffix>` = **基码**短码（剥末尾 `_\d+` 实例；语义复合如 `SCH_HE`/`SSD_DKI` 整段保留）。实例号只在叶子夹名。疾病全称 SSOT → `_diseases.csv`（见「archived 冷库」）。2026-11-08 t1824u 已把存量编号桶（`SSD_1\`、`LUNG2\`、`MHE1\`、`SHE\` 等）与新叶实例号批量归并：桶名一律基码，实例号只在叶子夹名（`<prefix>_<CODE>_<n>`）；新落点用基码，`_Docs/test/structure_check.py` S23 守门。
 
 | 分支 | 放 | 不放 |
 |---|---|---|
