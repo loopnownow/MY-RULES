@@ -87,9 +87,9 @@ SCI 相关文件统一命名：`<Stem>_<子项目名>_<版本号>`。（本条 2
 - **今后移动底表前必须先问城城**（D-1）；本契约迁移轮次已获准将原 `materials/` 内容上抬时除外。勿静默挪走。
 - 大体量影像 raw（DICOM/NIfTI 等）≠ 本条底表：落 `{RAW}`=`D:\MyProjects\_DataBase\<slug>\`，见 `workspace-layout.md`「`{RAW}` = `D:\MyProjects\_DataBase`」（进库多文件先压缩同节 t1800u；单元粒度仍见 t1719u）。
 
-### accepted 收工硬留（t1806u）
+### accepted 收工硬留（t1806u / t1809u）
 
-收工精简后课题树硬留：现行 `Manuscript_<slug>_{V|R|P}…`（子工程根）+ `FinalData_<slug>.xlsx`（或 `ref/README` 钉死的现用 data.xlsx）+ 可选 `ref/settings.ini` 指向 `_DataBase\<suffix>\<prefix_suffix>\`。可复现图 → `.Del\_by-project\<slug>\`；不可复现 → `_DataBase`。全文落点 → `workspace-layout.md`「accepted 收工」。本条不复写 closeout 清单。
+收工精简后课题树硬留：现行 `Manuscript_<slug>_{V|R|P}…`（子工程根**文件**）+ `FinalData_<slug>.xlsx`（或 `ref/README` 钉死的现用 data.xlsx）+ 可选 `ref/settings.ini` 指向 `_DataBase\<suffix>\<prefix_suffix>\`。课题树 `R*` / `P*` 整夹（修订包 / 投稿包）收工进 `_DataBase\<suffix>\<prefix_suffix>\`（≥20 散文件先压）；校验后原夹→`.Del\_by-project\<slug>\`。可复现图 → `.Del\_by-project\<slug>\`；不可复现 → `_DataBase`。全文落点 → `workspace-layout.md`「accepted 收工」。本条不复写 closeout 清单。
 
 ### Cleanup（过后可清；两档）
 

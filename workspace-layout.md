@@ -98,17 +98,21 @@ description: 本机布局与子工程短针。落点见 My rule.md §5。
 
 **`archived` 不是第五阶段：** 不进上表、不进 `study_folder_stage_aliases`；见「archived 冷库」。
 
-## accepted 收工（精简后进 archived · t1806u / 2026-11-08）
+## accepted 收工（精简后进 archived · t1806u / t1809u / 2026-11-08）
 
 **目标：** harvest 后尽量精简 `accepted\<prefix_suffix>\`，再搬进 `archived\<prefix>\<prefix_suffix>\` + `ARCHIVED.md`。accepted 不长期堆满。本条是**落点契约**，不是 harvest 步骤（harvest-skill-library 只抽「怎么做」；closeout ≠ harvest）。
 
 ### 课题树精简后硬留
-1. 终稿一份：`Manuscript_<slug>_{V|R|P}…`（旧名先问再改名；旧版→`ref/tmp/`）。
+1. 终稿一份：`Manuscript_<slug>_{V|R|P}…`（旧名先问再改名；旧版→`ref/tmp/`）。根上只留这份**文件**，不要把整夹 `R*` / `P*` 留在根。
 2. 复现 SSOT：`FinalData_<slug>.xlsx`（或 `ref/README` 钉死的现用 data.xlsx）。
 3. 可选：`ref/settings.ini` 指到 `_DataBase\<suffix>\<prefix_suffix>\`（影像 raw 不进课题树）。
 
+### R*/P* 整夹进 `_DataBase`（修订包 / 投稿包 · t1809u）
+课题树内名为 `R*` / `P*` 的夹（修订包、投稿包，如 R1/R2/P1/P1.1）收工时**整夹**进 `_DataBase\<suffix>\<prefix_suffix>\`。若夹内单独文件 ≥20 或明显小文件堆，先 7z/zip + `.files.txt`（见上节「进 `_DataBase` 多文件先压缩」）。校验通过后，原夹移 `D:\MyProjects\.Del\_by-project\<slug>\`。根上终稿仍只留一份现行 `Manuscript_*_{V|R|P}…`**文件**（不是把整夹留在根）。
+
 ### `_DataBase` 可收
 （≥20 散文件或小文件堆先 7z/zip + `.files.txt`，校验后散目录→`.Del`；见上节「进 `_DataBase` 多文件先压缩」。）
+- 课题树 `R*` / `P*` 整夹（修订包 / 投稿包；见上节 t1809u）
 - raw 影像/数据
 - 不可复现资料图
 - 去重合并底表 `MergedTables_*.xlsx`、纳排日志（非 FinalData）
@@ -189,7 +193,7 @@ description: 本机布局与子工程短针。落点见 My rule.md §5。
 - 写入 `_Docs\`（旧名 **0doc**）须用户点名「放 0doc」/「放 _Docs」。
 - **最终**→子工程根；**中间**→`ref/` 地图；**无** `0result\`；子工程内临时 → `ref/tmp/`（非默认 `{DEL}`）；无子工程/跨课题临时进 `{DEL}`；Downloads 仅当点名。权威 → `My rule.md` §5。
 - 可复用脚本 → 统计引擎与建模 CLI 在 `{code_stats}`（`modules/` + `model-validation/`），运维/加工脚本在 `{code_stats}\tools\<fine-id>\`（`_code` 已于 2026-11-01 整层退役：脚本在 MY-CODES，壳与索引移至 {DEL}）。`0script\` 已退休，不在课题根重建。长期规则/语料 → `0doc` 相应层。
-- 根不留临时/草稿/一次性中间件（例外：现行在改稿 / 现行 `Vn`）。旧版稿与中间件进 `ref/tmp/`，不进 `{DEL}`（除非过后清理先问）。`0doc\GitHub\MY-CODES\modules\` 增改移须先同意。
+- 根不留临时/草稿/一次性中间件（例外：现行在改稿 / 现行 `Vn`）。旧版稿与中间件进 `ref/tmp/`，不进 `{DEL}`（除非过后清理先问）。`_Docs\GitHub\MY-CODES\modules\`（旧盘符叫法 `0doc\GitHub\...`）增改移须先同意。
 - 数据课题根可留：`rawdata`、`derivatives`、`atlases`、索引/manifest、`ref`。`_Docs` 仅当点名「放 0doc」/「放 _Docs」。默认从 `derivatives` 拷出要用的结果，原件留在原处；终稿落子工程根。不建 `0result\`，不重建 `0script\`。
 - 同键终表合并为一张（一段说明，值列加前缀）。把原件移出子工程根须先同意。
 - 移脚本或文档前先搜 `import` / `addpath` / `settings.ini` / README。仍有未改引用则不移。移完后改路径与 `0doc` 示例再测。
