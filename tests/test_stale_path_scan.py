@@ -39,5 +39,62 @@ class StalePathAllowIfTests(unittest.TestCase):
         self.assertFalse(stale_line_allowed(line, pat, kind))
 
 
+class OldRootScanTests(unittest.TestCase):
+    """Root-rename scan: live old-root claims fail, rename/historic notes pass."""
+
+    @staticmethod
+    def _rule(kind: str):
+        for pat, label, rule_kind in STALE_RULES:
+            if rule_kind == kind:
+                return pat, label, rule_kind
+        raise AssertionError(f"missing rule kind: {kind}")
+
+    def test_old_grok_root_live_claim_fails(self) -> None:
+        pat, _, kind = self._rule("old_root_0grok")
+        line = "输出落 D:\\0Grok\\tmp\\out.txt"
+        self.assertTrue(pat.search(line))
+        self.assertFalse(stale_line_allowed(line, pat, kind))
+
+    def test_old_grok_root_rename_note_allowed(self) -> None:
+        pat, _, kind = self._rule("old_root_0grok")
+        line = "工程根 `D:\\MyProjects`（原 `D:\\0Grok`）。"
+        self.assertTrue(pat.search(line))
+        self.assertTrue(stale_line_allowed(line, pat, kind))
+
+    def test_old_del_root_live_claim_fails(self) -> None:
+        pat, _, kind = self._rule("old_root_0del")
+        line = "清空后写 D:\\0del\\_by-function\\x.txt"
+        self.assertTrue(pat.search(line))
+        self.assertFalse(stale_line_allowed(line, pat, kind))
+
+    def test_old_del_root_historic_allowed(self) -> None:
+        pat, _, kind = self._rule("old_root_0del")
+        line = "移出区 `D:\\MyProjects\\.Del`（旧名 **0del** / `D:\\0del`）。"
+        self.assertTrue(pat.search(line))
+        self.assertTrue(stale_line_allowed(line, pat, kind))
+
+    def test_old_00db_component_live_claim_fails(self) -> None:
+        pat, _, kind = self._rule("old_root_00db")
+        line = "落 D:\\MyProjects\\00db\\SSD_1\\"
+        self.assertTrue(pat.search(line))
+        self.assertFalse(stale_line_allowed(line, pat, kind))
+
+    def test_old_00ds_component_retired_note_allowed(self) -> None:
+        pat, _, kind = self._rule("old_root_00ds")
+        line = "`D:\\00ds` / 夹名 `00ds` 已退役"
+        self.assertTrue(pat.search(line))
+        self.assertTrue(stale_line_allowed(line, pat, kind))
+
+    def test_old_0doc_abs_live_claim_fails(self) -> None:
+        pat, _, kind = self._rule("old_root_0doc")
+        line = "文档落 D:\\MyProjects\\0doc\\x.md"
+        self.assertTrue(pat.search(line))
+        self.assertFalse(stale_line_allowed(line, pat, kind))
+
+    def test_bare_legacy_alias_word_not_flagged(self) -> None:
+        pat, _, kind = self._rule("old_root_00db")
+        self.assertFalse(pat.search("旧名 00db = `_DataBase`"))
+
+
 if __name__ == "__main__":
     unittest.main()

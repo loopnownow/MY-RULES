@@ -7,7 +7,10 @@ Usage:
 When MY-SKILLS is present (sibling clone, or SKILLS_ROOT / MY_SKILLS env), verify
 that seat folders and concrete file cites in skills.md / My rule.md / README.md
 exist, and scan Rules MD for stale path claims that conflict with project-ref /
-DEL SSOT. Exits 0 on success, 1 on missing paths or stale claims.
+DEL SSOT. The scan also covers retired absolute roots (D:\\0Grok, D:\\0del,
+D:\\MyProjects\\0doc, ...\\00db, ...\\00ds); lines that mark the old name as
+HISTORIC / renamed (旧名, 旧字面, 已退役, renamed, former) are exempt.
+Exits 0 on success, 1 on missing paths or stale claims.
 
 Fail-loud (no false-green): missing required Rules MD, missing skills root
 (unless --allow-missing-skills), or skipped checks that would otherwise exit 0
@@ -64,6 +67,14 @@ RENAMED_CODES_REPO_CONTEXT = re.compile(
     re.I,
 )
 
+# Root rename 2026-11-08 (t1791u/t1794u): old absolute roots are stale live claims.
+# A line that marks the old name as historic / renamed is exempt (see OLD_ROOT_CONTEXT).
+OLD_ROOT_CONTEXT = re.compile(
+    r'HISTORIC:|SUPERSEDED:|旧名|旧字面|曾用|已退役|renamed|改名|更名|'
+    r'former|historical|legacy|archived|原\s*[`"]?D:',
+    re.I,
+)
+
 STALE_RULES = (
     (
         re.compile(r"D:\\0Grok\\0del", re.I),
@@ -82,6 +93,31 @@ STALE_RULES = (
         re.compile(r"GitHub\\+stats-analysis|GitHub/+stats-analysis", re.I),
         r"GitHub\stats-analysis (repo renamed 2026-11-01 -> MY-CODES)",
         "renamed_codes_repo",
+    ),
+    (
+        re.compile(r"D:[\\/]+0Grok(?![A-Za-z0-9_-])", re.I),
+        r"D:\0Grok (old root; renamed 2026-11-08 -> D:\MyProjects)",
+        "old_root_0grok",
+    ),
+    (
+        re.compile(r"D:[\\/]+0del(?![A-Za-z0-9_-])", re.I),
+        r"D:\0del (retired DEL root; -> D:\MyProjects\.Del)",
+        "old_root_0del",
+    ),
+    (
+        re.compile(r"D:[\\/]+MyProjects[\\/]+0doc(?![A-Za-z0-9_-])", re.I),
+        r"D:\MyProjects\0doc (old doc root; -> D:\MyProjects\_Docs)",
+        "old_root_0doc",
+    ),
+    (
+        re.compile(r"[\\/]+00db(?![A-Za-z0-9_-])", re.I),
+        r"...\00db\ (old _DataBase dir name; -> _DataBase)",
+        "old_root_00db",
+    ),
+    (
+        re.compile(r"[\\/]+00ds(?![A-Za-z0-9_-])", re.I),
+        r"...\00ds\ (old _DataBase dir name; -> _DataBase)",
+        "old_root_00ds",
     ),
 )
 
@@ -104,6 +140,9 @@ def stale_line_allowed(line: str, pat: re.Pattern[str], rule_kind: str) -> bool:
             return True
     if rule_kind == "renamed_codes_repo" and RENAMED_CODES_REPO_CONTEXT.search(line):
         # Old repo name is fine when the same line marks the rename / redirect.
+        return True
+    if rule_kind.startswith("old_root") and OLD_ROOT_CONTEXT.search(line):
+        # Retired absolute root is fine when the same line marks the rename / history.
         return True
     return False
 

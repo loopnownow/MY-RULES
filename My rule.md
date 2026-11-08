@@ -10,9 +10,9 @@ license: MIT
 - **数据底表移动（D-1 · 2026-10-29 · t1309s6268）：** 原始/预清洗数据底表默认落 `ref/` 根（或 `ref/data/`）。**移动底表前必须先问城城**（D-1）；勿静默挪走。布局说明见 `project-ref-layout.md`。
 
 - **裁决顺序**：用户当轮表述 > 专题文件 > 本文件 > 子工程内约定。
-- **别名**：`{RULES}`=`D:\MyProjects\_Docs\GitHub\MY-RULES`；`{SKILLS}`=`D:\MyProjects\_Docs\GitHub\MY-SKILLS`；`{RAW}`=`D:\MyProjects\_DataBase`（已组织的原始库 = 课题原始件 + `_` 非课题归档分支；除 `_index.csv` 外只读；`00ds` 为旧名/QC 对象——活路径·夹名·filter 见 `00ds` 须改 `00db`，勿当 legacy 保留；细则 → `workspace-layout.md`「`{RAW}` = `D:\MyProjects\_DataBase`」）；`{DEL}`=`D:\MyProjects\.Del`（旧名 **0del** / `D:\0del` = `.Del`）。
+- **别名**：`{RULES}`=`D:\MyProjects\_Docs\GitHub\MY-RULES`；`{SKILLS}`=`D:\MyProjects\_Docs\GitHub\MY-SKILLS`；`{RAW}`=`D:\MyProjects\_DataBase`（已组织的原始库 = 课题原始件 + `_` 非课题归档分支；除 `_index.csv` 外只读；`00ds`/旧 `00db` 为旧名/QC 对象——活路径·夹名·filter 一律更正为 `_DataBase`，勿当 legacy 保留；细则 → `workspace-layout.md`「`{RAW}` = `D:\MyProjects\_DataBase`」）；`{DEL}`=`D:\MyProjects\.Del`（旧名 **0del** / `D:\0del` = `.Del`）。
 - **本机布局（一行）**：`D:\MyProjects\_DataBase`（organized raw） / `D:\MyProjects\.Del`（AI 可操作临时区；旧名 **0del**） / `D:\MyProjects\_Docs`（语料 + 可复用代码） / `D:\MyProjects`（分阶段子工程工作区；阶段含 `reviewing`，旧名 `in-review`） / `D:\MyProjects\archived`（已完结冷库 `archived\<suffix>\…`，**非**阶段）。申请包 `_DataBase\_grants\`；评阅他人稿 `_DataBase\_reviews\`（`R&P` 已退役）。细则 → `workspace-layout.md`。
-- **根路径更名（t1791u / t1794u / t1796u / 2026-11-08）：** 工程根 `D:\MyProjects`（原 `D:\0Grok`）；文档库 `D:\MyProjects\_Docs`（旧名 **0doc** = `_Docs`）；原始库 `{RAW}`=`D:\MyProjects\_DataBase`（旧名 **00db** = `_DataBase`）；移出区 `{DEL}`=`D:\MyProjects\.Del`（旧名 **0del** / `D:\0del`）。**syn 镜像目标 = `E:\Aitor` 根**（不是 `E:\Aitor\MyProjects`）；`synDB.bat` 仍镜像 `_DataBase`（E 侧按 synDB 惯例）。课题原始件按后缀分桶：`_DataBase\<suffix>\<prefix_suffix>\`；`_lab` 与其他 `_` 非课题分支留 `_DataBase` 根。冷库 `D:\MyProjects\archived\<suffix>\<prefix_suffix>\`（与 DB 同后缀分桶；进场条件见 `workspace-layout.md`）。同步：`syn.bat`：`D:\MyProjects` → `E:\Aitor`，`/XD .Del`（**不同步** `.Del`；`_DataBase` 随主树同步）；`synDB.bat` 镜像 `_DataBase`；`DB.lnk` → `_DataBase`；`DEL.lnk` → `.Del`。
+- **根路径更名（t1791u / t1794u / t1796u / 2026-11-08）：** 工程根 `D:\MyProjects`（原 `D:\0Grok`）；文档库 `D:\MyProjects\_Docs`（旧名 **0doc** = `_Docs`）；原始库 `{RAW}`=`D:\MyProjects\_DataBase`（旧名 **00db** = `_DataBase`）；移出区 `{DEL}`=`D:\MyProjects\.Del`（旧名 **0del** / `D:\0del`）。**syn 镜像目标 = `E:\Aitor` 根**（不是 `E:\Aitor\MyProjects`）。课题原始件按后缀分桶：`_DataBase\<suffix>\<prefix_suffix>\`；`_lab` 与其他 `_` 非课题分支留 `_DataBase` 根。冷库 `D:\MyProjects\archived\<suffix>\<prefix_suffix>\`（与 DB 同后缀分桶；进场条件见 `workspace-layout.md`）。同步：唯一入口 `D:\MyProjects\syn.bat`：`D:\MyProjects` → `E:\Aitor`，`/XD .Del`（**不同步** `.Del`；`_DataBase` 随主树同步）；无其它同步脚本或快捷方式（2026-11-08 实测）。
 - **进 `_DataBase` 多文件先压缩（t1800u）：** 入库时若目录单独文件 ≥20 或明显小文件堆，先压成一个归档再入库；细则 → `workspace-layout.md`「进 `_DataBase` 多文件先压缩」。
 - **accepted 收工（t1806u / t1809u / t1817u）：** harvest 后精简 `accepted\` 再进 `archived\<suffix>\…`；硬留终稿 + FinalData；课题树 `R*` / `P*` 整夹进 `_DataBase`（校验后原夹→`.Del\_by-project`）；细则 → `workspace-layout.md`「accepted 收工」。
 - **疾病短码 / archived L1 基码（t1821u / t1822u）：** `_DataBase\_diseases.csv` 为短码 SSOT（`suffix,name_en,name_zh,l1,l2,aliases`）；`archived` 与 `_DataBase` 的 L1=`<suffix>` **基码**（剥末尾 `_\d+` 实例；语义复合整段保留）；实例号只在叶子 `<prefix_suffix>`；全称只进表；ethics/references 仍用 library L1/L2，靠表内对照。细则 → `workspace-layout.md`「archived 冷库」。
@@ -121,7 +121,7 @@ license: MIT
 | 档 | 落点 | 判据 | 处置 |
 |---|---|---|---|
 | park | `_by-function\<批次>\` / `_by-project\<课题>\` | 有活指针、台账价值，或一次任务的全套件（旧稿、ACCEPT 回执、`MOVED.tsv`） | 留到城城点名；**不得**整夹清 |
-| harvest-park | `_by-function\harvest-0doc-<YYYYMMDD>\<原相对路径>` | `_Docs` 新建件的收尾归档（草稿已「进skills」收编，或已过时） | 留档；下次 QC 复核后再定留或降 harvested |
+| harvest-park | `_by-function\harvest-docs-<YYYYMMDD>\<原相对路径>` | `_Docs` 新建件的收尾归档（草稿已「进skills」收编，或已过时） | 留档；下次 QC 复核后再定留或降 harvested |
 | harvested | `harvested\`（平铺，不建日期子夹；原 `junk\`，2026-10-31 改名） | 一次性批次、字节码/缓存、拼写错件、本机配置备份、Downloads 残留、**无任何文本引用**的产物 | **只由城城手动清**；bot 不清、不代清 |
 
 - **课题件优先** `_by-project\<slug>\`（park）；**_Docs 收尾件**（草稿已收编进 skills、或已过时）才进 harvest-park。两档不得互替堆放。
@@ -144,7 +144,7 @@ license: MIT
 
 说明/QC 中文；期刊英文稿英文。汇报时区 Asia/Shanghai (UTC+08:00)。「；」=两任务；「|」=同任务并列。STE→`{SKILLS}\05_manuscript\base\vocab\L3\lab-ste.md`。
 写作证据席位：`GLOSSARY_ROOT`=`_Docs\_library\glossary`（**四层** md + `index.csv`；`banks\` 只作证据）。判据 SSOT = `{SKILLS}\05_manuscript\base\vocab\`（+ 具名 advanced）；`rule_ptr` 指回技能，不复制规则正文。
-标点：允许 Unicode minus U+2212 `−`（负号/有符号数/如 Q3−Q1）；ASCII `-` 与 en dash U+2013 `–` 仍可用。仍禁 em dash U+2014 `—` 与 spaced `--`；`≈` 仍禁。细则 → `{SKILLS}\05_manuscript\base\vocab\L1\ban-phrases.md`（owner t1761u / 2026-11-07）。
+标点：允许 Unicode minus U+2212 `−`（负号/有符号数/如 Q3−Q1）；ASCII `-` 与 en dash U+2013 `–` 仍可用。仍禁 em dash U+2014 `—` 与 spaced `--`；`≈` 仍禁。**作用域：** 该禁只针对英文稿件/对外英文文本；中文行文「——」不受限；spaced `--` 同理只限英文。细则 → `{SKILLS}\05_manuscript\base\vocab\L1\ban-phrases.md`（owner t1761u / 2026-11-07）。
 
 # 9 按需文件
 
@@ -153,7 +153,7 @@ license: MIT
 | 网段/敏感外发 / 本机出站代理 | `network-security.md` |
 | 技能/PR 同步 | `skills.md` |
 | 本机布局 / 子工程 | `workspace-layout.md`（见 §1 一行布局） |
-| 冷库 / `00db` 非课题分支 | `workspace-layout.md`（「archived 冷库」+「`{RAW}` 非课题分支」） |
+| 冷库 / `_DataBase` 非课题分支 | `workspace-layout.md`（「archived 冷库」+「`{RAW}` 非课题分支」） |
 | accepted 收工 | `workspace-layout.md`（「accepted 收工」） |
 | 三仓分工 / 某内容该放哪 | `README.md`（RULES=运营规则，SKILLS=专业技能，MY-CODES=脚本） |
 | 派单/盯梢 | `{SKILLS}\00_orchestrator\references\ownership-contract.md`；`{SKILLS}\00_orchestrator\references\handoff-monitor.md` |

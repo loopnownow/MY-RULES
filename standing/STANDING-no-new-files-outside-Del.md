@@ -19,7 +19,7 @@
 - `{SKILLS}\00_orchestrator\references\standing-delivery.md`（thin pointer）
 - `{SKILLS}\02_data-processing\personal\workspace.md`（thin pointer）
 
-## Downloads archive this turn
+## Downloads archive this turn（HISTORIC：2026-10-24 记录）
 
-- Copied `Grok会话-技能草案-20261024.md` + `Grok会话-规则候选-20261024.md` → this folder `downloads-archive\`
+- Copied `Grok会话-技能草案-20261024.md` + `Grok会话-规则候选-20261024.md` → 当时的 `downloads-archive\`（未随本仓保留；2026-11-08 实测 `standing/downloads-archive` 不存在）
 - Prior sibling already parked copies under `_Docs\skill-harvest\` (rules-triage / by-fine-id `_proposal-`); no new by-fine-id created here.
