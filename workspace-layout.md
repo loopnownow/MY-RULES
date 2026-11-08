@@ -98,6 +98,50 @@ description: 本机布局与子工程短针。落点见 My rule.md §5。
 
 **`archived` 不是第五阶段：** 不进上表、不进 `study_folder_stage_aliases`；见「archived 冷库」。
 
+## accepted 收工（精简后进 archived · t1806u / 2026-11-08）
+
+**目标：** harvest 后尽量精简 `accepted\<prefix_suffix>\`，再搬进 `archived\<prefix>\<prefix_suffix>\` + `ARCHIVED.md`。accepted 不长期堆满。本条是**落点契约**，不是 harvest 步骤（harvest-skill-library 只抽「怎么做」；closeout ≠ harvest）。
+
+### 课题树精简后硬留
+1. 终稿一份：`Manuscript_<slug>_{V|R|P}…`（旧名先问再改名；旧版→`ref/tmp/`）。
+2. 复现 SSOT：`FinalData_<slug>.xlsx`（或 `ref/README` 钉死的现用 data.xlsx）。
+3. 可选：`ref/settings.ini` 指到 `_DataBase\<suffix>\<prefix_suffix>\`（影像 raw 不进课题树）。
+
+### `_DataBase` 可收
+（≥20 散文件或小文件堆先 7z/zip + `.files.txt`，校验后散目录→`.Del`；见上节「进 `_DataBase` 多文件先压缩」。）
+- raw 影像/数据
+- 不可复现资料图
+- 去重合并底表 `MergedTables_*.xlsx`、纳排日志（非 FinalData）
+- 难再算中间产物（手工 ROI/掩膜、半自动分割、radiomics 大表、外验导出、第三方一次性结果）
+- 影像旁路元数据（DICOM 头汇总、序列清单、质控截图栈、扫描仪参数快照；整库登记仍可在 `_Docs\scanner-registry`）
+- 不可再采过程件（知情扫描、纸质 CRF 扫描、科教科/财务回执扫描、唯一仪器打印；PHI 敏感不进 skill 正文）
+- 可选投稿锁定包（终版图+表压缩包）
+- 外部数据快照（公开库某日下载、合作方移交盘、不可再拉 API dump）
+
+**不进 DB：** 终稿 Word、glossary/期刊池/文献全文、可脚本重生图、热分析工作副本。
+
+### `_Docs` 分桶
+须当轮点名「放 _Docs」才写；默认禁 mkdir，`mem` 例外（§5.1）。
+- `templates\`：空白伦理/SCI骨架/清单/金样/brand
+- `_library\ethics\approvals\`：已批批件 PDF+索引
+- `_library\references\`：文献全文；课题 `ref/refer` 只 DOI 指针
+- `_library\lit-bank` / `journals\`：书目、期刊池、投稿 prior
+- `skill-harvest\`：可复用写法/方法句（「进skills」再进 MY-SKILLS）
+- `mem\`：people.csv、JCR 可变、证件/签名（不进 skill 正文）
+
+填好知情、含姓名表、未发表全文不进 harvest；慎进 `_Docs` 公开层。
+
+### 图分流
+可复现图 → `.Del\_by-project\<slug>\`；不可复现 → `_DataBase`。
+
+### 其它
+- 其它 csv/xlsx：去重合并→DB；移删先问（D-1）。
+- 脚本：一次性留指针；可复用提案 MY-CODES。
+- THESIS/行政（伦理·科教科·财务）与单篇 SCI 分轨。
+- 四条件齐再 archived（含 skill_ref 或 none）；更新 `_DataBase\_index.csv`、`mem\people.csv`（见「archived 冷库」）。
+- syn：`D:\MyProjects`→`E:\Aitor` 仅 `/XD .Del`。
+- harvest-skill-library ≠ closeout：harvest 只抽「怎么做」；closeout 是落点；勿把 closeout 写成 harvest 步骤。
+
 ## archived 冷库（非阶段；2026-11-08）
 
 `D:\MyProjects\archived` 放**已完结**项目：`D:\MyProjects\archived\<prefix>\<prefix_suffix>\`（第二层与课题夹名一致）；不按病种/年份分层。
