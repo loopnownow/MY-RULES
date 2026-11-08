@@ -5,7 +5,7 @@
 
 约定：
 - **不联网**、不改业务代码、不写课题目录；输出只看 stdout。
-- 都是**只读**分析工具（`sync_project_page.py` / `fill_start_placeholders.py` 例外：写目标 html）。
+- 多数是**只读**分析工具；写盘例外：`sync_project_page.py` / `fill_start_placeholders.py`（写目标 html）、`extract_inline.py`（写 `<out.js>`）。
 - 需要 Python 3.10+；`smoke_page.js` / `extract_inline.py` 的用法需要 Node（`node --check` / `node`）。
 
 | 脚本 | 用途 | 用法 |
@@ -15,7 +15,7 @@
 | `extract_inline.py` | 把 html 里的内联 `<script>` 抽成 `.js`，便于 `node --check` | `python -B extract_inline.py <in.html> <out.js>` |
 | `check_html.py` | 标签配平检查（返回 `OK [] []` 或缺失/多余列表） | `python -B check_html.py <file.html>` |
 | `smoke_page.js` | **假 DOM 跑页面顶层脚本**：抓「删了声明忘了引用」这类让页面初始化中断、按钮全点不动的错误（如 `go is not defined`） | `node smoke_page.js <inline.js>`（先 `extract_inline.py`；`__MODULES_DEFAULT__` 会自动替换成空串） |
-| `sync_project_page.py` | 金版 `project.html` → 课题起始页：注入 `__MODULES_DEFAULT__`；token **只写 meta 标签**（传空串 = 保持未登记），两处 JS 哨兵保持 `__CONSOLE_TOKEN__` 占位符；写盘固定 LF；页面顶部插一行 `<!-- console-build: gold=… commit=… synced=… -->` 版本戳，`--ini` 把同组版本写进该课题 `ref/settings.ini` 的 `[console]` 段（写前 `.bak`）。用法末尾可加 `[--ini <ref/settings.ini>] [--apply]`，**默认 dry-run** | `python -B sync_project_page.py <gold.html> <dest.html> <token\|""> <modules_dir>` |
+| `sync_project_page.py` | 金版 `project.html` → 课题起始页：注入 `__MODULES_DEFAULT__`；token **只写 meta 标签**（传空串 = 保持未登记），两处 JS 哨兵保持 `__CONSOLE_TOKEN__` 占位符；写盘固定 LF；页面顶部插一行 `<!-- console-build: gold=… commit=… synced=… -->` 版本戳，`--ini` 把同组版本写进该课题 `ref/settings.ini` 的 `[console]` 段（写前 `.bak`）。用法末尾可加 `[--ini <ref/settings.ini>] [--stats-root <MY-CODES 根>] [--apply]`，**默认 dry-run** | `python -B sync_project_page.py <gold.html> <dest.html> <token\|""> <modules_dir>` |
 | `fill_start_placeholders.py` | **只补**起始页里未替换的 `__MODULES_DEFAULT__`（不动版式与 token）；漏替会让整页脚本首行 `ReferenceError`、按钮全失效 | `python -B fill_start_placeholders.py <page.html> <modules_dir>`（dry-run）→ 加 `--apply` 写盘 |
 
 ## 什么时候跑

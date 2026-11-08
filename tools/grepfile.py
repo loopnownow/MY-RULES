@@ -1,7 +1,7 @@
 """一次性检索工具：在某目录的文件里按正则找行（只打印，不改任何文件）。
 
 用法:
-    python -B inspect.py <dir> <regex> [ext1 ext2 ...]
+    python -B grepfile.py <dir> <regex> [ext1 ext2 ...]
 
 参数:
     dir    要扫描的目录（递归）

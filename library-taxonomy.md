@@ -71,4 +71,4 @@
 ## 6 迁移与临时件
 
 - 库内改名/移动：保留 `MOVED-FROM.md` 记录；被替代原件进 `D:\MyProjects\.Del\_by-project\<task>\superseded\`。
-- 未进 `accepted\` 前，子工程的临时/中间/旧版/试跑一律 `ref\tmp\`；**禁止自动进 0del、禁止自动删**。
+- 未进 `accepted\` 前，子工程的临时/中间/旧版/试跑一律 `ref\tmp\`；**禁止自动进 `{DEL}`、禁止自动删**。

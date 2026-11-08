@@ -7,10 +7,12 @@ import / 参数 / 赋值。内层函数的 import 不会让外层函数"看得�
     python -B scope_check.py <dir> [alias1 alias2 ...]
 例:
     python -B scope_check.py D:/MyProjects/_Docs/GitHub/MY-CODES/modules pd np plt os sys json re
+
+退出码: 0 = 无隐患; 1 = 有隐患（或语法/读取错误）; 2 = 用法错误。
 """
+import argparse
 import ast
 import os
-import sys
 
 DEFAULT_ALIASES = ("pd", "np", "plt", "os", "sys", "json", "re")
 SKIP_DIR = {".git", "__pycache__", ".pytest_cache", ".ruff_cache"}
@@ -94,25 +96,46 @@ def _check(nodes, inherited: set, aliases: set, label: str, out: list) -> None:
         _check(fn.body, visible, aliases, f"{label}::{fn.name}", out)
 
 
-def main() -> int:
-    if len(sys.argv) < 2:
-        print(__doc__)
+def main(argv: list[str] | None = None) -> int:
+    ap = argparse.ArgumentParser(
+        description="静态作用域自查：找出「用了某别名但该作用域没绑定」的 NameError 隐患。",
+        epilog="例: python -B scope_check.py D:/MyProjects/_Docs/GitHub/MY-CODES/modules pd np plt",
+    )
+    ap.add_argument("dir", nargs="?", help="要递归扫描的目录（必填）")
+    ap.add_argument(
+        "aliases",
+        nargs="*",
+        help="别名列表；省略则用默认 pd np plt os sys json re",
+    )
+    args = ap.parse_args(argv)
+    if not args.dir:
+        ap.print_help()
         return 2
-    root = sys.argv[1]
-    aliases = set(sys.argv[2:] or DEFAULT_ALIASES)
+    root = args.dir
+    if not os.path.isdir(root):
+        print(f"!! not a directory: {root}")
+        return 2
+    aliases = set(args.aliases or DEFAULT_ALIASES)
     total = 0
+    had_error = False
     for dp, dn, fn in os.walk(root):
         dn[:] = [d for d in dn if d not in SKIP_DIR]
         for name in sorted(fn):
             if not name.endswith(".py"):
                 continue
             path = os.path.join(dp, name)
-            with open(path, encoding="utf-8", errors="replace") as fh:
-                src = fh.read()
+            try:
+                with open(path, encoding="utf-8", errors="replace") as fh:
+                    src = fh.read()
+            except OSError as exc:
+                print(f"!! read {path}: {exc}")
+                had_error = True
+                continue
             try:
                 tree = ast.parse(src, filename=path)
             except SyntaxError as exc:
                 print(f"!! syntax {path}: {exc}")
+                had_error = True
                 continue
             out: list[str] = []
             rel = os.path.relpath(path, root)
@@ -121,7 +144,7 @@ def main() -> int:
                 print(line)
             total += len(out)
     print(f"-- {total} 处隐患")
-    return 0
+    return 1 if (total or had_error) else 0
 
 
 if __name__ == "__main__":

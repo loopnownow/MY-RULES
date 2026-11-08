@@ -40,7 +40,7 @@
 ### 三区 / 临时结果区
 
 - **站立（t1450u）：** 子工程内临时与中间文件默认进 `ref/tmp/`，**不**默认进 `{DEL}` / `D:\MyProjects\.Del`。过后清理（先问）再移 `{DEL}`。
-- **分析临时结果**（`ASL/`、`DKI/`、`DTI_IVIM/` 等）放在**子工程根旁**，**不进 `ref/`**。
+- **分析临时结果**（`ASL/`、`DKI/`、`DTI_IVIM/` 等）落**当次结果夹** `<project>/<endpoint>/`（或解析出的 OUT_DIR / `SUBPROJECT_BY_OUTCOME` 夹），**不在子工程根**，也**不进 `ref/`**（t1660u）。
 - 面向稿件/门控的统计**表图**在 `ref/tables/` `ref/figures/`；**锁定件** `hashes.tsv` `MANIFEST.md` `pipeline_run.log` 在 **`ref/pipeline/`**；**勿**与 `ASL/` 等分析树合并。
 - **分析错分/临时表（t1660u）**：`false_classification*` 与同类 ASL 分析临时表落**当次结果夹** `<project>/<endpoint>/`（或解析出的 OUT_DIR / `SUBPROJECT_BY_OUTCOME` 夹），**不在子工程根**，也**不进 `ref/`**。结果 HTML 同落该结果夹为 `Results*.html`（见 `workspace-layout.md`）；**不**把 `{slug}_results.html` 或旧结果 HTML 提升到子工程根——根上已有的旧副本属错位。
 - **文献全文（t1455u）：** PDF/HTML 实体一律进 `D:\MyProjects\_Docs\_library\references\<L1>\<L2>\`（命名、索引、指针契约见该库 `README.md`）；子工程 `ref/refer/` 只写 `DOI_*.md` 指针，`ref/citation/` 不放全文，`_library\lit-bank` 只存书目。
@@ -85,7 +85,7 @@ SCI 相关文件统一命名：`<Stem>_<子项目名>_<版本号>`。（本条 2
 
 - 原始/预清洗数据底表可落在 `ref/` 根或 `ref/data/`（撞名或更清晰时保留 `data/`）。
 - **今后移动底表前必须先问城城**（D-1）；本契约迁移轮次已获准将原 `materials/` 内容上抬时除外。勿静默挪走。
-- 大体量影像 raw（DICOM/NIfTI 等）≠ 本条底表：落 `{RAW}`=`D:\MyProjects\_DataBase\<slug>\`，见 `workspace-layout.md`「`{RAW}` = `D:\MyProjects\_DataBase`」（进库多文件先压缩同节 t1800u；单元粒度仍见 t1719u）。
+- 大体量影像 raw（DICOM/NIfTI 等）≠ 本条底表：落 `{RAW}`=`D:\MyProjects\_DataBase\<suffix>\<prefix_suffix>\`，见 `workspace-layout.md`「`{RAW}` = `D:\MyProjects\_DataBase`」（进库多文件先压缩同节 t1800u；单元粒度仍见 t1719u）。
 
 ### accepted 收工硬留（t1806u / t1809u）
 
@@ -95,7 +95,7 @@ SCI 相关文件统一命名：`<Stem>_<子项目名>_<版本号>`。（本条 2
 
 **禁止**静默删除。清理时**先问城城再移**；优先移入 `D:\MyProjects\.Del\_by-project\<project>\`（跨课题则 `_by-function`），有用时保留相对名。
 
-**默认可清 → 0del**（先问再移）：
+**默认可清 → `{DEL}`**（= `D:\MyProjects\.Del`；先问再移）：
 
 - `ref/tmp/`（整树或点名文件）
 - 已废的旧写作参考 / 过期预清洗表（现位于 `ref/refer/` 或曾在 `ref/` 根者）
@@ -109,7 +109,7 @@ SCI 相关文件统一命名：`<Stem>_<子项目名>_<版本号>`。（本条 2
 - `ref/code-gates/`
 - 根上 `settings.ini` / `manuscript-revision.md` / `README.md` / `qc.html`（及仍在用的 `project-state.yaml`）
 - `ref/review/` 中未关闭或主人未点名丢弃的轮次材料；`-org` 编辑前原件（见下节）
-- ASL 类分析树（在子工程根，不在 `ref/`）：默认保留；仅当城城点名整树时再清
+- ASL 类分析树（在当次结果夹 `<project>/<endpoint>/`，不在 `ref/`）：默认保留；仅当城城点名整树时再清
 
 首次需要时创建子夹（copy-on-need）；清理后可留空 `ref/tmp/` 或下次写入时再建；勿在此编造临床内容。
 

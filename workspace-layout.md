@@ -22,7 +22,7 @@ description: 本机布局与子工程短针。落点见 My rule.md §5。
 ### 同步（t1794u / t1796u / 2026-11-08）
 - `syn.bat`：`D:\MyProjects` → **`E:\Aitor`**（镜像到 Aitor **根**；**不是** `E:\Aitor\MyProjects`）。
 - `/XD .Del`：不同步 `.Del`（旧 0del）；`_DataBase` 随主树同步（t1796u 取消 /XD `_DataBase`）。
-- `synDB.bat`：单独镜像 `_DataBase`；`DB.lnk` → `_DataBase`；`DEL.lnk` → `D:\MyProjects\.Del`。
+- 同步入口只有 `D:\MyProjects\syn.bat`（E 侧镜像 `E:\Aitor`）；无其它同步脚本或快捷方式（2026-11-08 实测）。
 
 ### `{RAW}` = `D:\MyProjects\_DataBase`（原始库契约 · t1705u；ZIP/进库压缩 t1719u/t1800u；根更名+后缀分桶 t1791u；旧名 **00db**）
 
@@ -119,7 +119,7 @@ description: 本机布局与子工程短针。落点见 My rule.md §5。
 - 不可复现资料图
 - 去重合并底表 `MergedTables_*.xlsx`、纳排日志（非 FinalData）
 - 难再算中间产物（手工 ROI/掩膜、半自动分割、radiomics 大表、外验导出、第三方一次性结果）
-- 影像旁路元数据（DICOM 头汇总、序列清单、质控截图栈、扫描仪参数快照；整库登记仍可在 `_Docs\scanner-registry`）
+- 影像旁路元数据（DICOM 头汇总、序列清单、质控截图栈、扫描仪参数快照；整库登记仍可在 `_Docs\_library\scanner-registry`）
 - 不可再采过程件（知情扫描、纸质 CRF 扫描、科教科/财务回执扫描、唯一仪器打印；PHI 敏感不进 skill 正文）
 - 可选投稿锁定包（终版图+表压缩包）
 - 外部数据快照（公开库某日下载、合作方移交盘、不可再拉 API dump）
