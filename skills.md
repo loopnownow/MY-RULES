@@ -25,6 +25,7 @@ description: 技能库契约、按需加载、演进门、PR 与合并后部署�
 - 默认证据 **E4**（同类重复用户纠正）；单次事件不演进。
 - **delete** 须显式批准。正文→`{SKILLS}\00_orchestrator\references\skill-evolution.md`。
 - **Harvest 任务流程**由 skill-00 管理（`{SKILLS}\00_orchestrator\references\skill-evolution.md`「Harvest 任务流程」）；收集标准 SSOT→`{doc_root}\skill-harvest\HARVEST-STANDARD.md`。改 live 技能须城城点名「进skills」（extract ≠ promote）；propose-only 仍适用；不另开 evolution 技能树。
+- **harvest ↔ closeout 关系 / 授权范围**（可在四阶段或 archived / `.Del` 抽，每次须当轮授权；harvest ≠ 搬盘）→ `workspace-layout.md`「工作区关系：阶段 · 分流 · harvest · 冷库」。本条不复写。
 
 ## 4 单一技能源（勿重建第二条树）
 

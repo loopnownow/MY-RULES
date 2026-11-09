@@ -106,11 +106,46 @@ description: 本机布局与子工程短针。落点见 My rule.md §5。
 
 **命名（2026-11-08）：** `<prefix>_<suffix>`——`<prefix>` = sub-PI 小写拼音首字母（如 `lxf`），`<suffix>` = 项目短码（大写或约定写法，如 `RC`/`CID`）。一人多题、一题多人都不改名；同后缀多例加 `_1`/`_2`（如 `llj_OV_1`）。中文人名只进台账（`_Docs\mem\people.csv`），路径与正文不写中文名。
 
-**`archived` 不是第五阶段：** 不进上表、不进 `study_folder_stage_aliases`；见「archived 冷库」。
+**`archived` 不是第五阶段：** 不进上表、不进 `study_folder_stage_aliases`；见「archived 冷库」。关系总图见下「工作区关系：阶段 · 分流 · harvest · 冷库」。
+
+## 工作区关系：阶段 · 分流 · harvest · 冷库（t1840u）
+
+主人确认的工作区关系总图。细则清单仍见「accepted 收工」「archived 冷库」；本节约束**关系**与授权，不复写硬留字节表。
+
+### 两层：活阶段 vs 分流落点
+
+- **四阶段 = 活课题生命周期：** `drafting` / `pre-submit` / `reviewing` / `accepted`。路径 `D:\MyProjects\<stage>\<prefix_suffix>\`。
+- **分流落点（非阶段）：** `_DataBase` / `_Docs` / `.Del` / `archived`。`archived` **不是**第五阶段（见「archived 冷库」；不进阶段表、不进 `study_folder_stage_aliases`）。
+
+### closeout（物理落点；绑 accepted 流程结束）
+
+**closeout = 收工搬盘**：精简活树后把字节落到分流落点。绑在 `accepted` 该稿流程结束之后；细节见下节「accepted 收工」。概要：
+
+1. 可复用语料 / 批件 / 模板 → `_Docs`（默认 `_library`；须当轮点名「放 _Docs」）
+2. raw / 不可复现图 / `R*`/`P*` 包 / 难再算中间件 → `_DataBase\<family>\<prefix_suffix>\`（≥20 散文件先压，沿用现条）
+3. 可脚本重生图 / 热副本 / 过期草稿 → `.Del`
+4. 硬留：终稿 Word + `FinalData_`（或钉死 data）+ 可选 `settings.ini` → `archived\<family>\<prefix_suffix>\` + `ARCHIVED.md`（四条件齐仍有效）
+
+### harvest（抽取）≠ closeout（搬盘）
+
+- **harvest：** 抽「怎么做」→ `_Docs\skill-harvest`；仅当主人说「进skills」才进 MY-SKILLS（extract ≠ promote；流程见 `skills.md` §3 / skill-evolution「Harvest 任务流程」）。
+- **closeout：** 物理落点与精简；**不是** harvest 的替代步骤。
+- **harvest 也不代替搬盘：** 抽完仍须按 closeout 把字节落到 `_DataBase` / `_Docs` / `.Del` / `archived`。
+- 关系总图 / harvest 授权 →「工作区关系：阶段 · 分流 · harvest · 冷库」。harvest-skill-library 只抽「怎么做」；closeout 是落点；勿把 closeout 写成 harvest 步骤。
+
+### harvest 授权范围
+
+- 可在 `drafting` / `pre-submit` / `reviewing` / `accepted` / `archived` / `.Del` **任一侧**进行。
+- **每次须主人当轮授权**；不因阶段自动触发。
+- `archived` 默认只读：从冷库抽也要当轮点名；不解冻整夹除非另批。
+
+### 不进 harvest / 慎进 `_Docs` 公开层
+
+填好知情、含姓名表、未发表全文、PHI：不进 harvest；慎进 `_Docs` 公开层（与「accepted 收工」同口径）。
 
 ## accepted 收工（精简后进 archived · t1806u / t1809u / 2026-11-08）
 
-**目标：** harvest 后尽量精简 `accepted\<prefix_suffix>\`，再搬进 `archived\<family(suffix)>\<prefix_suffix>\` + `ARCHIVED.md`。accepted 不长期堆满。本条是**落点契约**，不是 harvest 步骤（harvest-skill-library 只抽「怎么做」；closeout ≠ harvest）。
+**目标：** 按 closeout 精简 `accepted\<prefix_suffix>\`，再搬进 `archived\<family(suffix)>\<prefix_suffix>\` + `ARCHIVED.md`。accepted 不长期堆满。本条是**落点契约**（closeout）；关系与 harvest 授权见上「工作区关系：阶段 · 分流 · harvest · 冷库」。harvest ≠ closeout。
 
 ### 课题树精简后硬留
 1. 终稿一份：`Manuscript_<slug>_{V|R|P}…`（旧名先问再改名；旧版→`ref/tmp/`）。根上只留这份**文件**，不要把整夹 `R*` / `P*` 留在根。
@@ -154,7 +189,7 @@ description: 本机布局与子工程短针。落点见 My rule.md §5。
 - THESIS/行政（伦理·科教科·财务）与单篇 SCI 分轨。
 - 四条件齐再 archived（含 skill_ref 或 none）；更新 `_DataBase\_index.csv`、`mem\people.csv`（见「archived 冷库」）。
 - syn：`D:\MyProjects`→`E:\Aitor` 仅 `/XD .Del`。
-- harvest-skill-library ≠ closeout：harvest 只抽「怎么做」；closeout 是落点；勿把 closeout 写成 harvest 步骤。
+- 关系总图 / harvest 授权 →「工作区关系：阶段 · 分流 · harvest · 冷库」。harvest-skill-library 只抽「怎么做」；closeout 是落点；勿把 closeout 写成 harvest 步骤。
 
 ## archived 冷库（非阶段；2026-11-08；t1821u / t1822u / t1825u / t1829u）
 

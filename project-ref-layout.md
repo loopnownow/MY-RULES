@@ -89,7 +89,7 @@ SCI 相关文件统一命名：`<Stem>_<子项目名>_<版本号>`。（本条 2
 
 ### accepted 收工硬留（t1806u / t1809u）
 
-收工精简后课题树硬留：现行 `Manuscript_<slug>_{V|R|P}…`（子工程根**文件**）+ `FinalData_<slug>.xlsx`（或 `ref/README` 钉死的现用 data.xlsx）+ 可选 `ref/settings.ini` 指向 `_DataBase\<suffix>\<prefix_suffix>\`。课题树 `R*` / `P*` 整夹（修订包 / 投稿包）收工进 `_DataBase\<suffix>\<prefix_suffix>\`（≥20 散文件先压）；校验后原夹→`.Del\_by-project\<slug>\`。可复现图 → `.Del\_by-project\<slug>\`；不可复现 → `_DataBase`。全文落点 → `workspace-layout.md`「accepted 收工」。本条不复写 closeout 清单。
+收工精简后课题树硬留：现行 `Manuscript_<slug>_{V|R|P}…`（子工程根**文件**）+ `FinalData_<slug>.xlsx`（或 `ref/README` 钉死的现用 data.xlsx）+ 可选 `ref/settings.ini` 指向 `_DataBase\<suffix>\<prefix_suffix>\`。课题树 `R*` / `P*` 整夹（修订包 / 投稿包）收工进 `_DataBase\<suffix>\<prefix_suffix>\`（≥20 散文件先压）；校验后原夹→`.Del\_by-project\<slug>\`。可复现图 → `.Del\_by-project\<slug>\`；不可复现 → `_DataBase`。全文落点 → `workspace-layout.md`「accepted 收工」；关系 / harvest 授权 → 同文件「工作区关系：阶段 · 分流 · harvest · 冷库」。本条不复写 closeout 清单。
 
 ### Cleanup（过后可清；两档）
 
