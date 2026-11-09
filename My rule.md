@@ -16,7 +16,7 @@ license: MIT
 - **进 `_DataBase` 多文件先压缩（t1800u）：** 入库时若目录单独文件 ≥20 或明显小文件堆，先压成一个归档再入库；细则 → `workspace-layout.md`「进 `_DataBase` 多文件先压缩」。
 - **单档 ≤1 GiB / 超限分卷（2026-11-09）：** 入库、交付、归档的**单个文件一律 ≤1 GiB**（1,073,741,824 B）；预计超限时直接分卷（900 MiB 字节卷，`<原名>.001`…，同夹 `分卷说明.md`），不要先造大档再拆；存量超限档按同法拆分，拼接 sha256 校验通过后原档才移 `{DEL}` 并记台账（禁删）。例外：`{DEL}` 临时件、在途中间件。细则 → `workspace-layout.md`「单档 ≤1 GiB / 分卷」。
 - **accepted 收工（t1806u / t1809u / t1817u）：** harvest 后精简 `accepted\` 再进 `archived\<family>\…`；硬留终稿 + FinalData；课题树 `R*` / `P*` 整夹进 `_DataBase`（校验后原夹→`.Del\_by-project`）；细则 → `workspace-layout.md`「accepted 收工」。
-- **疾病短码 / 家族桶 L1（t1821u / t1822u / t1825u / t1829u）：** `_DataBase\_diseases.csv` 为短码+家族 SSOT（列含 `suffix,...,family`）；`archived` 与 `_DataBase` 的 L1=`<family>`（`family` 列；留空=自家族基码）；叶后缀仍用基码（剥末尾 `_\d+` 实例；语义复合整段保留）；实例号只在叶子 `<prefix_suffix>`；全称只进表；ethics/references 仍用 library L1/L2。**同源聚合**：同影像/队列母集或共用 raw → 同 `family`；非同源可自家族；共用 raw 只存一份（优先家族原始件池 `_DataBase\<family>\_share\`——2026-11-09 起亦收原始数据/原始记录/原始图片、伦理申请材料、学位论文；或主叶 + 指针）。细则 → `workspace-layout.md`「按家族分桶」/「同源聚合」/「archived 冷库」。
+- **疾病短码 / 家族桶 L1（t1821u / t1822u / t1825u / t1829u）：** `_DataBase\_diseases.csv` 为短码+家族 SSOT（列含 `suffix,...,family`）；`archived` 与 `_DataBase` 的 L1=`<family>`（`family` 列；留空=自家族基码）；叶后缀仍用基码（剥末尾 `_\d+` 实例；语义复合整段保留）；实例号只在叶子 `<prefix_suffix>`；全称只进表；ethics/references 仍用 library L1/L2。**同源聚合**：同影像/队列母集或共用 raw → 同 `family`；非同源可自家族；共用 raw 只存一份（优先家族原始件池 `_DataBase\<family>\_share\`——2026-11-09 起亦收原始数据/原始记录/原始图片、伦理申请材料、学位论文；或主叶 + 指针）；表格去重合并入 `<family>\_db\<family>db`，叶内只留 `目录说明.md`，压缩档（非表格）只进 `_share\`，档内表格解出入库（2026-11-09）。细则 → `workspace-layout.md`「按家族分桶」/「同源聚合」/「家族库 `_db\`」/「archived 冷库」。
 - **库分类（t1458u）**：L1/L2 与三库分工的权威正文 → `library-taxonomy.md`。`_library` 下 `references`（全文实体）/ `lit-bank`（书目，无 PDF）/ `journals`（期刊池，含选刊侧私有 `whitelist-submitted.csv` / `submission-prior.jsonl`）/ `ethics\approvals`（批件）；不设 radiology 一级，按临床专科归类。
 - **术语**：作者字段 `A`=批注作者；`00`–`07`=技能层；派单→`{SKILLS}\00_orchestrator\references\ownership-contract.md`。工作区只有一层；不再有 A/B 双工作区或挂载缓存树。
 - **技能 ID**：选型只按 fine id；细则 → `skills.md` §2；`{SKILLS}\00_orchestrator\references\id-rules.md`。
@@ -155,7 +155,7 @@ license: MIT
 | 技能/PR 同步 | `skills.md` |
 | 本机布局 / 子工程 | `workspace-layout.md`（见 §1 一行布局） |
 | 冷库 / `_DataBase` 非课题分支 | `workspace-layout.md`（「archived 冷库」+「`{RAW}` 非课题分支」） |
-| 散表归并 / 建库 `_db` / DB 台账 | `workspace-layout.md`（「散表归并与表格入库」「家族库 `_db`」） |
+| 散表归并 / 建库 `_db` / 叶 readme / 压缩档 `_share` / DB 台账 | `workspace-layout.md`（「散表归并与表格入库」「家族库 `_db`」「`_share` 家族原始件池」） |
 | accepted 收工 | `workspace-layout.md`（「accepted 收工」） |
 | 工作区关系 / harvest↔closeout | `workspace-layout.md`（「工作区关系：阶段 · 分流 · harvest · 冷库」） |
 | 三仓分工 / 某内容该放哪 | `README.md`（RULES=运营规则，SKILLS=专业技能，MY-CODES=脚本） |
