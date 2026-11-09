@@ -44,9 +44,15 @@ description: 本机布局与子工程短针。落点见 My rule.md §5。
   - **syn：** 压完后 `_DataBase` 仍随主树同步；`syn` 仅 `/XD .Del`（与 t1796u 一致）。
 - **只读默认：** `{RAW}` 只读，除非主人点名写入。**不预建空夹**（用到再拷 / copy-on-need）。
 
-### `{RAW}` 非课题分支与家族分桶（t1791u / t1822u / t1825u）
+### `{RAW}` 非课题分支与家族分桶（t1791u / t1822u / t1825u / t1829u）
 `D:\MyProjects\_DataBase`（旧名 **00db**）内存三类：① 课题原始件（按后缀分桶）；② `_lab`（历史档，**只读**，不再新增；**留根**、不分桶）；③ `_` 开头的非课题归档分支（新件落这里；**留根**、不分桶）。
 - **按家族分桶（t1791u → t1825u）：** 课题原始件路径为 `_DataBase\<family>\<prefix_suffix>\`（例 `SCH\lxf_RC`、`EGVB\js_CN`、`MHE\ly_SCH_HE`）。`<prefix>` = sub-PI 缩写；`<family>` = `_diseases.csv` 的 `family` 列（留空 = 该基码即家族根）；`<prefix_suffix>` 的**后缀仍是基码**（剥末尾 `_\d+` 实例；语义复合如 `SCH_HE`/`SSD_DKI` 整段保留），实例号只在叶子夹名。家族根本身必须在 `suffix` 列有行，清单一律由 `_diseases.csv` 决定，不另设 allowlist。2026-11-08 t1824u 已把存量编号桶（`SSD_1\`、`LUNG2\`、`MHE1\`、`SHE\` 等）批量归并；2026-11-09 t1825u 把 DB 与 archived 收成同名家族桶（含 `OTHERS` 兜底），`_Docs/test/structure_check.py` S23 守门。
+- **同源聚合（t1829u）：** `<family>` 按**同源数据**聚合，不是按病名近义随便并。
+  1. 同一影像/队列母集、同一纳排、或多篇稿共用一批 raw/底表 → 同一 `family`。
+  2. 同病但非同源（独立采集 / 独立伦理 / raw 不可互指）→ 可自家族；若仅临床谱系同桶仍分叶，**文件不得跨叶混放**。
+  3. 叶夹仍是 `<prefix_suffix>`。共用 raw **只存一份**：优先 `_DataBase\<family>\_shared\`（或钉死的主叶）；其它课题经 `ref/settings.ini`（或 README）指针；禁止整树复制进多叶。本票只定规则，**不**在磁盘上新建 `_shared` 实夹。
+  4. SSOT = `_diseases.csv` 的 `family` 列（L1 桶名以此为准；`family` 留空 = 该基码即自家族）；改挂靠先改表再搬盘；`OTHERS` 仅兜底。`_shared` 为保留名（下划线前缀），与 `_thesis` 同类例外：**不**参与 S23 叶后缀校验。
+  5. 与 archived 同构：冷库 L1 仍跟同一 `family`；本条**不**改 accepted 收工硬留清单。
 - **文档支（t1825u）：** 非课题数据型材料不按疾病家族分桶，落 `_DataBase\_thesis\<slug>\`（学位论文/博士后）、`_DataBase\_grants\_misc\<slug>\`（标书）、`_DataBase\_ethics\_misc\<slug>\`（伦理单图等）；桶名带 `_` 前缀，不参与 S23 家族桶校验。
 
 | 分支 | 放 | 不放 |
@@ -61,7 +67,7 @@ description: 本机布局与子工程短针。落点见 My rule.md §5。
 
 - **硬规则：** 课题原始数据不得进 `_` 分支；`_` 分支不得被课题 `ref/settings.ini` 当数据源。
 - **`目录说明.md`：** 每个 `_` 分支根与 `_lab` 根必须有（放什么、谁维护、更新日）。
-- **`D:\MyProjects\_DataBase\_diseases.csv`（疾病短码 SSOT · t1821u / t1822u / t1825u）：** 列 `suffix,name_en,name_zh,l1,l2,aliases,family`；`suffix`=基码（无 `_\d+` 实例）；`family`=该基码所属家族根（留空=自家族；家族根必须在 `suffix` 列有本人行，如 `MHE`、`SCC`、`EC`、`THESIS`、`OTHERS`）；编号形式进 `aliases`；library `l1`/`l2` 对照 ethics/references。全称不进路径规则。
+- **`D:\MyProjects\_DataBase\_diseases.csv`（疾病短码 + 家族桶 SSOT · t1821u / t1822u / t1825u / t1829u）：** 列 `suffix,name_en,name_zh,l1,l2,aliases,family`；`suffix`=基码（无 `_\d+` 实例）；`family`=该基码所属家族根（留空=自家族；家族根必须在 `suffix` 列有本人行，如 `MHE`、`SCC`、`EC`、`THESIS`、`OTHERS`）；编号形式进 `aliases`；library `l1`/`l2` 对照 ethics/references。全称不进路径规则。
 - **`D:\MyProjects\_DataBase\_index.csv`（唯一可写台账）：** 一行一个 slug/分支，列 `kind,slug,prefix,suffix,title,l1,l2,stage,owner,indexed_on,note`；新建/改名当轮更新。
 - **只读不变：** 除 `_index.csv` 外 `_DataBase` 默认只读；新建分支/子夹属写盘，须当轮点名（§5.1 不豁免）。
 - 不预建空夹。
@@ -149,11 +155,11 @@ description: 本机布局与子工程短针。落点见 My rule.md §5。
 - syn：`D:\MyProjects`→`E:\Aitor` 仅 `/XD .Del`。
 - harvest-skill-library ≠ closeout：harvest 只抽「怎么做」；closeout 是落点；勿把 closeout 写成 harvest 步骤。
 
-## archived 冷库（非阶段；2026-11-08；t1821u / t1822u / t1825u）
+## archived 冷库（非阶段；2026-11-08；t1821u / t1822u / t1825u / t1829u）
 
 `D:\MyProjects\archived` 放**已完结**项目：`D:\MyProjects\archived\<family>\<prefix_suffix>\`（L1=`<family>` **家族根**短码；`<family>` 取自 `_diseases.csv` 的 `family` 列，与 `_DataBase\<family>\<prefix_suffix>\` 同桶；第二层 = 完整课题夹名）。不按年份分层。
 
-- **L1 = 家族根（t1825u）：** 冷库按疾病家族/文档类型分桶，桶名 = `_diseases.csv` 的 `family` 列（留空 = 自家族，即基码本身）。例：`archived\EGVB\js_CN`、`archived\MHE\ly_SCH_HE`、`archived\OTHERS\lxj_BMP6`。
+- **L1 = 家族根（t1825u / t1829u）：** 冷库按疾病家族/文档类型分桶，桶名 = `_diseases.csv` 的 `family` 列（留空 = 自家族，即基码本身；挂靠按同源聚合，见上文「同源聚合」）。例：`archived\EGVB\js_CN`、`archived\MHE\ly_SCH_HE`、`archived\OTHERS\lxj_BMP6`。
 - **叶夹名后缀 = 病种基码（t1822u 不变）：** `archived\<family>\<prefix>_<suffix>[_<n>]\`；`<suffix>` 仍是基码（去末尾 `_\d+`；`SSD_DKI`、`SCH_HE` 等语义复合整段保留），实例号只留在叶子夹名（例 `archived\CC\fyh_CAC_1\`）。
 - **两树同构（t1825u）：** `_DataBase` 与 `archived` 都用同一个 `<family>` 桶；靠 `_diseases.csv` 的 `suffix`/`family` 对应，S23 同时校验两树桶名与叶后缀。文档支（`_thesis` 等）仅存在于 `_DataBase`，冷库不设。
 - **疾病短码 SSOT：** `_DataBase\_diseases.csv`（UTF-8；列 `suffix,name_en,name_zh,l1,l2,aliases,family`）。`suffix` = 基码；`family` = 家族根（留空 = 自家族）；编号形式进 `aliases`（如 `SSD_1`）。中英文全称**只**进本表（及 `_index.csv` 可抄空值）；路径规则不写长病名。
