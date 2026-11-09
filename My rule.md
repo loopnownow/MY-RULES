@@ -154,6 +154,7 @@ license: MIT
 | 技能/PR 同步 | `skills.md` |
 | 本机布局 / 子工程 | `workspace-layout.md`（见 §1 一行布局） |
 | 冷库 / `_DataBase` 非课题分支 | `workspace-layout.md`（「archived 冷库」+「`{RAW}` 非课题分支」） |
+| 散表归并 / 建库 `_db` / DB 台账 | `workspace-layout.md`（「散表归并与表格入库」「家族库 `_db`」） |
 | accepted 收工 | `workspace-layout.md`（「accepted 收工」） |
 | 工作区关系 / harvest↔closeout | `workspace-layout.md`（「工作区关系：阶段 · 分流 · harvest · 冷库」） |
 | 三仓分工 / 某内容该放哪 | `README.md`（RULES=运营规则，SKILLS=专业技能，MY-CODES=脚本） |
