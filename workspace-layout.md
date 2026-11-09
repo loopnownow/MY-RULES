@@ -50,17 +50,28 @@ description: 本机布局与子工程短针。落点见 My rule.md §5。
 - **只读默认：** `{RAW}` 只读，除非主人点名写入。**不预建空夹**（用到再拷 / copy-on-need）。
 
 ### `{RAW}` 非课题分支与家族分桶（t1791u / t1822u / t1825u / t1829u）
-`D:\MyProjects\_DataBase`（旧名 **00db**）内存三类：① 课题原始件（按后缀分桶）；② `_lab`（历史档，**只读**，不再新增；**留根**、不分桶）；③ `_` 开头的非课题归档分支（新件落这里；**留根**、不分桶）。
+`D:\MyProjects\_DataBase`（旧名 **00db**）内存三类：① 课题原始件（按后缀分桶）；② `_lab`（历史档，**只读**，不再新增；**留根**、不分桶；其中 `_lab\ethics` 按 t1849u **退役** → `.Del`，见「伦理材料留存」）；③ `_` 开头的非课题归档分支（新件落这里；**留根**、不分桶）。
 - **按家族分桶（t1791u → t1825u）：** 课题原始件路径为 `_DataBase\<family>\<prefix_suffix>\`（例 `SCH\lxf_RC`、`EGVB\js_CN`、`MHE\ly_SCH_HE`）。`<prefix>` = sub-PI 缩写；`<family>` = `_diseases.csv` 的 `family` 列（留空 = 该基码即家族根）；`<prefix_suffix>` 的**后缀仍是基码**（剥末尾 `_\d+` 实例；语义复合如 `SCH_HE`/`SSD_DKI` 整段保留），实例号只在叶子夹名。家族根本身必须在 `suffix` 列有行，清单一律由 `_diseases.csv` 决定，不另设 allowlist。2026-11-08 t1824u 已把存量编号桶（`SSD_1\`、`LUNG2\`、`MHE1\`、`SHE\` 等）批量归并；2026-11-09 t1825u 把 DB 与 archived 收成同名家族桶（含 `OTHERS` 兜底），`_Docs/test/structure_check.py` S23 守门。
 - **同源聚合（t1829u）：** `<family>` 按**同源数据**聚合，不是按病名近义随便并。
   1. 同一影像/队列母集、同一纳排、或多篇稿共用一批 raw/底表 → 同一 `family`。
   2. 同病但非同源（独立采集 / 独立伦理 / raw 不可互指）→ 可自家族；若仅临床谱系同桶仍分叶，**文件不得跨叶混放**。
   3. 叶夹仍是 `<prefix_suffix>`。共用 raw **只存一份**：优先 `_DataBase\<family>\_share\`（或钉死的主叶）；其它课题经 `ref/settings.ini`（或 README）指针；禁止整树复制进多叶。
-  4. **`_share` 家族原始件池（2026-11-09 主人裁定；取代同日试点「≥2 课题引用」建夹条件）：** 课题的原始数据 / 原始记录 / 原始图片一律进 `<family>\_share\`，不再按叶分散。固定三类（**自 `_share` 起 ≤2 层，D1 最终口径**）：`_share\<leaf>\<文件>` 放该叶原始件压缩档（`tar.zst` 原样，**不就地解压**，解压树用完即移 `{DEL}`）；`_share\ethics\<CODE>__<文件>` 放伦理申请材料 / 原始件（**批件仍归** `_Docs\_library\ethics\approvals\`）；`_share\thesis\<slug>__<文件>` 放学位论文 / 博士后材料。`_share` 一级仅上述三类 + `目录说明.md`（`_share` 存在必须自带 `_share\目录说明.md`；无叶家族例外 `_share\<family>\` 直放，须在家族 `目录说明.md` 登记）；其下**一层平铺**，不建 `raw\` / `cohort\` 子夹；`<family>` 根放 `目录说明.md` 记件清单 / 使用者 / PHI；搬入前先 grep 全库按路径引用；迁移记 `MOVED-*.tsv`（件数/字节/sha 校验），原叶留指针；压缩档与解压树并存时**只留档**（先验档为解压树超集再移树）。2026-11-09 起：`_share` 为压缩档唯一落点（收的是原始件压缩档；档内表格按「家族库 `_db\`」条解出入库，原档仍留 `_share`），叶内与家族根不得留任何归档；`_share` 下文件层级 ≤2（`_share\<类>\<文件>`），不再加中间夹。首个实例 = `_DataBase\ACN\_share\`（`人-血浆-171 - 0.7z`、`2026碳纤维部数据-- (3).xls`）；2026-11-09 全库重组后 20 个家族已建 `_share\`（伦理 48 项 + 学位论文 7 项 + 原始件档 13 个）。存量叶内非表格 raw 按一级目录 / loose 单元压 `<PREFIX>__<leaf>__<unit>-raw-<YYYY-MM-DD>.tar.zst` 上收 `_share\<leaf>\`（不整叶 mega-zip）；原件移 `{DEL}\_by-function\<batch>\originals\<code>\<family>\<leaf>\`，写 tsv（相对路径 / 字节 / sha256），叶 `目录说明.md` 记「raw→档」映射。
+  4. **`_share` 家族原始件池（2026-11-09 主人裁定；取代同日试点「≥2 课题引用」建夹条件）：** 课题的原始数据 / 原始记录 / 原始图片一律进 `<family>\_share\`，不再按叶分散。固定三类（**自 `_share` 起 ≤2 层，D1 最终口径**）：`_share\<leaf>\<文件>` 放该叶原始件压缩档（`tar.zst` 原样，**不就地解压**，解压树用完即移 `{DEL}`）；`_share\ethics\<CODE>__<文件>` 放伦理申请材料 / 原始件（留存口径 →「伦理材料留存（t1849u）」；**批件 PDF 索引仍归** `_Docs\_library\ethics\approvals\`）；`_share\thesis\<slug>__<文件>` 放学位论文 / 博士后材料。`_share` 一级仅上述三类 + `目录说明.md`（`_share` 存在必须自带 `_share\目录说明.md`；无叶家族例外 `_share\<family>\` 直放，须在家族 `目录说明.md` 登记）；其下**一层平铺**，不建 `raw\` / `cohort\` 子夹；`<family>` 根放 `目录说明.md` 记件清单 / 使用者 / PHI；搬入前先 grep 全库按路径引用；迁移记 `MOVED-*.tsv`（件数/字节/sha 校验），原叶留指针；压缩档与解压树并存时**只留档**（先验档为解压树超集再移树）。2026-11-09 起：`_share` 为压缩档唯一落点（收的是原始件压缩档；档内表格按「家族库 `_db\`」条解出入库，原档仍留 `_share`），叶内与家族根不得留任何归档；`_share` 下文件层级 ≤2（`_share\<类>\<文件>`），不再加中间夹。首个实例 = `_DataBase\ACN\_share\`（`人-血浆-171 - 0.7z`、`2026碳纤维部数据-- (3).xls`）；2026-11-09 全库重组后 20 个家族已建 `_share\`（伦理 48 项 + 学位论文 7 项 + 原始件档 13 个）。存量叶内非表格 raw 按一级目录 / loose 单元压 `<PREFIX>__<leaf>__<unit>-raw-<YYYY-MM-DD>.tar.zst` 上收 `_share\<leaf>\`（不整叶 mega-zip）；原件移 `{DEL}\_by-function\<batch>\originals\<code>\<family>\<leaf>\`，写 tsv（相对路径 / 字节 / sha256），叶 `目录说明.md` 记「raw→档」映射。
   5. SSOT = `_diseases.csv` 的 `family` 列（L1 桶名以此为准；`family` 留空 = 该基码即自家族）；改挂靠先改表再搬盘；`OTHERS` 仅兜底。`_share` 为保留名（下划线前缀），与 `_lab` 同类例外：`structure_check.py` S23 **已实现**桶内 `_` / `.` 前缀叶跳过叶后缀校验（2026-11-09）。
   6. **短码夹层级（2026-11-09 主人裁定）：** 短码夹位于 `_DataBase\<family>\<prefix_suffix>`（自 `_DataBase` 起总深 3）；**叶内目录 ≤3 层**，超深链条按 `<父>_<子>` 合并为单层名（实例：`DER\zyx_H`，原 8 层 / 1,188 个超深目录 → 3 层）；派生件（期刊成图 / 投稿包 / 汇报稿）不进叶内 raw，`_未标天数` 这类纯归档中间层不保留；表格入库后叶内只留 `目录说明.md`（见「家族库 `_db\`」）。
   7. 与 archived 同构：冷库 L1 仍跟同一 `family`；本条**不**改 accepted 收工硬留清单。
 - **文档支（t1825u；2026-11-09 退役）：** 学位论文 / 标书 / 伦理申请材料不再设 `_DataBase` 顶层 `_thesis`、`_grants\_misc`、`_ethics\_misc` 三夹；改落家族池 `<family>\_share\thesis\<slug>__<文件>` 与 `<family>\_share\ethics\<CODE>__<文件>`，标书原件归 `_DataBase\_grants\<year>\`。原三夹已于 2026-11-09 解散（`_grants\_misc` 移 `{DEL}`）；遗留例外：`_grants\2025\_ethics-forms\`（申报随附伦理表）。
+
+
+### 伦理材料留存（t1849u）
+
+短码/家族伦理落点 = `_DataBase\<family>\_share\ethics\`（与「`_share` 家族原始件池」同构；`<family>` 取 `_diseases.csv` 的 `family` 列）。本条定**留存口径**；盘面大搬由 Bai 执行，本票（Rules encode）**不**搬盘。
+
+1. **批件原件**：仅保留**日期 ≥ 2023-11-10** 的进短码/家族伦理夹（`_DataBase\<family>\_share\ethics\`）。日期取批件批准日 / 文件标注日（能确定者）；**早于 2023-11-10** 的批件原件 → `.Del`（不进短码夹）。库侧已批批件 PDF + 索引仍落 `_Docs\_library\ethics\approvals\`（`library-taxonomy.md` §3）；本条不另造 approvals 路径。
+2. **临床研究方案 + 知情同意书**：**全部保留**进短码/家族伦理夹（`_DataBase\<family>\_share\ethics\`），**无**日期下限。
+3. **`_DataBase\_lab\ethics` 废弃**：该树不再作为活伦理落点；内容进 `.Del`（政策已立；搬迁由 Bai 当轮执行）。`_lab` 根其它历史档只读口径不变，唯 ethics 子树按本条退役。
+
+挂靠：短码 ↔ 家族靠 `_diseases.csv`；ethics/references 的 library L1/L2 对照不变。
 
 | 分支 | 放 | 不放 |
 |---|---|---|
