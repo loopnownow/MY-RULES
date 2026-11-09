@@ -36,7 +36,7 @@
 | `_library\references\<L1>\<L2>\` | 文献全文实体（PDF/HTML），一文一文件，文件名用 DOI（`/` -> `_`）；`index.csv` 记 `doi,pmid,l1,l2,rel_path,sha256,source_project,fetched_at,notes` | 书目卡片、批件、稿件、第二份副本 |
 | `_library\lit-bank\` | 书目 SSOT：`index.csv`（NLM 引用 + 结论 + 主题），**无 PDF** | 全文实体 |
 | `_library\journals\` | 期刊池 `index.csv`（单表；2026-10-31 起不再留 xlsx）/ `l1-l2-map.csv` / 选刊侧私有 `whitelist-submitted.csv` + `submission-prior.jsonl`（旧表按年重建时移 `{DEL}`，不留 `archive\`） | 全文、`submission-urls.csv`、名单本体 |
-| `_library\ethics\` | `approvals\<L1>\<L2>\` 批件 PDF + `approvals-index.xlsx` + `extract\`（briefs/phrases/doc-role/held-out 提取层） + **`sections\`**（2026-11-01：按伦理表格 section 的分节取用层，`protocol\`/`icf\` 细、`other\` 粗；生成物） | 已填申请材料原件（新件 → `D:\MyProjects\_DataBase\_ethics\<code>\`；历史批量 `D:\MyProjects\_DataBase\_lab\ethics\raw-20261023\` 只读）、第二份全文副本 |
+| `_library\ethics\` | `approvals\<L1>\<L2>\` 批件 PDF + `approvals-index.xlsx` + `extract\`（briefs/phrases/doc-role/held-out 提取层） + **`sections\`**（2026-11-01：按伦理表格 section 的分节取用层，`protocol\`/`icf\` 细、`other\` 粗；生成物） | 已填申请材料原件（新件 → `_DataBase\<family>\_share\ethics\`；历史 `_DataBase\_lab\ethics` 按 t1849u **退役** → `.Del`，见 `workspace-layout.md`「伦理材料留存」；旧顶层 `_ethics\<code>\` 仅作别名阅读）、第二份全文副本 |
 | `_library\glossary\`（2026-11-01，原 `0doc\_bank`） | **自有写作语料 + 四层**（与 glossary README 同口径）：`words\` / `sentences\` / `paragraphs\` + `sections\*.md` **指针页**（无正文）+ `index.csv`（**13 列**，含 `sections` 列，**由 md 生成**）；证据层 `banks\`（jsonl + `glossary.db`，gitignore；`GATES.md` 已清）。环境变量 **`GLOSSARY_ROOT`**。判据 SSOT 在 `{SKILLS}\05_manuscript\base\vocab\`（+ 具名 advanced）；此处只放实例 + `rule_ptr` | **他人文献**（不进 `references`/`lit-bank`）、L1/L2 归类、规则/词表本体 |
 
 子工程侧：`ref\refer\` 只放**文献指针**（`DOI_*.md`，`fulltext:` 指向 `_library\references`）+ NLM 引用与摘要列表 + 写作参考；
@@ -50,8 +50,9 @@
 - 索引 `approvals-index.xlsx` 19 列：`seq,l1,l2,approval_id,id_year,approval_date,valid_until,project_title,institution,file_name,rel_path,pages,size_kb,sha256,archive_name,original_name_zh,id_source,needs_owner,note`。
 - `approval_date` 与 `valid_until`（**批件有效期**）必录；扫描件无文本层时用本机 OCR 出候选 + **人工确认**，只补空、不覆盖人工值。
 - 子工程只挂指针（批号 + 路径），不存批件副本。
+- **留存分流（t1849u）：** `_DataBase` 短码/家族伦理夹只收日期 ≥ 2023-11-10 的**批件原件**；临床研究方案 + 知情同意书全留；`_DataBase\_lab\ethics` 退役进 `.Del`（Bai 搬盘）。权威 → `workspace-layout.md`「伦理材料留存」。
 - _Docs 目录名一律 ASCII 英文；中文原名只留索引列。
-- 申请包/申报原件不是批件：落 `D:\MyProjects\_DataBase\_ethics\<code>\`（非库分支 → `workspace-layout.md`）；`_library\ethics` 只收批件 PDF + 索引 + 提取层。
+- 申请包/申报原件不是批件：落 `_DataBase\<family>\_share\ethics\`（留存口径 → `workspace-layout.md`「伦理材料留存（t1849u）」）；`_library\ethics` 只收批件 PDF + 索引 + 提取层。
 
 ## 4 journals 契约
 
