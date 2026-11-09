@@ -50,9 +50,10 @@ description: 本机布局与子工程短针。落点见 My rule.md §5。
 - **同源聚合（t1829u）：** `<family>` 按**同源数据**聚合，不是按病名近义随便并。
   1. 同一影像/队列母集、同一纳排、或多篇稿共用一批 raw/底表 → 同一 `family`。
   2. 同病但非同源（独立采集 / 独立伦理 / raw 不可互指）→ 可自家族；若仅临床谱系同桶仍分叶，**文件不得跨叶混放**。
-  3. 叶夹仍是 `<prefix_suffix>`。共用 raw **只存一份**：优先 `_DataBase\<family>\_shared\`（或钉死的主叶）；其它课题经 `ref/settings.ini`（或 README）指针；禁止整树复制进多叶。本票只定规则，**不**在磁盘上新建 `_shared` 实夹。
-  4. SSOT = `_diseases.csv` 的 `family` 列（L1 桶名以此为准；`family` 留空 = 该基码即自家族）；改挂靠先改表再搬盘；`OTHERS` 仅兜底。`_shared` 为保留名（下划线前缀），与 `_thesis` 同类例外：**不**参与 S23 叶后缀校验。
-  5. 与 archived 同构：冷库 L1 仍跟同一 `family`；本条**不**改 accepted 收工硬留清单。
+  3. 叶夹仍是 `<prefix_suffix>`。共用 raw **只存一份**：优先 `_DataBase\<family>\_shared\`（或钉死的主叶）；其它课题经 `ref/settings.ini`（或 README）指针；禁止整树复制进多叶。
+  4. **`_shared` 实夹（2026-11-09 试点起）：** 建夹条件 = 同一物理原件被 ≥2 课题实际引用；**同队列仅表不同不建**（各叶原件互不相同即判不建）。夹内**一层平铺**，不建 `raw\` / `cohort\` 子夹；短码根放 `目录说明.md` 记件清单 / 使用者 / PHI；搬入前先 grep 全库按路径引用；迁移记 `MOVED-*.tsv`（件数/字节/sha 校验），原叶留指针；压缩档与解压树并存时**只留档**（先验档为解压树超集再移树）。首个实例 = `_DataBase\ACN\_shared\`（`人-血浆-171 - 0.7z`、`2026碳纤维部数据-- (3).xls`）。
+  5. SSOT = `_diseases.csv` 的 `family` 列（L1 桶名以此为准；`family` 留空 = 该基码即自家族）；改挂靠先改表再搬盘；`OTHERS` 仅兜底。`_shared` 为保留名（下划线前缀），与 `_thesis` 同类例外：`structure_check.py` S23 **已实现**桶内 `_` / `.` 前缀叶跳过叶后缀校验（2026-11-09）。
+  6. 与 archived 同构：冷库 L1 仍跟同一 `family`；本条**不**改 accepted 收工硬留清单。
 - **文档支（t1825u）：** 非课题数据型材料不按疾病家族分桶，落 `_DataBase\_thesis\<slug>\`（学位论文/博士后）、`_DataBase\_grants\_misc\<slug>\`（标书）、`_DataBase\_ethics\_misc\<slug>\`（伦理单图等）；桶名带 `_` 前缀，不参与 S23 家族桶校验。
 
 | 分支 | 放 | 不放 |
