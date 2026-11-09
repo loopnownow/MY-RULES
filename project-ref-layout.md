@@ -25,7 +25,7 @@
 
 ## 子文件夹地图
 
-尽量少的 `ref/` 子夹。标准夹：`review/` `citation/` `refer/` `code-gates/` `tmp/`（按需创建，**不预建空夹**）。**勿再新建** `analysis/` 或 `materials/` 壳。
+尽量少的 `ref/` 子夹。标准夹：`review/` `citation/` `refer/` `code-gates/` `tmp/`（按需创建，**不预建空夹**）；另登记 `figures-orig/`（图件原始可编辑件，2026-11-09 QC；与终图 `figures/` 分工见下表）。**勿再新建** `analysis/` 或 `materials/` 壳。
 
 | 子文件夹 | 放这里 | 不放这里 |
 |---|---|---|
@@ -33,6 +33,7 @@
 | `ref/citation/` | **审计台账 + 期刊/候选刊**：`CITATION_AUDIT.json`（或 `.jsonl`）；引用 README / 跳过说明；**期刊/候选刊只用 `journals.csv`（或 `.xlsx`）** + 合并笔记 `_notes.md`（t1458u）；期刊/引用日志（`ref_journal_log.txt`、`CITATION*`） | NLM+摘要列表与文献正文（见 `refer/`）；写作参考草稿；**期刊信息的散装 md/json/html**（合并进 `_notes.md`，被替代原稿进 `ref/tmp/`） |
 | `ref/refer/` | **文献指针 + NLM 引用与摘要列表**：每篇一个 `DOI_*.md`（`fulltext:` 指向 `_library\references`）；文献清单（原「参考文献」/ `materials/citation` / `materials/refer`）；**亦可**放写作参考 pptx/doc/docx（课题申请书/汇报幻灯/三线表等） | 文献全文实体（PDF/HTML → `D:\MyProjects\_Docs\_library\references\<L1>\<L2>\`，t1455u）；审计台账（`CITATION_AUDIT` 等仍在 `citation/`）；**期刊/候选刊（t1458u 起一律进 `citation/`）**；勿把 locks（hashes/MANIFEST/log）放这里 |
 | `ref/code-gates/` | 脚本/路径说明、补丁指针（无密钥）；`GATE*_report.md`、数字锁定、输入/输出哈希报告 | 现役 `settings.ini`；原始凭据。**原并列的 `code/` 与 `gates/` 不再分夹** |
+| `ref/figures-orig/` | 投稿图**原始可编辑件**（`.ai` `.psd` `.pptx` 原始 `.tif`、未标题导出等）；**2026-11-09 QC 起登记为允许夹**，按课题保留原形（不改名、不合并、不压包） | 终图（`ref/figures/`）；被替代的旧图件（→ `ref/tmp/`） |
 | `ref/tmp/` | 子工程内**临时/中间**默认落点（**非**先丢 `{DEL}`）：中间 Word/PDF/草稿（Claude diff、被替代的 TC、`-copy`、合并草稿）；**旧版 SCI 稿**（如 `Manuscript_<slug>_V1.docx` / 亦可含 `_R*`）；被合并的期刊/引文散装原稿（如 `journal-archive-<YYYYMMDD>/`）；保留到主人说清理/收工。**未进 `accepted\` 前的临时/中间/旧版/试跑一律留此**：禁止自动进 `{DEL}`、禁止自动删；进 `accepted` 须主人另批（t1458u） | 现行终稿 / `Manuscript_<slug>_V…` 或 `_R…`（子工程根）；已关闭轮次 changelog（`review/`）；citation / code-gates ledger；密钥 |
 
 **已退役（勿再新建）：** `ref/analysis/`、`ref/materials/`、独立 `ref/exec/`、`ref/code/`、`ref/gates/`、`ref/writing-refs/`、`ref/raw-pre/`、`ref/results/`。旧树：`analysis/` 子项 → `ref/` 根；`materials/` 内 lit/`citation`/`参考文献` → `refer/`，其余 → `ref/` 根；空壳移入 `{DEL}`（见 Cleanup）。本轮布局迁移另见主人点名。
@@ -72,6 +73,15 @@ SCI 相关文件统一命名：`<Stem>_<子项目名>_<版本号>`。（本条 2
 - 优先 `.docx`；若有 md/pdf 伴生件，**同 stem**
 - 例：`Manuscript_lxf_PP_V1.10.docx`（投出稿）；`Manuscript_lxf_PP_R1.1.docx`、`Comments_lxf_PP_R1.1.docx`、`Response_lxf_PP_R1.1.docx`、`Supplementary_lxf_PP_R1.1.docx`
 - **落点：** 现行 `Manuscript_<slug>_V…` 或 `_R…`（及同号配套）在**子工程根**；**旧版** → `ref/tmp/`。未被接受的投稿包仍按上节进 `ref/` / `submission-*`。本条管文件名 + 旧版落点；详 → 上表 `ref/tmp/`。（原 `materials/` 已退役，勿再新建。）
+
+### 非契约编辑后缀稿（登记保留 · QC 2026-11-09）
+
+整体 QC 发现 28 件稿件用以下**编辑中间件后缀**，主人裁定**保留并登记**（不强制改名、不批量清）：
+
+- `-formatted`（期刊格式化件）、`-clean`（去痕/清稿件）、`V<n>-reviewed`（同版审阅件）
+- `_house`（社内格式件）、`_polished`（润色件）、`_revised_pre_html_update`（HTML 同步前修订件）、`submission-ready`（投稿就绪件）
+
+规则：① 这些**都不是现行版**，子工程根仍须唯一现行 `Manuscript_<slug>_{V|R|P}…`；② 优先放 `ref/tmp/`，已在根上者可留至该课题下一次版本收口；③ 不得据其反推版本号、不得与 `R` 轮同号冒充；④ 清理（移 `{DEL}`）须先问主人。
 
 ### 城城手改识别（仅靠版本号抬升 · t1757u）
 
