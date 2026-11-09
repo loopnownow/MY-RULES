@@ -78,6 +78,26 @@ description: 本机布局与子工程短针。落点见 My rule.md §5。
 
 可选：数据课题也可在上述子工程树内自建文件夹；约定写在该子工程内，不进全局 rules/skills。
 
+### 家族库 `_db\`（2026-11-09 主人裁定 · t1842u）
+
+- **位置（三层）**：`_DataBase\<family>\_db\<family>db`。自 `_DataBase` 起总深 3；`_DataBase\_db\` 已退役，也不建 `<family>\_db\<short_code>\` 子夹。
+- **一族一库**：同家族全部短码共用一个 `<family>db`；短码靠 `project` 表与 `doc.rel_path` 区分；家族拆分时整库随 `<family>` 走。
+- **命名**：库文件 `<family>db`（无扩展名；实例 `MHEdb`）；同目录只放 `目录说明.md`（口径 / 表结构 / 查询示例 / 重建步骤 / 限制）。
+- **只收表格**：xlsx / xls / csv 等可解析表格入库；压缩档（`*.tar.zst`、`7z`、`zip`）不入库、不移动，原地留叶。
+- **原件留痕**：建库并校验通过后，原件移 `{DEL}\_by-function\<batch>\originals\<family>\`，写 `*-MOVED-YYYYMMDD.tsv`（相对路径 / 字节 / sha256）；原件不回流。
+- **门禁**：`_db` 是 `_` 前缀桶，不参与 S23 桶/叶后缀校验；`structure_check.py` S25 校验落点与库文件（`<family>db` + `目录说明.md`、库头 SQLite、核心表齐、`_DataBase\_db` 不复活）；建库 / 迁移前后仍须全门 PASS。
+- 细则（去重层级、schema、QA 清单、重建命令）→ skill `db-library`。
+
+### 散表归并与表格入库（2026-11-09 主人裁定 · t1842u）
+
+- **触发**：家族根 / 叶根散落表格（同项目多份、`(n)` 版本、一簿多 sheet）需要「去重 → 对齐 → 合并成一个 Excel」或「入 `_db`」时。
+- **项目粒度 = 叶 slug**（家族根直放的用家族名）；合并产物 `<项目名>_merged_YYYYMMDD.xlsx` 落回该叶根 / 家族根；`_share\` 内不动。
+- **去重三层**：① 文件级 sha256；② 整表级（表头 + 行哈希集合全等 = 重复；真子集 = subset，只记边、不存第二份字节）；③ 行级 / 实体级（自然键整行全等才去重；跨项目映射只人工建）。
+- **对齐**：列名词典 + 表头驱动解析；**不按 mtime 判新旧**（迁移会刷新 mtime，本轮 239/258 张挤在 13 个分钟桶）；版本簇（`(n)` / `copy`）只作线索，须开表核对。
+- **留痕**：原件移 `{DEL}\_by-function\<batch>\originals\<项目>\`，写 `*-MOVED-YYYYMMDD.tsv`（件数 / 字节 / sha256 100% 核验）；结果与限制写叶 / 家族 `目录说明.md` 追加段 + `_index.csv` note；批次报告 `<batch>-REPORT.md`。
+- **闸**：改动前后 `structure_check.py` 全门 PASS；手工删除 / 清除须主人确认后写 `REVOKED-YYYYMMDD.tsv`，不得静默。
+- 细则（三类型判定、表头驱动解析、坑位清单、合并簿 sheet 约定）→ skill `db-library`。
+
 ## 阶段夹与课题名
 
 课题路径：`D:\MyProjects\<stage>\<project>`。
