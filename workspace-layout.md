@@ -11,7 +11,7 @@ description: 本机布局与子工程短针。落点见 My rule.md §5。
 
 | 根 | 角色 |
 |---|---|
-| `D:\MyProjects\_DataBase`（`{RAW}`；旧名 00db） | 课题原始件（`<family>\<prefix_suffix>`，家族桶；文档支 `_thesis`/`_grants\_misc`/`_ethics\_misc`）+ `_` 非课题归档分支 + `_lab` 历史档只读；除 `_index.csv`/`_diseases.csv` 外只读除非点名；细则见下节 |
+| `D:\MyProjects\_DataBase`（`{RAW}`；旧名 00db） | 课题原始件（`<family>\<prefix_suffix>`，家族桶；家族原始件池 `<family>\_share\`（`ethics\` / `thesis\` / 原始件档））+ `_` 非课题归档分支 + `_lab` 历史档只读；除 `_index.csv`/`_diseases.csv` 外只读除非点名；细则见下节 |
 | `D:\MyProjects\.Del`（`{DEL}`；旧名 **0del** / `D:\0del`） | AI 可操作临时/移出区（`_by-project` / `_by-function`）；**syn 不同步**（`/XD .Del`） |
 | `D:\MyProjects\_Docs` | 语料 + 可复用代码；live tops：`_library`（含 `references` 文献全文、`lit-bank` 书目、`journals` 期刊池与选刊侧私有、`ethics\approvals` 批件、`lab-ref-ranges`、`glossary` 自有语料+四层（words/sentences/paragraphs + sections 指针页；`GLOSSARY_ROOT`）） / `templates` / `mem` / `GitHub` / `test` / `skill-harvest`（+ 根 md；`_bank` 2026-11-01 并入 `_library\glossary`，`_code` 2026-11-01 退役） |
 | `D:\MyProjects\_Docs\mem` | bot 记忆导出/更新落点（城城 2026-10-25）；**仅隐私** + 可变数据 SSOT（如 find-journal JCR xlsx）；站立政策不进 mem |
@@ -51,11 +51,11 @@ description: 本机布局与子工程短针。落点见 My rule.md §5。
   1. 同一影像/队列母集、同一纳排、或多篇稿共用一批 raw/底表 → 同一 `family`。
   2. 同病但非同源（独立采集 / 独立伦理 / raw 不可互指）→ 可自家族；若仅临床谱系同桶仍分叶，**文件不得跨叶混放**。
   3. 叶夹仍是 `<prefix_suffix>`。共用 raw **只存一份**：优先 `_DataBase\<family>\_share\`（或钉死的主叶）；其它课题经 `ref/settings.ini`（或 README）指针；禁止整树复制进多叶。
-  4. **`_share` 实夹（2026-11-09 试点起）：** 建夹条件 = 同一物理原件被 ≥2 课题实际引用；**同队列仅表不同不建**（各叶原件互不相同即判不建）。夹内**一层平铺**，不建 `raw\` / `cohort\` 子夹；短码根放 `目录说明.md` 记件清单 / 使用者 / PHI；搬入前先 grep 全库按路径引用；迁移记 `MOVED-*.tsv`（件数/字节/sha 校验），原叶留指针；压缩档与解压树并存时**只留档**（先验档为解压树超集再移树）。首个实例 = `_DataBase\ACN\_share\`（`人-血浆-171 - 0.7z`、`2026碳纤维部数据-- (3).xls`）。
-  5. SSOT = `_diseases.csv` 的 `family` 列（L1 桶名以此为准；`family` 留空 = 该基码即自家族）；改挂靠先改表再搬盘；`OTHERS` 仅兜底。`_share` 为保留名（下划线前缀），与 `_thesis` 同类例外：`structure_check.py` S23 **已实现**桶内 `_` / `.` 前缀叶跳过叶后缀校验（2026-11-09）。
+  4. **`_share` 家族原始件池（2026-11-09 主人裁定；取代同日试点「≥2 课题引用」建夹条件）：** 课题的原始数据 / 原始记录 / 原始图片一律进 `<family>\_share\`，不再按叶分散。固定三类：`_share\<leaf>\` 放该叶原始件压缩档（`tar.zst` 原样，**不就地解压**，解压树用完即移 `{DEL}`）；`_share\ethics\<CODE>\` 放伦理申请材料 / 原始件（**批件仍归** `_Docs\_library\ethics\approvals\`）；`_share\thesis\<slug>\` 放学位论文 / 博士后材料。`_share` 一级仅上述三类 + `目录说明.md`；其下**一层平铺**，不建 `raw\` / `cohort\` 子夹；`<family>` 根放 `目录说明.md` 记件清单 / 使用者 / PHI；搬入前先 grep 全库按路径引用；迁移记 `MOVED-*.tsv`（件数/字节/sha 校验），原叶留指针；压缩档与解压树并存时**只留档**（先验档为解压树超集再移树）。首个实例 = `_DataBase\ACN\_share\`（`人-血浆-171 - 0.7z`、`2026碳纤维部数据-- (3).xls`）；2026-11-09 全库重组后 20 个家族已建 `_share\`（伦理 48 项 + 学位论文 7 项 + 原始件档 13 个）。存量叶内 raw **不强制上收**（本轮未动）。
+  5. SSOT = `_diseases.csv` 的 `family` 列（L1 桶名以此为准；`family` 留空 = 该基码即自家族）；改挂靠先改表再搬盘；`OTHERS` 仅兜底。`_share` 为保留名（下划线前缀），与 `_lab` 同类例外：`structure_check.py` S23 **已实现**桶内 `_` / `.` 前缀叶跳过叶后缀校验（2026-11-09）。
   6. **短码夹层级（2026-11-09 主人裁定）：** 短码夹位于 `_DataBase\<family>\<prefix_suffix>`（自 `_DataBase` 起总深 3）；**叶内目录 ≤3 层**，超深链条按 `<父>_<子>` 合并为单层名（实例：`DER\zyx_H`，原 8 层 / 1,188 个超深目录 → 3 层）；派生件（期刊成图 / 投稿包 / 汇报稿）不进叶内 raw，`_未标天数` 这类纯归档中间层不保留。
   7. 与 archived 同构：冷库 L1 仍跟同一 `family`；本条**不**改 accepted 收工硬留清单。
-- **文档支（t1825u）：** 非课题数据型材料不按疾病家族分桶，落 `_DataBase\_thesis\<slug>\`（学位论文/博士后）、`_DataBase\_grants\_misc\<slug>\`（标书）、`_DataBase\_ethics\_misc\<slug>\`（伦理单图等）；桶名带 `_` 前缀，不参与 S23 家族桶校验。
+- **文档支（t1825u；2026-11-09 退役）：** 学位论文 / 标书 / 伦理申请材料不再设 `_DataBase` 顶层 `_thesis`、`_grants\_misc`、`_ethics\_misc` 三夹；改落家族池 `<family>\_share\thesis\<slug>\` 与 `<family>\_share\ethics\<CODE>\`，标书原件归 `_DataBase\_grants\<year>\`。原三夹已于 2026-11-09 解散（`_grants\_misc` 移 `{DEL}`）；遗留例外：`_grants\2025\_ethics-forms\`（申报随附伦理表）。
 
 | 分支 | 放 | 不放 |
 |---|---|---|
@@ -198,7 +198,7 @@ description: 本机布局与子工程短针。落点见 My rule.md §5。
 
 - **L1 = 家族根（t1825u / t1829u）：** 冷库按疾病家族/文档类型分桶，桶名 = `_diseases.csv` 的 `family` 列（留空 = 自家族，即基码本身；挂靠按同源聚合，见上文「同源聚合」）。例：`archived\EGVB\js_CN`、`archived\MHE\ly_SCH_HE`、`archived\OTHERS\lxj_BMP6`。
 - **叶夹名后缀 = 病种基码（t1822u 不变）：** `archived\<family>\<prefix>_<suffix>[_<n>]\`；`<suffix>` 仍是基码（去末尾 `_\d+`；`SSD_DKI`、`SCH_HE` 等语义复合整段保留），实例号只留在叶子夹名（例 `archived\CC\fyh_CAC_1\`）。
-- **两树同构（t1825u）：** `_DataBase` 与 `archived` 都用同一个 `<family>` 桶；靠 `_diseases.csv` 的 `suffix`/`family` 对应，S23 同时校验两树桶名与叶后缀。文档支（`_thesis` 等）仅存在于 `_DataBase`，冷库不设。
+- **两树同构（t1825u）：** `_DataBase` 与 `archived` 都用同一个 `<family>` 桶；靠 `_diseases.csv` 的 `suffix`/`family` 对应，S23 同时校验两树桶名与叶后缀。家族池 `_share\` 与 `_lab` 仅存在于 `_DataBase`，冷库不设。
 - **疾病短码 SSOT：** `_DataBase\_diseases.csv`（UTF-8；列 `suffix,name_en,name_zh,l1,l2,aliases,family`）。`suffix` = 基码；`family` = 家族根（留空 = 自家族）；编号形式进 `aliases`（如 `SSD_1`）。中英文全称**只**进本表（及 `_index.csv` 可抄空值）；路径规则不写长病名。
 - **ethics / references** 仍用 library L1/L2（`library-taxonomy.md`）；靠 `_diseases.csv` 的 `suffix`↔`l1`/`l2` 对照，不另造路径层。
 
