@@ -155,6 +155,7 @@ license: MIT
 | 本机布局 / 子工程 | `workspace-layout.md`（见 §1 一行布局） |
 | 冷库 / `_DataBase` 非课题分支 | `workspace-layout.md`（「archived 冷库」+「`{RAW}` 非课题分支」） |
 | accepted 收工 | `workspace-layout.md`（「accepted 收工」） |
+| 工作区关系 / harvest↔closeout | `workspace-layout.md`（「工作区关系：阶段 · 分流 · harvest · 冷库」） |
 | 三仓分工 / 某内容该放哪 | `README.md`（RULES=运营规则，SKILLS=专业技能，MY-CODES=脚本） |
 | 派单/盯梢 | `{SKILLS}\00_orchestrator\references\ownership-contract.md`；`{SKILLS}\00_orchestrator\references\handoff-monitor.md` |
 | _Docs 文档库查找 | Bai → `{SKILLS}\03_research\advanced\docs-db.md`；派单 SSOT → ownership-contract §_Docs |
