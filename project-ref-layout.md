@@ -69,7 +69,7 @@ SCI 相关文件统一命名：`<Stem>_<子项目名>_<版本号>`。（本条 2
 - 审稿意见一到才开 R。该轮必须三件同号：`Manuscript_*_R1.1`、`Comments_*_R1.1`、`Response_*_R1.1`（有补充材料再加同号 `Supplementary_`）。Comments/Response/Supplementary 只与对应 R（或校样 P）同号；投稿前的 V 稿一般不配 Comments/Response。
 - 拒稿后换刊重写仍用 V（可升主版本，如 `V2.1`），直到再次投出；**不要**把换刊稿写成 R。
 - 接收后课题进 `accepted`，文件保持最后那个 R；校样单独留档用 P，不必再涨 V 或 R。
-- 每次实质改动 `+0.1`，不跳号；每次升版在 `ref/manuscript-revision.md` 追加一行。
+- 每次实质改动 `+0.1`，不跳号；每次升版在 `ref/manuscript-revision.md` 追加一行。实质改动指结论、数据、结构、段落增删、换刊重写等。**小改不升级版本号（t1946u）：** 错字、标点、纯改字、只加/改批注、不改结论或结构的微调，仍用现行 V/R/P 文件名就地改，不得 `+0.1`，也不得另存新号。
 - 优先 `.docx`；若有 md/pdf 伴生件，**同 stem**
 - 例：`Manuscript_lxf_PP_V1.10.docx`（投出稿）；`Manuscript_lxf_PP_R1.1.docx`、`Comments_lxf_PP_R1.1.docx`、`Response_lxf_PP_R1.1.docx`、`Supplementary_lxf_PP_R1.1.docx`
 - **落点：** 现行 `Manuscript_<slug>_V…` 或 `_R…`（及同号配套）在**子工程根**；**旧版** → `ref/tmp/`。未被接受的投稿包仍按上节进 `ref/` / `submission-*`。本条管文件名 + 旧版落点；详 → 上表 `ref/tmp/`。（原 `materials/` 已退役，勿再新建。）
@@ -85,11 +85,11 @@ SCI 相关文件统一命名：`<Stem>_<子项目名>_<版本号>`。（本条 2
 
 ### 城城手改识别（仅靠版本号抬升 · t1757u）
 
-- 城城每次手改并保存后，在**文件名**（及文内版本号，若有）抬升 patch（例：`Manuscript_*_V1.2.docx` → `V1.3`；`R` / `P` 同理）。
-- 助手：子工程**根**上最新的 `Manuscript_*_V…` / `_R…` / `_P…`，若其版本号**大于**该课题上次助手记录的已落地版本，**必须**视为**城城手改 live 稿**。
+- 实质手改：城城每次实质手改并保存后，在**文件名**（及文内版本号，若有）抬升 patch（例：`Manuscript_*_V1.2.docx` → `V1.3`；`R` / `P` 同理）。小改可不升号（口径见上节「SCI 稿件文件名」t1946u）。
+- 助手：子工程**根**上最新的 `Manuscript_*_V…` / `_R…` / `_P…`，若其版本号**大于**该课题上次助手记录的已落地版本，**必须**视为**城城手改 live 稿**（充分条件）。
 - 此时：**禁止**从更旧的 bak / `-org` / collapsed 副本整文件还原或覆盖；只允许 **Track Changes（作者 A）增量**合并；**禁止**降低版本号；**禁止**用 bak 整文件替换现行稿。
-- **不要**为此新建 `OWNER.md`、`.owner.docx`、lock txt 或其它标记文件——识别信号**仅**是文件名（及文内）版本号抬升。
-
+- 未升号不得反推「不是手改」；正文与城城已改文本不同，仍按 `My rule.md` §5.1「城城已改先问」。
+- **不要**为此新建 `OWNER.md`、`.owner.docx`、lock txt 或其它标记文件。
 
 ### 数据底表（D-1）
 

@@ -94,7 +94,7 @@ license: MIT
 
 - **Word/PDF 格式**：未经当轮点名，禁止改 `.docx`/`.pdf` 版式；改文字用修订模式。词/句级修订，禁止大段覆盖。细则→`{SKILLS}\06_review\advanced\word-edit.md`。
 - **城城已改先问（全局停）**：若 Word/手稿正文与城城（用户）已编辑文本不同（修订痕迹 / 已知本人改动），**必须先问再改**，禁止擅自覆盖或改回。技能须指针本条，勿只埋在 revise。→`word-edit.md`；`writing-rules-hard.md`；`07_response` revise。（2026-10-24）
-- **城城手改识别（版本号抬升 · t1757u）**：子工程根最新 `Manuscript_*_V/R/P` 若版本号**大于**上次助手落地版 → 视为城城手改 live 稿；**禁**从 bak/`-org`/collapsed 整文件还原或覆盖；只许 Track Changes（作者 A）增量；不降号；**不**另建 `OWNER.md` / `.owner.docx` / lock 标记。权威 → `project-ref-layout.md`「城城手改识别」。
+- **城城手改识别（版本号抬升 · t1757u）**：子工程根最新 `Manuscript_*_V/R/P` 若版本号**大于**上次助手落地版 → 视为城城手改 live 稿；**禁**从 bak/`-org`/collapsed 整文件还原或覆盖；只许 Track Changes（作者 A）增量；不降号；**不**另建 `OWNER.md` / `.owner.docx` / lock 标记。权威 → `project-ref-layout.md`「城城手改识别」。小改不升号与未升号不得反推「不是手改」→ 同文件「SCI 稿件文件名」与「城城手改识别」（t1946u）。
 - **统一版式**：手稿、审稿意见、审稿回复同一套——正文 Times New Roman 12、1.5 倍行距、段前后 0、两端对齐、LTR、特殊格式无；**表格单元格 12 pt**；**图内文字 Arial**（与正文双轨）；**流程图首选 PDF**。→`{SKILLS}\05_manuscript\advanced\Aitor-format.md`；`word-edit.md`；`draw-flowchart`。（2026-10-24）
 
 - **图表编号（C-1 · 指针，2026-10-29 · t1309s6268）：** Table 1 = 基线；**不**单独放 logistic 系数表或 score-correlation 表（Aitor-format §209）；ROC 操作特性作表；图按适用放 workflow / US / heatmap / nomogram+校准 / ROC / DCA。细则勿在本文件复写，指针 → `{SKILLS}\05_manuscript\advanced\Aitor-format.md` §200 / §209 / §213。
