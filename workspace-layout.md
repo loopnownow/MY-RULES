@@ -171,6 +171,7 @@ description: 本机布局与子工程短针。落点见 My rule.md §5。
 - **closeout：** 物理落点与精简；**不是** harvest 的替代步骤。
 - **harvest 也不代替搬盘：** 抽完仍须按 closeout 把字节落到 `_DataBase` / `_Docs` / `.Del` / `archived`。
 - **harvest 剩余件（t1950u）：** 一次 harvest 之后应进 `{DEL}` 的剩余件一律落 `harvested\`（平铺；含原可进 `_by-project` 或 harvest-park 的收尾件）。非 harvest 的三档落点不变。权威 → `My rule.md` §5.3。
+- **先判 harvest 需求再定落点（t1951u）：** 批次进 park 后先分四类——H1 可复用 how-to（抽完即搬 `harvested`）/ **H2 不需要 harvest（数据、原始件、PHI、第三方源码、构建产物、浏览器配置、一次性修补脚本、日志截图 → 不进 harvest 队列，核对后直接落 `harvested`）** / H3 活依赖（先解 `DEL_ROOT`·`DEFAULT_BATCH`·`--del-root` 或活指针，再搬；可先瘦身留台账）/ H4 课题件（`_by-project\<slug>\`）。park 不是长期仓，禁止积压。权威 → `My rule.md` §5.3.1。
 - 关系总图 / harvest 授权 →「工作区关系：阶段 · 分流 · harvest · 冷库」。harvest-skill-library 只抽「怎么做」；closeout 是落点；勿把 closeout 写成 harvest 步骤。
 
 ### harvest 授权范围
