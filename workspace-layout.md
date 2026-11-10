@@ -50,7 +50,7 @@ description: 本机布局与子工程短针。落点见 My rule.md §5。
 - **只读默认：** `{RAW}` 只读，除非主人点名写入。**不预建空夹**（用到再拷 / copy-on-need）。
 
 ### `{RAW}` 非课题分支与家族分桶（t1791u / t1822u / t1825u / t1829u）
-`D:\MyProjects\_DataBase`（旧名 **00db**）内存三类：① 课题原始件（按后缀分桶）；② `_lab`（历史档，**只读**，不再新增；**留根**、不分桶；其中 `_lab\ethics` 按 t1849u **退役** → `.Del`，见「伦理材料留存」）；③ `_` 开头的非课题归档分支（新件落这里；**留根**、不分桶）。
+`D:\MyProjects\_DataBase`（旧名 **00db**）内存三类：① 课题原始件（按家族分桶）；② `_lab`（历史档，**只读**，不再新增；**留根**、不分桶；其中 `_lab\ethics` 按 t1849u **退役** → `.Del`，见「伦理材料留存」）；③ `_` 开头的非课题归档分支（新件落这里；**留根**、不分桶）。
 - **按家族分桶（t1791u → t1825u）：** 课题原始件路径为 `_DataBase\<family>\<prefix_suffix>\`（例 `SCH\lxf_RC`、`EGVB\js_CN`、`MHE\ly_SCH_HE`）。`<prefix>` = sub-PI 缩写；`<family>` = `_diseases.csv` 的 `family` 列（留空 = 该基码即家族根）；`<prefix_suffix>` 的**后缀仍是基码**（剥末尾 `_\d+` 实例；语义复合如 `SCH_HE`/`SSD_DKI` 整段保留），实例号只在叶子夹名。家族根本身必须在 `suffix` 列有行，清单一律由 `_diseases.csv` 决定，不另设 allowlist。2026-11-08 t1824u 已把存量编号桶（`SSD_1\`、`LUNG2\`、`MHE1\`、`SHE\` 等）批量归并；2026-11-09 t1825u 把 DB 与 archived 收成同名家族桶（含 `OTHERS` 兜底），`_Docs/test/structure_check.py` S23 守门。
 - **同源聚合（t1829u）：** `<family>` 按**同源数据**聚合，不是按病名近义随便并。
   1. 同一影像/队列母集、同一纳排、或多篇稿共用一批 raw/底表 → 同一 `family`。
