@@ -134,6 +134,35 @@ license: MIT
 - **禁止活指针引用 `{DEL}`（2026-10-31）**：`{RULES}` / `{SKILLS}` / `_Docs` 文档与脚本**不得**把 `D:\MyProjects\.Del\...`（或旧字面 `D:\0del\...`）当作当前落点或路径解析目标（0del 会周期性清空）。需要长期存在的全文/台账/脚本一律放耐久位置（`{RULES}` / `{SKILLS}` / `_Docs` / `project root`）；历史记录里的 0del 路径由 `test\path_audit.py` 归 `HISTORIC`，但**不得新增**活指针；要清空 `.Del` 前先把活指针重指。
 - **整理 `.Del`（旧 0del）前先 grep 活路径**：`_code` 多个脚本把输出写死到 `{DEL}\<子夹>` / `D:\MyProjects\.Del\<子夹>`（一律在 `harvested\` 下：`smoke`、`modules_bak`、`cln_fill_supplement`、`yt_RDL`、`batch_rerun_status.json`、`batch_rerun.log`；t1490u），这些不是移出件，搬走即破坏脚本；新增写死路径须同轮补入本节清单。
 
+### 5.3.1 先判 harvest 需求，再定落点（t1951u）
+
+批次进 `_by-function` / `_by-project` 后**先分四类**，再谈落点。**不需要 harvest 的内容不进 harvest 队列，核对后直接落 `harvested\`**。
+
+| 类 | 判据 | 要不要 harvest | 落点 |
+|---|---|---|---|
+| **H1 可复用 how-to** | 规程 / 口径 / 决策理由 / 踩坑 / 验证法 / 清单或报表格式 | **要**（HARVEST-STANDARD §7 三桶） | 抽进 `_Docs\skill-harvest`；**抽完即搬** `harvested\` |
+| **H2 不需要 harvest** | 数据底表/导出、原始件、PHI 或伦理相邻件、第三方源码树、构建产物、浏览器/探针配置、一次性台账修补脚本、日志截图、缓存 | **不抽**（不进 harvest） | 核对唯一副本后**直接落** `harvested\`，不停 park |
+| **H3 活依赖** | 被活代码当输入/默认路径（`DEL_ROOT` / `DEFAULT_BATCH` / `--del-root`），或被活文档给出可运行绝对路径 | 含 how-to 的先抽（H1）；本体**先解依赖再搬** | 解依赖前留 park；解完落 `harvested\` |
+| **H4 课题件** | 单课题中途/收尾件、旧稿、投稿包、课题专用脚本 | 按需 | `_by-project\<slug>\`，**不进** `harvested\` |
+
+- **park 不是长期仓**：`_by-function` / `_by-project` 常态应为空。批次完成即按 H1–H4 分流，禁止积压（2026-11-10 实测一处积压 239 项 / 45.9 GB，即反例）。
+- **H2 没有「等下次 harvest」这一步**：不抽 how-to 的件不需要排队，也不必等「确认无用」——只做三查（唯一副本已在他处 / 同名异字节不覆盖 / 写 `MOVED.tsv`）即可落 `harvested\`。
+- **H3 解依赖两条标准路径**：① **代码侧**——把写死的输入改指耐久位或 `harvested\`（例：`DEL_ROOT` / `DEFAULT_BATCH` / `--del-root` 默认值），跑一次门禁与单测后再搬；② **文档侧**——把活指针改成「历史落点」或指向耐久副本，再搬。两条都做不了（或缺授权）→ 留 park，并在该批次 `目录说明.md` 写明阻塞原因与解除条件。
+- **H3 优先瘦身，别整批压着**：活脚本只吃少数文件时，先搬大件、留必需件在批次根。实例：`verify_db.py` 的台账 glob 是**一层深**（`*/*MOVED*.tsv`，即 `<batch>\*.tsv`），故可留 `*.tsv` + `目录说明.md` 在批次根、把 `originals/`、`staging/`、`backup-*/` 等搬走；不得为保脚本把 10 GB 级批次长期占着 park。搬前须查该批 `--from-originals` 这类重建路径是否仍需要。
+- **工作夹：耐久层 vs 瞬态（t1951u）**：判据是「后人能否**复算**该数字/结论」。能 → 耐久；只是本次执行过程 → 瞬态。
+  - **耐久层 = `_Docs\skill-harvest\rounds\<round>\`**，固定形态：`HARVEST-*.md`（三桶正文）/ `INDEX.md`（来源·覆盖·分流）/ `MANIFEST.tsv`（逐件 sha256 + 决策）/ **`evidence\`**（判定证据：`dir-agg.tsv`、`proc-candidates.tsv`、`delta.tsv`、`moves-plan.tsv` + 门禁日志）/ `tools\`（可复用扫描·分档脚本）。**不放实体镜像**（源在库内，正文用 `MANIFEST.tsv` 的 `relpath` 指路）。正文引证据用 `evidence\...` 相对路径。
+  - **瞬态 = `.Del\_<task>-<YYYYMMDD>\`**（下划线前缀工作夹，与 `_by-function` / `_by-project` / `harvested` 并列）：试跑输出、草稿 `*.new.md`、已有耐久副本的脚本体、临时 dump、探针日志。
+  - **收尾**：先核耐久件已在 `skill-harvest\rounds\<round>\`（sha256 一致）→ 整个工作夹落 `harvested\` 并写 `MOVED.tsv`。工作夹**不得**长期留在 `.Del` 根（会被当移出件误清）。
+  - **探针/一次性脚本**（不进 harvest 的 H2 件）**不要**为「可能有用」在 `_Docs` 建夹存盘；要么进 `skill-harvest\rounds\<round>\tools\`，要么随工作夹落 `harvested\`。
+
+### 5.3.2 harvest 对象范围与产物形态（t1952u）
+
+1. **对象三类**：`.Del` 移出件、`_library` 机器库（references / lit-bank / journals / ethics / glossary / lab-ref-ranges / scanner-registry）、`_DataBase` 原始库（`<family>\_db` / `_share` / 叶 `ref\settings.ini` / `目录说明.md`）。**fine-id 不是对象来源，而是 lane 坐标系**（现行 22 个，见 `{SKILLS}\\NN_slug\base\`）。
+2. **抽什么**：能跨课题重放的**动作 / 判据 / 格式 / 踩坑**（三桶）。**不抽**数据本体：影像与 DICOM、文献 PDF 全文、批件 PDF、PHI（含 ICF/方案正文）、未发表全文、期刊全量行、glossary `banks\` 证据库。
+3. **lane 只用现行 fine-id**；跨切面进该席位 `advanced\`；纯规则进 `{RULES}`。**禁止自造 lane**（2026-11-10 实测一轮 harvest 里 6 节有 5 节用了不存在的 lane，全部返工）。
+4. **快照不保留**：`skill-harvest` 只收「正文 + `MANIFEST.tsv` + `evidence\` + `tools\`」；**实体镜像（`from-by-*`）不进 `_Docs`**。移出前须证「每个镜像都有同 sha 对应件在库内」（2026-11-10 实测 414 件镜像 0 孤本），移出照 §5.3 进 `harvested\` 并记台账。
+5. **布局固定**：`README.md`（一页索引）/ `HARVEST-STANDARD.md` / `by-fine-id\<fine-id>.md` / `rounds\<YYYYMMDDx-round>\` / `sources\`（耐久 park，非草稿）。一次性批次并入草稿后原夹移 `harvested\`，**不新造平级夹**。
+
 # 6 工程决策
 
 - R1 需求优先 · R2 证据排错 · R3 有序简化 · R4 风险比例 · R5 保护不变量 · R6 闭环验证。
