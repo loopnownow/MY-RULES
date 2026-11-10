@@ -126,7 +126,8 @@ license: MIT
 | harvest-park | `_by-function\harvest-docs-<YYYYMMDD>\<原相对路径>` | `_Docs` 新建件的收尾归档（草稿已「进skills」收编，或已过时） | 留档；下次 QC 复核后再定留或降 harvested |
 | harvested | `harvested\`（平铺，不建日期子夹；原 `junk\`，2026-10-31 改名） | 一次性批次、字节码/缓存、拼写错件、本机配置备份、Downloads 残留、**无任何文本引用**的产物 | **只由城城手动清**；bot 不清、不代清 |
 
-- **课题件优先** `_by-project\<slug>\`（park）；**_Docs 收尾件**（草稿已收编进 skills、或已过时）才进 harvest-park。两档不得互替堆放。
+- **课题件优先** `_by-project\<slug>\`（park）；**_Docs 收尾件**（草稿已收编进 skills、或已过时）才进 harvest-park。两档不得互替堆放。一次 harvest 之后应进 `{DEL}` 的剩余件除外，见下条 t1950u。
+- **harvest 剩余件落 harvested（t1950u）：** 一次 harvest（抽「怎么做」）之后，凡按分流应进 `{DEL}` / `D:\MyProjects\.Del` 的剩余件（含原可进 `_by-project` 或 harvest-park 的收尾件），一律落 `harvested\`（平铺，不建日期子夹）。抽出的 how-to 仍进 `_Docs\skill-harvest`；进 `_DataBase` / `_Docs` 活库 / `archived` 的分流不变。非 harvest 的 `.Del` 落点不变（如 closeout 可复现图、入库后原散目录、课题 park、Downloads 残留等仍按本条 park / harvest-park / harvested 三档）。落 `harvested` 前仍须：① 全库 grep 无活文本引用（有活指针先改指针或仍留 park，不得带着活引用进 harvested）；② 同名异字节不覆盖（文件名加 slug 或当轮 id 区分，不建日期子夹）；③ 写 `harvested\MOVED.tsv`。清空口径不变：`harvested` 只由城城手动清，bot 不清、不代清；park / harvest-park 仍不得整夹清。
 - 落 harvested 前必须：① 全库 grep 确认无活文本引用（`_Docs` + `D:\MyProjects` 课题树）；② 同名异字节不覆盖；③ 写 `harvested\MOVED.tsv`。
 - **harvested 是唯一的终弃档，且只由城城手动清空**（bot 不清、不代清、不自作主张）；park / harvest-park 不得整夹清。
 - `_Docs` 侧的判定与落盘仍由 `test\cleanup_scan.py`（判据）与 `test\cleanup_move.py --dest <落点>`（落点）负责；本条只定**落点与可弃度**，不另造脚本。

@@ -170,6 +170,7 @@ description: 本机布局与子工程短针。落点见 My rule.md §5。
 - **harvest：** 抽「怎么做」→ `_Docs\skill-harvest`；仅当主人说「进skills」才进 MY-SKILLS（extract ≠ promote；流程见 `skills.md` §3 / skill-evolution「Harvest 任务流程」）。
 - **closeout：** 物理落点与精简；**不是** harvest 的替代步骤。
 - **harvest 也不代替搬盘：** 抽完仍须按 closeout 把字节落到 `_DataBase` / `_Docs` / `.Del` / `archived`。
+- **harvest 剩余件（t1950u）：** 一次 harvest 之后应进 `{DEL}` 的剩余件一律落 `harvested\`（平铺；含原可进 `_by-project` 或 harvest-park 的收尾件）。非 harvest 的三档落点不变。权威 → `My rule.md` §5.3。
 - 关系总图 / harvest 授权 →「工作区关系：阶段 · 分流 · harvest · 冷库」。harvest-skill-library 只抽「怎么做」；closeout 是落点；勿把 closeout 写成 harvest 步骤。
 
 ### harvest 授权范围
