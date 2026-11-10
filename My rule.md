@@ -6,7 +6,7 @@ license: MIT
 
 # 1 适用范围与优先级
 
-- 对 Grok Bot/Aitor、子代理、Cursor 生效（本机编码入口默认 **Loopnow**（`02_data-processing`）；外部 **Cursor IDE** 仅在城城批准或说「交给cursor」时使用；其中 Cline 为 IDE 插件，由城城自用，bot 不单独调用 Cline）。
+- 对 Grok Bot/Aitor、子代理、本机 DeepSeek（DSH）与 Cline 生效（本机编码入口默认 **Loopnow**（`02_data-processing`）；整理 / 提取 / 填写 / 本机 IDE 作业改走 **本机 DeepSeek（DSH）** 或 **Cline**（桌面应用或 Cline CLI），在城城说「交给 DS / DeepSeek / Cline」或批准使用时调度；Cursor IDE 已卸载，不再把任务派给 Cursor IDE，也不再用「交给cursor」作为路由触发；bot **可以**调用本机 DSH 与 Cline）。
 - **数据底表移动（D-1 · 2026-10-29 · t1309s6268）：** 原始/预清洗数据底表默认落 `ref/` 根（或 `ref/data/`）。**移动底表前必须先问城城**（D-1）；勿静默挪走。布局说明见 `project-ref-layout.md`。
 
 - **裁决顺序**：用户当轮表述 > 专题文件 > 本文件 > 子工程内约定。
@@ -21,8 +21,8 @@ license: MIT
 - **库分类（t1458u）**：L1/L2 与三库分工的权威正文 → `library-taxonomy.md`。`_library` 下 `references`（全文实体）/ `lit-bank`（书目，无 PDF）/ `journals`（期刊池，含选刊侧私有 `whitelist-submitted.csv` / `submission-prior.jsonl`）/ `ethics\approvals`（批件）；不设 radiology 一级，按临床专科归类。
 - **术语**：作者字段 `A`=批注作者；`00`–`07`=技能层；派单→`{SKILLS}\00_orchestrator\references\ownership-contract.md`。工作区只有一层；不再有 A/B 双工作区或挂载缓存树。
 - **技能 ID**：选型只按 fine id；细则 → `skills.md` §2；`{SKILLS}\00_orchestrator\references\id-rules.md`。
-- **一任务一执行方（t1595u）**：**编码 / 脚本 / MY-CODES 工作交给 Loopnow**（粗席位 `02_data-processing`；`{code_root}` / `{code_stats}` 落码）。外部包 **Cursor IDE** 仅在城城批准、或城城说「交给cursor」时使用，且限于整理 / 提取 / 填写 / IDE 本机操作；未经批准不得把编码默认派给 Cursor。bot **不得**调用 Cline，也不得调用独立 Cline CLI。盯梢→`{SKILLS}\00_orchestrator\references\handoff-monitor.md`。
-- **选模型（Cursor；2026-10-30 · t1452u）**：经 bot 调用 **Cursor** 时，默认 **composer**。
+- **一任务一执行方（t1595u / t1960u）**：**编码 / 脚本 / MY-CODES 工作交给 Loopnow**（粗席位 `02_data-processing`；`{code_root}` / `{code_stats}` 落码）。整理 / 提取 / 填写 / 本机 IDE 作业改走 **本机 DeepSeek（DSH）** 或 **Cline**（桌面应用或 Cline CLI）；城城说「交给 DS / DeepSeek / Cline」或批准使用时调度。Cursor IDE 已卸载，不再把任务派给 Cursor IDE，也不再用「交给cursor」作为路由触发。bot **可以**调用本机 DSH 与 Cline。盯梢→`{SKILLS}\00_orchestrator\references\handoff-monitor.md`。
+- **选模型（本机 DSH / Cline；2026-10-30 · t1452u；t1960u）**：调用本机 DSH 时用该 profile 当前默认模型；调用 Cline 时用 Cline 当前配置的模型。
 - **Rules 必须挂载并必须遵守；Skills 仅在派工时附加（t1397u；t1595u 强化）**：`{RULES}`＝`D:\MyProjects\_Docs\GitHub\MY-RULES`（本文件 `My rule.md` + 专题文件）。**Aitor 与全部专员 bot（Loopnow / Victor / Aitee / Lee / Bai 等）以及云端 Cursor / CloudAgent 一律必须遵守**，无例外、无需再问。**派子 bot/专员或云端执行时默认携带 `{RULES}`**；**仅当派具体 fine id / 工作包时，才附加 `{SKILLS}`**（相关 fine id / 路径，或整库 SSOT）。冲突裁决：**Rules > Skills**。**「Skills 未挂载」不得作为跳过 Rules 的理由**（Skills 缺省只影响该任务能否用该技能，不影响 Rules 生效）。CloudAgent prompt **必须写明 Rules 路径**；Skills 按本次任务写入，勿假设云端已挂载。
 - **云端 / 本地（术语，2026-10-25）：** **云端** = Grok Bot 的 box 计算机（`/workspace` 等）；**本地** = 城城本机（如 `D:\`、Downloads）。二者勿对调。
 - **mem 落盘：** bot 记忆导出/更新落在本地 `D:\MyProjects\_Docs\mem`（城城指定；非默认进 `{DEL}`）。mem **仅保留隐私**与可变数据 SSOT（如 JCR xlsx）；站立运营政策进 `{RULES}`，专业技能进 `{SKILLS}`。
@@ -31,7 +31,7 @@ license: MIT
 
 # 2 开工前确认
 
-- **写盘总闸（t1672u）：只读不用授权；任何写盘先问。**除非城城 / owner**当轮明确要求**该项改动（点名文件 / 路径 / 任务，或对该项工作说「改 / 写 / 更新 / 修 / 推合 / 直接做」），agent 在**新建、编辑、覆盖、移动、删除任何文件**前必须**先问并等到「是」**；未获授权即停，不静默落盘。范围覆盖全部 bot / CloudAgent / Cursor，及 `{RULES}` / `{SKILLS}` / MY-CODES / `_Docs` / 子工程 / `{DEL}` / mem 等任何位置。
+- **写盘总闸（t1672u）：只读不用授权；任何写盘先问。**除非城城 / owner**当轮明确要求**该项改动（点名文件 / 路径 / 任务，或对该项工作说「改 / 写 / 更新 / 修 / 推合 / 直接做」），agent 在**新建、编辑、覆盖、移动、删除任何文件**前必须**先问并等到「是」**；未获授权即停，不静默落盘。范围覆盖全部 bot / CloudAgent / 本机 DSH / Cline，及 `{RULES}` / `{SKILLS}` / MY-CODES / `_Docs` / 子工程 / `{DEL}` / mem 等任何位置。
 - **授权按项按轮（t1672u）**：当轮点名目标的授权**只覆盖该项**（如「改 A 第 3 节」只授权 A 的该处）；「直接做」只授权当轮那件事。**「继续」/ 未点名写盘的泛泛「好」≠ 写盘许可**，不得当全库放行。既有须问条款（D-1 移底表先问；网络须批；MY-SKILLS PR/merge 确认；Word「城城已改先问」）**继续有效**；本条是**所有**写盘的默认线。
 - **禁删**；移出只进 `{DEL}` 并保留相对路径。**旧稿清理**＝移入 `{DEL}` / `D:\MyProjects\.Del`（可按 `_by-project` / `_by-function`），禁止静默永久删除。
 - 确认：目标与验收；假设≤3；取舍；谁执行。
@@ -199,4 +199,4 @@ license: MIT
 | 库分类 / L1-L2 / 三库(references·lit-bank·journals·ethics) / 批件与期刊池 | `library-taxonomy.md` |
 | 盘问 / Plan card | 本文件 §2.1；技能 `plan-and-grilling.md`（指针） |
 
-Cursor User Rules 只一行指向本文件。「记住」：总则→本文件；专题→专题；项目→子工程约定；技能→提案；敏感→mem（禁写入 MY-RULES/MY-SKILLS）。
+Cursor User Rules 只一行指向本文件。Cursor IDE 已卸载，该入口不再维护；规则仍以本仓为准。「记住」：总则→本文件；专题→专题；项目→子工程约定；技能→提案；敏感→mem（禁写入 MY-RULES/MY-SKILLS）。

@@ -5,7 +5,7 @@
 
 ## 红线
 
-- AI/助手（Grok Bot/Aitor、子代理、Cursor、Cline）**不得**在 `{DEL}` / `D:\MyProjects\.Del` **以外新建文件**。
+- AI/助手（Grok Bot/Aitor、子代理、本机 DSH、Cline）**不得**在 `{DEL}` / `D:\MyProjects\.Del` **以外新建文件**。
 - **改已有文件也须当轮点名或先问（t1672u）**：`MY-RULES`、`MY-SKILLS`、`_Docs\skill-harvest\*`、`_Docs\mem\*`、子工程已有稿件等**不是自由编辑区**；除城城当轮明确要求改该文件 / 该处外，一律先问再改（总闸 → `My rule.md` §2）。
 - 新草稿 / ACCEPT / digest / by-fine-id lane / 笔记 / 中间件 / 一次性脚本 → 只进 `D:\MyProjects\.Del\_by-function\…` 或 `D:\MyProjects\.Del\_by-project\…`。
 - 优先 patch 已有文件（**仍须当轮点名或先问**，见上条 t1672u）；不要在 _Docs / 课题根 / 主目录新建 ACCEPT.md、digest、lane。
