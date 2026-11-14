@@ -13,7 +13,7 @@ description: 本机布局与子工程短针。落点见 My rule.md §5。
 |---|---|
 | `D:\MyProjects\_DataBase`（`{RAW}`；旧名 00db） | 课题原始件（`<family>\<prefix_suffix>`，家族桶；家族原始件池 `<family>\_share\`（`ethics\` / `thesis\` / 原始件档））+ `_` 非课题归档分支 + `_lab` 历史档只读；除 `_index.csv`/`_diseases.csv` 外只读除非点名；细则见下节 |
 | `D:\MyProjects\.Del`（`{DEL}`；旧名 **0del** / `D:\0del`） | AI 可操作临时/移出区（`_by-project` / `_by-function`）；**syn 不同步**（`/XD .Del`） |
-| `D:\MyProjects\_Docs` | 语料 + 可复用代码；live tops：`_library`（含 `references` 文献全文、`lit-bank` 书目、`journals` 期刊池与选刊侧私有、`ethics\approvals` 批件、`lab-ref-ranges`、`glossary` 自有语料+四层（words/sentences/paragraphs + sections 指针页；`GLOSSARY_ROOT`）） / `templates` / `mem` / `GitHub` / `test` / `skill-harvest`（+ 根 md；`_bank` 2026-11-01 并入 `_library\glossary`，`_code` 2026-11-01 退役） |
+| `D:\MyProjects\_Docs` | 语料 + 可复用代码；live tops：`_library`（含 `references` 文献全文、`lit-bank` 书目、`journals` 期刊池与选刊侧私有、`ethics\approvals` 批件、`lab-ref-ranges`、`glossary` 自有语料+四层（words/sentences/paragraphs + sections 指针页；`GLOSSARY_ROOT`）） / `templates` / `mem` / `GitHub` / `test` / `harvest` / `harvest-sources-park`（+ 根 md；`_bank` 2026-11-01 并入 `_library\glossary`，`_code` 2026-11-01 退役） |
 | `D:\MyProjects\_Docs\mem` | bot 记忆导出/更新落点（城城 2026-10-25）；**仅隐私** + 可变数据 SSOT（如 find-journal JCR xlsx）；站立政策不进 mem |
 | `D:\MyProjects` | 分阶段子工程工作区（阶段夹见下节） |
 | `D:\MyProjects\archived` | 已完结项目冷库（`archived\<family>\<prefix_suffix>\`；L1=疾病家族短码，与 `_DataBase\<family>` 同桶；叶夹名后缀仍是基码；全称见 `_diseases.csv`）；**非**阶段夹 |
@@ -167,7 +167,7 @@ description: 本机布局与子工程短针。落点见 My rule.md §5。
 
 ### harvest（抽取）≠ closeout（搬盘）
 
-- **harvest：** 抽「怎么做」→ `_Docs\skill-harvest`；仅当主人说「进skills」才进 MY-SKILLS（extract ≠ promote；流程与纳入门禁见 `{SKILLS}\00_orchestrator\harvest\SKILL.md`，00 只调度/门禁/复核；指针见 `skills.md` §3）。
+- **harvest：** 抽「怎么做」→ `_Docs\harvest`；仅当主人说「进skills」才进 MY-SKILLS（extract ≠ promote；流程与纳入门禁见 `{SKILLS}\00_orchestrator\harvest\SKILL.md`，00 只调度/门禁/复核；指针见 `skills.md` §3）。
 - **closeout：** 物理落点与精简；**不是** harvest 的替代步骤。
 - **harvest 也不代替搬盘：** 抽完仍须按 closeout 把字节落到 `_DataBase` / `_Docs` / `.Del` / `archived`。
 - **harvest 剩余件（t1950u）：** 一次 harvest 之后应进 `{DEL}` 的剩余件一律落 `harvested\`（平铺；含原可进 `_by-project` 或 harvest-park 的收尾件）。非 harvest 的三档落点不变。权威 → `My rule.md` §5.3。
@@ -218,7 +218,7 @@ description: 本机布局与子工程短针。落点见 My rule.md §5。
 - `_library\ethics\approvals\`：已批批件 PDF+索引
 - `_library\references\`：文献全文；课题 `ref/refer` 只 DOI 指针
 - `_library\lit-bank` / `journals\`：书目、期刊池、投稿 prior
-- `skill-harvest\`：可复用写法/方法句（「进skills」再进 MY-SKILLS）
+- `harvest\`：可复用写法/方法句（「进skills」再进 MY-SKILLS）
 - `mem\`：people.csv、JCR 可变、证件/签名（不进 skill 正文）
 
 填好知情、含姓名表、未发表全文不进 harvest；慎进 `_Docs` 公开层。
@@ -244,7 +244,7 @@ description: 本机布局与子工程短针。落点见 My rule.md §5。
 - **疾病短码 SSOT：** `_DataBase\_diseases.csv`（UTF-8；列 `suffix,name_en,name_zh,l1,l2,aliases,family`）。`suffix` = 基码；`family` = 家族根（留空 = 自家族）；编号形式进 `aliases`（如 `SSD_1`）。中英文全称**只**进本表（及 `_index.csv` 可抄空值）；路径规则不写长病名。
 - **ethics / references** 仍用 library L1/L2（`library-taxonomy.md`）；靠 `_diseases.csv` 的 `suffix`↔`l1`/`l2` 对照，不另造路径层。
 
-- **进场（四条全满足）：** ① 在 `accepted` 且该稿流程结束（接收/校样完成）；② skill 已提取或已按 `skills.md` §3 提案（`skill-harvest` 有记录，无则记 `none`）；③ rule 候选已提交（无则记 `none`）；④ `_DataBase\_index.csv` 行与 `_Docs\mem\people.csv` 行已更新。
+- **进场（四条全满足）：** ① 在 `accepted` 且该稿流程结束（接收/校样完成）；② skill 已提取或已按 `skills.md` §3 提案（`harvest` 有记录，无则记 `none`）；③ rule 候选已提交（无则记 `none`）；④ `_DataBase\_index.csv` 行与 `_Docs\mem\people.csv` 行已更新。
 - **历史旧论文（如 `000-vip\科研\文章`）：** 先进 `accepted`，按 `<prefix>_<suffix>` 建项目；抽取（skill/rule/_DataBase/_Docs）完成后再按上条进冷库。**先 accepted，后 archived**，不直进冷库。
 - **`ARCHIVED.md`（每个项目根一份）：** `archived_on`、`from_stage`、`slug`、`family`、`skill_ref`、`rule_ref`、`index_row`、`note`；缺项不进。
 - **非阶段：** 不进阶段表、不进 `study_folder_stage_aliases`；`project-state.yaml` 的 `stage` 保持 `accepted`（不加 `archived` 枚举，避免 MY-SKILLS PR）。
