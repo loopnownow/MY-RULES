@@ -72,6 +72,15 @@ def test_r2_history_word():
         assert gates(run(tmp), "R2")
 
 
+def test_r2_old_section_ref():
+    with tempfile.TemporaryDirectory() as d:
+        tmp = Path(d); build(tmp)
+        (tmp / "skills.md").write_text(
+            "---\nname: skills\ndescription: d\n---\n（原 My rule §5.2 迁入）\n", encoding="utf-8"
+        )
+        assert gates(run(tmp), "R2")
+
+
 def test_r3_old_name_outside_archive():
     with tempfile.TemporaryDirectory() as d:
         tmp = Path(d); build(tmp)
