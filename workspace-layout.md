@@ -12,7 +12,7 @@ description: 本机布局与子工程短针。落点见 My rule.md §3。
 | 根 | 角色 |
 |---|---|
 | `D:\MyProjects\_DataBase`（`{RAW}`） | 课题原始件（`<family>\<prefix_suffix>`，家族桶；家族原始件池 `<family>\_share\`（`ethics\` / `thesis\` / 原始件档））+ `_` 非课题归档分支 + `_lab` 历史档只读；除 `_index.csv`/`_diseases.csv` 外只读除非点名；细则见下节 |
-| `D:\MyProjects\.Del`（`{DEL}`；旧名 **0del** / `D:\0del`） | AI 可操作临时/移出区（`_by-project` / `_by-function`）；**syn 不同步**（`/XD .Del`） |
+| `D:\MyProjects\.Del`（`{DEL}`） | AI 可操作临时/移出区（`_by-project` / `_by-function`）；**syn 不同步**（`/XD .Del`） |
 | `D:\MyProjects\_Docs` | 语料 + 可复用代码；live tops：`_library`（含 `references` 文献全文、`lit-bank` 书目、`journals` 期刊池与选刊侧私有、`ethics\approvals` 批件、`lab-ref-ranges`、`glossary` 自有语料+四层（words/sentences/paragraphs + sections 指针页；`GLOSSARY_ROOT`）） / `templates` / `mem` / `GitHub` / `test` / `harvest` / `harvest-sources-park`（+ 根 md；`_bank` 已并入 `_library\glossary`，`_code` 已退役） |
 | `D:\MyProjects\_Docs\mem` | bot 记忆导出/更新落点（城城）；**仅隐私** + 可变数据 SSOT（如 find-journal JCR xlsx）；站立政策不进 mem |
 | `D:\MyProjects` | 分阶段子工程工作区（阶段夹见下节） |
@@ -21,7 +21,7 @@ description: 本机布局与子工程短针。落点见 My rule.md §3。
 
 ### 同步
 - `syn.bat`：`D:\MyProjects` → **`E:\Aitor`**（镜像到 Aitor **根**；**不是** `E:\Aitor\MyProjects`）。
-- `/XD .Del`：不同步 `.Del`（旧 0del）；`_DataBase` 随主树同步。
+- `/XD .Del`：不同步 `.Del`；`_DataBase` 随主树同步。
 - 同步入口只有 `D:\MyProjects\syn.bat`（E 侧镜像 `E:\Aitor`）；无其它同步脚本或快捷方式。
 
 ### `{RAW}` = `D:\MyProjects\_DataBase`
@@ -30,7 +30,9 @@ description: 本机布局与子工程短针。落点见 My rule.md §3。
 - **子工程只留指针：** 在 `ref/settings.ini` 写 data path；**不要**把原始体拷进 `D:\MyProjects\…` 或三仓（MY-RULES / MY-SKILLS / MY-CODES）。
 - **衍生件仍在课题侧：** 衍生物 / 图 / 表按本文件与 `project-ref-layout.md` 落在子工程；勿塞进 `_DataBase`。
 - **临床底表 ≠ 影像 raw：** Excel/CSV 底表仍落 `ref/` 或 `ref/data/`（D-1：移动前先问）。**不要**把所有「data」都倒进 `_DataBase`。
-- **现行名只写 `_DataBase`；活 `00ds` = QC 对象：** `D:\00ds` / 夹名 `00ds` 已退役。任何活路径、夹名、过滤器/默认项仍写 `00ds` 的，视为 QC 发现，**必须更正为 `_DataBase`**；**不要**在活 allowlist/filter 里把 `00ds` 留作「legacy」。changelog 里「曾用/原 `00ds`」的历史叙述可留。不另造第三个 raw 根。**更正活引用 ≠ 搬迁磁盘树**；本票不 bulk 迁移 `D:\00ds`；磁盘根更名见 `HISTORY.md` §A（两边若都在，维持原状，等主人另批搬迁）。
+- **现行名只写 `_DataBase`；活 `00ds` = QC 对象：** `D:\00ds` / 夹名 `00ds` 已退役。
+  - 任何活路径、夹名、过滤器 / 默认项仍写 `00ds` 的，视为 QC 发现，**必须更正为 `_DataBase`**；**不要**在活 allowlist / filter 里把 `00ds` 留作「legacy」。
+  - 不另造第三个 raw 根。**更正活引用 ≠ 搬迁磁盘树**：不 bulk 迁移旧根；磁盘根处置见 `HISTORY.md` §A（两边若都在，维持原状，等主人另批搬迁）。
 - **禁止进 git：** 原始影像二进制**不要**进 git（含 Git LFS）或任何 GitHub remote（DICOM 头含 PHI；二进制无有效 delta）。可选轻量清单（相对路径 + 大小 + SHA-256 + 入库日）可放子工程 `ref/pipeline/`（同 `hashes.tsv` / `MANIFEST.md` 思路）。该清单若需版本，可用**无 remote 的本地 git**；备份 = 拷到另一块盘，不是 git。
 - **进 `_DataBase` 多文件先压缩：** 进 `D:\MyProjects\_DataBase\…`（或其 E 镜）时，若某目录内「单独文件」≥20，或明显是大量小文件堆（DICOM 序列、切片导出、逐例中间件、碎日志），先压成**一个**归档再入库；单文件或本来就少的目录不压。
   - **格式与落点：** 优先 `7z`（`-mx=5`；固态 DICOM 可 `-m0=LZMA2`）；无 7z 用 `zip`。归档名=`<原目录名>.7z`，**唯一落点 = `<family>\_share\<leaf>\`**（叶内与家族根禁归档，见「`_share` 家族原始件池」）；`<名>.files.txt`（相对路径清单）**随档同放** `_share\<leaf>\`。
@@ -51,12 +53,21 @@ description: 本机布局与子工程短针。落点见 My rule.md §3。
 
 ### `{RAW}` 非课题分支与家族分桶
 `D:\MyProjects\_DataBase`内存三类：① 课题原始件（按家族分桶）；② `_lab`；③ `_` 开头的非课题归档分支（新件落这里；**留根**、不分桶）。
-- **按家族分桶：** 课题原始件路径为 `_DataBase\<family>\<prefix_suffix>\`（例 `SCH\lxf_RC`、`EGVB\js_CN`、`MHE\ly_SCH_HE`）。`<prefix>` = sub-PI 缩写；`<family>` = `_diseases.csv` 的 `family` 列（留空 = 该基码即家族根）；`<prefix_suffix>` 的**后缀仍是基码**（剥末尾 `_\d+` 实例；语义复合如 `SCH_HE`/`SSD_DKI` 整段保留），实例号只在叶子夹名。家族根本身必须在 `suffix` 列有行，清单一律由 `_diseases.csv` 决定，不另设 allowlist。存量编号桶（`SSD_1\`、`LUNG2\`、`MHE1\`、`SHE\` 等）已批量归并为家族桶；DB 与 archived 用同名家族桶（含 `OTHERS` 兜底），`_Docs/test/structure_check.py` S23 守门。
+- **按家族分桶：** 课题原始件路径为 `_DataBase\<family>\<prefix_suffix>\`（例 `SCH\lxf_RC`、`EGVB\js_CN`、`MHE\ly_SCH_HE`）。
+  - `<prefix>` = sub-PI 缩写；`<family>` = `_diseases.csv` 的 `family` 列（留空 = 该基码即家族根）。
+  - `<prefix_suffix>` 的**后缀仍是基码**（剥末尾 `_\d+` 实例；语义复合如 `SCH_HE` / `SSD_DKI` 整段保留），实例号只在叶子夹名。
+  - 家族根本身必须在 `suffix` 列有行，清单一律由 `_diseases.csv` 决定，不另设 allowlist。
+  - 存量编号桶（`SSD_1\`、`LUNG2\`、`MHE1\`、`SHE\` 等）已批量归并为家族桶；DB 与 archived 用同名家族桶（含 `OTHERS` 兜底），`_Docs/test/structure_check.py` S23 守门。
 - **同源聚合：** `<family>` 按**同源数据**聚合，不是按病名近义随便并。
   1. 同一影像/队列母集、同一纳排、或多篇稿共用一批 raw/底表 → 同一 `family`。
   2. 同病但非同源（独立采集 / 独立伦理 / raw 不可互指）→ 可自家族；若仅临床谱系同桶仍分叶，**文件不得跨叶混放**。
   3. 叶夹仍是 `<prefix_suffix>`。共用 raw **只存一份**：优先 `_DataBase\<family>\_share\`（或钉死的主叶）；其它课题经 `ref/settings.ini`（或 README）指针；禁止整树复制进多叶。
-  4. **`_share` 家族原始件池：** 课题的原始数据 / 原始记录 / 原始图片一律进 `<family>\_share\`，不再按叶分散。固定三类（**自 `_share` 起 ≤2 层，D1 最终口径**）：`_share\<leaf>\<文件>` 放该叶原始件压缩档（`tar.zst` 原样，**不就地解压**，解压树用完即移 `{DEL}`）；`_share\ethics\<CODE>__<文件>` 放伦理申请材料 / 原始件（留存口径 →「伦理材料留存」；**批件 PDF 索引仍归** `_Docs\_library\ethics\approvals\`）；`_share\thesis\<slug>__<文件>` 放学位论文 / 博士后材料。`_share` 一级仅上述三类 + `目录说明.md`（`_share` 存在必须自带 `_share\目录说明.md`；无叶家族例外 `_share\<family>\` 直放，须在家族 `目录说明.md` 登记）；其下**一层平铺**，不建 `raw\` / `cohort\` 子夹；`<family>` 根放 `目录说明.md` 记件清单 / 使用者 / PHI；搬入前先 grep 全库按路径引用；迁移记 `MOVED-*.tsv`（件数/字节/sha 校验），原叶留指针；压缩档与解压树并存时**只留档**（先验档为解压树超集再移树）。`_share` 为压缩档唯一落点（收的是原始件压缩档；档内表格按「家族库 `_db\`」条解出入库，原档仍留 `_share`），叶内与家族根不得留任何归档；`_share` 下文件层级 ≤2（`_share\<类>\<文件>`），不再加中间夹。首个实例 = `_DataBase\ACN\_share\`（`人-血浆-171 - 0.7z`、`2026碳纤维部数据-- (3).xls`）；20 个家族已建 `_share\`（伦理 48 项 + 学位论文 7 项 + 原始件档 13 个）。存量叶内非表格 raw 按一级目录 / loose 单元压 `<PREFIX>__<leaf>__<unit>-raw-<YYYY-MM-DD>.tar.zst` 上收 `_share\<leaf>\`（不整叶 mega-zip）；原件移 `{DEL}\_by-function\<batch>\originals\<code>\<family>\<leaf>\`，写 tsv（相对路径 / 字节 / sha256），叶 `目录说明.md` 记「raw→档」映射。
+  4. **`_share` 家族原始件池：** 课题的原始数据 / 原始记录 / 原始图片一律进 `<family>\_share\`，不再按叶分散。
+     - **三类固定**（自 `_share` 起 ≤2 层，D1 最终口径）：`_share\<leaf>\<文件>` 放该叶原始件压缩档（`tar.zst` 原样，**不就地解压**，解压树用完即移 `{DEL}`）；`_share\ethics\<CODE>__<文件>` 放伦理申请材料 / 原始件（留存口径 →「伦理材料留存」；**批件 PDF 索引仍归** `_Docs\_library\ethics\approvals\`）；`_share\thesis\<slug>__<文件>` 放学位论文 / 博士后材料。
+     - **一级结构：** 仅上述三类 + `目录说明.md`（`_share` 存在必须自带 `_share\目录说明.md`；无叶家族例外 `_share\<family>\` 直放，须在家族 `目录说明.md` 登记）；其下**一层平铺**，不建 `raw\` / `cohort\` 子夹。
+     - **家族根：** `<family>` 根放 `目录说明.md` 记件清单 / 使用者 / PHI；搬入前先 grep 全库按路径引用；迁移记 `MOVED-*.tsv`（件数 / 字节 / sha 校验），原叶留指针；压缩档与解压树并存时**只留档**（先验档为解压树超集再移树）。
+     - **唯一落点与层级：** `_share` 为压缩档唯一落点（收的是原始件压缩档；档内表格按「家族库 `_db\`」条解出入库，原档仍留 `_share`），叶内与家族根不得留任何归档；`_share` 下文件层级 ≤2（`_share\<类>\<文件>`），不再加中间夹。
+     - **存量：** 首个实例 = `_DataBase\ACN\_share\`（`人-血浆-171 - 0.7z`、`2026碳纤维部数据-- (3).xls`）；20 个家族已建 `_share\`（伦理 48 项 + 学位论文 7 项 + 原始件档 13 个）。叶内非表格 raw 按一级目录 / loose 单元压 `<PREFIX>__<leaf>__<unit>-raw-<YYYY-MM-DD>.tar.zst` 上收 `_share\<leaf>\`（不整叶 mega-zip）；原件移 `{DEL}\_by-function\<batch>\originals\<code>\<family>\<leaf>\`，写 tsv（相对路径 / 字节 / sha256），叶 `目录说明.md` 记「raw→档」映射。
   5. SSOT = `_diseases.csv` 的 `family` 列（L1 桶名以此为准；`family` 留空 = 该基码即自家族）；改挂靠先改表再搬盘；`OTHERS` 仅兜底。`_share` 为保留名（下划线前缀），与 `_lab` 同类例外：`structure_check.py` S23 **已实现**桶内 `_` / `.` 前缀叶跳过叶后缀校验。
   6. **短码夹层级：** 短码夹位于 `_DataBase\<family>\<prefix_suffix>`（自 `_DataBase` 起总深 3）；**叶内目录 ≤3 层**，超深链条按 `<父>_<子>` 合并为单层名（实例：`DER\zyx_H`，原 8 层 / 1,188 个超深目录 → 3 层）；派生件（期刊成图 / 投稿包 / 汇报稿）不进叶内 raw，`_未标天数` 这类纯归档中间层不保留；表格入库后叶内只留 `目录说明.md`（见「家族库 `_db\`」）。
   7. 与 archived 同构：冷库 L1 仍跟同一 `family`；本条**不**改 accepted 收工硬留清单。
@@ -245,7 +256,7 @@ description: 本机布局与子工程短针。落点见 My rule.md §3。
 - **课题申请包** → `_DataBase\_grants\<year>\`
 - **评阅他人稿**（peer / grants / thesis）→ `_DataBase\_reviews\{peer,grants,thesis}\<year>\`
 
-二者**不是**稿件流水线阶段：不要写入上方 `drafting` / `pre-submit` / `reviewing` / `accepted` 阶段表，也不进 `study_folder_stage_aliases`。本组期刊草稿 / R&R / 校样仍走四阶段夹。历史叙述可写「was / formerly proposal / R&P」。
+二者**不是**稿件流水线阶段：不要写入上方 `drafting` / `pre-submit` / `reviewing` / `accepted` 阶段表，也不进 `study_folder_stage_aliases`。本组期刊草稿 / R&R / 校样仍走四阶段夹。历史叙述只在 changelog 写，不进活规则。
 
 ## 文件落点
 
@@ -267,7 +278,10 @@ description: 本机布局与子工程短针。落点见 My rule.md §3。
 ## 控制台与 `ref/settings.ini`
 
 - 课题侧运行配置只留 console（`{project}.html`）与 `ref/settings.ini`。
-- **起始页占位符**：`<project>/<project>.html` 由金版 `modules/console/project.html` 派生时，`__MODULES_DEFAULT__`（算法库路径）**必须替换**；`__CONSOLE_TOKEN__` 只在 `<meta name="console-token">` 一处写 token，另外 **2 处 JS 哨兵必须留占位符**（写死具体 token 之后 `register --rotate` 只能改 meta，页面会留下上一枚旧 token）。漏替 `__MODULES_DEFAULT__` → 内联脚本首行 `ReferenceError`、整页按钮全失效（「开启服务」没反应）。生成用 `{RULES}\tools\sync_project_page.py`（token 传空串 = 保持未登记），或从 `http://127.0.0.1:<port>/start.html` 另存；只补该占位符用 `{RULES}\tools\fill_start_placeholders.py`。因为 `smoke_page.js` 会把占位符换成空串，**`node --check`/`smoke_page.js` 全绿也可能是死页**——改完必须真浏览器复核（`firefox --headless --screenshot`，标题=项目名）。
+- **起始页占位符**：`<project>/<project>.html` 由金版 `modules/console/project.html` 派生时，`__MODULES_DEFAULT__`（算法库路径）**必须替换**；`__CONSOLE_TOKEN__` 只在 `<meta name="console-token">` 一处写 token，另外 **2 处 JS 哨兵必须留占位符**（写死具体 token 之后 `register --rotate` 只能改 meta，页面会留下上一枚旧 token）。
+- 漏替 `__MODULES_DEFAULT__` → 内联脚本首行 `ReferenceError`、整页按钮全失效（「开启服务」没反应）。
+- 生成用 `{RULES}\tools\sync_project_page.py`（token 传空串 = 保持未登记），或从 `http://127.0.0.1:<port>/start.html` 另存；只补该占位符用 `{RULES}\tools\fill_start_placeholders.py`。
+- 因为 `smoke_page.js` 会把占位符换成空串，**`node --check`/`smoke_page.js` 全绿也可能是死页**——改完必须真浏览器复核（`firefox --headless --screenshot`，标题=项目名）。
 - 算法只来自 `{code_modules}`。不留课题内 `modules\`，不留长期 `config\settings.py`。
 - `MODULES_DIR` 必须指向已存在的目录。空或不是目录时，console 与 `import modules` 明确报错，不回退到默认或旧路径。
 - `{project}.html` 当次可覆盖 ini；写回更新 `ref/settings.ini`。无覆盖的命令行只读 ini。
@@ -277,7 +291,7 @@ description: 本机布局与子工程短针。落点见 My rule.md §3。
 - 写入 `_Docs\`须用户点名「放 _Docs」。
 - **最终**→子工程根；**中间**→`ref/` 地图；**无** `0result\`；子工程内临时 → `ref/tmp/`（非默认 `{DEL}`）；无子工程/跨课题临时进 `{DEL}`；Downloads 仅当点名。权威 → `My rule.md` §3。
 - 可复用脚本 → 统计引擎与建模 CLI 在 `{code_stats}`（`modules/` + `model-validation/`），运维/加工脚本在 `{code_stats}\tools\<fine-id>\`（壳与索引已移 `{DEL}`）。`0script\` 已退休，不在课题根重建。长期规则/语料 → `_Docs` 相应层。
-- 根不留临时/草稿/一次性中间件（例外：现行在改稿 / 现行 `Vn`）。旧版稿与中间件进 `ref/tmp/`，不进 `{DEL}`（除非过后清理先问）。`_Docs\GitHub\MY-CODES\modules\`（旧盘符叫法 `0doc\GitHub\...`）增改移须先同意。
+- 根不留临时/草稿/一次性中间件（例外：现行在改稿 / 现行 `Vn`）。旧版稿与中间件进 `ref/tmp/`，不进 `{DEL}`（除非过后清理先问）。`_Docs\GitHub\MY-CODES\modules\`增改移须先同意。
 - 数据课题根可留：`rawdata`、`derivatives`、`atlases`、索引/manifest、`ref`。`_Docs` 仅当点名「放 _Docs」。默认从 `derivatives` 拷出要用的结果，原件留在原处；终稿落子工程根。不建 `0result\`，不重建 `0script\`。
 - 同键终表合并为一张（一段说明，值列加前缀）。把原件移出子工程根须先同意。
 - 移脚本或文档前先搜 `import` / `addpath` / `settings.ini` / README。仍有未改引用则不移。移完后改路径与 `_Docs` 示例再测。

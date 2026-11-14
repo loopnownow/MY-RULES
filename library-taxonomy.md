@@ -1,3 +1,8 @@
+---
+name: library-taxonomy
+description: 库分类 L1/L2、三库分工、批件与期刊池契约。
+---
+
 # 库分类与三库契约（L1/L2 SSOT）
 
 **范围**：`D:\MyProjects\_Docs\_library` 下的 `references`（全文）、`lit-bank`（书目）、`journals`（期刊池）、

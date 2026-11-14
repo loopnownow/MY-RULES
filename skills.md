@@ -26,7 +26,8 @@ description: 技能库契约、按需加载、演进门、PR 与合并后部署�
 - **只提案，不直接改** live 技能正文（部署同步见 §1b）。
 - 默认证据 **E4**（同类重复用户纠正）；单次事件不演进。
 - **delete** 须显式批准。正文→`{SKILLS}\00_orchestrator\references\skill-evolution.md`。
-- **Harvest 任务流程与纳入门禁**由 harvest 技能管理（`{SKILLS}\00_orchestrator\harvest\SKILL.md`）；00 只留调度、门禁与本轮复核/去路由；收集标准 SSOT→`{doc_root}\harvest\HARVEST-STANDARD.md`。**QC 分三处**：库形/完整性→本地库门（`{doc_root}\test\structure_check.py` + `STRUCTURE.md`；`_DataBase` 根说明 + `DB-QC-STANDARD.md`）；纳入门禁→harvest 技能（当轮授权 / 是否误当 closeout / PHI / 三桶 / 证据可复算 / 去向）；00 复核通过后才候纳入。改 live 技能须城城点名「进skills」（extract ≠ promote）；propose-only 仍适用；不另开 evolution 技能树。
+- **Harvest 任务流程与纳入门禁**由 harvest 技能管理（`{SKILLS}\00_orchestrator\harvest\SKILL.md`）；00 只留调度、门禁与本轮复核/去路由；收集标准 SSOT→`{doc_root}\harvest\HARVEST-STANDARD.md`。**QC 分三处**：库形/完整性→本地库门（`{doc_root}\test\structure_check.py` + `STRUCTURE.md`；`_DataBase` 根说明 + `DB-QC-STANDARD.md`）；纳入门禁→harvest 技能（当轮授权 / 是否误当 closeout / PHI / 三桶 / 证据可复算 / 去向）；00 复核通过后才候纳入。
+- 改 live 技能须城城点名「进skills」（extract ≠ promote）；propose-only 仍适用；不另开 evolution 技能树。
 - **harvest ↔ closeout 关系 / 授权范围**（可在四阶段或 archived / `.Del` 抽，每次须当轮授权；harvest ≠ 搬盘）→ `workspace-layout.md`「工作区关系：阶段 · 分流 · harvest · 冷库」。本条不复写。
 
 ## 4 单一技能源（勿重建第二条树）
@@ -45,7 +46,7 @@ Live bodies SSOT = MY-SKILLS in-repo `NN_slug/base/`。不得在别处再建第�
 
 **QC 精简（站立）**：能合并的合并、能删除的删除、去重、去旧、尽量精简。删除的字节进 `{DEL}`（本机 `D:\MyProjects\.Del`，保留相对路径）；不得只改标签继续堆在 live 树。
 
-**`.Del`/0del 三档落点（站立）**：park / harvest-park / harvested 的落点与可弃度 → `del-and-harvest.md` §1（本条不复写；harvested 只由城城手动清）。一次 harvest 之后应进 `{DEL}` 的剩余件一律落 `harvested\`（平铺；非 harvest 落点不变）→ 同节 §1。
+**`{DEL}` 三档落点（站立）**：park / harvest-park / harvested 的落点与可弃度 → `del-and-harvest.md` §1（本条不复写；harvested 只由城城手动清）。一次 harvest 之后应进 `{DEL}` 的剩余件一律落 `harvested\`（平铺；非 harvest 落点不变）→ 同节 §1。
 
 **QC 处置（站立）**：对文件 / 技能树 / 文档做 QC 时，**不得**以 skip / skipped / archive / archived / 已归档（及同名文件夹、标签、路径段）作为「暂不处理」的停放处。合法处置只有：**合并**、**删除**、**就地改写**。QC **禁止**新造 skip 或 archive 停放位；已存在的 skipped / archived 残留一律视为**清理对象**（删 live 引用；若仍有字节则移入 `{DEL}`，保留相对路径），不是可继续堆问题的合法落点。
 

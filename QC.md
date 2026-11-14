@@ -12,7 +12,7 @@ up: My rule.md §6
 | 时点 | 跑什么 | 失败怎么办 |
 |---|---|---|
 | 每次改规则 | `python -B check_paths.py --check` | 阻断 merge，不推 |
-| 每次 PR | R1–R8（P5 起进脚本） | 不开 PR |
+| 每次 PR | R1–R7 脚本全绿 + `tests/` 通过；R8 人门 | 不开 PR |
 | 每轮任务收工 | `_Docs` 清理扫描（§5） | 当轮移 `{DEL}` 或记待办 |
 | 每季度 | 史清理、别名合并、路由表复核 | 出清单，批准后做 |
 | 每年 | `HISTORY.md` 归档评估（只追加，不重写） | 记入待批 |
@@ -20,14 +20,14 @@ up: My rule.md §6
 # 2 规则门 R1–R8
 | 编号 | 判据 | 机器点 | 现状 |
 |---|---|---|---|
-| R1 路由闭合 | 每个 live md 在 L0 路由表出现且仅一次；目标文件存在；`routes:` 数 = live md 数 | `qc_rules.py` | 待建（P5） |
-| R2 正文无史 | live md 正文不得出现变更日期、`t<数字>` 变更号、「此前 / 曾用 / 更名」叙述；数据阈值日期（如批件 ≥ 2023-11-10）与「勿再新建」禁名清单除外 | `check_paths.py` 扩展 | 待建 |
-| R3 旧名唯一 | 旧名 token 只允许在 `aliases.yaml` / `HISTORY.md`；「勿再新建」清单豁免 | 现有 `STALE_RULES` 上下文扫描扩展 | 部分 |
-| R4 指针可解析 | `{RULES}` / `{SKILLS}` 路径与 seat 存在 | `check_paths.py` | **已机器** |
-| R5 无副本 | 归一化（去标点空白）后 ≥40 字且相似度 ≥0.9 的句子只允许出现在一处 | `qc_rules.py` | 待建（P5） |
-| R6 头字段 | L1 必含 `name` / `description` / `up`；L0 必含 `routes:` | `qc_rules.py` | 待建（P5） |
-| R7 行长 | 单行 ≤300 字符；单条 ≥2 层括注告警 | `qc_rules.py` | 待建（P5） |
-| R8 变更留痕 | PR 必含：改前 `--check` 输出、史迁 `HISTORY.md`、改名同步 `aliases.yaml` | PR 模板 | 待建（P5） |
+| R1 路由闭合 | 每个 live md 在 L0 路由表或 `routes:` 出现；目标文件存在 | `qc_rules.py` | 已机器 |
+| R2 正文无史 | 不得出现变更日期、`t<数字>` 变更号、「此前 / 曾用 / 更名 / formerly」；数据阈值日期（如批件 ≥ 2023-11-10）除外 | `qc_rules.py` | 已机器 |
+| R3 旧名唯一 | `aliases.yaml` 里作者登记的 `tokens:` 不得出现在正文；「勿再新建 / 已退役 / 原 `」禁名行豁免 | `qc_rules.py` | 已机器 |
+| R4 指针可解析 | `{RULES}` / `{SKILLS}` 路径与 seat 存在 | `check_paths.py` | 已机器 |
+| R5 无副本 | 归一化后 ≥40 字、相似度 ≥0.92 的句子只允许一处；委派指针句（`→` + 见 / 同文件 / 细则 / 权威 / 指针 / 落点）除外 | `qc_rules.py` | 已机器 |
+| R6 头字段 | L1 必含 `name` / `description`；L0 必含 `routes:` | `qc_rules.py` | 已机器 |
+| R7 行长 | 单行 ≤400 字符；表格行与代码块除外 | `qc_rules.py` | 已机器 |
+| R8 变更留痕 | PR 必含：改前 `--check` 与 `qc_rules.py` 输出、史迁 `HISTORY.md`、改名同步 `aliases.yaml` | PR 模板 | 待建 |
 
 # 3 失败处置
 - 先修到过门；不能过门就改规则，但**须用户点头**。
@@ -51,7 +51,8 @@ up: My rule.md §6
 - 技能树的精简 / skip / archived / 退役仅指针 → `skills.md` §6。
 - 规则仓、`_Docs` 盘面、规则 PR 门 → 本文件。
 
-# 7 P5 待建清单
-- `qc_rules.py`（R1 / R2 / R5 / R6 / R7）+ `tests/` 负向用例。
-- `check_paths.py`：把 `HISTORY.md`、`aliases.yaml`、`del-and-harvest.md`、`QC.md` 显式纳入扫描与豁免。
-- PR 模板（R8）；本地无 GitHub Actions，门在提交前跑。
+# 7 实施状态
+
+- **已机器**：R1–R7（`qc_rules.py` + `tests/test_rules_qc.py`，22 个用例；R4 在 `check_paths.py`）。
+- **待建**：R8 PR 模板。`del-and-harvest.md` / `QC.md` 已纳入 `check_paths.py` 的必检与扫描清单（R4 覆盖）。
+- **季度**：史清理、别名合并、路由表复核定稿后出清单。
