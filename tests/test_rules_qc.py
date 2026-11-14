@@ -1,4 +1,4 @@
-"""Negative tests for qc_rules.py gates (R1-R3, R5-R7, R9-R10). Run: python -B -m pytest -q tests"""
+"""Negative tests for qc_rules.py gates (R1-R3, R5-R7, R9-R10; R11 lives in _Docs structure_check S30). Run: python -B -m pytest -q tests"""
 from __future__ import annotations
 
 import importlib.util

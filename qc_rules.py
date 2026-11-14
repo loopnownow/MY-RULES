@@ -1,4 +1,4 @@
-"""Rules gates R1-R3, R5-R7, R9-R10 (R4 lives in check_paths.py; R8 is a PR checklist).
+"""Rules gates R1-R3, R5-R7, R9-R10 (R4 lives in check_paths.py; R8 is a PR checklist; R11 lives in _Docs test structure_check.py S30).
 
 Usage:
   python -B qc_rules.py            # report only, exit 1 if any gate fails
