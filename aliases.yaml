@@ -287,3 +287,23 @@ entries:
     since: '2026-11-06'
     ref: t1694u
     note: '旧义：V2=投后未审、V3=第1轮回复、V4=第2轮、V9=校样；不再作为现行规则。'
+
+  # ── 语料 park 2026-11-14 瘦身 ───────────────────────────────────────
+  - old: 'D:\MyProjects\_Docs\_library\lab-ste'
+    new: 'D:\MyProjects\_Docs\GitHub\MY-SKILLS\05_manuscript\advanced\lab-ste'
+    kind: dir
+    status: moved
+    since: '2026-11-14'
+    note: 'Lab-STE 全本（SPEC/config/lexicons/tools/html，16 件）并入技能仓；`_library\lab-ste` 只留 MOVED.md 指针（S14 只许 stub）。`{doc_lab_ste}` 指技能仓路径。'
+  - old: 'D:\MyProjects\_Docs\harvest-sources-park\library-methods-20261023\lab-ste'
+    new: 'D:\MyProjects\_Docs\GitHub\MY-SKILLS\05_manuscript\advanced\lab-ste'
+    kind: dir
+    status: moved
+    since: '2026-11-14'
+    note: '同上一批：park 内的 Lab-STE 全本已于 2026-11-14 并入技能仓，park 不再保留。'
+  - old: 'D:\MyProjects\_Docs\harvest-sources-park\{doc-salvage-20261023,library-ftp-20261023,0doc-base-absorbed-20261023,library-figures-20261023}'
+    new: 'D:\MyProjects\.Del\_by-function\harvest-park-retired-20261114\harvest-sources-park\'
+    kind: dir
+    status: retired
+    since: '2026-11-14'
+    note: '抢救文本与已吸收页原件已在 `_DataBase\_lab\doc-word\` 或 `0doc-corpus.db`；park 只留方法原文与入口散件。'

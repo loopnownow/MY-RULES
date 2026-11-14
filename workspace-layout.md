@@ -13,7 +13,7 @@ description: 本机布局与子工程短针。落点见 My rule.md §3。
 |---|---|
 | `D:\MyProjects\_DataBase`（`{RAW}`） | 课题原始件（`<family>\<prefix_suffix>`，家族桶；家族原始件池 `<family>\_share\`（`ethics\` / `thesis\` / 原始件档））+ `_` 非课题归档分支 + `_lab` 历史档只读；除 `_index.csv`/`_diseases.csv` 外只读除非点名；细则见下节 |
 | `D:\MyProjects\.Del`（`{DEL}`） | AI 可操作临时/移出区（`_by-project` / `_by-function`）；**syn 不同步**（`/XD .Del`） |
-| `D:\MyProjects\_Docs` | 语料 + 可复用代码；live tops：`_library`（含 `references` 文献全文、`lit-bank` 书目、`journals` 期刊池与选刊侧私有、`ethics\approvals` 批件、`lab-ref-ranges`、`glossary` 自有语料+四层（words/sentences/paragraphs + sections 指针页；`GLOSSARY_ROOT`）） / `templates` / `mem` / `GitHub` / `test` / `harvest` / `harvest-sources-park`（+ 根 md；`_bank` 已并入 `_library\glossary`，`_code` 已退役） |
+| `D:\MyProjects\_Docs` | 语料 + 可复用代码；live tops：`_library`（含 `references` 文献全文、`lit-bank` 书目、`journals` 期刊池与选刊侧私有、`ethics\approvals` 批件、`lab-ref-ranges`、`glossary` 自有语料+四层（words/sentences/paragraphs + sections 指针页；`GLOSSARY_ROOT`）） / `templates` / `mem` / `GitHub` / `test` / `harvest` / `harvest-sources-park`（已瘦身：方法原文 6 件 + 入口散件；抢救文本已退役）（+ 根 md；`_bank` 已并入 `_library\glossary`，`_code` 已退役） |
 | `D:\MyProjects\_Docs\mem` | bot 记忆导出/更新落点（城城）；**仅隐私** + 可变数据 SSOT（如 find-journal JCR xlsx）；站立政策不进 mem |
 | `D:\MyProjects` | 分阶段子工程工作区（阶段夹见下节） |
 | `D:\MyProjects\archived` | 已完结项目冷库（`archived\<family>\<prefix_suffix>\`；L1=疾病家族短码，与 `_DataBase\<family>` 同桶；叶夹名后缀仍是基码；全称见 `_diseases.csv`）；**非**阶段夹 |
