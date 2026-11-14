@@ -301,7 +301,7 @@ description: 本机布局与子工程短针。落点见 My rule.md §3。
 
 ## 新建文件夹 / 新建文件
 
-只许建在 `{DEL}` / `D:\MyProjects\.Del\` 的 `_by-project\`、`_by-function\`。权威与例外 → `My rule.md` §2（含 `_Docs`默认禁止 mkdir、**改已有文件须当轮点名或先问**、一次性脚本不进主目录 / `.grok\tmp` / 课题根）。本段不复写。bot mem 落点例外（`D:\MyProjects\_Docs\mem\`）→ `My rule.md` §1 + §5.1。
+只许建在 `{DEL}` / `D:\MyProjects\.Del\` 的 `_by-project\`、`_by-function\`。权威与例外 → `My rule.md` §2（含 `_Docs`默认禁止 mkdir、**改已有文件须当轮点名或先问**、一次性脚本不进主目录 / `.grok\tmp` / 课题根）。本段不复写。bot mem 落点例外（`D:\MyProjects\_Docs\mem\`）→ `My rule.md` §2 写盘与授权 + §4 别名。
 
 **目录命名**：`_Docs` 下目录一律 ASCII 英文（`approvals` / `journals` / `jcr`）；中文目录发现即当轮 rename，并在 `_library\MOVED-FROM.md` 记一行。库分类与 L1/L2 → `library-taxonomy.md`。
 
