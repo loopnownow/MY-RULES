@@ -144,6 +144,16 @@ description: 本机布局与子工程短针。落点见 My rule.md §3。
 
 **命名：** `<prefix>_<suffix>`——`<prefix>` = sub-PI 小写拼音首字母（如 `lxf`），`<suffix>` = 项目短码（大写或约定写法，如 `RC`/`CID`）。一人多题、一题多人都不改名；同后缀多例加 `_1`/`_2`（如 `llj_OV_1`）。中文人名只进台账（`_Docs\mem\people.csv`），路径与正文不写中文名。
 
+### 阶段库管理规则（工程库）
+
+| 事项 | 规则 |
+|---|---|
+| 谁能动 | 阶段夹内的搬件/改名/删只由该项目 owner 发起，或 owner 当轮点名；QC 只报不擅动，修复须授权（`My rule.md` §2）。 |
+| 进场 | 新课题先建 `ref\` 四件（`settings.ini` / `README.md` / `manuscript-revision.md` + `ref\`），`INPUT` 必须可解析；空 `INPUT` 视为未开跑。 |
+| 出场 | 阶段推进靠事件（开跑 / 投稿 / 接收 / 校样），不靠目录名；`accepted` 收工按「accepted 收工」四落点分流。 |
+| 痕迹 | 版本推进、搬件、改名、`.bak` 处置都写 `ref\manuscript-revision.md`；台账追加，不覆盖。 |
+| 判据 | 骨架 / 命名 / 数据口径 → `{doc_root}\test\STAGE-QC-STANDARD.md`；机器门 S32–S34（`structure_check.py`）每轮 QC 必跑。 |
+
 **`archived` 不是第五阶段：** 不进上表、不进 `study_folder_stage_aliases`；见「archived 冷库」。关系总图见下「工作区关系：阶段 · 分流 · harvest · 冷库」。
 
 ## 工作区关系：阶段 · 分流 · harvest · 冷库
