@@ -56,9 +56,9 @@
 
 ## 4 journals 契约
 
-- `_library\journals\index.csv` 列见该库 `README.md`（单表，2026-10-31 起不再派生 xlsx）；关键：`jcr_year`（版本年）、`metric_year`（指标年）、`layer`、`l1/l2`、`whitelist`（含 `bmc`）、`queried_at`。
+- `_library\journals\index.csv` 列见该库 `README.md`（单表，2026-10-31 起不再派生 xlsx）；关键：`jcr_year`（版本年）、`metric_year`（指标年）、`layer`、`l1/l2`、`whitelist`（含 `submitted` / `reviewed` / `bmc` / `mdpi`）、`queried_at`。
 - **每年跨年后 7 月**按新 JCR 年版整表重建一次；旧表连同压缩前分层 CSV 移 `{DEL}`（2026-10-31 起不再保留 `archive\<year>\`），不逐行手改。
-- 选刊侧私有数据（投过白名单 `whitelist-submitted.csv`、投稿先验 `submission-prior.jsonl`）打平在 `journals\` 内，**不建年夹**（2026-10-31 裁定；原 `jcr\<year>\` 层级取消，别名校验见 `lab-paths.yaml`）。
+- 选刊侧私有数据（投过/选刊/审稿白名单 `whitelist-submitted.csv`、投稿先验 `submission-prior.jsonl`）打平在 `journals\` 内，**不建年夹**（2026-10-31 裁定；原 `jcr\<year>\` 层级取消，别名校验见 `lab-paths.yaml`）。
 - 名单本体（blacklist/graylist/whitelist-bmc/submission-urls）仍在 MY-SKILLS `find-journal/data\<year>\`。
 - 子工程候选刊**只用 csv/xlsx**：`ref\citation\journals.csv` + 合并笔记 `ref\citation\_notes.md`；被替代原稿进 `ref\tmp\`。
 
