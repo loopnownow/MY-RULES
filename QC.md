@@ -40,7 +40,7 @@ up: My rule.md §6
 - 引用史只写「背景见 `HISTORY.md` §x」，不作判据。
 - 技能正文里的英文镜像（如 `{SKILLS}\00_orchestrator\references\project-ref-layout.md`）不参与 R5 副本判定，冲突以 `{RULES}` 为准。
 
-# 5 `_Docs` 每轮清理（原 My rule §5.2 迁入）
+# 5 `_Docs` 每轮清理
 - 流程：`cleanup_scan.py` 出候选 → 人工确认 → `cleanup_move.py` 移 `{DEL}`。
 - 三条判据：**过期**（>90 天未被引用）、**重复**（同内容多份）、**无主**（无项目 / 无索引指向）。
 - 默认分级：A 可直接移、B 需确认、C 永不自动清。
@@ -54,5 +54,5 @@ up: My rule.md §6
 # 7 实施状态
 
 - **已机器**：R1–R7（`qc_rules.py` + `tests/test_rules_qc.py`，22 个用例；R4 在 `check_paths.py`）。
-- **待建**：R8 PR 模板。`del-and-harvest.md` / `QC.md` 已纳入 `check_paths.py` 的必检与扫描清单（R4 覆盖）。
-- **季度**：史清理、别名合并、路由表复核定稿后出清单。
+- **R8 已建**：`.github/pull_request_template.md` 把四件事做成勾选项（门全绿 / 史进 HISTORY / 改名更新 aliases / 新 L1 同步路由与必检）。
+- **季度**：首轮 2026-11-14 已跑——9 个 live 文件正文史标记 0 处、`aliases.yaml` 38 条无合并项、路由表 12 行与文件一一对应；记录见 `HISTORY.md` §I。

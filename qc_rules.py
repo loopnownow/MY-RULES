@@ -6,7 +6,7 @@ Usage:
 
 Gates (see QC.md §2):
   R1 routing closure   every live md is routed from My rule.md §5 and exists
-  R2 no change history t-ids / decision dates / "此前|曾用|更名|formerly"
+  R2 no change history t-ids / decision dates / "此前|曾用|更名|formerly|原 §x"
   R3 old names only    old-name tokens live in aliases.yaml / HISTORY.md
   R5 no copies         >=40-char sentences must not repeat across live files
   R6 frontmatter       name + description on every content file
@@ -39,7 +39,7 @@ ARCHIVE = {"HISTORY.md", "aliases.yaml", "QC.md"}
 
 T_ID_RE = re.compile(r"(?<![A-Za-z0-9])t\d{3,4}[a-z]?(?![A-Za-z0-9])")
 DATE_RE = re.compile(r"\b20\d{2}-\d{2}-\d{2}\b")
-HISTORY_WORDS = re.compile(r"此前|曾用|更名|formerly", re.I)
+HISTORY_WORDS = re.compile(r"此前|曾用|更名|formerly|原\s*My rule|原\s*§|旧\s*§", re.I)
 # Data thresholds are rules, not change history.
 THRESHOLD_CUES = ("≥", ">=", "早于", ">")
 LINE_MAX = 400

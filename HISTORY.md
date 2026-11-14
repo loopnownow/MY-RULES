@@ -78,4 +78,5 @@
 - **P2 L0**（PR #141 → `1d063fc`）：`My rule.md` 210 → 101 行，改为常驻层；拆出 `del-and-harvest.md`（66 行）与 `QC.md`（57 行）；`standing/` 两份并入后删除（副本留 `{DEL}`）；`project-ref-layout.md` 的 1,366 字「此前」段迁入本文件 §D；旧阶段别名表改为 `aliases.yaml` 指针。
 - **P3 DSH 适配层**：`$DSH_HOME\AGENTS.md` 74 → 55 行，只留挂载与指针；`$DSH_HOME\skills\state.json` 移除把 MY-RULES 当技能源的 git root（`git-55875fa9`），否则规则 md 会被当技能加载。
 - **P4 清史**（PR #142 → `a576b63`）：workspace / project-ref / library / skills / network 五个专题删除 t-id、决策日期与旧名括注；只保留数据阈值日期（批件 ≥ 2023-11-10）与「勿再新建」禁名清单。
-- **P5 规则门**（分支 `rules/p5-rules-gates`）：新增 `qc_rules.py`（R1–R3 / R5–R7）与 `tests/test_rules_qc.py`（22 用例）；R4 仍由 `check_paths.py`；`My rule.md` §6、`README.md` E3、`QC.md` §1/§2/§7 同步回写。
+- **P5 规则门**（PR #143 → `fd879db`）：新增 `qc_rules.py`（R1–R3 / R5–R7）与 `tests/test_rules_qc.py`（22 用例）；R4 仍由 `check_paths.py`；`My rule.md` §6、`README.md` E3、`QC.md` §1/§2/§7 同步回写。
+- **P6 收尾**（分支 `rules/p6-closeout`）：`QC.md` §5 标题去掉「原 My rule §5.2 迁入」史括注；R2 扩到「原 §x / 旧 §x」类段号引用（新增 1 个负向用例，共 23 个）；建 `.github/pull_request_template.md` 把 R8 做成勾选项；跑完首轮季度清史（9 个 live 文件正文史标记 0 处，`aliases.yaml` 38 条无合并项）。技能侧引用同步改指新节：MY-SKILLS #357 → `cae43b1`，英文镜像 `project-ref-layout.md` 降为索引页。
