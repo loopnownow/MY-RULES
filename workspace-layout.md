@@ -1,11 +1,11 @@
 ---
 name: workspace-layout
-description: 本机布局与子工程短针。落点见 My rule.md §5。
+description: 本机布局与子工程短针。落点见 My rule.md §3。
 ---
 
 # 本机布局与子工程
 
-路径别名见 `My rule.md` §1。代码路径别名（`{code_root}`、`{code_modules}`、`{code_stats}`、`{code_data_processing}`）见 skills `lab-paths.yaml`。工作区只有一层（`D:\MyProjects\<stage>\<project>`）；不再有 A/B 双工作区。
+路径别名见 `My rule.md` §4。代码路径别名（`{code_root}`、`{code_modules}`、`{code_stats}`、`{code_data_processing}`）见 skills `lab-paths.yaml`。工作区只有一层（`D:\MyProjects\<stage>\<project>`）；不再有 A/B 双工作区。
 
 ## 一行布局
 
@@ -87,10 +87,10 @@ description: 本机布局与子工程短针。落点见 My rule.md §5。
 - **`目录说明.md`：** 每个 `_` 分支根与 `_lab` 根必须有（放什么、谁维护、更新日）。
 - **`D:\MyProjects\_DataBase\_diseases.csv`（疾病短码 + 家族桶 SSOT · t1821u / t1822u / t1825u / t1829u）：** 列 `suffix,name_en,name_zh,l1,l2,aliases,family`；`suffix`=基码（无 `_\d+` 实例）；`family`=该基码所属家族根（留空=自家族；家族根必须在 `suffix` 列有本人行，如 `MHE`、`SCC`、`EC`、`THESIS`、`OTHERS`）；编号形式进 `aliases`；library `l1`/`l2` 对照 ethics/references。全称不进路径规则。2026-11-09 复核：`_diseases.csv:133` 的 `RI` 改挂 `SCH` 已确认（IR 数据随 SCH 队列）；`SCH\ly_RI` 只留 `目录说明.md` 为最终态（archived 同挂 SCH 口径）。
 - **`D:\MyProjects\_DataBase\_index.csv`（唯一可写台账）：** 一行一个 slug/分支，列 `kind,slug,prefix,suffix,title,l1,l2,stage,owner,indexed_on,note`；新建/改名当轮更新。
-- **只读不变：** 除 `_index.csv` 外 `_DataBase` 默认只读；新建分支/子夹属写盘，须当轮点名（§5.1 不豁免）。
+- **只读不变：** 除 `_index.csv` 外 `_DataBase` 默认只读；新建分支/子夹属写盘，须当轮点名（§2 不豁免）。
 - 不预建空夹。
 
-**云端 / 本地：** 云端 = Grok Bot box；本地 = 城城本机。详见 `My rule.md` §1。
+**云端 / 本地：** 云端 = Grok Bot box；本地 = 城城本机。详见 `My rule.md` §0。
 
 可选：数据课题也可在上述子工程树内自建文件夹；约定写在该子工程内，不进全局 rules/skills。
 
@@ -127,19 +127,7 @@ description: 本机布局与子工程短针。落点见 My rule.md §5。
 | `reviewing` | 已投 / 在审 / 修回再投（收到审稿意见是事件，不是阶段） |
 | `accepted` | 接收 / 校样 |
 
-已有文件夹若仍用旧名，按下表阅读。**不改写**这些夹。**不新建** `DER` 阶段夹或根目录（`DER` 仅是 `_diseases.csv` 的家族码，不是阶段/工作区）。
-
-旧阶段夹名仅作别名阅读；**勿重建** `preparing`/`polishing`/`submitting`/`reseived`。
-
-| 旧名 | 读作 |
-|---|---|
-| `preparing` | `drafting` |
-| `polishing` | `pre-submit` |
-| `submitting` | `reviewing` |
-| `in-review` | `reviewing`（历史别名；活路径只写 `reviewing`） |
-| `reseived`、`received` | `accepted` |
-
-别名表在 `{SKILLS}\00_orchestrator\templates\project-state.yaml` 的 `study_folder_stage_aliases`（路径段别名，不是 `pipeline.stage`）。
+- 已有文件夹若仍用旧名 → 按 `aliases.yaml`（`kind: stage`）阅读；**不改写**、**勿重建**。**不新建** `DER` 阶段夹或根目录（`DER` 仅是 `_diseases.csv` 的家族码，不是阶段 / 工作区）。
 
 课题夹名：`lowercase_UPPERCASE`（如 `fyh_CAC`、`xlm_LG`）。旧式 `CAC_fyh`、`lung_xlm` 已退休。
 
@@ -170,8 +158,7 @@ description: 本机布局与子工程短针。落点见 My rule.md §5。
 - **harvest：** 抽「怎么做」→ `_Docs\harvest`；仅当主人说「进skills」才进 MY-SKILLS（extract ≠ promote；流程与纳入门禁见 `{SKILLS}\00_orchestrator\harvest\SKILL.md`，00 只调度/门禁/复核；指针见 `skills.md` §3）。
 - **closeout：** 物理落点与精简；**不是** harvest 的替代步骤。
 - **harvest 也不代替搬盘：** 抽完仍须按 closeout 把字节落到 `_DataBase` / `_Docs` / `.Del` / `archived`。
-- **harvest 剩余件（t1950u）：** 一次 harvest 之后应进 `{DEL}` 的剩余件一律落 `harvested\`（平铺；含原可进 `_by-project` 或 harvest-park 的收尾件）。非 harvest 的三档落点不变。权威 → `My rule.md` §5.3。
-- **先判 harvest 需求再定落点（t1951u）：** 批次进 park 后先分四类——H1 可复用 how-to（抽完即搬 `harvested`）/ **H2 不需要 harvest（数据、原始件、PHI、第三方源码、构建产物、浏览器配置、一次性修补脚本、日志截图 → 不进 harvest 队列，核对后直接落 `harvested`）** / H3 活依赖（先解 `DEL_ROOT`·`DEFAULT_BATCH`·`--del-root` 或活指针，再搬；可先瘦身留台账）/ H4 课题件（`_by-project\<slug>\`）。park 不是长期仓，禁止积压。权威 → `My rule.md` §5.3.1。
+- **harvest 剩余件 / 先判 H1–H4 / 轮次去留** → `del-and-harvest.md` §1–§3（本文件不复写判据）。
 - 关系总图 / harvest 授权 →「工作区关系：阶段 · 分流 · harvest · 冷库」。harvest 技能只抽「怎么做」；closeout 是落点；勿把 closeout 写成 harvest 步骤。
 
 ### harvest 授权范围
@@ -180,7 +167,6 @@ description: 本机布局与子工程短针。落点见 My rule.md §5。
 - **每次须主人当轮授权**；不因阶段自动触发。
 - `archived` 默认只读：从冷库抽也要当轮点名；不解冻整夹除非另批。
 - **QC 分工：** 库形/完整性→本地库门（`{doc_root}\test\structure_check.py` + `STRUCTURE.md`；`_DataBase` 根说明 + `DB-QC-STANDARD.md`）；纳入门禁→harvest 技能；00 复核通过后才候纳入。指针 → `skills.md` §3。
-- **轮次去留：** 已 promote（或判 H2）的轮次不留活层，整轮移 `{DEL}\harvested\rounds\<round>\`，`rounds\LEDGER.tsv` 只留一行。细则 → `My rule.md` §5.3.1。
 
 ### 不进 harvest / 慎进 `_Docs` 公开层
 
@@ -213,7 +199,7 @@ description: 本机布局与子工程短针。落点见 My rule.md §5。
 **不进 DB：** 终稿 Word、glossary/期刊池/文献全文、可脚本重生图、热分析工作副本。
 
 ### `_Docs` 分桶
-须当轮点名「放 _Docs」才写；默认禁 mkdir，`mem` 例外（§5.1）。
+须当轮点名「放 _Docs」才写；默认禁 mkdir，`mem` 例外（§2）。
 - `templates\`：空白伦理/SCI骨架/清单/金样/brand
 - `_library\ethics\approvals\`：已批批件 PDF+索引
 - `_library\references\`：文献全文；课题 `ref/refer` 只 DOI 指针
@@ -248,7 +234,7 @@ description: 本机布局与子工程短针。落点见 My rule.md §5。
 - **历史旧论文（如 `000-vip\科研\文章`）：** 先进 `accepted`，按 `<prefix>_<suffix>` 建项目；抽取（skill/rule/_DataBase/_Docs）完成后再按上条进冷库。**先 accepted，后 archived**，不直进冷库。
 - **`ARCHIVED.md`（每个项目根一份）：** `archived_on`、`from_stage`、`slug`、`family`、`skill_ref`、`rule_ref`、`index_row`、`note`；缺项不进。
 - **非阶段：** 不进阶段表、不进 `study_folder_stage_aliases`；`project-state.yaml` 的 `stage` 保持 `accepted`（不加 `archived` 枚举，避免 MY-SKILLS PR）。
-- **与 QC 禁令消歧：** `My rule.md` §4 与 `skills.md` §6 的 skip/archived 禁令只约束**技能树/文档 QC**，**不适用**项目冷库；冷库 = 已完成，不是未处理。
+- **与 QC 禁令消歧：** `My rule.md` §6 与 `skills.md` §6 的 skip/archived 禁令只约束**技能树/文档 QC**，**不适用**项目冷库；冷库 = 已完成，不是未处理。
 - **只读默认：** 冷库不参与日常检索/改写；解冻 = 移回对应阶段夹 + 移除 `ARCHIVED.md`（须当轮点名）。
 - **命名：** `name_zh → prefix` 进 `D:\MyProjects\_Docs\mem\people.csv`（`/mem/` 已 gitignore、_Docs 仓无 remote）。
 - 不预建空夹；同一 `<prefix_suffix>` 不重复。
@@ -263,17 +249,17 @@ description: 本机布局与子工程短针。落点见 My rule.md §5。
 
 ## 文件落点
 
-交付表权威 → `My rule.md` §5。`ref/` 子目录 → 同仓 `project-ref-layout.md`。
+交付表权威 → `My rule.md` §3。`ref/` 子目录 → 同仓 `project-ref-layout.md`。
 
 | 种类 | 落点 |
 |---|---|
-| 草稿 / 旧稿 / 一次性脚本 | 子工程内临时/中间/旧版稿 → `ref/tmp/`（非默认 `{DEL}`；t1450u）。跨课题或无子工程一次性 → `{DEL}` 的 `_by-project\` / `_by-function\`。`{DEL}` 定期清空，值得长期保留的不放这里。细则 → `My rule.md` §5 / `project-ref-layout.md`。 |
+| 草稿 / 旧稿 / 一次性脚本 | 子工程内临时/中间/旧版稿 → `ref/tmp/`（非默认 `{DEL}`；t1450u）。跨课题或无子工程一次性 → `{DEL}` 的 `_by-project\` / `_by-function\`。`{DEL}` 定期清空，值得长期保留的不放这里。细则 → `My rule.md` §3 / `project-ref-layout.md`。 |
 | 共享统计库 | `{code_modules}`（`D:\MyProjects\_Docs\GitHub\MY-CODES\modules`）。入口：`PYTHONPATH={code_stats}` 后 `python -m modules.pipeline`。课题只指向该树，不在课题内再放 `modules\`。未点名则不改该库。技能正文（怎么用、按什么规则）在 `{SKILLS}\02_data-processing\`；本仓只管代码。 |
 | 02 运维（整理 / 清洗 / 同步） | `D:\MyProjects\_Docs\GitHub\MY-CODES\tools\`（`{code_stats}` + `tools/<fine-id>/`；席位夹名不镜像 `02-…`/`03-…`）。统计引擎与建模 CLI 在 `D:\MyProjects\_Docs\GitHub\MY-CODES`（2026-10-25 起独立主库；2026-11-01 由 `stats-analysis` 更名）。 |
 | 参考包 / 锁定笔记 | 课题 `ref/`。运行键只在 `ref/settings.ini`。可选 `ref/project-state.yaml` 只记设计与稿件进度。 |
 | 文献全文（PDF/HTML） | `D:\MyProjects\_Docs\_library\references\<L1>\<L2>\`（一文一文件，名用 DOI；t1455u）；子工程 `ref/refer\` 只写 `DOI_*.md` 指针；书目进 `_library\lit-bank`（不存 PDF） |
 | 期刊池 / 批件 | `_library\journals\index.csv`（单表，2026-10-31 起不再留 xlsx）；`_library\ethics\approvals\<L1>\<L2>\` + `approvals-index.xlsx`（t1458u）；子工程候选刊只写 `ref\citation\journals.csv` + `_notes.md`。口径 → `library-taxonomy.md` |
-| 现行分析数字 | `<project>/<endpoint>/`；成对比较再套 `<positive_display>_vs_<negative_display>/`。稿件活数字只来自该处 `Results*.html`（新写 `Results{subproject}.html`）。旧 `{endpoint}-results.html`、`results.html` 仍可读取。与 `.xlsx` 冲突以 HTML 为准（`My rule.md` §5）。**结果 HTML 不提升到子工程根**（t1660u；`false_classification*` 同落该结果夹 → `project-ref-layout.md`）。 |
+| 现行分析数字 | `<project>/<endpoint>/`；成对比较再套 `<positive_display>_vs_<negative_display>/`。稿件活数字只来自该处 `Results*.html`（新写 `Results{subproject}.html`）。旧 `{endpoint}-results.html`、`results.html` 仍可读取。与 `.xlsx` 冲突以 HTML 为准（`My rule.md` §3）。**结果 HTML 不提升到子工程根**（t1660u；`false_classification*` 同落该结果夹 → `project-ref-layout.md`）。 |
 | 课题 QC | 主 QC：`<project>/ref/qc.html`。外部 QC：`<project>/ref/qc-ext-*.html`（文件名不用 `qc.html`）。 |
 
 同夹多份稿件：留与当前 HTML 相符的最新一份；其余仅当用户要求才移入 `{DEL}`。
@@ -289,7 +275,7 @@ description: 本机布局与子工程短针。落点见 My rule.md §5。
 ## 子工程约定
 
 - 写入 `_Docs\`（旧名 **0doc**）须用户点名「放 0doc」/「放 _Docs」。
-- **最终**→子工程根；**中间**→`ref/` 地图；**无** `0result\`；子工程内临时 → `ref/tmp/`（非默认 `{DEL}`）；无子工程/跨课题临时进 `{DEL}`；Downloads 仅当点名。权威 → `My rule.md` §5。
+- **最终**→子工程根；**中间**→`ref/` 地图；**无** `0result\`；子工程内临时 → `ref/tmp/`（非默认 `{DEL}`）；无子工程/跨课题临时进 `{DEL}`；Downloads 仅当点名。权威 → `My rule.md` §3。
 - 可复用脚本 → 统计引擎与建模 CLI 在 `{code_stats}`（`modules/` + `model-validation/`），运维/加工脚本在 `{code_stats}\tools\<fine-id>\`（`_code` 已于 2026-11-01 整层退役：脚本在 MY-CODES，壳与索引移至 {DEL}）。`0script\` 已退休，不在课题根重建。长期规则/语料 → `_Docs` 相应层。
 - 根不留临时/草稿/一次性中间件（例外：现行在改稿 / 现行 `Vn`）。旧版稿与中间件进 `ref/tmp/`，不进 `{DEL}`（除非过后清理先问）。`_Docs\GitHub\MY-CODES\modules\`（旧盘符叫法 `0doc\GitHub\...`）增改移须先同意。
 - 数据课题根可留：`rawdata`、`derivatives`、`atlases`、索引/manifest、`ref`。`_Docs` 仅当点名「放 0doc」/「放 _Docs」。默认从 `derivatives` 拷出要用的结果，原件留在原处；终稿落子工程根。不建 `0result\`，不重建 `0script\`。
@@ -301,8 +287,8 @@ description: 本机布局与子工程短针。落点见 My rule.md §5。
 
 ## 新建文件夹 / 新建文件
 
-只许建在 `{DEL}` / `D:\MyProjects\.Del\` 的 `_by-project\`、`_by-function\`。权威与例外 → `My rule.md` §5.1（含 `_Docs`（旧名 0doc）默认禁止 mkdir、**改已有文件须当轮点名或先问**（§2 总闸 t1672u）、一次性脚本不进主目录 / `.grok\tmp` / 课题根）。本段不复写。bot mem 落点例外（`D:\MyProjects\_Docs\mem\`）→ `My rule.md` §1 + §5.1。
+只许建在 `{DEL}` / `D:\MyProjects\.Del\` 的 `_by-project\`、`_by-function\`。权威与例外 → `My rule.md` §2（含 `_Docs`（旧名 0doc）默认禁止 mkdir、**改已有文件须当轮点名或先问**（§2 总闸 t1672u）、一次性脚本不进主目录 / `.grok\tmp` / 课题根）。本段不复写。bot mem 落点例外（`D:\MyProjects\_Docs\mem\`）→ `My rule.md` §1 + §5.1。
 
 **目录命名（t1458u）**：`_Docs` 下目录一律 ASCII 英文（`approvals` / `journals` / `jcr`）；中文目录发现即当轮 rename，并在 `_library\MOVED-FROM.md` 记一行。库分类与 L1/L2 → `library-taxonomy.md`。
 
-**`.Del` 内部三档**（旧名 0del）（park / harvest-park / harvested，原 junk）与落 harvested 前的 grep 要求 → `My rule.md` §5.3。
+**`.Del` 内部三档**（旧名 0del）（park / harvest-park / harvested，原 junk）与落 harvested 前的 grep 要求 → `del-and-harvest.md`。
