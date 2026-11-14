@@ -1,0 +1,289 @@
+# aliases.yaml — 旧名 → 现行名映射（机器可读，唯一来源）
+#
+# 契约：
+#   1. 规则正文（*.md，HISTORY.md 除外）不得出现旧名；旧名只在本文件与 HISTORY.md 出现。
+#   2. 本文件是「读旧名」的接口，不是「用旧名」的许可：status=retired 的旧名只用于识别与更正。
+#   3. fine-id 旧名不在这里，归 {SKILLS}\00_orchestrator\legacy_aliases.yaml。
+#   4. 消费者：check_paths.py（现状）、qc_rules.py（P5 接入）。脚本只读字段，不解析散文。
+#
+# 字段：
+#   old     旧写法（规范形式，路径或 token）
+#   tokens  可选；正文里可能出现的变体（用于 grep / 正则）
+#   new     现行写法；retired / nonexistent 项写去向或留空
+#   kind    root | dir | stage | ref_dir | file | repo | version | syn_target | family_code
+#   status  renamed | retired | alias | false_target | false_stage | nonexistent | merged | superseded
+#   since   生效日期（YYYY-MM-DD）；未知留空，不猜
+#   ref     依据（t-id / 文件名）
+#   note    一句说明；不写规则正文
+
+version: 1
+updated: '2026-11-14'
+owner: MY-RULES
+
+entries:
+  # ── 根 ──────────────────────────────────────────────────────────────
+  - old: 'D:\0Grok'
+    new: 'D:\MyProjects'
+    kind: root
+    status: renamed
+    since: '2026-11-08'
+    ref: t1791u/t1794u/t1796u
+
+  - old: 'D:\MyProjects\0doc'
+    tokens: ['0doc']
+    new: 'D:\MyProjects\_Docs'
+    kind: dir
+    status: renamed
+    since: '2026-11-08'
+    ref: t1791u/t1794u/t1796u
+
+  - old: 'D:\MyProjects\00db'
+    tokens: ['00db']
+    new: 'D:\MyProjects\_DataBase'
+    kind: dir
+    status: renamed
+    since: '2026-11-08'
+    ref: t1791u/t1794u/t1796u
+
+  - old: 'D:\00ds'
+    tokens: ['00ds']
+    new: 'D:\MyProjects\_DataBase'
+    kind: dir
+    status: retired
+    since: '2026-11-08'
+    ref: t1705u
+    note: '活路径/夹名/filter 仍写 00ds 的一律算 QC 发现，更正为 _DataBase；不得当 legacy 保留。'
+
+  - old: 'D:\0del'
+    tokens: ['0del']
+    new: 'D:\MyProjects\.Del'
+    kind: dir
+    status: renamed
+    since: '2026-11-08'
+    ref: t1791u/t1794u
+    note: '另一变体 D:\MyProjects\0del 从未存在；.Del 才是 SSOT。'
+
+  - old: 'D:\0script'
+    tokens: ['0script']
+    new: '{code_stats}\tools\<fine-id>\'
+    kind: dir
+    status: retired
+    ref: 'workspace-layout.md 文件落点'
+    note: '已退休，不在课题根重建。'
+
+  - old: 'D:\MyProjects\R&P'
+    tokens: ['R&P', 'proposal']
+    new: '_DataBase\_grants\<year>\ ; _DataBase\_reviews\{peer,grants,thesis}\<year>\'
+    kind: root
+    status: retired
+    ref: t1813/t1815/t1817u
+    note: '活兄弟根退役，磁盘 stub 已移 .Del，勿重建；不是稿件阶段。'
+
+  # ── 同步与盘面 ──────────────────────────────────────────────────────
+  - old: 'E:\Aitor\MyProjects'
+    new: 'E:\Aitor'
+    kind: syn_target
+    status: false_target
+    since: '2026-11-08'
+    ref: 'My rule.md 同步条'
+    note: 'syn.bat 的镜像根是 E:\Aitor，不是 E:\Aitor\MyProjects；/XD .Del。'
+
+  - old: 'D:\MyProjects\_Docs\_bank'
+    tokens: ['_bank']
+    new: 'D:\MyProjects\_Docs\_library\glossary'
+    kind: dir
+    status: renamed
+    since: '2026-11-01'
+    ref: 'workspace-layout.md 布局表'
+
+  - old: 'D:\MyProjects\_Docs\_code'
+    tokens: ['_code']
+    new: '{code_stats}'
+    kind: dir
+    status: retired
+    since: '2026-11-01'
+    ref: 'workspace-layout.md 文件落点'
+    note: '整层退役：脚本在 MY-CODES，壳与索引移 .Del。'
+
+  - old: 'D:\MyProjects\_Docs\harvest\sources'
+    tokens: ['harvest\sources']
+    new: 'D:\MyProjects\_Docs\harvest-sources-park'
+    kind: dir
+    status: renamed
+    since: '2026-11-14'
+    ref: 'My rule.md §5.3.2'
+
+  - old: 'D:\MyProjects\.Del\junk'
+    tokens: ['junk']
+    new: 'D:\MyProjects\.Del\harvested'
+    kind: dir
+    status: renamed
+    since: '2026-10-31'
+    ref: '.Del 三档'
+
+  - old: 'D:\MyProjects\_DataBase\_lab\ethics'
+    new: 'D:\MyProjects\.Del'
+    kind: dir
+    status: retired
+    ref: t1849u
+    note: '废弃活伦理落点；批件原件只收日期 ≥ 2023-11-10。'
+
+  - old: 'D:\MyProjects\_Docs\GitHub\stats-analysis'
+    tokens: ['GitHub\stats-analysis', 'stats-analysis']
+    new: '{code_stats}'
+    kind: repo
+    status: renamed
+    since: '2026-11-01'
+    ref: 'check_paths.py renamed_codes_repo'
+
+  - old: 'D:\MyProjects\_Docs\_code\04-analysis\stats-analysis'
+    new: '{code_stats}'
+    kind: dir
+    status: retired
+    ref: 'check_paths.py retired_stats'
+
+  # ── 阶段夹 ──────────────────────────────────────────────────────────
+  - old: 'preparing'
+    new: 'drafting'
+    kind: stage
+    status: alias
+    note: '只作别名阅读，勿重建。'
+
+  - old: 'polishing'
+    new: 'pre-submit'
+    kind: stage
+    status: alias
+    note: '只作别名阅读，勿重建。'
+
+  - old: 'submitting'
+    new: 'reviewing'
+    kind: stage
+    status: alias
+    note: '只作别名阅读，勿重建。'
+
+  - old: 'in-review'
+    new: 'reviewing'
+    kind: stage
+    status: alias
+    note: '活路径只写 reviewing。'
+
+  - old: 'reseived'
+    new: 'accepted'
+    kind: stage
+    status: alias
+    note: '原拼写错误保留为识别用；received 同义。'
+
+  - old: 'received'
+    new: 'accepted'
+    kind: stage
+    status: alias
+
+  - old: 'archived'
+    new: ''
+    kind: stage
+    status: false_stage
+    note: '分流落点，不是第五阶段；不进阶段表、不进 study_folder_stage_aliases。'
+
+  - old: 'DER'
+    new: ''
+    kind: family_code
+    status: false_stage
+    note: '只是 _diseases.csv 的家族码，不建阶段夹或根目录。'
+
+  # ── 项目 ref/ 旧夹 ─────────────────────────────────────────────────
+  - old: '<project>/results/'
+    new: '<project>/ref/tables/ · <project>/ref/figures/ · <project>/ref/'
+    kind: ref_dir
+    status: retired
+    ref: t1309s6268/t1316u
+    note: '最早的分析壳；先改 analysis/，再取消。'
+
+  - old: '<project>/analysis/'
+    new: '<project>/ref/tables/ · <project>/ref/figures/ · <project>/ref/'
+    kind: ref_dir
+    status: retired
+    ref: t1316u
+
+  - old: '<project>/materials/'
+    new: '<project>/ref/refer/（lit/citation）· <project>/ref/'
+    kind: ref_dir
+    status: retired
+    ref: t1316u
+
+  - old: '<project>/exec/'
+    new: '<project>/ref/code-gates/'
+    kind: ref_dir
+    status: retired
+    ref: t1303s6243/t1300u
+
+  - old: '<project>/code/'
+    new: '<project>/ref/code-gates/'
+    kind: ref_dir
+    status: retired
+    ref: t1300u
+
+  - old: '<project>/gates/'
+    new: '<project>/ref/code-gates/'
+    kind: ref_dir
+    status: retired
+    ref: t1300u
+
+  - old: '<project>/writing-refs/'
+    new: '<project>/ref/refer/'
+    kind: ref_dir
+    status: retired
+    ref: t1303s6243
+
+  - old: '<project>/raw-pre/'
+    new: '<project>/ref/'
+    kind: ref_dir
+    status: retired
+    ref: t1303s6243
+    note: '合并史见 t1303s6243/t1300u；不再设独立夹。'
+
+  - old: '<project>/0result/'
+    new: ''
+    kind: ref_dir
+    status: nonexistent
+    note: '从未存在，也不许新建；最终交付落子工程根。'
+
+  - old: 'ref 内散装期刊 md/json/html'
+    new: '<project>/ref/citation/_notes.md'
+    kind: file
+    status: merged
+    ref: t1458u
+    note: '期刊/候选刊只用 journals.csv（或 xlsx）+ 合并笔记。'
+
+  # ── 已迁出的规则/说明文件 ───────────────────────────────────────────
+  - old: 'manuscript-and-review.md'
+    new: '{SKILLS}\05_manuscript\qc\ · {SKILLS}\06_review\advanced\ · {SKILLS}\07_response\advanced\'
+    kind: file
+    status: merged
+    since: '2026-10-18'
+
+  - old: 'routing.md'
+    new: '{SKILLS}\00_orchestrator\references\ownership-contract.md · handoff-monitor.md'
+    kind: file
+    status: merged
+    since: '2026-10-18'
+
+  - old: 'engineering-decision.md'
+    new: 'My rule.md §6'
+    kind: file
+    status: merged
+    since: '2026-10-18'
+
+  - old: '0del\STANDING-*.md'
+    new: '{RULES}\standing\'
+    kind: file
+    status: renamed
+    since: '2026-10-31'
+
+  # ── 稿件版本口径 ────────────────────────────────────────────────────
+  - old: 'V2/V3/V4/V9（2026-11-05 纯 V 映射）'
+    new: 'V主.次 / R轮.次 / P（校样）'
+    kind: version
+    status: superseded
+    since: '2026-11-06'
+    ref: t1694u
+    note: '旧义：V2=投后未审、V3=第1轮回复、V4=第2轮、V9=校样；不再作为现行规则。'
