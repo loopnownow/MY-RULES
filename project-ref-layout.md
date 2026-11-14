@@ -25,26 +25,26 @@
 
 ## 子文件夹地图
 
-尽量少的 `ref/` 子夹。标准夹：`review/` `citation/` `refer/` `code-gates/` `tmp/`（按需创建，**不预建空夹**）；另登记 `figures-orig/`（图件原始可编辑件，2026-11-09 QC；与终图 `figures/` 分工见下表）。**勿再新建** `analysis/` 或 `materials/` 壳。
+尽量少的 `ref/` 子夹。标准夹：`review/` `citation/` `refer/` `code-gates/` `tmp/`（按需创建，**不预建空夹**）；另登记 `figures-orig/`（图件原始可编辑件，QC；与终图 `figures/` 分工见下表）。**勿再新建** `analysis/` 或 `materials/` 壳。
 
 | 子文件夹 | 放这里 | 不放这里 |
 |---|---|---|
 | `ref/review/` | 每轮 `changelog.md` / `CHANGELOG_*.md`；审稿交接 YAML；Lee 轮次笔记 | 主 Word 变更 ledger（仍用 `manuscript-revision.md`） |
-| `ref/citation/` | **审计台账 + 期刊/候选刊**：`CITATION_AUDIT.json`（或 `.jsonl`）；引用 README / 跳过说明；**期刊/候选刊只用 `journals.csv`（或 `.xlsx`）** + 合并笔记 `_notes.md`（t1458u）；期刊/引用日志（`ref_journal_log.txt`、`CITATION*`） | NLM+摘要列表与文献正文（见 `refer/`）；写作参考草稿；**期刊信息的散装 md/json/html**（合并进 `_notes.md`，被替代原稿进 `ref/tmp/`） |
-| `ref/refer/` | **文献指针 + NLM 引用与摘要列表**：每篇一个 `DOI_*.md`（`fulltext:` 指向 `_library\references`）；文献清单（原「参考文献」/ `materials/citation` / `materials/refer`）；**亦可**放写作参考 pptx/doc/docx（课题申请书/汇报幻灯/三线表等） | 文献全文实体（PDF/HTML → `D:\MyProjects\_Docs\_library\references\<L1>\<L2>\`，t1455u）；审计台账（`CITATION_AUDIT` 等仍在 `citation/`）；**期刊/候选刊（t1458u 起一律进 `citation/`）**；勿把 locks（hashes/MANIFEST/log）放这里 |
+| `ref/citation/` | **审计台账 + 期刊/候选刊**：`CITATION_AUDIT.json`（或 `.jsonl`）；引用 README / 跳过说明；**期刊/候选刊只用 `journals.csv`（或 `.xlsx`）** + 合并笔记 `_notes.md`；期刊/引用日志（`ref_journal_log.txt`、`CITATION*`） | NLM+摘要列表与文献正文（见 `refer/`）；写作参考草稿；**期刊信息的散装 md/json/html**（合并进 `_notes.md`，被替代原稿进 `ref/tmp/`） |
+| `ref/refer/` | **文献指针 + NLM 引用与摘要列表**：每篇一个 `DOI_*.md`（`fulltext:` 指向 `_library\references`）；文献清单（原「参考文献」/ `materials/citation` / `materials/refer`）；**亦可**放写作参考 pptx/doc/docx（课题申请书/汇报幻灯/三线表等） | 文献全文实体；审计台账（`CITATION_AUDIT` 等仍在 `citation/`）；**期刊/候选刊**；勿把 locks（hashes/MANIFEST/log）放这里 |
 | `ref/code-gates/` | 脚本/路径说明、补丁指针（无密钥）；`GATE*_report.md`、数字锁定、输入/输出哈希报告 | 现役 `settings.ini`；原始凭据。**原并列的 `code/` 与 `gates/` 不再分夹** |
-| `ref/figures-orig/` | 投稿图**原始可编辑件**（`.ai` `.psd` `.pptx` 原始 `.tif`、未标题导出等）；**2026-11-09 QC 起登记为允许夹**，按课题保留原形（不改名、不合并、不压包） | 终图（`ref/figures/`）；被替代的旧图件（→ `ref/tmp/`） |
-| `ref/tmp/` | 子工程内**临时/中间**默认落点（**非**先丢 `{DEL}`）：中间 Word/PDF/草稿（Claude diff、被替代的 TC、`-copy`、合并草稿）；**旧版 SCI 稿**（如 `Manuscript_<slug>_V1.docx` / 亦可含 `_R*`）；被合并的期刊/引文散装原稿（如 `journal-archive-<YYYYMMDD>/`）；保留到主人说清理/收工。**未进 `accepted\` 前的临时/中间/旧版/试跑一律留此**：禁止自动进 `{DEL}`、禁止自动删；进 `accepted` 须主人另批（t1458u） | 现行终稿 / `Manuscript_<slug>_V…` 或 `_R…`（子工程根）；已关闭轮次 changelog（`review/`）；citation / code-gates ledger；密钥 |
+| `ref/figures-orig/` | 投稿图**原始可编辑件**（`.ai` `.psd` `.pptx` 原始 `.tif`、未标题导出等）；**QC 登记为允许夹**，按课题保留原形（不改名、不合并、不压包） | 终图（`ref/figures/`）；被替代的旧图件（→ `ref/tmp/`） |
+| `ref/tmp/` | 子工程内**临时/中间**默认落点（**非**先丢 `{DEL}`）：中间 Word/PDF/草稿（Claude diff、被替代的 TC、`-copy`、合并草稿）；**旧版 SCI 稿**（如 `Manuscript_<slug>_V1.docx` / 亦可含 `_R*`）；被合并的期刊/引文散装原稿（如 `journal-archive-<YYYYMMDD>/`）；保留到主人说清理/收工。**未进 `accepted\` 前的临时/中间/旧版/试跑一律留此**：禁止自动进 `{DEL}`、禁止自动删；进 `accepted` 须主人另批 | 现行终稿 / `Manuscript_<slug>_V…` 或 `_R…`（子工程根）；已关闭轮次 changelog（`review/`）；citation / code-gates ledger；密钥 |
 
 **已退役（勿再新建）：** `ref/analysis/`、`ref/materials/`、独立 `ref/exec/`、`ref/code/`、`ref/gates/`、`ref/writing-refs/`、`ref/raw-pre/`、`ref/results/`（原名保留作禁令，不算旧名；历史去向见 `HISTORY.md` §D）。
 
 ### 三区 / 临时结果区
 
-- **站立（t1450u）：** 子工程内临时与中间文件默认进 `ref/tmp/`，**不**默认进 `{DEL}` / `D:\MyProjects\.Del`。过后清理（先问）再移 `{DEL}`。
-- **分析临时结果**（`ASL/`、`DKI/`、`DTI_IVIM/` 等）落**当次结果夹** `<project>/<endpoint>/`（或解析出的 OUT_DIR / `SUBPROJECT_BY_OUTCOME` 夹），**不在子工程根**，也**不进 `ref/`**（t1660u）。
+- **站立：** 子工程内临时与中间文件默认进 `ref/tmp/`，**不**默认进 `{DEL}` / `D:\MyProjects\.Del`。过后清理（先问）再移 `{DEL}`。
+- **分析临时结果**（`ASL/`、`DKI/`、`DTI_IVIM/` 等）落**当次结果夹** `<project>/<endpoint>/`（或解析出的 OUT_DIR / `SUBPROJECT_BY_OUTCOME` 夹），**不在子工程根**，也**不进 `ref/`**。
 - 面向稿件/门控的统计**表图**在 `ref/tables/` `ref/figures/`；**锁定件** `hashes.tsv` `MANIFEST.md` `pipeline_run.log` 在 **`ref/pipeline/`**；**勿**与 `ASL/` 等分析树合并。
-- **分析错分/临时表（t1660u）**：`false_classification*` 与同类 ASL 分析临时表落**当次结果夹** `<project>/<endpoint>/`（或解析出的 OUT_DIR / `SUBPROJECT_BY_OUTCOME` 夹），**不在子工程根**，也**不进 `ref/`**。结果 HTML 同落该结果夹为 `Results*.html`（见 `workspace-layout.md`）；**不**把 `{slug}_results.html` 或旧结果 HTML 提升到子工程根——根上已有的旧副本属错位。
-- **文献全文（t1455u）：** PDF/HTML 实体一律进 `D:\MyProjects\_Docs\_library\references\<L1>\<L2>\`（命名、索引、指针契约见该库 `README.md`）；子工程 `ref/refer/` 只写 `DOI_*.md` 指针，`ref/citation/` 不放全文，`_library\lit-bank` 只存书目。
+- **分析错分/临时表**：`false_classification*` 与同类 ASL 分析临时表落**当次结果夹** `<project>/<endpoint>/`（或解析出的 OUT_DIR / `SUBPROJECT_BY_OUTCOME` 夹），**不在子工程根**，也**不进 `ref/`**。结果 HTML 同落该结果夹为 `Results*.html`（见 `workspace-layout.md`）；**不**把 `{slug}_results.html` 或旧结果 HTML 提升到子工程根——根上已有的旧副本属错位。
+- **文献全文：** PDF/HTML 实体一律进 `D:\MyProjects\_Docs\_library\references\<L1>\<L2>\`（命名、索引、指针契约见该库 `README.md`）；子工程 `ref/refer/` 只写 `DOI_*.md` 指针，`ref/citation/` 不放全文，`_library\lit-bank` 只存书目。
 - **终稿 / 控制台终表**留在子工程根。
 - **已接受**的最终稿件留在子工程根；**未被接受**的投稿包进 `ref/` 根或 `submission-*`（见下「投稿包」）。主人点名时，中间 xlsx 也可留在子工程根，勿擅自挪走。
 
@@ -57,11 +57,11 @@
 
 ### SCI 稿件文件名（Manuscript / Comments / Response / Supplementary）
 
-SCI 相关文件统一命名：`<Stem>_<子项目名>_<版本号>`。（本条 2026-11-06 t1694u 覆盖 2026-11-05 纯 V 阶段映射：旧 `V2`=投后未审 / `V3`=第1轮回复 / `V4`=第2轮 / `V9`=校样 不再作为现行规则。）
+SCI 相关文件统一命名：`<Stem>_<子项目名>_<版本号>`。
 
 - **Stem：** `Manuscript` | `Comments` | `Response` | `Supplementary`（仅当确有补充材料时建 Supplementary）
 - **子项目名** = project slug（如 `lxf_PP`）
-- **版本号**两套前缀（2026-11-06 t1694u）：
+- **版本号**两套前缀：
   - **V** = 投稿前（含投出后、尚未收到审稿意见时的改稿）：`V` + `主`.`次`（`V1.1`、`V1.2`…`V1.10`；小数位不补零，**排序按数值不按字符串**）
   - **R** = 收到审稿意见之后的修回：`R` + `轮次`.`次`（`R1.1`、`R1.2` 同一轮内再改；下一轮意见到了再 `R2.1`）
   - **P** = 接收后校样（可选）：`P1` 或 `P1.1`
@@ -69,13 +69,13 @@ SCI 相关文件统一命名：`<Stem>_<子项目名>_<版本号>`。（本条 2
 - 审稿意见一到才开 R。该轮必须三件同号：`Manuscript_*_R1.1`、`Comments_*_R1.1`、`Response_*_R1.1`（有补充材料再加同号 `Supplementary_`）。Comments/Response/Supplementary 只与对应 R（或校样 P）同号；投稿前的 V 稿一般不配 Comments/Response。
 - 拒稿后换刊重写仍用 V（可升主版本，如 `V2.1`），直到再次投出；**不要**把换刊稿写成 R。
 - 接收后课题进 `accepted`，文件保持最后那个 R；校样单独留档用 P，不必再涨 V 或 R。
-- 每次实质改动 `+0.1`，不跳号；每次升版在 `ref/manuscript-revision.md` 追加一行。实质改动指结论、数据、结构、段落增删、换刊重写等。**小改不升级版本号（t1946u）：** 错字、标点、纯改字、只加/改批注、不改结论或结构的微调，仍用现行 V/R/P 文件名就地改，不得 `+0.1`，也不得另存新号。
+- 每次实质改动 `+0.1`，不跳号；每次升版在 `ref/manuscript-revision.md` 追加一行。实质改动指结论、数据、结构、段落增删、换刊重写等。**小改不升级版本号：** 错字、标点、纯改字、只加/改批注、不改结论或结构的微调，仍用现行 V/R/P 文件名就地改，不得 `+0.1`，也不得另存新号。
 - 优先 `.docx`；若有 md/pdf 伴生件，**同 stem**
 - 例：`Manuscript_lxf_PP_V1.10.docx`（投出稿）；`Manuscript_lxf_PP_R1.1.docx`、`Comments_lxf_PP_R1.1.docx`、`Response_lxf_PP_R1.1.docx`、`Supplementary_lxf_PP_R1.1.docx`
 - **落点：** 现行 `Manuscript_<slug>_V…` 或 `_R…`（及同号配套）在**子工程根**；**旧版** → `ref/tmp/`。未被接受的投稿包仍按上节进 `ref/` / `submission-*`。本条管文件名 + 旧版落点；详 → 上表 `ref/tmp/`。（原 `materials/` 已退役，勿再新建。）
-- **无稿不造空件（t2033u）：** 子工程若无稿件 docx，记「无 docx」，不得为交差创建空稿。
+- **无稿不造空件：** 子工程若无稿件 docx，记「无 docx」，不得为交差创建空稿。
 
-### 非契约编辑后缀稿（登记保留 · QC 2026-11-09）
+### 非契约编辑后缀稿（登记保留 · QC）
 
 整体 QC 发现 28 件稿件用以下**编辑中间件后缀**，主人裁定**保留并登记**（不强制改名、不批量清）：
 
@@ -84,9 +84,9 @@ SCI 相关文件统一命名：`<Stem>_<子项目名>_<版本号>`。（本条 2
 
 规则：① 这些**都不是现行版**，子工程根仍须唯一现行 `Manuscript_<slug>_{V|R|P}…`；② 优先放 `ref/tmp/`，已在根上者可留至该课题下一次版本收口；③ 不得据其反推版本号、不得与 `R` 轮同号冒充；④ 清理（移 `{DEL}`）须先问主人。
 
-### 城城手改识别（仅靠版本号抬升 · t1757u）
+### 城城手改识别
 
-- 实质手改：城城每次实质手改并保存后，在**文件名**（及文内版本号，若有）抬升 patch（例：`Manuscript_*_V1.2.docx` → `V1.3`；`R` / `P` 同理）。小改可不升号（口径见上节「SCI 稿件文件名」t1946u）。
+- 实质手改：城城每次实质手改并保存后，在**文件名**（及文内版本号，若有）抬升 patch（例：`Manuscript_*_V1.2.docx` → `V1.3`；`R` / `P` 同理）。小改可不升号。
 - 助手：子工程**根**上最新的 `Manuscript_*_V…` / `_R…` / `_P…`，若其版本号**大于**该课题上次助手记录的已落地版本，**必须**视为**城城手改 live 稿**（充分条件）。
 - 此时：**禁止**从更旧的 bak / `-org` / collapsed 副本整文件还原或覆盖；只允许 **Track Changes（作者 A）增量**合并；**禁止**降低版本号；**禁止**用 bak 整文件替换现行稿。
 - 未升号不得反推「不是手改」；正文与城城已改文本不同，仍按 `My rule.md` §3「城城已改先问」。
@@ -96,9 +96,9 @@ SCI 相关文件统一命名：`<Stem>_<子项目名>_<版本号>`。（本条 2
 
 - 原始/预清洗数据底表可落在 `ref/` 根或 `ref/data/`（撞名或更清晰时保留 `data/`）。
 - **今后移动底表前必须先问城城**（D-1）；本契约迁移轮次已获准将原 `materials/` 内容上抬时除外。勿静默挪走。
-- 大体量影像 raw（DICOM/NIfTI 等）≠ 本条底表：落 `{RAW}`=`D:\MyProjects\_DataBase\<family>\<prefix_suffix>\`，见 `workspace-layout.md`「`{RAW}` = `D:\MyProjects\_DataBase`」（进库多文件先压缩同节 t1800u；单元粒度仍见 t1719u）。
+- 大体量影像 raw（DICOM/NIfTI 等）≠ 本条底表：落 `{RAW}`=`D:\MyProjects\_DataBase\<family>\<prefix_suffix>\`，见 `workspace-layout.md`「`{RAW}` = `D:\MyProjects\_DataBase`」。
 
-### accepted 收工硬留（t1806u / t1809u）
+### accepted 收工硬留
 
 收工精简后课题树硬留：现行 `Manuscript_<slug>_{V|R|P}…`（子工程根**文件**）+ `FinalData_<slug>.xlsx`（或 `ref/README` 钉死的现用 data.xlsx）+ 可选 `ref/settings.ini` 指向 `_DataBase\<family>\<prefix_suffix>\`。课题树 `R*` / `P*` 整夹（修订包 / 投稿包）收工进 `_DataBase\<family>\<prefix_suffix>\`（≥20 散文件先压）；校验后原夹→`.Del\_by-project\<slug>\`。可复现图 → `.Del\_by-project\<slug>\`；不可复现 → `_DataBase`。全文落点 → `workspace-layout.md`「accepted 收工」；关系 / harvest 授权 → 同文件「工作区关系：阶段 · 分流 · harvest · 冷库」。本条不复写 closeout 清单。
 
@@ -128,12 +128,12 @@ SCI 相关文件统一命名：`<Stem>_<子项目名>_<版本号>`。（本条 2
 
 项目一旦采用本布局，在 `ref/` 根备一份简短 **`ref/README.md`**，至少各用一行写明：
 
-- `refer/`：文献**指针**（每篇 `DOI_*.md`，`fulltext:` 指向 `_library\references`）+ NLM 引用与摘要列表（原「参考文献」/ materials/citation）；**亦可**写作参考 pptx/doc/docx；与 `citation/` 审计台账分夹；全文实体在 `_library\references`（t1455u）。
+- `refer/`：文献**指针**（每篇 `DOI_*.md`，`fulltext:` 指向 `_library\references`）+ NLM 引用与摘要列表（原「参考文献」/ materials/citation）；**亦可**写作参考 pptx/doc/docx；与 `citation/` 审计台账分夹；全文实体在 `_library\references`。
 - `citation/`：仅 `CITATION_AUDIT*` / 跳过说明 / 期刊引用日志。
 - `code-gates/`：脚本说明 + 门控/哈希报告（原 `code/`+`gates/`）。
 - 根上 `tables/` `figures/` `pipeline/`：统计表图与流水线夹；**hashes / MANIFEST / pipeline_run.log 在 `ref/pipeline/`**（原 `analysis/`/`results/` locks）；`qc.html` 仍在 `ref/` 根。
 - 写作参考（可在 `refer/`）、`submission-*`、数据底表：原 `materials/` 子项（D-1：今后移底表先问）。
-- 并注明：「分析错分/临时表 `false_classification*` 与结果 HTML（`Results*.html`）落当次结果夹 `<project>/<endpoint>/`（或 OUT_DIR / `SUBPROJECT_BY_OUTCOME`），不在子工程根，也不在 ref」（t1660u）
+- 并注明：「分析错分/临时表 `false_classification*` 与结果 HTML（`Results*.html`）落当次结果夹 `<project>/<endpoint>/`（或 OUT_DIR / `SUBPROJECT_BY_OUTCOME`），不在子工程根，也不在 ref」
 
 ## 跳过 / 幂等规则（再跑前先读 ledger）
 
@@ -162,7 +162,7 @@ SCI 相关文件统一命名：`<Stem>_<子项目名>_<版本号>`。（本条 2
 - 不安装 ARIS runtime。
 - 不静默删除；空壳只移 `{DEL}`。
 
-## 编辑前原件（`-org`）（2026-10-19）
+## 编辑前原件（`-org`）
 
 - 名为 `*-org` / `*org*` 的文件（如 `comments-org.docx`、`SARC_CT_MRI_manuscript-org.docx`）是**编辑前原件**。留在课题内 (通常 `ref/review/`)。
 - 主人收工/清理时：**勿丢弃** `-org` 原件。只把真正的中间件从 `ref/tmp/` 移到 `D:\MyProjects\.Del\_by-project\<project>\`。若 `-org` 曾停在 `tmp/`，清理前先提升到 `ref/review/`（或留在根）。

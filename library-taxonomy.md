@@ -2,7 +2,7 @@
 
 **范围**：`D:\MyProjects\_Docs\_library` 下的 `references`（全文）、`lit-bank`（书目）、`journals`（期刊池）、
 
-`ethics`（批件/提取），以及子工程 `ref\citation` / `ref\refer` 的分工。2026-10-31（t1458u）站立。
+`ethics`（批件/提取），以及子工程 `ref\citation` / `ref\refer` 的分工。
 
 权威顺序：用户当轮 > 本文件 > `project-ref-layout.md` > `workspace-layout.md`。
 
@@ -10,15 +10,15 @@
 
 | L1 | L2 |
 |---|---|
-| `obgyn` | ovary, endometrium, cervix, gestation, **gyn-oncology**（跨器官妇科肿瘤/AI，2026-10-31） |
+| `obgyn` | ovary, endometrium, cervix, gestation, **gyn-oncology**（跨器官妇科肿瘤/AI） |
 | `hepatology` | MHE-HE, portal-hypertension, schistosomiasis, NAFLD-fibrosis, liver-tumor |
-| `neuropsych` | cognitive, SSD, WML, gut-brain, **pain**（神经痛）, **cerebral-ischemia**, **neurotoxicity**（2026-10-31） |
+| `neuropsych` | cognitive, SSD, WML, gut-brain, **pain**（神经痛）, **cerebral-ischemia**, **neurotoxicity** |
 | `oncology` | breast, lung, GI, pancreas, renal, head-neck, skin, soft-tissue |
 | `nephrology` | CKD-ESRD |
-| `cardio-vascular` | coronary, vascular, **cardiac**（结构/心耳等非冠脉非血管病变，2026-10-31） |
+| `cardio-vascular` | coronary, vascular, **cardiac**（结构/心耳等非冠脉非血管病变） |
 | `gastro` | UGIB, GI-non-tumor |
 | `guidelines` | hepatology, neuropsych, obgyn, other |
-| `other` | methods, **dermatology**, **occupational**, **chest**（2026-10-31） |
+| `other` | methods, **dermatology**, **occupational**, **chest** |
 
 归类规则：
 
@@ -35,9 +35,9 @@
 |---|---|---|
 | `_library\references\<L1>\<L2>\` | 文献全文实体（PDF/HTML），一文一文件，文件名用 DOI（`/` -> `_`）；`index.csv` 记 `doi,pmid,l1,l2,rel_path,sha256,source_project,fetched_at,notes` | 书目卡片、批件、稿件、第二份副本 |
 | `_library\lit-bank\` | 书目 SSOT：`index.csv`（NLM 引用 + 结论 + 主题），**无 PDF** | 全文实体 |
-| `_library\journals\` | 期刊池 `index.csv`（单表；2026-10-31 起不再留 xlsx）/ `l1-l2-map.csv` / 选刊侧私有 `whitelist-submitted.csv` + `submission-prior.jsonl`（旧表按年重建时移 `{DEL}`，不留 `archive\`） | 全文、`submission-urls.csv`、名单本体 |
-| `_library\ethics\` | `approvals\<L1>\<L2>\` 批件 PDF + `approvals-index.xlsx` + `extract\`（briefs/phrases/doc-role/held-out 提取层） + **`sections\`**（2026-11-01：按伦理表格 section 的分节取用层，`protocol\`/`icf\` 细、`other\` 粗；生成物） | 已填申请材料原件（新件 → `_DataBase\<family>\_share\ethics\`；历史 `_DataBase\_lab\ethics` 按 t1849u **退役** → `.Del`，见 `workspace-layout.md`「伦理材料留存」；旧顶层 `_ethics\<code>\` 仅作别名阅读）、第二份全文副本 |
-| `_library\glossary\`（2026-11-01，原 `0doc\_bank`） | **自有写作语料 + 四层**（与 glossary README 同口径）：`words\` / `sentences\` / `paragraphs\` + `sections\*.md` **指针页**（无正文）+ `index.csv`（**13 列**，含 `sections` 列，**由 md 生成**）；证据层 `banks\`（jsonl + `glossary.db`，gitignore；`GATES.md` 已清）。环境变量 **`GLOSSARY_ROOT`**。判据 SSOT 在 `{SKILLS}\05_manuscript\base\vocab\`（+ 具名 advanced）；此处只放实例 + `rule_ptr` | **他人文献**（不进 `references`/`lit-bank`）、L1/L2 归类、规则/词表本体 |
+| `_library\journals\` | 期刊池 `index.csv`（单表；不再留 xlsx）/ `l1-l2-map.csv` / 选刊侧私有 `whitelist-submitted.csv` + `submission-prior.jsonl`（旧表按年重建时移 `{DEL}`，不留 `archive\`） | 全文、`submission-urls.csv`、名单本体 |
+| `_library\ethics\` | `approvals\<L1>\<L2>\` 批件 PDF + `approvals-index.xlsx` + `extract\`（briefs/phrases/doc-role/held-out 提取层） + **`sections\`** | 已填申请材料原件、第二份全文副本 |
+| `_library\glossary\` | **自有写作语料 + 四层**（与 glossary README 同口径）：`words\` / `sentences\` / `paragraphs\` + `sections\*.md` **指针页**（无正文）+ `index.csv`（**13 列**，含 `sections` 列，**由 md 生成**）；证据层 `banks\`（jsonl + `glossary.db`，gitignore；`GATES.md` 已清）。环境变量 **`GLOSSARY_ROOT`**。判据 SSOT 在 `{SKILLS}\05_manuscript\base\vocab\`（+ 具名 advanced）；此处只放实例 + `rule_ptr` | **他人文献**（不进 `references`/`lit-bank`）、L1/L2 归类、规则/词表本体 |
 
 子工程侧：`ref\refer\` 只放**文献指针**（`DOI_*.md`，`fulltext:` 指向 `_library\references`）+ NLM 引用与摘要列表 + 写作参考；
 `ref\citation\` 放**审计台账 + 期刊/候选刊**（见 `project-ref-layout.md`）。
@@ -50,15 +50,15 @@
 - 索引 `approvals-index.xlsx` 19 列：`seq,l1,l2,approval_id,id_year,approval_date,valid_until,project_title,institution,file_name,rel_path,pages,size_kb,sha256,archive_name,original_name_zh,id_source,needs_owner,note`。
 - `approval_date` 与 `valid_until`（**批件有效期**）必录；扫描件无文本层时用本机 OCR 出候选 + **人工确认**，只补空、不覆盖人工值。
 - 子工程只挂指针（批号 + 路径），不存批件副本。
-- **留存分流（t1849u）：** `_DataBase` 短码/家族伦理夹只收日期 ≥ 2023-11-10 的**批件原件**；临床研究方案 + 知情同意书全留；`_DataBase\_lab\ethics` 退役进 `.Del`（Bai 搬盘）。权威 → `workspace-layout.md`「伦理材料留存」。
+- **留存分流：** `_DataBase` 短码/家族伦理夹只收日期 ≥ 2023-11-10 的**批件原件**；临床研究方案 + 知情同意书全留；`_DataBase\_lab\ethics` 退役进 `.Del`（Bai 搬盘）。权威 → `workspace-layout.md`「伦理材料留存」。
 - _Docs 目录名一律 ASCII 英文；中文原名只留索引列。
-- 申请包/申报原件不是批件：落 `_DataBase\<family>\_share\ethics\`（留存口径 → `workspace-layout.md`「伦理材料留存（t1849u）」）；`_library\ethics` 只收批件 PDF + 索引 + 提取层。
+- 申请包/申报原件不是批件：落 `_DataBase\<family>\_share\ethics\`（留存口径 → `workspace-layout.md`「伦理材料留存」）；`_library\ethics` 只收批件 PDF + 索引 + 提取层。
 
 ## 4 journals 契约
 
-- `_library\journals\index.csv` 列见该库 `README.md`（单表，2026-10-31 起不再派生 xlsx）；关键：`jcr_year`（版本年）、`metric_year`（指标年）、`layer`、`l1/l2`、`whitelist`（含 `submitted` / `reviewed` / `bmc` / `mdpi`）、`queried_at`。
-- **每年跨年后 7 月**按新 JCR 年版整表重建一次；旧表连同压缩前分层 CSV 移 `{DEL}`（2026-10-31 起不再保留 `archive\<year>\`），不逐行手改。
-- 选刊侧私有数据（投过/选刊/审稿白名单 `whitelist-submitted.csv`、投稿先验 `submission-prior.jsonl`）打平在 `journals\` 内，**不建年夹**（2026-10-31 裁定；原 `jcr\<year>\` 层级取消，别名校验见 `lab-paths.yaml`）。
+- `_library\journals\index.csv` 列见该库 `README.md`（单表，不再派生 xlsx）；关键：`jcr_year`（版本年）、`metric_year`（指标年）、`layer`、`l1/l2`、`whitelist`（含 `submitted` / `reviewed` / `bmc` / `mdpi`）、`queried_at`。
+- **每年跨年后 7 月**按新 JCR 年版整表重建一次；旧表连同压缩前分层 CSV 移 `{DEL}`，不逐行手改。
+- 选刊侧私有数据（投过/选刊/审稿白名单 `whitelist-submitted.csv`、投稿先验 `submission-prior.jsonl`）打平在 `journals\` 内，**不建年夹**。
 - 名单本体（blacklist/graylist/whitelist-bmc/submission-urls）仍在 MY-SKILLS `find-journal/data\<year>\`。
 - 子工程候选刊**只用 csv/xlsx**：`ref\citation\journals.csv` + 合并笔记 `ref\citation\_notes.md`；被替代原稿进 `ref\tmp\`。
 
