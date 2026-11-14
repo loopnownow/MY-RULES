@@ -80,3 +80,4 @@
 - **P4 清史**（PR #142 → `a576b63`）：workspace / project-ref / library / skills / network 五个专题删除 t-id、决策日期与旧名括注；只保留数据阈值日期（批件 ≥ 2023-11-10）与「勿再新建」禁名清单。
 - **P5 规则门**（PR #143 → `fd879db`）：新增 `qc_rules.py`（R1–R3 / R5–R7）与 `tests/test_rules_qc.py`（22 用例）；R4 仍由 `check_paths.py`；`My rule.md` §6、`README.md` E3、`QC.md` §1/§2/§7 同步回写。
 - **P6 收尾**（分支 `rules/p6-closeout`）：`QC.md` §5 标题去掉「原 My rule §5.2 迁入」史括注；R2 扩到「原 §x / 旧 §x」类段号引用（新增 1 个负向用例，共 23 个）；建 `.github/pull_request_template.md` 把 R8 做成勾选项；跑完首轮季度清史（9 个 live 文件正文史标记 0 处，`aliases.yaml` 38 条无合并项）。技能侧引用同步改指新节：MY-SKILLS #357 → `cae43b1`，英文镜像 `project-ref-layout.md` 降为索引页。
+- **P7 节号锚点门 + 停每轮清理**（分支 `rules/p7-section-gate`）：新增 R9——`§N` 必须命中目标文件的编号标题，裸 `§N` 继承同行文件名、否则指本文件，`§A–B` 两端都校验；抓出并修掉 4 处本仓断链（`workspace-layout.md` 的裸 §2/§3/§4）；按用户要求取消「每轮收工扫 `_Docs`」，改为按需（点名 / 季度巡检），`QC.md` §1/§5、`del-and-harvest.md`、`My rule.md` §6 同步。

@@ -1,4 +1,4 @@
-"""Negative tests for qc_rules.py gates (R1-R3, R5-R7). Run: python -B -m pytest -q tests"""
+"""Negative tests for qc_rules.py gates (R1-R3, R5-R7, R9). Run: python -B -m pytest -q tests"""
 from __future__ import annotations
 
 import importlib.util
@@ -33,7 +33,7 @@ def build(tmp: Path) -> None:
 def run(tmp: Path):
     qc.ROOT = tmp
     hits = []
-    for fn in (qc.check_r1, qc.check_r2, qc.check_r3, qc.check_r5, qc.check_r6, qc.check_r7):
+    for fn in (qc.check_r1, qc.check_r2, qc.check_r3, qc.check_r5, qc.check_r6, qc.check_r7, qc.check_r9):
         hits.extend(fn())
     return hits
 
@@ -120,3 +120,15 @@ def test_r7_long_line_and_table_exemption():
         assert gates(run(tmp), "R7")
         (tmp / "skills.md").write_text("---\nname: skills\ndescription: d\n---\n| " + "字" * 500 + "\n", encoding="utf-8")
         assert not gates(run(tmp), "R7")
+
+
+def test_r9_section_ref_must_resolve():
+    with tempfile.TemporaryDirectory() as d:
+        tmp = Path(d); build(tmp)
+        p = tmp / "skills.md"
+        p.write_text(
+            "---\nname: skills\ndescription: d\n---\n# 9 写盘\n见 `My rule.md` §0\n", encoding="utf-8")
+        assert not gates(run(tmp), "R9")
+        p.write_text(
+            "---\nname: skills\ndescription: d\n---\n# 9 写盘\n见 `My rule.md` §7\n", encoding="utf-8")
+        assert gates(run(tmp), "R9")
