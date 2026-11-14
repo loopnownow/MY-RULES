@@ -73,6 +73,7 @@ SCI 相关文件统一命名：`<Stem>_<子项目名>_<版本号>`。（本条 2
 - 优先 `.docx`；若有 md/pdf 伴生件，**同 stem**
 - 例：`Manuscript_lxf_PP_V1.10.docx`（投出稿）；`Manuscript_lxf_PP_R1.1.docx`、`Comments_lxf_PP_R1.1.docx`、`Response_lxf_PP_R1.1.docx`、`Supplementary_lxf_PP_R1.1.docx`
 - **落点：** 现行 `Manuscript_<slug>_V…` 或 `_R…`（及同号配套）在**子工程根**；**旧版** → `ref/tmp/`。未被接受的投稿包仍按上节进 `ref/` / `submission-*`。本条管文件名 + 旧版落点；详 → 上表 `ref/tmp/`。（原 `materials/` 已退役，勿再新建。）
+- **无稿不造空件（t2033u）：** 子工程若无稿件 docx，记「无 docx」，不得为交差创建空稿。
 
 ### 非契约编辑后缀稿（登记保留 · QC 2026-11-09）
 

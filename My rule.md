@@ -25,7 +25,8 @@ license: MIT
 - **选模型（本机 DSH / Cline；2026-10-30 · t1452u；t1960u）**：调用本机 DSH 时用该 profile 当前默认模型；调用 Cline 时用 Cline 当前配置的模型。
 - **Rules 必须挂载并必须遵守；Skills 仅在派工时附加（t1397u；t1595u 强化）**：`{RULES}`＝`D:\MyProjects\_Docs\GitHub\MY-RULES`（本文件 `My rule.md` + 专题文件）。**Aitor 与全部专员 bot（Loopnow / Victor / Aitee / Lee / Bai 等）以及云端 Cursor / CloudAgent 一律必须遵守**，无例外、无需再问。**派子 bot/专员或云端执行时默认携带 `{RULES}`**；**仅当派具体 fine id / 工作包时，才附加 `{SKILLS}`**（相关 fine id / 路径，或整库 SSOT）。冲突裁决：**Rules > Skills**。**「Skills 未挂载」不得作为跳过 Rules 的理由**（Skills 缺省只影响该任务能否用该技能，不影响 Rules 生效）。CloudAgent prompt **必须写明 Rules 路径**；Skills 按本次任务写入，勿假设云端已挂载。
 - **云端 / 本地（术语，2026-10-25）：** **云端** = Grok Bot 的 box 计算机（`/workspace` 等）；**本地** = 城城本机（如 `D:\`、Downloads）。二者勿对调。
-- **mem 落盘：** bot 记忆导出/更新落在本地 `D:\MyProjects\_Docs\mem`（城城指定；非默认进 `{DEL}`）。mem **仅保留隐私**与可变数据 SSOT（如 JCR xlsx）；站立运营政策进 `{RULES}`，专业技能进 `{SKILLS}`。
+- **mem 落盘：** bot 记忆导出/更新落在本地 `D:\MyProjects\_Docs\mem`（城城指定；非默认进 `{DEL}`）。mem **仅保留隐私**与可变数据 SSOT（如 JCR xlsx）；站立运营政策进 `{RULES}`，专业技能进 `{SKILLS}`。bot 站立记忆正文也只保留敏感信息（称呼、Vault 条目名、账号与本机路径指针、lit-bank 个人过滤）；运营与技能口径不进记忆。
+- **本机库可写字段（t2033u）：** 姓名、电话可写入本机 `_DataBase` 家族 SQLite（`<family>db`，不进 GitHub）。不得写入 MY-RULES、MY-SKILLS、MY-CODES、skill-harvest、回执或聊天。身份证与地址默认不进该库，除非城城当轮新授权。
 - **单项目约定**写在该**子工程文件夹**内（如子工程 `_Docs\` 或 `ref\`），**不**写入全局 `{RULES}` / `{SKILLS}`。须用户点名「放 0doc」/「放 _Docs」才写 `_Docs\`（旧名 0doc）。
 - **交付落点**：子工程**没有** `0result\` 文件夹。**最终**交付物 → 该子工程**根目录**（`D:\MyProjects\<project>` 下）；**中间**产物 → 按 `project-ref-layout.md` 的 `ref/` 子文件夹地图（`review/` / `citation/` / `refer/`（文献+写作参考 pptx/doc/docx） / `code-gates/` / `tmp/` + 根上 tables/figures/pipeline；**hashes/MANIFEST/pipeline_run.log 在 `ref/pipeline/`**；`submission-*`、底表；分析 `false_classification*` 落**当次结果夹** `<project>/<endpoint>/`（**非**子工程根，亦不进 `ref/`；详图与 Cleanup 两档见 `project-ref-layout.md`；已退役 `analysis/`/`materials/`/`results/`/`exec/`/`code/`/`gates/`/`writing-refs/`/`raw-pre/`））；**子工程内临时/中间默认 `ref/tmp/`**（**非**默认 `{DEL}`；旧版 `Manuscript_*_V*` 亦然，现行 `Vn` 在根；详 → `project-ref-layout.md`）；无子工程或不属课题树的临时进 `{DEL}`；Downloads **仅当**当轮点名「下载」或「Downloads」。**文献全文（PDF/HTML）SSOT = `D:\MyProjects\_Docs\_library\references\<L1>\<L2>\`**（t1455u）：子工程 `ref/refer/` 只留 `DOI_*.md` 指针 + NLM/摘要 + 写作参考，不再存第二份全文；`_library\lit-bank` 只存书目。
 
@@ -36,7 +37,10 @@ license: MIT
 - **禁删**；移出只进 `{DEL}` 并保留相对路径。**旧稿清理**＝移入 `{DEL}` / `D:\MyProjects\.Del`（可按 `_by-project` / `_by-function`），禁止静默永久删除。
 - 确认：目标与验收；假设≤3；取舍；谁执行。
 - 「直接做」可不逐项确认（**写盘仍只限该项**，见上条 t1672u），但不跳过 MY-SKILLS PR/merge（`skills.md`）与须批网络（`network-security.md`）。「继续」≠网络同意。
-- 网络红线→`network-security.md`（含本机出站代理常设 `127.0.0.1:10808`）。
+- **后果性操作（t2033u）：** 投稿 Approve、付 APC、改稿开跑、接审等，先出计划，等城城明确「同意」再执行。
+- **三仓 QC（t2033u）：** 默认由 Aitor 本人做；城城点名交给其他 bot 时除外。
+- **三仓改动流程（t2033u）：** 全部改动先在本地分支完成（测试通过），出示完整变更清单，再请城城批准开 PR；禁止未完成就分段开 PR。仅当城城说「合」「和」或「推合」时才 merge。MY-SKILLS 细则 → `skills.md` §5；MY-RULES / MY-CODES 同样遵守。
+- 网络红线→`network-security.md`（含本机出站代理常设 `127.0.0.1:10808`；DSH 禁公网隧道、Cloud Agent 区域模型、机构库检索同文件）。
 
 ## 2.1 盘问 / grill-me（SSOT；技能只指针）
 
@@ -95,6 +99,7 @@ license: MIT
 - **Word/PDF 格式**：未经当轮点名，禁止改 `.docx`/`.pdf` 版式；改文字用修订模式。词/句级修订，禁止大段覆盖。细则→`{SKILLS}\06_review\advanced\word-edit.md`。
 - **城城已改先问（全局停）**：若 Word/手稿正文与城城（用户）已编辑文本不同（修订痕迹 / 已知本人改动），**必须先问再改**，禁止擅自覆盖或改回。技能须指针本条，勿只埋在 revise。→`word-edit.md`；`writing-rules-hard.md`；`07_response` revise。（2026-10-24）
 - **城城手改识别（版本号抬升 · t1757u）**：子工程根最新 `Manuscript_*_V/R/P` 若版本号**大于**上次助手落地版 → 视为城城手改 live 稿；**禁**从 bak/`-org`/collapsed 整文件还原或覆盖；只许 Track Changes（作者 A）增量；不降号；**不**另建 `OWNER.md` / `.owner.docx` / lock 标记。权威 → `project-ref-layout.md`「城城手改识别」。小改不升号与未升号不得反推「不是手改」→ 同文件「SCI 稿件文件名」与「城城手改识别」（t1946u）。
+- **无稿不造空件（t2033u）：** 子工程若无稿件 docx，记「无 docx」，不得为交差创建空稿。
 - **统一版式**：手稿、审稿意见、审稿回复同一套——正文 Times New Roman 12、1.5 倍行距、段前后 0、两端对齐、LTR、特殊格式无；**表格单元格 12 pt**；**图内文字 Arial**（与正文双轨）；**流程图首选 PDF**。→`{SKILLS}\05_manuscript\advanced\Aitor-format.md`；`word-edit.md`；`draw-flowchart`。（2026-10-24）
 
 - **图表编号（C-1 · 指针，2026-10-29 · t1309s6268）：** Table 1 = 基线；**不**单独放 logistic 系数表或 score-correlation 表（Aitor-format §209）；ROC 操作特性作表；图按适用放 workflow / US / heatmap / nomogram+校准 / ROC / DCA。细则勿在本文件复写，指针 → `{SKILLS}\05_manuscript\advanced\Aitor-format.md` §200 / §209 / §213。
