@@ -1,40 +1,48 @@
 # MY-RULES
 
-规范 GitHub 仓为权威源。`{RULES}`=`D:\MyProjects\_Docs\GitHub\MY-RULES`（绝对路径见 `My rule.md` §1；若本机仍有 `Documents\Cline\Rules` junction，仅供 Cline 读规则，勿再维护第二份副本）。先改本仓再经 PR；勿在多处冲突改文。**派工默认 Loopnow**（编码 / 脚本 / MY-CODES → 粗席位 `02_data-processing`）；整理 / 提取 / 填写 / 本机 IDE 作业改走本机 DeepSeek（DSH）或 Cline（t1960u）。
+运营规则 SSOT，两层结构：**L0 常驻**（`My rule.md`，每次开工必读）+ **L1 专题**（按需读取）。专业技能正文在 `{SKILLS}`（L2），可运行代码在 `{code_root}`。
 
-核心 `My rule.md`；现行专题：`skills.md`、`workspace-layout.md`、`network-security.md`、`project-ref-layout.md`、`library-taxonomy.md`（库分类 L1/L2 + 三库契约，t1458u）。
+入口永远是 `My rule.md` §5 路由表：先认触发，再读专题。三仓互指只用别名，不复制正文。
 
-## 三仓分工（2026-10-27 站立）
+## 文件结构（正文 11 个）
+
+| 文件 | 层 | 做什么 | 边界 |
+|---|---|---|---|
+| `My rule.md` | L0 | 裁决顺序、硬闸、交付落点、路由第一跳、QC 频率 | 不写领域细节 / 步骤 / 史 |
+| `workspace-layout.md` | L1 | 盘面、阶段夹、家族桶、`_share`、`_db`、冷库、accepted 收工 | `{DEL}` → `del-and-harvest.md`；稿名 → `project-ref-layout.md` |
+| `project-ref-layout.md` | L1 | 项目 `ref\` 地图、稿名、手改识别、幂等 | 落点总则 → `My rule.md` §3；版式 → 技能 |
+| `del-and-harvest.md` | L1 | `{DEL}` 三档、harvest 去向、活依赖、新建禁区全文 | 扫描实现 → `_Docs\test\`；何时清 → `QC.md` |
+| `library-taxonomy.md` | L1 | 库分类 L1/L2、三库分工、批件 / 期刊池契约 | 归并脚本 → 技能 `db-library` |
+| `network-security.md` | L1 | 网段红线、敏感外发、代理、留痕 | 不写执行步骤 |
+| `skills.md` | L1 | 技能仓读边界、按需加载、演进、MY-SKILLS PR | fine-id 路由在技能仓，不在此 |
+| `README.md` | 支撑 | 本文件：仓地图与维护入口 | 不承载规则正文 |
+| `QC.md` | 支撑 | 规则门 R1–R8、频率、失败处置、豁免 | 技能树 QC → `skills.md` §6 |
+| `HISTORY.md` | 档案 | 旧根 / 旧阶段 / 搬迁 / 命名沿革 / 事故 | 只追加，不作判据 |
+| `aliases.yaml` | 档案 | 旧名 → 现行名（机器可读） | 不是规则 |
+
+## 三仓分工
 
 | 仓 | 放什么 | 不放什么 |
 |---|---|---|
-| **MY-RULES**（本仓） | 站立运营政策：本机布局、交付落点、新建禁区、网络红线、技能库契约、`ref/` 地图 | 专业技能正文、可运行代码 |
-| **MY-SKILLS** | 专业技能：`NN_slug/base/` 能力正文 + `advanced/` 个人层 + `qc/` 门控标准（正文 prose SSOT）；席位 `**/scripts/` 与 `00_orchestrator/scripts/` 可放轻量 helper | 重分析/清洗/建模代码（→ MY-CODES / `{code_root}`）；患者数据 |
-| **MY-CODES** | 可运行代码：`modules/` 算法库 + `model-validation/` CLI + `tools/`，即 02 席位的脚本半（**编码默认席位 = Loopnow（`02_data-processing`）**，t1595u） | skill 正文；课题配置；患者数据 |
+| **MY-RULES**（本仓） | 运营政策：布局、落点、新建禁区、网络红线、技能库契约、`ref/` 地图 | 专业技能正文、可运行代码 |
+| **MY-SKILLS** | 专业技能：`NN_slug/base/` + `advanced/` + `qc/`（正文 SSOT） | 重分析 / 清洗 / 建模代码；患者数据 |
+| **MY-CODES** | 可运行代码：`modules/` + `model-validation/` + `tools/` | 技能正文；课题配置；患者数据 |
 
 判据：**经常用的运营规则进 RULES，专业技能进 SKILLS，能跑的脚本进 MY-CODES。**
 一句话以上、每次开工都要看的写 RULES；只在特定席位上展开的写法写 SKILLS；要 `python` 跑起来的进 MY-CODES。
-三仓互指只用路径别名（`{RULES}` / `{SKILLS}` / `{code_stats}`），不复制正文。
 
-## 迁移对照（2026-10-18）
+## 维护
 
-| 旧文件 | 现在去哪 |
-|---|---|
-| `manuscript-and-review.md` | `{SKILLS}\05_manuscript\qc\`（正文禁令/版式）+ `{SKILLS}\06_review\advanced\`（批注/修订）+ `{SKILLS}\07_response\advanced\`（回信） |
-| `routing.md` | `{SKILLS}\00_orchestrator\references\ownership-contract.md`（座位/派单）+ `handoff-monitor.md`（盯梢） |
-| `engineering-decision.md` | `My rule.md` §6（R1–R6 + 大变更门） |
+- 改规则：本地分支 + 测试 → 出示完整变更清单 → 批准开 PR → 不直推 `main` → 用户说「合」「和」「推合」才 merge（`My rule.md` §6）。
+- 提交前跑 `python -B check_paths.py --check`；规则门与频率见 `QC.md`。
+- `HISTORY.md` 只追加、不作判据；`aliases.yaml` 是旧名唯一来源，正文不写旧名。
+- 技能侧英文镜像只作运行期读本，冲突以本仓中文版为准。
 
-## 开发辅助脚本（`tools/`，2026-11-04 固化）
+## 开发辅助（`tools/`）
 
-排错/质检用的小工具（只读、不联网、不进交付物）：`grepfile.py`（正则 grep）、`scope_check.py`（AST 作用域自查，抓 `NameError` 隐患）、`extract_inline.py`（html 内联 JS 抽出）、`check_html.py`（标签配平）、`smoke_page.js`（假 DOM 跑页面顶层脚本，抓「删了声明忘了引用」导致整页点不动）、`sync_project_page.py`（金版 → 课题起始页注入 token/modules）、`fill_start_placeholders.py`（只补起始页漏替的 `__MODULES_DEFAULT__`，不动版式与 token）。
+只读、不联网、不进交付物：`grepfile.py`、`scope_check.py`、`extract_inline.py`、`check_html.py`、`smoke_page.js`、`sync_project_page.py`、`fill_start_placeholders.py`。用哪个、何时跑 → `tools/README.md`。
 
-用哪个、什么时候跑 → `tools/README.md`。
-**改 `modules/console/project.html` 后固定四步**：`extract_inline.py` → `node --check` → `smoke_page.js` → `check_html.py`，再 `sync_project_page.py` 同步课题页。
-
-**起始页（`<project>/<project>.html`）不许直接拷金版**（2026-11-05）：金版带两处占位符——`__CONSOLE_TOKEN__`（登记项目时注入）、`__MODULES_DEFAULT__`（算法库路径）。漏替后者会让内联脚本**第一行** `ReferenceError: __MODULES_DEFAULT__ is not defined`，整页初始化中断，所有按钮（含「开启服务」）点了没反应——看着像「服务起不来」，其实是页面死了（2026-11-05 一次性 41 个课题页全中）。生成走 `sync_project_page.py`（整套重生成）或从运行中的 `http://127.0.0.1:<port>/start.html` 另存（服务端会替换两处）；只补这一处用 `fill_start_placeholders.py`。**核查必须真浏览器**：四步里的 `node --check` / `smoke_page.js` **抓不到**（smoke 把该占位符自动换成空串）；`firefox --headless --screenshot <png> file:///<page>`，标题应等于项目名、课题栏应预填。
-
-**token 只写 meta，JS 哨兵保留占位符**（2026-11-05，lya_CTA 那次踩到）：页面里 `__CONSOLE_TOKEN__` 出现 3 次——1 处 `<meta name="console-token">`（真 token 写这里）+ 2 处 JS 哨兵（`metaTok !== "__CONSOLE_TOKEN__"` 一类「本页是否已登记」判定，**必须一直是占位符**）。`sync_project_page.py <gold> <dest> <token|""> <modules_dir>` 传空串 = 保持未登记；`registry.inject_token()` 也只改 meta。此前是「有占位符就全量替换」，于是第一次注入把哨兵写成具体 token，之后 `register --rotate` 只改得到 meta，页面就永久留着上一枚旧 token（判定失效，注销后还会把占位符当有效 token 发进 `X-Console-Token`）。同轮修了写盘 `newline="\n"`（原来 Windows 文本模式把页面写成 CRLF，金版与其它页都是 LF）。42 个课题页已于 2026-11-05 统一刷到 HEAD 金版（正文规范化后全等，仅 meta token 不同）。
-（本仓其余仍是政策正文；这些脚本属于「开发辅助」，不是交付代码，也不是可复用算法库——算法/清洗脚本仍进 MY-CODES。）
+改 `modules/console/project.html` 后固定四步：`extract_inline.py` → `node --check` → `smoke_page.js` → `check_html.py`，再 `sync_project_page.py` 同步课题页；起始页占位符与 token 事故背景见 `HISTORY.md` §G。
 
 ## Local check (E3)
 
@@ -42,4 +50,4 @@
 python -B check_paths.py --check
 ```
 
-Verifies Rules docs cite live MY-SKILLS seats/files when MY-SKILLS is present (sibling or `SKILLS_ROOT` / `MY_SKILLS`). Missing skills root fails loud (exit 1) unless `--allow-missing-skills`. Also scans Rules MD for stale live path claims (DEL SSOT / retired stats path). Cross-repo layout/retired-id checks live in MY-SKILLS `tests/test_cross_repo_contract.py`.
+校验 Rules 正文引用的 `{SKILLS}` 席位 / 文件存在，并扫描已退役路径的 live 引用。缺技能根默认 fail loud（exit 1），除非 `--allow-missing-skills`。

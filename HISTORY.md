@@ -12,7 +12,7 @@
 
 - **2026-10-18 · 三仓分工站立 + 旧文件迁出。** `manuscript-and-review.md` 拆入 `{SKILLS}\05_manuscript\qc\`（禁令/版式）、`06_review\advanced\`（批注/修订）、`07_response\advanced\`（回信）；`routing.md` 拆入 `00_orchestrator\references\ownership-contract.md`（座位/派单）与 `handoff-monitor.md`（盯梢）；`engineering-decision.md` 并入 `My rule.md` §6（R1–R6 + 重大变更门）。依据：README 迁移对照；GitHub `loopnownow/MY-RULES` 首次提交。
 - **2026-10-23 · `.grok\skills` 退役。** 技能运行期只认 MY-SKILLS 克隆（`{SKILLS}` = `{skills_runtime}` = `{skills_git}`），禁止再拷第二棵 runtime 树。依据：`skills.md` §1b。
-- **2026-10-24 · 两条 STANDING 立规。** ① 禁止在 `{DEL}` 以外新建文件（t1098u）；② `_Docs` 默认禁止 mkdir，唯一例外是当轮明确同意（t1107u/t1108u/t1109u）。两份全文最初在 `0del`，2026-10-31 移入本仓 `standing/`；`0del` 不再承载任何全文或指针。依据：`standing/` 两文件；`My rule.md` §5.1。
+- **2026-10-24 · 两条 STANDING 立规。** ① 禁止在 `{DEL}` 以外新建文件（t1098u）；② `_Docs` 默认禁止 mkdir，唯一例外是当轮明确同意（t1107u/t1108u/t1109u）。两份全文最初在 `0del`，2026-10-31 移入本仓 `standing/`，P2 起并入 `del-and-harvest.md` §7。依据：`del-and-harvest.md` §7；`My rule.md` §2。
 - **2026-10-30 · 新建禁区合并。** t1098u/t1107u/t1240 三处同义条款合并为一条「新建文件/文件夹（权威）」，并补「改已有文件同样先问」（t1672u 总闸）。依据：t1442u/t1450u。
 - **2026-11-01 · `_Docs` 顶层收缩。** `_bank` 并入 `_library\glossary`；`_code` 整层退役（脚本 → MY-CODES，壳与索引 → `{DEL}`）；`0script\` 退休；代码仓 `GitHub\stats-analysis` 更名 MY-CODES，旧路径只作历史。依据：`workspace-layout.md` 布局表；`check_paths.py` 的 `retired_stats` / `renamed_codes_repo` 检查项。
 - **2026-11-08 · 根路径更名（t1791u / t1794u / t1796u）。** `D:\0Grok` → `D:\MyProjects`；`0doc` → `_Docs`；`00db` → `_DataBase`（`00ds` 为曾用/QC 对象，不是可保留的 legacy）；`0del` / `D:\0del` → `.Del`。同步唯一入口 = `D:\MyProjects\syn.bat` → `E:\Aitor` 根（不是 `E:\Aitor\MyProjects`），`/XD .Del`；实测无其它同步脚本或快捷方式。依据：t1791u/t1794u/t1796u。
@@ -71,3 +71,4 @@
 - **`_grants\2025\_ethics-forms\`** 为 `_grants\_misc` 解散后的遗留例外，未定去向。
 - **正文清理未做（P2–P4）：** 截至 P1，`My rule.md` 仍含 §1 约 30 条密排 bullet 与 t-id；`project-ref-layout.md:9` 的「此前」段（1,366 字符）未迁本文件。P1 只建档案层，未改任何正文。
 - **旧阶段夹**若仍在盘上，只作别名阅读，勿重建、勿改写。
+- **2026-11-14 · P2 完成（L0 拆分）。** `My rule.md` 改为 L0 常驻层；`.Del` / harvest 落点拆入 `del-and-harvest.md`；规则门 R1–R8 拆入 `QC.md`；`standing/` 两份并入 `del-and-harvest.md` §7 后删除；`project-ref-layout.md` 的 1,366 字「此前」段迁入本文件 §D；旧阶段表改为 `aliases.yaml` 指针。

@@ -6,7 +6,7 @@
 
 本文是**文件夹地图与跳过/幂等契约**。不编造临床数字。文件名与 ledger 行除课题科学所需（路径、DOI、citekey）外，不含 PII。
 
-**SSOT：** 本文件为**权威中文版**。技能侧镜像（英文）`{SKILLS}\00_orchestrator\references\project-ref-layout.md` 只作运行期读本；两版冲突以本文件为准（2026-10-29；**t1660u（2026-11-05）**：`false_classification*` 与同类 ASL 分析临时表改落**当次结果夹** `<project>/<endpoint>/`（或解析出的 OUT_DIR / `SUBPROJECT_BY_OUTCOME` 夹），**不在**子工程根，仍**不进** `ref/`；结果 HTML 同落该结果夹为 `Results*.html`（见 `workspace-layout.md`），**不**提升到子工程根。此条取代 t1321u/t1322u 的「`false_classification*` 留子工程根」半句；**t1458u（2026-10-31）**：`ref/citation/` 增「期刊/候选刊 `journals.csv` + `_notes.md`」、`ref/refer/` 明确不放期刊，两者分工以本条为准；库内 L1/L2 与三库契约见 `library-taxonomy.md`。此前：**t1321u/t1322u**：锁定件 `hashes.tsv`/`MANIFEST.md`/`pipeline_run.log` 落 **`ref/pipeline/`**（不在 ref 根）；写作参考 pptx/doc/docx 可进 **`ref/refer/`**（与文献列表同夹）；~~分析 `false_classification*` 留**子工程根**（ASL 类临时产物），不进 ref~~（此半句已被 **t1660u（2026-11-05）** 取代：`false_classification*` 及同类 ASL 临时表落**当次结果夹** `<project>/<endpoint>/`，非子工程根，亦不进 `ref/`）；t1316u：取消标准壳 `analysis/` 与 `materials/`，表图等子项抬到 `ref/`；文献与 NLM+摘要列表进 `ref/refer/`；`ref/citation/` 仍只做审计台账；t1309s6268：原 `results/` → 曾用 `analysis/`；t1307u：未被接受投稿包进 `ref/` 根或 `submission-*`；t1303s6243 / t1300u：原 writing-refs+raw-pre、code+gates 合并史；**t1450u**：子工程内临时/中间默认 `ref/tmp/`（非默认 `{DEL}`）；旧版 SCI 稿亦落 `ref/tmp/`，现行 `Vn` 在子工程根；**t1455u**：文献全文（PDF/HTML）实体 SSOT = `D:\MyProjects\_Docs\_library\references\<L1>\<L2>\`，子工程 `ref/refer/` 只留 `DOI_*.md` 指针，`_library\lit-bank` 仍只存书目）。
+**SSOT：** 本文件为**权威中文版**；技能侧英文镜像 `{SKILLS}\00_orchestrator\references\project-ref-layout.md` 只作运行期读本，冲突以本文件为准。布局演化与旧口径见 `HISTORY.md` §D；旧夹名映射见 `aliases.yaml`。
 
 ## 根目录不变量（勿挪位）
 
@@ -36,7 +36,7 @@
 | `ref/figures-orig/` | 投稿图**原始可编辑件**（`.ai` `.psd` `.pptx` 原始 `.tif`、未标题导出等）；**2026-11-09 QC 起登记为允许夹**，按课题保留原形（不改名、不合并、不压包） | 终图（`ref/figures/`）；被替代的旧图件（→ `ref/tmp/`） |
 | `ref/tmp/` | 子工程内**临时/中间**默认落点（**非**先丢 `{DEL}`）：中间 Word/PDF/草稿（Claude diff、被替代的 TC、`-copy`、合并草稿）；**旧版 SCI 稿**（如 `Manuscript_<slug>_V1.docx` / 亦可含 `_R*`）；被合并的期刊/引文散装原稿（如 `journal-archive-<YYYYMMDD>/`）；保留到主人说清理/收工。**未进 `accepted\` 前的临时/中间/旧版/试跑一律留此**：禁止自动进 `{DEL}`、禁止自动删；进 `accepted` 须主人另批（t1458u） | 现行终稿 / `Manuscript_<slug>_V…` 或 `_R…`（子工程根）；已关闭轮次 changelog（`review/`）；citation / code-gates ledger；密钥 |
 
-**已退役（勿再新建）：** `ref/analysis/`、`ref/materials/`、独立 `ref/exec/`、`ref/code/`、`ref/gates/`、`ref/writing-refs/`、`ref/raw-pre/`、`ref/results/`。旧树：`analysis/` 子项 → `ref/` 根；`materials/` 内 lit/`citation`/`参考文献` → `refer/`，其余 → `ref/` 根；空壳移入 `{DEL}`（见 Cleanup）。本轮布局迁移另见主人点名。
+**已退役（勿再新建）：** `ref/analysis/`、`ref/materials/`、独立 `ref/exec/`、`ref/code/`、`ref/gates/`、`ref/writing-refs/`、`ref/raw-pre/`、`ref/results/`（原名保留作禁令，不算旧名；历史去向见 `HISTORY.md` §D）。
 
 ### 三区 / 临时结果区
 
@@ -89,7 +89,7 @@ SCI 相关文件统一命名：`<Stem>_<子项目名>_<版本号>`。（本条 2
 - 实质手改：城城每次实质手改并保存后，在**文件名**（及文内版本号，若有）抬升 patch（例：`Manuscript_*_V1.2.docx` → `V1.3`；`R` / `P` 同理）。小改可不升号（口径见上节「SCI 稿件文件名」t1946u）。
 - 助手：子工程**根**上最新的 `Manuscript_*_V…` / `_R…` / `_P…`，若其版本号**大于**该课题上次助手记录的已落地版本，**必须**视为**城城手改 live 稿**（充分条件）。
 - 此时：**禁止**从更旧的 bak / `-org` / collapsed 副本整文件还原或覆盖；只允许 **Track Changes（作者 A）增量**合并；**禁止**降低版本号；**禁止**用 bak 整文件替换现行稿。
-- 未升号不得反推「不是手改」；正文与城城已改文本不同，仍按 `My rule.md` §5.1「城城已改先问」。
+- 未升号不得反推「不是手改」；正文与城城已改文本不同，仍按 `My rule.md` §3「城城已改先问」。
 - **不要**为此新建 `OWNER.md`、`.owner.docx`、lock txt 或其它标记文件。
 
 ### 数据底表（D-1）
