@@ -95,7 +95,7 @@ description: 本机布局与子工程短针。落点见 My rule.md §3。
 | `_personal\` | 个人材料（进修/签证） | 任何课题数据 |
 
 - **硬规则：** 课题原始数据不得进 `_` 分支；`_` 分支不得被课题 `ref/settings.ini` 当数据源。
-- **`目录说明.md`：** 每个 `_` 分支根与 `_lab` 根必须有（放什么、谁维护、更新日）。
+- **`目录说明.md`：** 每个 `_` 分支根与 `_lab` 根必须有（放什么、谁维护、更新日）；它是**活文档**——正文里作现行指令的路径与计数须与实盘一致，史证须同句带标记词，搬件 / 改名 / 计数变化当轮同步（门 → `QC.md` R11）。
 - **`D:\MyProjects\_DataBase\_diseases.csv`：** 列 `suffix,name_en,name_zh,l1,l2,aliases,family`；`suffix`=基码（无 `_\d+` 实例）；`family`=该基码所属家族根（留空=自家族；家族根必须在 `suffix` 列有本人行，如 `MHE`、`SCC`、`EC`、`THESIS`、`OTHERS`）；编号形式进 `aliases`；library `l1`/`l2` 对照 ethics/references。全称不进路径规则。`_diseases.csv` 复核：`RI` 挂 `SCH`（IR 数据随 SCH 队列）；`SCH\ly_RI` 只留 `目录说明.md` 为最终态（archived 同挂 SCH 口径）。
 - **`D:\MyProjects\_DataBase\_index.csv`（唯一可写台账）：** 一行一个 slug/分支，列 `kind,slug,prefix,suffix,title,l1,l2,stage,owner,indexed_on,note`；新建/改名当轮更新。
 - **只读不变：** 除 `_index.csv` 外 `_DataBase` 默认只读；新建分支/子夹属写盘，须当轮点名（`My rule.md` §2 不豁免）。
