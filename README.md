@@ -16,8 +16,7 @@
 | `network-security.md` | L1 | 网段红线、敏感外发、代理、留痕 | 不写执行步骤 |
 | `skills.md` | L1 | 技能仓读边界、按需加载、演进、MY-SKILLS PR | fine-id 路由在技能仓，不在此 |
 | `README.md` | 支撑 | 本文件：仓地图与维护入口 | 不承载规则正文 |
-| `QC.md` | 支撑 | 规则门 R1–R9、频率、失败处置、豁免 | 技能树 QC → `skills.md` §6 |
-| `HISTORY.md` | 档案 | 旧根 / 旧阶段 / 搬迁 / 命名沿革 / 事故 | 只追加，不作判据 |
+| `QC.md` | 支撑 | 规则门 R1–R10、频率、失败处置、豁免 | 技能树 QC → `skills.md` §6 |
 | `aliases.yaml` | 档案 | 旧名 → 现行名（机器可读） | 不是规则 |
 
 ## 三仓分工
@@ -35,20 +34,20 @@
 
 - 改规则：本地分支 + 测试 → 出示完整变更清单 → 批准开 PR → 不直推 `main` → 用户说「合」「和」「推合」才 merge（`My rule.md` §6）。
 - 提交前跑 `python -B check_paths.py --check`；规则门与频率见 `QC.md`。
-- `HISTORY.md` 只追加、不作判据；`aliases.yaml` 是旧名唯一来源，正文不写旧名。
+- `aliases.yaml` 是旧名唯一来源，正文不写旧名；变更理由写进 PR 正文，仓内不留史。
 - 技能侧英文镜像只作运行期读本，冲突以本仓中文版为准。
 
 ## 开发辅助（`tools/`）
 
 只读、不联网、不进交付物：`grepfile.py`、`scope_check.py`、`extract_inline.py`、`check_html.py`、`smoke_page.js`、`sync_project_page.py`、`fill_start_placeholders.py`。用哪个、何时跑 → `tools/README.md`。
 
-改 `modules/console/project.html` 后固定四步：`extract_inline.py` → `node --check` → `smoke_page.js` → `check_html.py`，再 `sync_project_page.py` 同步课题页；起始页占位符与 token 事故背景见 `HISTORY.md` §G。
+改 `modules/console/project.html` 后固定四步：`extract_inline.py` → `node --check` → `smoke_page.js` → `check_html.py`，再 `sync_project_page.py` 同步课题页。
 
 ## Local check (E3)
 
 ```bash
 python -B check_paths.py --check   # R4：{SKILLS} 席位/文件存在 + 退役路径 live 引用
-python -B qc_rules.py              # R1–R3、R5–R7：路由闭合、正文无史、旧名唯一、无副本、头字段、行长
+python -B qc_rules.py              # R1–R3、R5–R7、R9、R10：路由闭合、正文无史、旧名唯一、无副本、头字段、行长、节号、指针壳
 python -B -m pytest -q tests       # 门的负向用例（改规则时必跑）
 ```
 

@@ -32,7 +32,7 @@ description: 本机布局与子工程短针。落点见 My rule.md §3。
 - **临床底表 ≠ 影像 raw：** Excel/CSV 底表仍落 `ref/` 或 `ref/data/`（D-1：移动前先问）。**不要**把所有「data」都倒进 `_DataBase`。
 - **现行名只写 `_DataBase`；活 `00ds` = QC 对象：** `D:\00ds` / 夹名 `00ds` 已退役。
   - 任何活路径、夹名、过滤器 / 默认项仍写 `00ds` 的，视为 QC 发现，**必须更正为 `_DataBase`**；**不要**在活 allowlist / filter 里把 `00ds` 留作「legacy」。
-  - 不另造第三个 raw 根。**更正活引用 ≠ 搬迁磁盘树**：不 bulk 迁移旧根；磁盘根处置见 `HISTORY.md` §A（两边若都在，维持原状，等主人另批搬迁）。
+  - 不另造第三个 raw 根。**更正活引用 ≠ 搬迁磁盘树**：不 bulk 迁移旧根；两边若都在，维持原状，等主人另批搬迁。
 - **禁止进 git：** 原始影像二进制**不要**进 git（含 Git LFS）或任何 GitHub remote（DICOM 头含 PHI；二进制无有效 delta）。可选轻量清单（相对路径 + 大小 + SHA-256 + 入库日）可放子工程 `ref/pipeline/`（同 `hashes.tsv` / `MANIFEST.md` 思路）。该清单若需版本，可用**无 remote 的本地 git**；备份 = 拷到另一块盘，不是 git。
 - **进 `_DataBase` 多文件先压缩：** 进 `D:\MyProjects\_DataBase\…`（或其 E 镜）时，若某目录内「单独文件」≥20，或明显是大量小文件堆（DICOM 序列、切片导出、逐例中间件、碎日志），先压成**一个**归档再入库；单文件或本来就少的目录不压。
   - **格式与落点：** 优先 `7z`（`-mx=5`；固态 DICOM 可 `-m0=LZMA2`）；无 7z 用 `zip`。归档名=`<原目录名>.7z`，**唯一落点 = `<family>\_share\<leaf>\`**（叶内与家族根禁归档，见「`_share` 家族原始件池」）；`<名>.files.txt`（相对路径清单）**随档同放** `_share\<leaf>\`。
@@ -252,7 +252,7 @@ description: 本机布局与子工程短针。落点见 My rule.md §3。
 
 ## R&P 退役
 
-活兄弟根 `D:\MyProjects\R&P`**已退役**：勿重建（背景 → `HISTORY.md` §A）。材料落点改为：
+活兄弟根 `D:\MyProjects\R&P`**已退役**：勿重建。材料落点改为：
 - **课题申请包** → `_DataBase\_grants\<year>\`
 - **评阅他人稿**（peer / grants / thesis）→ `_DataBase\_reviews\{peer,grants,thesis}\<year>\`
 

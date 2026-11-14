@@ -54,6 +54,8 @@ Live bodies SSOT = MY-SKILLS in-repo `NN_slug/base/`。不得在别处再建第�
 
 **凡标 skip / skipped / archived / 已归档 / page not on disk 的技能树、文件或指针，在 QC 时一律删除或并入现行能力**（删引用；若仍有字节则移入 `{DEL}`），**禁止**只改标成 skipped / archived 继续留在 live 正文或 SOP 调度表。
 
+**指针壳 = QC 清理对象（R10）**：规则侧与技能侧同一口径——正文 ≤5 行且只含 move/pointer 线索，或正文为空，即为 stub，当场删；不留 stub 停放位。
+
 **退役且仅剩指针 = QC 清理对象**：能力已并入现行座位 / fine-id / 路径后，live 树只剩「已退役→见某某」、空 README、SUPERSEDED / retired / page-not-on-disk 等**无实现字节**的壳或单向指针时，与 skip/archived **同档 P0/P1**：删壳、删活引用；必要的一句并入现行文档；若仍有字节则移 `{DEL}`（保相对路径）。**禁止**新造「仅指针」壳当停放。**不算壳（勿误清）**：`legacy_aliases.yaml` 路由表；现行契约指针（如 `DOI_*.md`→`_library/references`、批件指针、`journals.csv`）；`HISTORIC` 审计记录（只标历史、不新建活链到 `{DEL}`）。
 
 - 退休 fine-id **只**保留在 `{SKILLS}\00_orchestrator\legacy_aliases.yaml` → 现行 id；live 路由 / workflow / advanced 只写现行 fine-id 与现存路径。

@@ -1,4 +1,4 @@
-"""Rules gates R1-R3, R5-R7 (R4 lives in check_paths.py; R8 is a PR checklist).
+"""Rules gates R1-R3, R5-R7, R9-R10 (R4 lives in check_paths.py; R8 is a PR checklist).
 
 Usage:
   python -B qc_rules.py            # report only, exit 1 if any gate fails
@@ -7,13 +7,14 @@ Usage:
 Gates (see QC.md §2):
   R1 routing closure   every live md is routed from My rule.md §5 and exists
   R2 no change history t-ids / decision dates / "此前|曾用|更名|formerly|原 §x"
-  R3 old names only    old-name tokens live in aliases.yaml / HISTORY.md
+  R3 old names only    old-name tokens live in aliases.yaml
   R5 no copies         >=40-char sentences must not repeat across live files
   R6 frontmatter       name + description on every content file
   R7 line length       no live line over 400 characters
   R9 section refs      every §N resolves to a numbered heading in the target file
+  R10 no pointer shells a stub, or an empty rule, is not a rule — delete it
 
-Archives (HISTORY.md, aliases.yaml) and this file itself are exempt.
+The alias registry and this file itself are exempt.
 """
 from __future__ import annotations
 
@@ -36,7 +37,7 @@ CONTENT = [
     "skills.md",
 ]
 ROUTED = CONTENT + ["README.md", "QC.md"]
-ARCHIVE = {"HISTORY.md", "aliases.yaml", "QC.md"}
+ARCHIVE = {"aliases.yaml", "QC.md"}
 
 T_ID_RE = re.compile(r"(?<![A-Za-z0-9])t\d{3,4}[a-z]?(?![A-Za-z0-9])")
 DATE_RE = re.compile(r"\b20\d{2}-\d{2}-\d{2}\b")
@@ -238,6 +239,32 @@ def check_r9() -> list[dict]:
     return hits
 
 
+POINTER_CUE = re.compile(
+    r"指针壳|pointer stub|pointer shell|moved to|已移至|已迁移|Body moved|thin pointer", re.I
+)
+
+
+def check_r10() -> list[dict]:
+    """R10: a pointer-only shell is transient, not a rule.
+
+    A live md whose body (frontmatter and headings stripped) is at most 5
+    non-empty lines and only names a move/pointer is a stub: delete it, or keep
+    it only behind a live consumer. An empty file is reported too — an empty
+    rule is worse than a stub.
+    """
+    hits = []
+    for name in ROUTED:
+        text = load(name)
+        body = re.sub(r"\A---\n.*?\n---\n", "", text, flags=re.S)
+        body_lines = [ln for ln in body.splitlines()
+                      if ln.strip() and not ln.lstrip().startswith("#")]
+        if not body_lines:
+            hits.append(fail("R10", f"{name}: empty rule body"))
+        elif len(body_lines) <= 5 and POINTER_CUE.search(body):
+            hits.append(fail("R10", f"{name}: pointer-only shell ({len(body_lines)} lines) — delete it"))
+    return hits
+
+
 GATES = {
     "R1": check_r1,
     "R2": check_r2,
@@ -246,6 +273,7 @@ GATES = {
     "R6": check_r6,
     "R7": check_r7,
     "R9": check_r9,
+    "R10": check_r10,
 }
 
 

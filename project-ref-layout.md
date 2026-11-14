@@ -11,7 +11,7 @@ description: 项目 ref/ 地图、稿名与文件命名、城城手改识别、�
 
 本文是**文件夹地图与跳过/幂等契约**。不编造临床数字。文件名与 ledger 行除课题科学所需（路径、DOI、citekey）外，不含 PII。
 
-**SSOT：** 本文件为**权威中文版**；技能侧英文镜像 `{SKILLS}\00_orchestrator\references\project-ref-layout.md` 只作运行期读本，冲突以本文件为准。布局演化与旧口径见 `HISTORY.md` §D；旧夹名映射见 `aliases.yaml`。
+**SSOT：** 本文件为**权威中文版**；技能侧英文镜像 `{SKILLS}\00_orchestrator\references\project-ref-layout.md` 只作运行期读本，冲突以本文件为准。旧夹名映射见 `aliases.yaml`。
 
 ## 根目录不变量（勿挪位）
 
@@ -41,7 +41,7 @@ description: 项目 ref/ 地图、稿名与文件命名、城城手改识别、�
 | `ref/figures-orig/` | 投稿图**原始可编辑件**（`.ai` `.psd` `.pptx` 原始 `.tif`、未标题导出等）；**QC 登记为允许夹**，按课题保留原形（不改名、不合并、不压包） | 终图（`ref/figures/`）；被替代的旧图件（→ `ref/tmp/`） |
 | `ref/tmp/` | 子工程内**临时/中间**默认落点（**非**先丢 `{DEL}`）：中间 Word/PDF/草稿（Claude diff、被替代的 TC、`-copy`、合并草稿）；**旧版 SCI 稿**（如 `Manuscript_<slug>_V1.docx` / 亦可含 `_R*`）；被合并的期刊/引文散装原稿（如 `journal-archive-<YYYYMMDD>/`）；保留到主人说清理/收工。**未进 `accepted\` 前的临时/中间/旧版/试跑一律留此**：禁止自动进 `{DEL}`、禁止自动删；进 `accepted` 须主人另批 | 现行终稿 / `Manuscript_<slug>_V…` 或 `_R…`（子工程根）；已关闭轮次 changelog（`review/`）；citation / code-gates ledger；密钥 |
 
-**已退役（勿再新建）：** `ref/analysis/`、`ref/materials/`、独立 `ref/exec/`、`ref/code/`、`ref/gates/`、`ref/writing-refs/`、`ref/raw-pre/`、`ref/results/`（原名保留作禁令，不算旧名；历史去向见 `HISTORY.md` §D）。
+**已退役（勿再新建）：** `ref/analysis/`、`ref/materials/`、独立 `ref/exec/`、`ref/code/`、`ref/gates/`、`ref/writing-refs/`、`ref/raw-pre/`、`ref/results/`（原名保留作禁令，不算旧名）。
 
 ### 三区 / 临时结果区
 

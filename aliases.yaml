@@ -1,7 +1,7 @@
 # aliases.yaml — 旧名 → 现行名映射（机器可读，唯一来源）
 #
 # 契约：
-#   1. 规则正文（*.md，HISTORY.md 除外）不得出现旧名；旧名只在本文件与 HISTORY.md 出现。
+#   1. 规则正文（*.md）不得出现旧名；旧名只在本文件出现。
 #   2. 本文件是「读旧名」的接口，不是「用旧名」的许可：status=retired 的旧名只用于识别与更正。
 #   3. fine-id 旧名不在这里，归 {SKILLS}\00_orchestrator\legacy_aliases.yaml。
 #   4. 消费者：check_paths.py（现状）、qc_rules.py（P5 接入）。脚本只读字段，不解析散文。

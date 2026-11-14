@@ -1,4 +1,4 @@
-"""Negative tests for qc_rules.py gates (R1-R3, R5-R7, R9). Run: python -B -m pytest -q tests"""
+"""Negative tests for qc_rules.py gates (R1-R3, R5-R7, R9-R10). Run: python -B -m pytest -q tests"""
 from __future__ import annotations
 
 import importlib.util
@@ -23,17 +23,16 @@ def build(tmp: Path) -> None:
     (tmp / "My rule.md").write_text(
         "---\nname: my-rule\ndescription: top\n---\n# 0\n" + router + "\n", encoding="utf-8")
     for n in CONTENT[1:]:
-        (tmp / n).write_text(f"---\nname: {n[:-3]}\ndescription: d\n---\n# 0\n", encoding="utf-8")
-    (tmp / "README.md").write_text("# readme\n", encoding="utf-8")
-    (tmp / "QC.md").write_text("---\nname: rules-qc\ndescription: d\n---\n", encoding="utf-8")
-    (tmp / "HISTORY.md").write_text("t1800u 与 2026-10-31 的历史\n", encoding="utf-8")
+        (tmp / n).write_text(f"---\nname: {n[:-3]}\ndescription: d\n---\n# 0\n正文。\n", encoding="utf-8")
+    (tmp / "README.md").write_text("# readme\n\n说明。\n", encoding="utf-8")
+    (tmp / "QC.md").write_text("---\nname: rules-qc\ndescription: d\n---\n# 0\n判据。\n", encoding="utf-8")
     (tmp / f"aliases.yaml").write_text(f'- old: "{OLD}"\n  tokens: ["{OLD}"]\n  new: "_DataBase"\n', encoding="utf-8")
 
 
 def run(tmp: Path):
     qc.ROOT = tmp
     hits = []
-    for fn in (qc.check_r1, qc.check_r2, qc.check_r3, qc.check_r5, qc.check_r6, qc.check_r7, qc.check_r9):
+    for fn in (qc.check_r1, qc.check_r2, qc.check_r3, qc.check_r5, qc.check_r6, qc.check_r7, qc.check_r9, qc.check_r10):
         hits.extend(fn())
     return hits
 
@@ -132,3 +131,28 @@ def test_r9_section_ref_must_resolve():
         p.write_text(
             "---\nname: skills\ndescription: d\n---\n# 9 写盘\n见 `My rule.md` §7\n", encoding="utf-8")
         assert gates(run(tmp), "R9")
+
+
+def test_r10_pointer_shell():
+    with tempfile.TemporaryDirectory() as d:
+        tmp = Path(d); build(tmp)
+        (tmp / "skills.md").write_text(
+            "---\nname: skills\ndescription: d\n---\n# 0\n已移至 {DEL}。\n", encoding="utf-8")
+        assert gates(run(tmp), "R10")
+
+
+def test_r10_empty_body():
+    with tempfile.TemporaryDirectory() as d:
+        tmp = Path(d); build(tmp)
+        (tmp / "library-taxonomy.md").write_text(
+            "---\nname: library-taxonomy\ndescription: d\n---\n# 0\n", encoding="utf-8")
+        assert gates(run(tmp), "R10")
+
+
+def test_r10_real_body_passes():
+    with tempfile.TemporaryDirectory() as d:
+        tmp = Path(d); build(tmp)
+        (tmp / "skills.md").write_text(
+            "---\nname: skills\ndescription: d\n---\n# 0\n判据一\n判据二\n判据三\n判据四\n判据五\n判据六\n",
+            encoding="utf-8")
+        assert not gates(run(tmp), "R10")
