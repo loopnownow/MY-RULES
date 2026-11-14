@@ -37,7 +37,7 @@ Live bodies SSOT = MY-SKILLS in-repo `NN_slug/base/`。不得在别处再建第�
 
 ## 5 MY-SKILLS 仓流程
 
-本地分支+测试 → PR 前完整变更清单 → 不直推 main → 用户同意后 merge。「直接做」不跳过清单与 merge 确认。merge 后按 §1b 同步。
+本地分支+测试 → 出示完整变更清单 → 用户批准后再开 PR → 不直推 main → 仅当用户说「合」「和」或「推合」时 merge。「直接做」不跳过清单与 merge 确认。禁止未完成全部改动就分段开 PR。merge 后按 §1b 同步。MY-RULES / MY-CODES 同样遵守（`My rule.md` §2）。
 
 ## 6 QC、精简与 skip/archived / 退役仅指针（2026-10-26；t1432u 2026-10-30；t1463u 2026-10-31；t1520u 2026-11-01；t1559u 2026-11-01）
 
