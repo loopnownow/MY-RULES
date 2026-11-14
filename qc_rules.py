@@ -10,7 +10,8 @@ Gates (see QC.md §2):
   R3 old names only    old-name tokens live in aliases.yaml / HISTORY.md
   R5 no copies         >=40-char sentences must not repeat across live files
   R6 frontmatter       name + description on every content file
-  R7 line length       no live line over 300 characters
+  R7 line length       no live line over 400 characters
+  R9 section refs      every §N resolves to a numbered heading in the target file
 
 Archives (HISTORY.md, aliases.yaml) and this file itself are exempt.
 """
@@ -186,6 +187,57 @@ def check_r7() -> list[dict]:
     return hits
 
 
+HEADING_NUM_RE = re.compile(r"^(#{1,6})\s+(\d+(?:\.\d+)*)(?:[.、\s]|$)")
+REF_RE = re.compile(
+    r"(?:(?<![A-Za-z0-9_.-])`?((?:My rule|[A-Za-z0-9][A-Za-z0-9_.-]*)\.md)`?\s*)?§\s*(\d+(?:\.\d+)*)"
+)
+
+
+def section_numbers(name: str) -> set[str]:
+    nums = set()
+    for _, line in lines(name):
+        m = HEADING_NUM_RE.match(line)
+        if m:
+            nums.add(m.group(2))
+    return nums
+
+
+RANGE_RE = re.compile(r"\s*[–—~-]\s*§?\s*(\d+(?:\.\d+)*)")
+
+
+def check_r9() -> list[dict]:
+    """A §N reference must resolve to a numbered heading in the file it targets.
+
+    A bare §N inherits the file named earlier on the same line, else the current
+    file; §A–B ranges validate both ends.
+    """
+    hits = []
+    cache: dict[str, set[str]] = {}
+
+    def ok(target: str, ref: str) -> bool:
+        if target not in cache:
+            cache[target] = section_numbers(target)
+        nums = cache[target]
+        return ref in nums or any(n.startswith(ref + ".") for n in nums)
+
+    for name in ROUTED:
+        for i, line in lines(name):
+            last = name
+            for m in REF_RE.finditer(line):
+                if m.group(1):
+                    last = m.group(1)
+                target = last
+                if target in ARCHIVE or not (ROOT / target).exists():
+                    continue
+                ref = m.group(2)
+                if not ok(target, ref):
+                    hits.append(fail("R9", f"{name}:{i}: §{ref} not found in {target}"))
+                tail = RANGE_RE.match(line, m.end())
+                if tail and not ok(target, tail.group(1)):
+                    hits.append(fail("R9", f"{name}:{i}: §{tail.group(1)} not found in {target}"))
+    return hits
+
+
 GATES = {
     "R1": check_r1,
     "R2": check_r2,
@@ -193,6 +245,7 @@ GATES = {
     "R5": check_r5,
     "R6": check_r6,
     "R7": check_r7,
+    "R9": check_r9,
 }
 
 

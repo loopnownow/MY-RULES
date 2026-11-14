@@ -1,6 +1,6 @@
 ---
 name: rules-qc
-description: L1 支撑：规则仓与 _Docs 盘面的判据（R1–R8）、频率、失败处置、豁免。
+description: L1 支撑：规则仓与 _Docs 盘面的判据（R1–R9）、频率、失败处置、豁免。
 up: My rule.md §6
 ---
 # 0 定位与边界
@@ -12,12 +12,11 @@ up: My rule.md §6
 | 时点 | 跑什么 | 失败怎么办 |
 |---|---|---|
 | 每次改规则 | `python -B check_paths.py --check` | 阻断 merge，不推 |
-| 每次 PR | R1–R7 脚本全绿 + `tests/` 通过；R8 人门 | 不开 PR |
-| 每轮任务收工 | `_Docs` 清理扫描（§5） | 当轮移 `{DEL}` 或记待办 |
+| 每次 PR | R1–R9 脚本全绿 + `tests/` 通过；R8 人门 | 不开 PR |
 | 每季度 | 史清理、别名合并、路由表复核 | 出清单，批准后做 |
 | 每年 | `HISTORY.md` 归档评估（只追加，不重写） | 记入待批 |
 
-# 2 规则门 R1–R8
+# 2 规则门 R1–R9
 | 编号 | 判据 | 机器点 | 现状 |
 |---|---|---|---|
 | R1 路由闭合 | 每个 live md 在 L0 路由表或 `routes:` 出现；目标文件存在 | `qc_rules.py` | 已机器 |
@@ -27,7 +26,8 @@ up: My rule.md §6
 | R5 无副本 | 归一化后 ≥40 字、相似度 ≥0.92 的句子只允许一处；委派指针句（`→` + 见 / 同文件 / 细则 / 权威 / 指针 / 落点）除外 | `qc_rules.py` | 已机器 |
 | R6 头字段 | L1 必含 `name` / `description`；L0 必含 `routes:` | `qc_rules.py` | 已机器 |
 | R7 行长 | 单行 ≤400 字符；表格行与代码块除外 | `qc_rules.py` | 已机器 |
-| R8 变更留痕 | PR 必含：改前 `--check` 与 `qc_rules.py` 输出、史迁 `HISTORY.md`、改名同步 `aliases.yaml` | PR 模板 | 待建 |
+| R8 变更留痕 | PR 必含：改前 `--check` 与 `qc_rules.py` 输出、史迁 `HISTORY.md`、改名同步 `aliases.yaml` | PR 模板 | 已建 |
+| R9 节号锚点 | `§N` 必须命中目标文件的编号标题；裸 `§N` 继承同行的文件名，否则指本文件；`§A–B` 两端都校验 | `qc_rules.py` | 已机器 |
 
 # 3 失败处置
 - 先修到过门；不能过门就改规则，但**须用户点头**。
@@ -40,7 +40,8 @@ up: My rule.md §6
 - 引用史只写「背景见 `HISTORY.md` §x」，不作判据。
 - 技能正文里的英文镜像（如 `{SKILLS}\00_orchestrator\references\project-ref-layout.md`）不参与 R5 副本判定，冲突以 `{RULES}` 为准。
 
-# 5 `_Docs` 每轮清理
+# 5 `_Docs` 清理（按需）
+- **触发**：用户点名，或季度巡检时一并跑；不再每轮收工自动跑。
 - 流程：`cleanup_scan.py` 出候选 → 人工确认 → `cleanup_move.py` 移 `{DEL}`。
 - 三条判据：**过期**（>90 天未被引用）、**重复**（同内容多份）、**无主**（无项目 / 无索引指向）。
 - 默认分级：A 可直接移、B 需确认、C 永不自动清。

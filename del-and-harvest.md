@@ -61,6 +61,6 @@ up: My rule.md §2（写盘总闸与新建禁区）
 7. 用户点名的终稿落点仍按 `My rule.md` §3（优先改已有终稿）。
 
 # 8 与 QC 的分工
-- **何时清**：每轮收工扫 `_Docs`（`QC.md` §5）；扫描实现 `cleanup_scan.py` → `cleanup_move.py`。
+- **何时清**：用户点名或季度巡检时扫 `_Docs`（`QC.md` §5）；扫描实现 `cleanup_scan.py` → `cleanup_move.py`。
 - **永不自动清名单**（`_library`、期刊池、批件、`mem`、harvest 台账）在 `QC.md` 维护。
 - 本文件只定**落点与离场条件**，不定清理频率。
