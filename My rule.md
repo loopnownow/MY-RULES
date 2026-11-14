@@ -151,10 +151,11 @@ license: MIT
 - **H3 解依赖两条标准路径**：① **代码侧**——把写死的输入改指耐久位或 `harvested\`（例：`DEL_ROOT` / `DEFAULT_BATCH` / `--del-root` 默认值），跑一次门禁与单测后再搬；② **文档侧**——把活指针改成「历史落点」或指向耐久副本，再搬。两条都做不了（或缺授权）→ 留 park，并在该批次 `目录说明.md` 写明阻塞原因与解除条件。
 - **H3 优先瘦身，别整批压着**：活脚本只吃少数文件时，先搬大件、留必需件在批次根。实例：`verify_db.py` 的台账 glob 是**一层深**（`*/*MOVED*.tsv`，即 `<batch>\*.tsv`），故可留 `*.tsv` + `目录说明.md` 在批次根、把 `originals/`、`staging/`、`backup-*/` 等搬走；不得为保脚本把 10 GB 级批次长期占着 park。搬前须查该批 `--from-originals` 这类重建路径是否仍需要。
 - **工作夹：耐久层 vs 瞬态（t1951u）**：判据是「后人能否**复算**该数字/结论」。能 → 耐久；只是本次执行过程 → 瞬态。
-  - **耐久层 = `_Docs\skill-harvest\rounds\<round>\`**，固定形态：`HARVEST-*.md`（三桶正文）/ `INDEX.md`（来源·覆盖·分流）/ `MANIFEST.tsv`（逐件 sha256 + 决策）/ **`evidence\`**（判定证据：`dir-agg.tsv`、`proc-candidates.tsv`、`delta.tsv`、`moves-plan.tsv` + 门禁日志）/ `tools\`（可复用扫描·分档脚本）。**不放实体镜像**（源在库内，正文用 `MANIFEST.tsv` 的 `relpath` 指路）。正文引证据用 `evidence\...` 相对路径。
-  - **瞬态 = `.Del\_<task>-<YYYYMMDD>\`**（下划线前缀工作夹，与 `_by-function` / `_by-project` / `harvested` 并列）：试跑输出、草稿 `*.new.md`、已有耐久副本的脚本体、临时 dump、探针日志。
-  - **收尾**：先核耐久件已在 `skill-harvest\rounds\<round>\`（sha256 一致）→ 整个工作夹落 `harvested\` 并写 `MOVED.tsv`。工作夹**不得**长期留在 `.Del` 根（会被当移出件误清）。
-  - **探针/一次性脚本**（不进 harvest 的 H2 件）**不要**为「可能有用」在 `_Docs` 建夹存盘；要么进 `skill-harvest\rounds\<round>\tools\`，要么随工作夹落 `harvested\`。
+  - **耐久层 = 活层三件**：`rounds\LEDGER.tsv`（一轮一行：round / 日期 / 来源 / lane 数 / promote PR / 离场日期 / `{DEL}` 落点 / owner 口径 / retro）+ `by-fine-id\<fine-id>.md`（累积草稿，promote 后不清空，下轮追加）+ `HARVEST-STANDARD.md`。
+  - **瞬态 = 轮次夹 `_Docs\skill-harvest\rounds\<round>\`**（只存在到 promote 前），固定形态：`HARVEST-*.md`（三桶正文）/ `INDEX.md`（来源·覆盖·分流）/ `MANIFEST.tsv`（逐件 sha256 + 决策）/ **`evidence\`**（判定证据：`dir-agg.tsv`、`proc-candidates.tsv`、`delta.tsv`、`moves-plan.tsv` + 门禁日志）/ `tools\`（可复用扫描·分档脚本）。**不放实体镜像**（源在库内，正文用 `MANIFEST.tsv` 的 `relpath` 指路）。正文引证据用 `evidence\...` 相对路径。
+  - **瞬态工作夹 = `.Del\_<task>-<YYYYMMDD>\`**（下划线前缀工作夹，与 `_by-function` / `_by-project` / `harvested` 并列）：试跑输出、草稿 `*.new.md`、已有耐久副本的脚本体、临时 dump、探针日志。
+  - **抽走即离场**：该轮内容 promote 进 live（或判 H2 不抽）后，整轮移 `{DEL}\harvested\rounds\<round>\`，活层不留轮次夹、只留 LEDGER 一行；抽走前把可复算证据摘要写进 PR 说明。
+  - **探针/一次性脚本**（不进 harvest 的 H2 件）**不要**为「可能有用」在 `_Docs` 建夹存盘；要么进该轮 `tools\`，要么随工作夹落 `harvested\`；工作夹**不得**长期留在 `.Del` 根（会被当移出件误清）。
 
 ### 5.3.2 harvest 对象范围与产物形态（t1952u）
 
@@ -194,6 +195,7 @@ license: MIT
 | 派单/盯梢 | `{SKILLS}\00_orchestrator\references\ownership-contract.md`；`{SKILLS}\00_orchestrator\references\handoff-monitor.md` |
 | _Docs 文档库查找 | Bai → `{SKILLS}\03_research\advanced\docs-db.md`；派单 SSOT → ownership-contract §_Docs |
 | 技能演进 | `{SKILLS}\00_orchestrator\references\skill-evolution.md`（门在 `skills.md`） |
+| harvest 任务流程 / 纳入门禁 | `{SKILLS}\00_orchestrator\harvest\SKILL.md`（00 只调度/门禁/复核；收集标准 `{doc_root}\skill-harvest\HARVEST-STANDARD.md`） |
 | 稿件禁令 | `{SKILLS}\05_manuscript\qc\manuscript-local-qc.md`；`{SKILLS}\05_manuscript\base\vocab\L1\ban-phrases.md` |
 | 项目 `ref/` 布局 / ledger 再跑 | `project-ref-layout.md`；`{SKILLS}\00_orchestrator\references\project-ref-layout.md` |
 | 伦理材料留存 / `_lab\ethics` 退役 | `workspace-layout.md`（「伦理材料留存（t1849u）」） |
