@@ -100,7 +100,7 @@ license: MIT
 - **图表编号（C-1 · 指针，2026-10-29 · t1309s6268）：** Table 1 = 基线；**不**单独放 logistic 系数表或 score-correlation 表（Aitor-format §209）；ROC 操作特性作表；图按适用放 workflow / US / heatmap / nomogram+校准 / ROC / DCA。细则勿在本文件复写，指针 → `{SKILLS}\05_manuscript\advanced\Aitor-format.md` §200 / §209 / §213。
 - **批注英文建议句**：单独成句，以 `Suggested …` 起首。字面模板技能落点→`{SKILLS}\06_review\advanced\word-edit.md`。`manuscript-and-review.md` 已于 2026-10-18 按 README 迁入 `05_manuscript` / `06_review` / `07_response`。
 - **审稿回复**：保留完整原始 comments；不简化；不擅自加小标题；不自创信函格式。→`{SKILLS}\07_response\advanced\response.md`。
-- **新建文件/文件夹（权威；合并 t1098u/t1107u/t1240 · 2026-10-30 · t1442u/t1450u）**：默认只能在 `{DEL}` / `D:\MyProjects\.Del`（`_by-project` / `_by-function`）新建文件与文件夹；路径 SSOT 为 `D:\MyProjects\.Del`（旧名 `D:\0del`；非 `D:\MyProjects\0del`）。在其他位置新建前必须本轮明确问城城并获准。**常设例外（仅限新建）**：(1) bot 记忆导出/更新可在 `D:\MyProjects\_Docs\mem\` 内新建（§1「mem 落盘」）；(2) 子工程内 `ref/tmp/` 按需写入临时/中间（含旧版稿；详 → `project-ref-layout.md`）。以上只是**新建路径**的例外，**不是编辑许可**：这些位置已有文件的编辑 / 覆盖 / 移动仍按 §2 写盘总闸，须当轮点名或先问（t1672u）。**改已有文件同样先问（t1672u）**：`{RULES}` / `{SKILLS}` / `_Docs\skill-harvest\*` / `_Docs\mem\*` / 子工程已有稿（含 Track Changes）**均不豁免**——除非城城当轮已点名要改该文件 / 该处，否则先问再改，不得以「属可改区」为由静默编辑。默认禁止在 `D:\MyProjects\_Docs` 下 mkdir（除 mem 例外与本轮明确同意）。新草稿、ACCEPT、digest、by-fine-id lane、笔记、中间件、临时/scratch、ACCEPT 备注 → 只进 `{DEL}`。审稿交付：优先修订现有评审意见 `.docx`（Track Changes），禁止另存新稿名、禁止在子工程下新建夹。用户本轮点名的终稿落点仍按 §5（优先改已有终稿）。短针→`workspace-layout.md`（不复写）；mem→`D:\MyProjects\_Docs\mem\README.md`；全文→`{RULES}\standing\STANDING-no-new-files-outside-Del.md` 与 `{RULES}\standing\STANDING-docs-no-new-folder.md`（2026-10-31 从 0del 移入本仓；**0del 不再承载任何全文/指针**）。
+- **新建文件/文件夹（权威；合并 t1098u/t1107u/t1240 · 2026-10-30 · t1442u/t1450u）**：默认只能在 `{DEL}` / `D:\MyProjects\.Del`（`_by-project` / `_by-function`）新建文件与文件夹；路径 SSOT 为 `D:\MyProjects\.Del`（旧名 `D:\0del`；非 `D:\MyProjects\0del`）。在其他位置新建前必须本轮明确问城城并获准。**常设例外（仅限新建）**：(1) bot 记忆导出/更新可在 `D:\MyProjects\_Docs\mem\` 内新建（§1「mem 落盘」）；(2) 子工程内 `ref/tmp/` 按需写入临时/中间（含旧版稿；详 → `project-ref-layout.md`）。以上只是**新建路径**的例外，**不是编辑许可**：这些位置已有文件的编辑 / 覆盖 / 移动仍按 §2 写盘总闸，须当轮点名或先问（t1672u）。**改已有文件同样先问（t1672u）**：`{RULES}` / `{SKILLS}` / `_Docs\harvest\*` / `_Docs\mem\*` / 子工程已有稿（含 Track Changes）**均不豁免**——除非城城当轮已点名要改该文件 / 该处，否则先问再改，不得以「属可改区」为由静默编辑。默认禁止在 `D:\MyProjects\_Docs` 下 mkdir（除 mem 例外与本轮明确同意）。新草稿、ACCEPT、digest、by-fine-id lane、笔记、中间件、临时/scratch、ACCEPT 备注 → 只进 `{DEL}`。审稿交付：优先修订现有评审意见 `.docx`（Track Changes），禁止另存新稿名、禁止在子工程下新建夹。用户本轮点名的终稿落点仍按 §5（优先改已有终稿）。短针→`workspace-layout.md`（不复写）；mem→`D:\MyProjects\_Docs\mem\README.md`；全文→`{RULES}\standing\STANDING-no-new-files-outside-Del.md` 与 `{RULES}\standing\STANDING-docs-no-new-folder.md`（2026-10-31 从 0del 移入本仓；**0del 不再承载任何全文/指针**）。
 - **一次性脚本/说明/小补丁**（非课题交付）：只落 `{DEL}`，禁止丢进用户主目录、`.grok\tmp`、或课题根。
 - **_Docs 目录名英文化（t1458u）**：`_Docs` 下新建目录一律 ASCII 英文（如 `approvals` / `journals` / `jcr` 这类英文短名）；发现中文目录当轮 rename，并在 `_library\MOVED-FROM.md` 记一行。文件名可保留中文原名，但须在对应索引列留映射（如 `original_name_zh`）。库分类口径 → `library-taxonomy.md`。
 
@@ -111,7 +111,7 @@ license: MIT
 - **每轮质控必须跑一次无用件清理**（`D:\MyProjects\_Docs`）：`python -B test\cleanup_scan.py --tsv <清单>` → 人工确认 → `python -B test\cleanup_move.py --plan <清单> --apply`，移入 `{DEL}\_by-function\0doc-qc-clean\<YYYYMMDD>\`，保相对路径并落 `MOVED.tsv`。
 - **判据只有三条**：有没有入口 / 有没有真实落点 / 能不能再生。「看起来旧」不是理由；只剩历史价值 → 留档并标注，不计清理成绩。
 - **默认分级**：字节码缓存、垃圾文件名、空目录、历史结构快照、被同名无日期版取代的副本 → 可直接移；重复件、无入口脚本、无读者台账、孤立 `.md`、占位壳 → 出清单等点头；断链与「文中路径全失效」→ 只修指针或就地标注，**不搬**（历史档合法引用过去落点）。
-- **永不自动清**：`_library\glossary\banks`（含 `glossary.db`）、`mem\`、`_library\ethics\`，以及历史档 `MIGRATION.md`、`ACCEPT-*`、`_library\former-*`、`skill-harvest\PLAN-*`。
+- **永不自动清**：`_library\glossary\banks`（含 `glossary.db`）、`mem\`、`_library\ethics\`，以及历史档 `MIGRATION.md`、`ACCEPT-*`、`_library\former-*`、`harvest\PLAN-*`。
 - 移出即记台账；收工报告须给「一条命令还原」的路径映射。分类说明→`_Docs\test\README.md`。
 - **skip / archive / 退役仅指针 不是停放位**：口径见 §4 与 `skills.md` §6（t1463u；t1520u；**t1559u 不得 ignore/跳过假绿**）；_Docs 侧由 `test\structure_check.py` S4 与 `test\cleanup_scan.py` C2 强制，**无存档例外**（年报/年表同样移 `{DEL}`，见 `_Docs\STRUCTURE.md` §7）。
 
@@ -127,7 +127,7 @@ license: MIT
 | harvested | `harvested\`（平铺，不建日期子夹；原 `junk\`，2026-10-31 改名） | 一次性批次、字节码/缓存、拼写错件、本机配置备份、Downloads 残留、**无任何文本引用**的产物 | **只由城城手动清**；bot 不清、不代清 |
 
 - **课题件优先** `_by-project\<slug>\`（park）；**_Docs 收尾件**（草稿已收编进 skills、或已过时）才进 harvest-park。两档不得互替堆放。一次 harvest 之后应进 `{DEL}` 的剩余件除外，见下条 t1950u。
-- **harvest 剩余件落 harvested（t1950u）：** 一次 harvest（抽「怎么做」）之后，凡按分流应进 `{DEL}` / `D:\MyProjects\.Del` 的剩余件（含原可进 `_by-project` 或 harvest-park 的收尾件），一律落 `harvested\`（平铺，不建日期子夹）。抽出的 how-to 仍进 `_Docs\skill-harvest`；进 `_DataBase` / `_Docs` 活库 / `archived` 的分流不变。非 harvest 的 `.Del` 落点不变（如 closeout 可复现图、入库后原散目录、课题 park、Downloads 残留等仍按本条 park / harvest-park / harvested 三档）。落 `harvested` 前仍须：① 全库 grep 无活文本引用（有活指针先改指针或仍留 park，不得带着活引用进 harvested）；② 同名异字节不覆盖（文件名加 slug 或当轮 id 区分，不建日期子夹）；③ 写 `harvested\MOVED.tsv`。清空口径不变：`harvested` 只由城城手动清，bot 不清、不代清；park / harvest-park 仍不得整夹清。
+- **harvest 剩余件落 harvested（t1950u）：** 一次 harvest（抽「怎么做」）之后，凡按分流应进 `{DEL}` / `D:\MyProjects\.Del` 的剩余件（含原可进 `_by-project` 或 harvest-park 的收尾件），一律落 `harvested\`（平铺，不建日期子夹）。抽出的 how-to 仍进 `_Docs\harvest`；进 `_DataBase` / `_Docs` 活库 / `archived` 的分流不变。非 harvest 的 `.Del` 落点不变（如 closeout 可复现图、入库后原散目录、课题 park、Downloads 残留等仍按本条 park / harvest-park / harvested 三档）。落 `harvested` 前仍须：① 全库 grep 无活文本引用（有活指针先改指针或仍留 park，不得带着活引用进 harvested）；② 同名异字节不覆盖（文件名加 slug 或当轮 id 区分，不建日期子夹）；③ 写 `harvested\MOVED.tsv`。清空口径不变：`harvested` 只由城城手动清，bot 不清、不代清；park / harvest-park 仍不得整夹清。
 - 落 harvested 前必须：① 全库 grep 确认无活文本引用（`_Docs` + `D:\MyProjects` 课题树）；② 同名异字节不覆盖；③ 写 `harvested\MOVED.tsv`。
 - **harvested 是唯一的终弃档，且只由城城手动清空**（bot 不清、不代清、不自作主张）；park / harvest-park 不得整夹清。
 - `_Docs` 侧的判定与落盘仍由 `test\cleanup_scan.py`（判据）与 `test\cleanup_move.py --dest <落点>`（落点）负责；本条只定**落点与可弃度**，不另造脚本。
@@ -141,7 +141,7 @@ license: MIT
 
 | 类 | 判据 | 要不要 harvest | 落点 |
 |---|---|---|---|
-| **H1 可复用 how-to** | 规程 / 口径 / 决策理由 / 踩坑 / 验证法 / 清单或报表格式 | **要**（HARVEST-STANDARD §7 三桶） | 抽进 `_Docs\skill-harvest`；**抽完即搬** `harvested\` |
+| **H1 可复用 how-to** | 规程 / 口径 / 决策理由 / 踩坑 / 验证法 / 清单或报表格式 | **要**（HARVEST-STANDARD §7 三桶） | 抽进 `_Docs\harvest`；**抽完即搬** `harvested\` |
 | **H2 不需要 harvest** | 数据底表/导出、原始件、PHI 或伦理相邻件、第三方源码树、构建产物、浏览器/探针配置、一次性台账修补脚本、日志截图、缓存 | **不抽**（不进 harvest） | 核对唯一副本后**直接落** `harvested\`，不停 park |
 | **H3 活依赖** | 被活代码当输入/默认路径（`DEL_ROOT` / `DEFAULT_BATCH` / `--del-root`），或被活文档给出可运行绝对路径 | 含 how-to 的先抽（H1）；本体**先解依赖再搬** | 解依赖前留 park；解完落 `harvested\` |
 | **H4 课题件** | 单课题中途/收尾件、旧稿、投稿包、课题专用脚本 | 按需 | `_by-project\<slug>\`，**不进** `harvested\` |
@@ -152,7 +152,7 @@ license: MIT
 - **H3 优先瘦身，别整批压着**：活脚本只吃少数文件时，先搬大件、留必需件在批次根。实例：`verify_db.py` 的台账 glob 是**一层深**（`*/*MOVED*.tsv`，即 `<batch>\*.tsv`），故可留 `*.tsv` + `目录说明.md` 在批次根、把 `originals/`、`staging/`、`backup-*/` 等搬走；不得为保脚本把 10 GB 级批次长期占着 park。搬前须查该批 `--from-originals` 这类重建路径是否仍需要。
 - **工作夹：耐久层 vs 瞬态（t1951u）**：判据是「后人能否**复算**该数字/结论」。能 → 耐久；只是本次执行过程 → 瞬态。
   - **耐久层 = 活层三件**：`rounds\LEDGER.tsv`（一轮一行：round / 日期 / 来源 / lane 数 / promote PR / 离场日期 / `{DEL}` 落点 / owner 口径 / retro）+ `by-fine-id\<fine-id>.md`（累积草稿，promote 后不清空，下轮追加）+ `HARVEST-STANDARD.md`。
-  - **瞬态 = 轮次夹 `_Docs\skill-harvest\rounds\<round>\`**（只存在到 promote 前），固定形态：`HARVEST-*.md`（三桶正文）/ `INDEX.md`（来源·覆盖·分流）/ `MANIFEST.tsv`（逐件 sha256 + 决策）/ **`evidence\`**（判定证据：`dir-agg.tsv`、`proc-candidates.tsv`、`delta.tsv`、`moves-plan.tsv` + 门禁日志）/ `tools\`（可复用扫描·分档脚本）。**不放实体镜像**（源在库内，正文用 `MANIFEST.tsv` 的 `relpath` 指路）。正文引证据用 `evidence\...` 相对路径。
+  - **瞬态 = 轮次夹 `_Docs\harvest\rounds\<round>\`**（只存在到 promote 前），固定形态：`HARVEST-*.md`（三桶正文）/ `INDEX.md`（来源·覆盖·分流）/ `MANIFEST.tsv`（逐件 sha256 + 决策）/ **`evidence\`**（判定证据：`dir-agg.tsv`、`proc-candidates.tsv`、`delta.tsv`、`moves-plan.tsv` + 门禁日志）/ `tools\`（可复用扫描·分档脚本）。**不放实体镜像**（源在库内，正文用 `MANIFEST.tsv` 的 `relpath` 指路）。正文引证据用 `evidence\...` 相对路径。
   - **瞬态工作夹 = `.Del\_<task>-<YYYYMMDD>\`**（下划线前缀工作夹，与 `_by-function` / `_by-project` / `harvested` 并列）：试跑输出、草稿 `*.new.md`、已有耐久副本的脚本体、临时 dump、探针日志。
   - **抽走即离场**：该轮内容 promote 进 live（或判 H2 不抽）后，整轮移 `{DEL}\harvested\rounds\<round>\`，活层不留轮次夹、只留 LEDGER 一行；抽走前把可复算证据摘要写进 PR 说明。
   - **探针/一次性脚本**（不进 harvest 的 H2 件）**不要**为「可能有用」在 `_Docs` 建夹存盘；要么进该轮 `tools\`，要么随工作夹落 `harvested\`；工作夹**不得**长期留在 `.Del` 根（会被当移出件误清）。
@@ -162,8 +162,8 @@ license: MIT
 1. **对象三类**：`.Del` 移出件、`_library` 机器库（references / lit-bank / journals / ethics / glossary / lab-ref-ranges / scanner-registry）、`_DataBase` 原始库（`<family>\_db` / `_share` / 叶 `ref\settings.ini` / `目录说明.md`）。**fine-id 不是对象来源，而是 lane 坐标系**（现行 22 个，见 `{SKILLS}\\NN_slug\base\`）。
 2. **抽什么**：能跨课题重放的**动作 / 判据 / 格式 / 踩坑**（三桶）。**不抽**数据本体：影像与 DICOM、文献 PDF 全文、批件 PDF、PHI（含 ICF/方案正文）、未发表全文、期刊全量行、glossary `banks\` 证据库。
 3. **lane 只用现行 fine-id**；跨切面进该席位 `advanced\`；纯规则进 `{RULES}`。**禁止自造 lane**（2026-11-10 实测一轮 harvest 里 6 节有 5 节用了不存在的 lane，全部返工）。
-4. **快照不保留**：`skill-harvest` 只收「正文 + `MANIFEST.tsv` + `evidence\` + `tools\`」；**实体镜像（`from-by-*`）不进 `_Docs`**。移出前须证「每个镜像都有同 sha 对应件在库内」（2026-11-10 实测 414 件镜像 0 孤本），移出照 §5.3 进 `harvested\` 并记台账。
-5. **布局固定**：`README.md`（一页索引）/ `HARVEST-STANDARD.md` / `by-fine-id\<fine-id>.md` / `rounds\<YYYYMMDDx-round>\` / `sources\`（耐久 park，非草稿）。一次性批次并入草稿后原夹移 `harvested\`，**不新造平级夹**。
+4. **快照不保留**：`harvest` 只收「正文 + `MANIFEST.tsv` + `evidence\` + `tools\`」；**实体镜像（`from-by-*`）不进 `_Docs`**。移出前须证「每个镜像都有同 sha 对应件在库内」（2026-11-10 实测 414 件镜像 0 孤本），移出照 §5.3 进 `harvested\` 并记台账。
+5. **布局固定**：`README.md`（一页索引）/ `HARVEST-STANDARD.md` / `by-fine-id\<fine-id>.md` / `rounds\<YYYYMMDDx-round>\`（瞬态，promote 后离场）+ `{doc_harvest_sources}`（= `_Docs\harvest-sources-park`，耐久 park，非草稿；2026-11-14 从 `harvest\sources\` 整棵迁出）。一次性批次并入草稿后原夹移 `harvested\`，**不新造平级夹**。
 
 # 6 工程决策
 
@@ -195,7 +195,7 @@ license: MIT
 | 派单/盯梢 | `{SKILLS}\00_orchestrator\references\ownership-contract.md`；`{SKILLS}\00_orchestrator\references\handoff-monitor.md` |
 | _Docs 文档库查找 | Bai → `{SKILLS}\03_research\advanced\docs-db.md`；派单 SSOT → ownership-contract §_Docs |
 | 技能演进 | `{SKILLS}\00_orchestrator\references\skill-evolution.md`（门在 `skills.md`） |
-| harvest 任务流程 / 纳入门禁 | `{SKILLS}\00_orchestrator\harvest\SKILL.md`（00 只调度/门禁/复核；收集标准 `{doc_root}\skill-harvest\HARVEST-STANDARD.md`） |
+| harvest 任务流程 / 纳入门禁 | `{SKILLS}\00_orchestrator\harvest\SKILL.md`（00 只调度/门禁/复核；收集标准 `{doc_root}\harvest\HARVEST-STANDARD.md`） |
 | 稿件禁令 | `{SKILLS}\05_manuscript\qc\manuscript-local-qc.md`；`{SKILLS}\05_manuscript\base\vocab\L1\ban-phrases.md` |
 | 项目 `ref/` 布局 / ledger 再跑 | `project-ref-layout.md`；`{SKILLS}\00_orchestrator\references\project-ref-layout.md` |
 | 伦理材料留存 / `_lab\ethics` 退役 | `workspace-layout.md`（「伦理材料留存（t1849u）」） |

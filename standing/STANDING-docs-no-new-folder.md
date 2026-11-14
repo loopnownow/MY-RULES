@@ -7,7 +7,7 @@
 
 1. **全部新文件夹**助手需要的 → 只许建在 `{DEL}` / `D:\MyProjects\.Del`（`_by-project` / `_by-function`）。（t1109u）
 2. **`D:\MyProjects\_Docs`：默认禁止 mkdir**；**唯一例外**：城城**本轮明确同意**才可在 _Docs 建新夹。（t1107u/t1108u）
-3. **改已有文件也须当轮点名或先问**（含 MY-RULES / MY-SKILLS / `_Docs\skill-harvest\*` / `_Docs\mem\*` / 子工程已有稿）；本条不是自由编辑区（t1672u 写盘总闸 → `My rule.md` §2）。
+3. **改已有文件也须当轮点名或先问**（含 MY-RULES / MY-SKILLS / `_Docs\harvest\*` / `_Docs\mem\*` / 子工程已有稿）；本条不是自由编辑区（t1672u 写盘总闸 → `My rule.md` §2）。
 4. 临时 / scratch → `D:\MyProjects\.Del`。
 5. **ACCEPT 备注只落 `D:\MyProjects\.Del`**（本夹即例）。
 6. 与既有「禁止在 `{DEL}` 以外新建文件」（t1098u）并存；见 sibling `{RULES}\standing\STANDING-no-new-files-outside-Del.md`。
