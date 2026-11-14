@@ -41,7 +41,7 @@ HIS/PACS 登录客户端只留在医院机器。禁止把 Selenium 脚本、HIS 
 
 每次网络操作结束后，用一两行汇报：目标、端口、发送的数据类型、是否落盘。与批准范围不一致时必须明确指出。
 
-## 本机出站代理（常设 · t1614u）
+## 本机出站代理（常设）
 
 本机（loopn / Aitor PC）常设本地 HTTP 代理，供公网 HTTPS 出站（典型：`git` / `gh` 访问 GitHub 直连失败或 Connection reset 时）。
 
@@ -52,19 +52,19 @@ HIS/PACS 登录客户端只留在医院机器。禁止把 Selenium 脚本、HIS 
 - **会话环境变量 ≠ 改系统代理**（见下条「不改代理」）。
 - 直连 GitHub 失败时用本节会话代理。若会话代理仍失败：改用 cursor-github 或 GitHub API，再同步本地克隆。
 
-## 本机 DeepSeek（DSH · t2033u）
+## 本机 DeepSeek
 
 控制本机 DeepSeek（DSH）只用本机本地界面，禁止用 ngrok、Cloudflare Tunnel 或其他公网隧道；禁止把 token 写入聊天；禁止把 3080 端口暴露到公网。DSH 桌面应用须保持运行。
 
-## Cloud Agent（t2033u）
+## Cloud Agent
 
 上海区域 Auto / Claude / GPT 不可用（region-blocked）。开启 Cloud Agent 须显式指定可用模型（Grok / Composer / Kimi / GLM / DeepSeek）。Cloud Agent 跑在 Cursor 托管云上，不走本机 `127.0.0.1:10808` 代理。
 
-## Grok CLI（t2033u）
+## Grok CLI
 
 本机 `grok.exe` 在 `C:\Users\loopn\.grok\bin`；会话按工作目录存在 `C:\Users\loopn\.grok\sessions`。运行 `grok` 前须在该会话设置 `HTTPS_PROXY` 与 `HTTP_PROXY` 为 `http://127.0.0.1:10808`。
 
-## 机构库检索（t2033u）
+## 机构库检索
 
 需机构权限的文献检索（如 Web of Science）走金山医院图书馆代理，在城城本机进行，不在助手机器上直连。
 
