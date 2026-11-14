@@ -16,7 +16,7 @@
 | `network-security.md` | L1 | 网段红线、敏感外发、代理、留痕 | 不写执行步骤 |
 | `skills.md` | L1 | 技能仓读边界、按需加载、演进、MY-SKILLS PR | fine-id 路由在技能仓，不在此 |
 | `README.md` | 支撑 | 本文件：仓地图与维护入口 | 不承载规则正文 |
-| `QC.md` | 支撑 | 规则门 R1–R9、频率、失败处置、豁免 | 技能树 QC → `skills.md` §6 |
+| `QC.md` | 支撑 | 规则门 R1–R10、频率、失败处置、豁免 | 技能树 QC → `skills.md` §6 |
 | `HISTORY.md` | 档案 | 旧根 / 旧阶段 / 搬迁 / 命名沿革 / 事故 | 只追加，不作判据 |
 | `aliases.yaml` | 档案 | 旧名 → 现行名（机器可读） | 不是规则 |
 
@@ -48,7 +48,7 @@
 
 ```bash
 python -B check_paths.py --check   # R4：{SKILLS} 席位/文件存在 + 退役路径 live 引用
-python -B qc_rules.py              # R1–R3、R5–R7：路由闭合、正文无史、旧名唯一、无副本、头字段、行长
+python -B qc_rules.py              # R1–R3、R5–R7、R9、R10：路由闭合、正文无史、旧名唯一、无副本、头字段、行长、节号、指针壳
 python -B -m pytest -q tests       # 门的负向用例（改规则时必跑）
 ```
 
