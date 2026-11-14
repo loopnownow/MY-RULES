@@ -107,7 +107,7 @@ entries:
 
   - old: 'D:\MyProjects\_Docs\harvest\sources'
     tokens: ['harvest\sources']
-    new: 'D:\MyProjects\_Docs\harvest-sources-park'
+    new: 'D:\MyProjects\.Del\_by-function\harvest-park-retired-20261114\harvest-sources-park'
     kind: dir
     status: renamed
     since: '2026-11-14'

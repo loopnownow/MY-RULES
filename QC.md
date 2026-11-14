@@ -1,6 +1,6 @@
 ---
 name: rules-qc
-description: L1 支撑：规则仓与 _Docs 盘面的判据（R1–R11）、频率、失败处置、豁免。
+description: L1 支撑：规则仓与 _Docs 盘面的判据（R1–R12）、频率、失败处置、豁免。
 up: My rule.md §6
 ---
 # 0 定位与边界
@@ -12,10 +12,10 @@ up: My rule.md §6
 | 时点 | 跑什么 | 失败怎么办 |
 |---|---|---|
 | 每次改规则 | `python -B check_paths.py --check` | 阻断 merge，不推 |
-| 每次 PR | R1–R10 脚本全绿 + R11 用 `{doc_root}\test\structure_check.py` 全绿 + `tests/` 通过；R8 人门 | 不开 PR |
+| 每次 PR | R1–R10 脚本全绿 + R11、R12 用 `{doc_root}\test\structure_check.py` 全绿 + `tests/` 通过；R8 人门 | 不开 PR |
 | 每季度 | 史清理、别名合并、路由表复核 | 出清单，批准后做 |
 
-# 2 规则门 R1–R11
+# 2 规则门 R1–R12
 | 编号 | 判据 | 机器点 | 现状 |
 |---|---|---|---|
 | R1 路由闭合 | 每个 live md 在 L0 路由表或 `routes:` 出现；目标文件存在 | `qc_rules.py` | 已机器 |
@@ -29,6 +29,7 @@ up: My rule.md §6
 | R9 节号锚点 | `§N` 必须命中目标文件的编号标题；裸 `§N` 继承同行的文件名，否则指本文件；`§A–B` 两端都校验 | `qc_rules.py` | 已机器 |
 | R10 指针壳 | live 文件正文（去 frontmatter 与标题）非空行 ≤5 且只含 move/pointer 线索，或正文为空 → 立刻删；不接受 stub 长期存在 | `qc_rules.py` | 已机器 |
 | R11 活文档不陈旧 | `_DataBase` / `_Docs` 的 `目录说明.md` 与 README 里作为现行指令的绝对路径必须可解析（无停用根、无失效阶段指针）；计数与日期主张须与实盘一致；史证须同句带标记词 | `{doc_root}\test\structure_check.py` S30 + `audit_readme_counts.py` | 已机器（_Docs 侧）+ H2 人门 |
+| R12 备份垃圾不进阶段工程 | `*.bak` / `*.bk` / `~$*` / `- copy` / `副本` 不得留在阶段工程；旧配置与旧稿移 `ref\tmp\` 或 `{DEL}`，移动留台账 | `{doc_root}\test\structure_check.py` S32 | 已机器 |
 
 # 3 失败处置
 - 先修到过门；不能过门就改规则，但**须用户点头**。
