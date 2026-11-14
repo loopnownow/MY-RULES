@@ -7,14 +7,14 @@ Usage:
 Gates (see QC.md §2):
   R1 routing closure   every live md is routed from My rule.md §5 and exists
   R2 no change history t-ids / decision dates / "此前|曾用|更名|formerly|原 §x"
-  R3 old names only    old-name tokens live in aliases.yaml / HISTORY.md
+  R3 old names only    old-name tokens live in aliases.yaml
   R5 no copies         >=40-char sentences must not repeat across live files
   R6 frontmatter       name + description on every content file
   R7 line length       no live line over 400 characters
   R9 section refs      every §N resolves to a numbered heading in the target file
   R10 no pointer shells a stub, or an empty rule, is not a rule — delete it
 
-Archives (HISTORY.md, aliases.yaml) and this file itself are exempt.
+The alias registry and this file itself are exempt.
 """
 from __future__ import annotations
 
@@ -37,7 +37,7 @@ CONTENT = [
     "skills.md",
 ]
 ROUTED = CONTENT + ["README.md", "QC.md"]
-ARCHIVE = {"HISTORY.md", "aliases.yaml", "QC.md"}
+ARCHIVE = {"aliases.yaml", "QC.md"}
 
 T_ID_RE = re.compile(r"(?<![A-Za-z0-9])t\d{3,4}[a-z]?(?![A-Za-z0-9])")
 DATE_RE = re.compile(r"\b20\d{2}-\d{2}-\d{2}\b")

@@ -26,7 +26,6 @@ def build(tmp: Path) -> None:
         (tmp / n).write_text(f"---\nname: {n[:-3]}\ndescription: d\n---\n# 0\n正文。\n", encoding="utf-8")
     (tmp / "README.md").write_text("# readme\n\n说明。\n", encoding="utf-8")
     (tmp / "QC.md").write_text("---\nname: rules-qc\ndescription: d\n---\n# 0\n判据。\n", encoding="utf-8")
-    (tmp / "HISTORY.md").write_text("t1800u 与 2026-10-31 的历史\n", encoding="utf-8")
     (tmp / f"aliases.yaml").write_text(f'- old: "{OLD}"\n  tokens: ["{OLD}"]\n  new: "_DataBase"\n', encoding="utf-8")
 
 

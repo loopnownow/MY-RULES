@@ -10,8 +10,8 @@
 
 ## 留痕（R8）
 
-- [ ] PR 标题带编号（如 `t20261114h:`），同号条目已写进 `HISTORY.md`（§I 或对应节）
-- [ ] 决策号 / 日期 / 旧名没有留在正文，全部进 `HISTORY.md` / `aliases.yaml`
+- [ ] PR 标题带编号（如 `t20261114h:`），正文写清 why（≤3 行），编号可从 `git log` 检索
+- [ ] 决策号 / 日期 / 旧名没有留在正文；旧名进 `aliases.yaml`
 - [ ] 改名或删名：`aliases.yaml` 已补 `old` / `tokens` / `new` / `kind`
 - [ ] 新增或删除 L1 文件：`My rule.md` 路由表、`README.md` 地图、`check_paths.py` 必检清单三处同步
 
