@@ -83,7 +83,7 @@ routes: [workspace-layout.md, project-ref-layout.md, del-and-harvest.md, library
 | 文献 / 选刊 / 统计 / 建模 | — | `03_research` / `find-journal` / `02_data-processing` |
 
 # 6 QC
-- **频率**：改规则跑 `python -B check_paths.py --check`；每轮收工跑 `_Docs` 清理扫描；每季度清一次史。
+- **频率**：改规则跑 `python -B check_paths.py --check` + `python -B qc_rules.py`（R1–R3 / R5–R7；负向用例 `python -B -m pytest -q tests`）；每轮收工跑 `_Docs` 清理扫描；每季度清一次史。
 - **规则门 R1–R8**（判据 / 豁免 / 失败处置）→ `QC.md`；QC 不得 ignore / skip / 假绿，skip / archived / 退役仅指针不是停放位（技能树 → `skills.md` §6）。
 - **三仓流程**：本地分支 + 测试 → 出示完整变更清单 → 批准开 PR → 不直推 main → 用户说「合」「和」「推合」才 merge；默认 QC 由 Aitor 本人做（点名除外）；MY-SKILLS 细则 → `skills.md` §5。
 

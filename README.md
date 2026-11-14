@@ -47,7 +47,9 @@
 ## Local check (E3)
 
 ```bash
-python -B check_paths.py --check
+python -B check_paths.py --check   # R4：{SKILLS} 席位/文件存在 + 退役路径 live 引用
+python -B qc_rules.py              # R1–R3、R5–R7：路由闭合、正文无史、旧名唯一、无副本、头字段、行长
+python -B -m pytest -q tests       # 门的负向用例（改规则时必跑）
 ```
 
-校验 Rules 正文引用的 `{SKILLS}` 席位 / 文件存在，并扫描已退役路径的 live 引用。缺技能根默认 fail loud（exit 1），除非 `--allow-missing-skills`。
+`check_paths.py` 缺技能根默认 fail loud（exit 1），除非 `--allow-missing-skills`；`qc_rules.py` 的判据与豁免见 [QC.md](<QC.md>)。

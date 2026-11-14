@@ -69,6 +69,13 @@
 
 - **`00ds` 磁盘树**与 `_DataBase` 若并存，维持原状，等城城另批搬迁（t1705u 明确「更正活引用 ≠ 搬迁磁盘树」）。
 - **`_grants\2025\_ethics-forms\`** 为 `_grants\_misc` 解散后的遗留例外，未定去向。
-- **正文清理未做（P2–P4）：** 截至 P1，`My rule.md` 仍含 §1 约 30 条密排 bullet 与 t-id；`project-ref-layout.md:9` 的「此前」段（1,366 字符）未迁本文件。P1 只建档案层，未改任何正文。
+- **正文清理**：P4（2026-11-14）已完成，五个专题的 t-id / 决策日期 / 旧名括注已清，见 §I。
 - **旧阶段夹**若仍在盘上，只作别名阅读，勿重建、勿改写。
-- **2026-11-14 · P2 完成（L0 拆分）。** `My rule.md` 改为 L0 常驻层；`.Del` / harvest 落点拆入 `del-and-harvest.md`；规则门 R1–R8 拆入 `QC.md`；`standing/` 两份并入 `del-and-harvest.md` §7 后删除；`project-ref-layout.md` 的 1,366 字「此前」段迁入本文件 §D；旧阶段表改为 `aliases.yaml` 指针。
+
+## I 2026-11-14 分层重构日志
+
+- **P1 档案层**（PR #140 → `12db2e4`）：新增 `HISTORY.md` 与 `aliases.yaml`（38 条旧名映射），7 个规则正文 0 行改动。
+- **P2 L0**（PR #141 → `1d063fc`）：`My rule.md` 210 → 101 行，改为常驻层；拆出 `del-and-harvest.md`（66 行）与 `QC.md`（57 行）；`standing/` 两份并入后删除（副本留 `{DEL}`）；`project-ref-layout.md` 的 1,366 字「此前」段迁入本文件 §D；旧阶段别名表改为 `aliases.yaml` 指针。
+- **P3 DSH 适配层**：`$DSH_HOME\AGENTS.md` 74 → 55 行，只留挂载与指针；`$DSH_HOME\skills\state.json` 移除把 MY-RULES 当技能源的 git root（`git-55875fa9`），否则规则 md 会被当技能加载。
+- **P4 清史**（PR #142 → `a576b63`）：workspace / project-ref / library / skills / network 五个专题删除 t-id、决策日期与旧名括注；只保留数据阈值日期（批件 ≥ 2023-11-10）与「勿再新建」禁名清单。
+- **P5 规则门**（分支 `rules/p5-rules-gates`）：新增 `qc_rules.py`（R1–R3 / R5–R7）与 `tests/test_rules_qc.py`（22 用例）；R4 仍由 `check_paths.py`；`My rule.md` §6、`README.md` E3、`QC.md` §1/§2/§7 同步回写。

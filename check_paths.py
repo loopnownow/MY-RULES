@@ -26,7 +26,13 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
 
-REQUIRED_RULES_MD = ("skills.md", "My rule.md", "README.md")
+REQUIRED_RULES_MD = (
+    "skills.md",
+    "My rule.md",
+    "README.md",
+    "del-and-harvest.md",
+    "QC.md",
+)
 # Also scan these for stale path claims (N14).
 SCAN_MD = REQUIRED_RULES_MD + (
     "workspace-layout.md",
