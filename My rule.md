@@ -88,13 +88,13 @@ routes: [workspace-layout.md, project-ref-layout.md, del-and-harvest.md, library
 - **三仓流程**：本地分支 + 测试 → 出示完整变更清单 → 批准开 PR → 不直推 main → 用户说「合」「和」「推合」才 merge；默认 QC 由 Aitor 本人做（点名除外）；MY-SKILLS 细则 → `skills.md` §5。
 
 # 7 执行准则
-- **编程**：简单优先、外科手术式、模块化、不写回退（失败要响）；新脚本 Python 3.13.9；PowerShell 不用 `&&`；配置置顶；注释只写配置含义与运行方式。
+- **编程**：简单优先、外科手术式、模块化、不写回退（失败要响）；新脚本 Python 3.13.9；PowerShell 不用 `&&`；配置置顶；注释只写配置含义与运行方式；写计算代码前先读本机 CPU / GPU / RAM，能用则优先多线程和 CUDA。
 - **流程**：先测 → 再跑 → 核查 → 验收；批量写盘先 dry-run，显式 `--execute` 才落盘；断点续传不整段重算；后台开跑前先冒烟测试；后台或预计超过 2 分钟的作业须同时开可见控制台监控（默认 60 秒刷新）。
 - **验证**：优先 diff；lint / 测试后交终稿；**不编造**事实 / 数字 / 文献 / DOI / 路径，找不到写「未找到」。
 - **科研**：文献只引真实来源；统计不为跑通改 outcome / 纳入 / cutoff / 协变量 / 缺失 / 模型（细则 → `{SKILLS}\02_data-processing\qc\`）。
 - **工程决策** R1 需求优先 · R2 证据排错 · R3 有序简化 · R4 风险比例 · R5 保护不变量 · R6 闭环验证；**重大变更门**（改结构 / 改 ID / 删目录）先给假设清单与影响并获批。
 - **长任务交接**：执行长任务（后台或预计超过 2 分钟）时，须提醒城城写交接文档并开新对话。
-- 细节（模板、阶梯、docstring、断点做法、冒烟与后台监控）→ `{SKILLS}\02_data-processing\advanced\coding.md`。
+- 细节（模板、阶梯、docstring、断点做法、冒烟与后台监控、并行与 CUDA）→ `{SKILLS}\02_data-processing\advanced\coding.md`。
 
 # 8 汇报
 - 说明 / QC 中文；期刊英文稿英文；时区 `Asia/Shanghai`；「；」=两任务，「|」=同任务并列；状态用表格或列表。
