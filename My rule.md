@@ -51,7 +51,7 @@ routes: [workspace-layout.md, project-ref-layout.md, del-and-harvest.md, library
 | 期刊池 / 批件 | `_library\journals\index.csv`；`_library\ethics\approvals\<L1>\<L2>\`（口径 `library-taxonomy.md`） |
 
 - **单档 ≤1 GiB**；预计超限直接分 900 MiB 字节卷 + `分卷说明.md`，不先造大档再拆（细则 `workspace-layout.md`）。
-- **Word / 稿件**：未当轮点名禁改 `.docx` / `.pdf` 版式；改文字用 Track Changes，禁大段覆盖；城城已改先问，禁覆盖或改回；**已手改文字禁止重新打修订标记**（不得用旧稿对照再标红）；**任何回滚须当轮点名授权**（手改识别 → `project-ref-layout.md`）；**无稿不造空件**（无 docx 就记「无 docx」）。
+- **Word / 稿件**：未当轮点名禁改 `.docx` / `.pdf` 版式；**所有助手改稿只许用 Track Changes 增量合并**，禁大段覆盖；城城已改先问，禁覆盖或改回；城城手改后去掉已确认修订标记的文字视为已定稿，**禁止重新打修订标记**（不得用旧稿对照再标红，不得把已接受的修订再打回去）；**任何回滚须当轮点名授权**（手改识别 → `project-ref-layout.md`）；**无稿不造空件**（无 docx 就记「无 docx」）。
 - 同一分析 `Results*.html` 与 `.xlsx` 冲突 → 以 HTML 为准并写明；清理旧稿 → `{DEL}` 保相对路径，不静默删除；长表 → `{SKILLS}\00_orchestrator\references\standing-delivery.md`。
 
 # 4 别名
