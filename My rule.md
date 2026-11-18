@@ -1,11 +1,12 @@
 ---
 name: My rule
 description: L0 常驻层：裁决顺序、硬闸、交付落点、路由第一跳、QC 频率。
-routes: [workspace-layout.md, project-ref-layout.md, del-and-harvest.md, library-taxonomy.md, network-security.md, skills.md, QC.md]
+routes: [workspace-layout.md, project-ref-layout.md, del-and-harvest.md, library-taxonomy.md, network-security.md, skills.md, QC.md, project-fact-lookup.md]
 ---
 
 # 0 本仓与阅读顺序
 - 本文件 = **L0 常驻层**，每次开工必读。细则按 §5 路由读 L1 专题；做法按派单挂到 MY-SKILLS（L2）。
+- **课题事实：** 开工、改稿、内审须先查 `project-fact-lookup.md`（通讯作者、伦理号、扫描序列、实验室范围）；挂载不等于已查。
 - 层级契约：L0 只写裁决、授权、落点、路由、门；L1 只写「放哪 / 什么算对 / 何时停」；L2 不碰授权、落点、网络、PR、别名、路由。L1 只能收紧硬闸，不能放宽。
 - 生效对象：Aitor、子代理、本机 DSH、Cline、Cloud Agent，一律遵守，无例外、无需再问。云端 prompt 必须写明 `{RULES}`；Skills 按本次任务写入。云端 = Grok Bot 的 box；本地 = 城城本机（`D:\`、Downloads），勿对调。
 - 工作区只有一层（`D:\MyProjects\<stage>\<project>`）；不设 A/B 双工作区或挂载缓存树。
@@ -49,6 +50,7 @@ routes: [workspace-layout.md, project-ref-layout.md, del-and-harvest.md, library
 | DOCX 稿件 / XLSX 终表 | 子工程根；稿名见 `project-ref-layout.md`「SCI 稿件文件名」 |
 | 文献全文（PDF / HTML） | `{doc_root}\_library\references\<L1>\<L2>\`；子工程 `ref\refer\` 只留 `DOI_*.md` 指针 |
 | 期刊池 / 批件 | `_library\journals\index.csv`；`_library\ethics\approvals\<L1>\<L2>\`（口径 `library-taxonomy.md`） |
+| 扫描参数 / 实验室参考范围 | `_library\scanner-registry\`；`_library\lab-ref-ranges\`（查找口径 `project-fact-lookup.md`） |
 
 - **单档 ≤1 GiB**；预计超限直接分 900 MiB 字节卷 + `分卷说明.md`，不先造大档再拆（细则 `workspace-layout.md`）。
 - **Word / 稿件**：未当轮点名禁改 `.docx` / `.pdf` 版式；**所有助手改稿只许用 Track Changes 增量合并**，禁大段覆盖；城城已改先问，禁覆盖或改回；城城手改后去掉已确认修订标记的文字视为已定稿，**禁止重新打修订标记**（不得用旧稿对照再标红，不得把已接受的修订再打回去）；**任何回滚须当轮点名授权**（手改识别 → `project-ref-layout.md`）；**无稿不造空件**（无 docx 就记「无 docx」）。
@@ -75,6 +77,7 @@ routes: [workspace-layout.md, project-ref-layout.md, del-and-harvest.md, library
 | 网络 / 敏感外发 / 代理 / 留痕 | `network-security.md` | — |
 | 技能库 / PR 同步 / 演进 | `skills.md` | `skills` |
 | 库分类 L1–L2 / 三库 / 批件 / 期刊池 | `library-taxonomy.md` | `find-journal` |
+| 通讯作者 / 伦理号 / 扫描序列 / 实验室参考范围 | `project-fact-lookup.md` | — |
 | 规则 QC / 清理判据 / 门 | `QC.md` | — |
 | 三仓分工 / 内容该放哪 | `README.md` | — |
 | 派单 / 盯梢 | `{SKILLS}\00_orchestrator\references\ownership-contract.md` / `handoff-monitor.md` | `00_orchestrator` |
@@ -90,7 +93,7 @@ routes: [workspace-layout.md, project-ref-layout.md, del-and-harvest.md, library
 # 7 执行准则
 - **编程**：简单优先、外科手术式、模块化、不写回退（失败要响）；新脚本 Python 3.13.9；PowerShell 不用 `&&`；配置置顶；注释只写配置含义与运行方式；写计算代码前先读本机 CPU / GPU / RAM，能用则优先多线程和 CUDA。
 - **流程**：先测 → 再跑 → 核查 → 验收；批量写盘先 dry-run，显式 `--execute` 才落盘；断点续传不整段重算；后台开跑前先冒烟测试；后台或预计超过 2 分钟的作业须同时开可见控制台监控（默认 60 秒刷新）。
-- **验证**：优先 diff；lint / 测试后交终稿；**不编造**事实 / 数字 / 文献 / DOI / 路径，找不到写「未找到」。
+- **验证**：优先 diff；lint / 测试后交终稿；**不编造**事实 / 数字 / 文献 / DOI / 路径，找不到写「未找到」。稿面伦理号、序列参数、实验室范围须按 `project-fact-lookup.md` 复核，库中无值则报缺。
 - **科研**：文献只引真实来源；统计不为跑通改 outcome / 纳入 / cutoff / 协变量 / 缺失 / 模型（细则 → `{SKILLS}\02_data-processing\qc\`）。
 - **工程决策** R1 需求优先 · R2 证据排错 · R3 有序简化 · R4 风险比例 · R5 保护不变量 · R6 闭环验证；**重大变更门**（改结构 / 改 ID / 删目录）先给假设清单与影响并获批。
 - **长任务交接**：执行长任务（后台或预计超过 2 分钟）时，须提醒城城写交接文档并开新对话。

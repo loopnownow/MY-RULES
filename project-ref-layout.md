@@ -144,6 +144,7 @@ SCI 相关文件统一命名：`<Stem>_<子项目名>_<版本号>`。
 - 根上 `tables/` `figures/` `pipeline/`：统计表图与流水线夹；**hashes / MANIFEST / pipeline_run.log 在 `ref/pipeline/`**（原 `analysis/`/`results/` locks）；`qc.html` 仍在 `ref/` 根。
 - 写作参考（可在 `refer/`）、`submission-*`、数据底表：原 `materials/` 子项（D-1：今后移底表先问）。
 - 并注明：「分析错分/临时表 `false_classification*` 与结果 HTML（`Results*.html`）落当次结果夹 `<project>/<endpoint>/`（或 OUT_DIR / `SUBPROJECT_BY_OUTCOME`），不在子工程根，也不在 ref」
+- 课题事实指针：伦理批件行、扫描参数登记表行、涉及的实验室检验项（查找与禁补编 → `project-fact-lookup.md`）；通讯作者邮箱不写进 README。亦可追加到 `manuscript-revision.md`。
 
 ## 跳过 / 幂等规则（再跑前先读 ledger）
 

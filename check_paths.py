@@ -39,6 +39,7 @@ SCAN_MD = REQUIRED_RULES_MD + (
     "project-ref-layout.md",
     "network-security.md",
     "library-taxonomy.md",
+    "project-fact-lookup.md",
 )
 
 RULES_SKILL_PATH_RE = re.compile(
