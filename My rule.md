@@ -28,7 +28,7 @@ routes: [workspace-layout.md, project-ref-layout.md, del-and-harvest.md, library
 
 # 2 写盘与授权
 **总闸：只读不用授权；任何新建 / 编辑 / 覆盖 / 移动 / 删除前，须用户当轮点名该项或明确同意；未获授权即停，不静默落盘。**
-- **授权按项按轮**：点名 A 只授权 A 的该处；「继续」「好」「你看着办」不等于写盘许可。须问条款（D-1 移底表、网络、MY-SKILLS PR/merge、Word 城城已改先问）继续有效。
+- **授权按项按轮**：点名 A 只授权 A 的该处；「继续」「好」「你看着办」不等于写盘许可。须问条款（D-1 移底表、网络、MY-SKILLS PR/merge、Word 城城已改先问、稿件回滚须授权）继续有效。
 - **禁删**：旧稿 / 旧产物移入 `{DEL}`（`_by-project` / `_by-function`），保留相对路径；禁止静默永久删除。
 - **新建**：默认只许 `{DEL}`；常设例外仅限 bot 记忆导出（`_Docs\mem\`）、子工程 `ref\tmp\`、用户当轮同意；例外只是新建路径，不构成编辑许可。一次性脚本 / 小补丁只落 `{DEL}`，不进主目录、`.grok\tmp`、课题根。
 - 默认禁止直接改 `{RULES}`、`{SKILLS}`、`_Docs`、子工程已有文件；**改已有文件同样须当轮点名**，含 `_Docs\harvest\*`、`_Docs\mem\*`、已有稿（含 Track Changes）。
@@ -51,7 +51,7 @@ routes: [workspace-layout.md, project-ref-layout.md, del-and-harvest.md, library
 | 期刊池 / 批件 | `_library\journals\index.csv`；`_library\ethics\approvals\<L1>\<L2>\`（口径 `library-taxonomy.md`） |
 
 - **单档 ≤1 GiB**；预计超限直接分 900 MiB 字节卷 + `分卷说明.md`，不先造大档再拆（细则 `workspace-layout.md`）。
-- **Word / 稿件**：未当轮点名禁改 `.docx` / `.pdf` 版式；改文字用 Track Changes，禁大段覆盖；城城已改先问，禁覆盖或改回（手改识别 → `project-ref-layout.md`）；**无稿不造空件**（无 docx 就记「无 docx」）。
+- **Word / 稿件**：未当轮点名禁改 `.docx` / `.pdf` 版式；改文字用 Track Changes，禁大段覆盖；城城已改先问，禁覆盖或改回；**已手改文字禁止重新打修订标记**（不得用旧稿对照再标红）；**任何回滚须当轮点名授权**（手改识别 → `project-ref-layout.md`）；**无稿不造空件**（无 docx 就记「无 docx」）。
 - 同一分析 `Results*.html` 与 `.xlsx` 冲突 → 以 HTML 为准并写明；清理旧稿 → `{DEL}` 保相对路径，不静默删除；长表 → `{SKILLS}\00_orchestrator\references\standing-delivery.md`。
 
 # 4 别名
