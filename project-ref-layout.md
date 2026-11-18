@@ -50,7 +50,7 @@ description: 项目 ref/ 地图、稿名与文件命名、城城手改识别、�
 - 面向稿件/门控的统计**表图**在 `ref/tables/` `ref/figures/`；**锁定件** `hashes.tsv` `MANIFEST.md` `pipeline_run.log` 在 **`ref/pipeline/`**；**勿**与 `ASL/` 等分析树合并。
 - **分析错分/临时表**：`false_classification*` 与同类 ASL 分析临时表落**当次结果夹** `<project>/<endpoint>/`（或解析出的 OUT_DIR / `SUBPROJECT_BY_OUTCOME` 夹），**不在子工程根**，也**不进 `ref/`**。结果 HTML 同落该结果夹为 `Results*.html`（见 `workspace-layout.md`）；**不**把 `{slug}_results.html` 或旧结果 HTML 提升到子工程根——根上已有的旧副本属错位。
 - **文献全文：** PDF/HTML 实体一律进 `D:\MyProjects\_Docs\_library\references\<L1>\<L2>\`（命名、索引、指针契约见该库 `README.md`）；子工程 `ref/refer/` 只写 `DOI_*.md` 指针，`ref/citation/` 不放全文，`_library\lit-bank` 只存书目。
-- **终稿 / 控制台终表**留在子工程根。
+- **终稿 / 控制台终表**留在子工程根。查阅入口用 `{memo_dir}` 快捷方式（`My rule.md` §3），不另存一份。
 - **已接受**的最终稿件留在子工程根；**未被接受**的投稿包进 `ref/` 根或 `submission-*`（见下「投稿包」）。主人点名时，中间 xlsx 也可留在子工程根，勿擅自挪走。
 
 ### 投稿包（未被接受 vs 已接受）
