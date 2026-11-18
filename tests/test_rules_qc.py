@@ -12,8 +12,7 @@ qc = importlib.util.module_from_spec(spec)
 sys.modules["qc_rules"] = qc
 spec.loader.exec_module(qc)
 
-CONTENT = ["My rule.md", "workspace-layout.md", "project-ref-layout.md",
-           "del-and-harvest.md", "library-taxonomy.md", "network-security.md", "skills.md"]
+CONTENT = list(qc.CONTENT)
 ROUTED_EXTRA = ["README.md", "QC.md"]
 OLD = "00db"
 

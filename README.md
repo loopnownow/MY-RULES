@@ -4,7 +4,7 @@
 
 入口永远是 `My rule.md` §5 路由表：先认触发，再读专题。三仓互指只用别名，不复制正文。
 
-## 文件结构（10 个）
+## 文件结构（11 个）
 
 | 文件 | 层 | 做什么 | 边界 |
 |---|---|---|---|
@@ -13,6 +13,7 @@
 | `project-ref-layout.md` | L1 | 项目 `ref\` 地图、稿名、手改识别、幂等 | 落点总则 → `My rule.md` §3；版式 → 技能 |
 | `del-and-harvest.md` | L1 | `{DEL}` 三档、harvest 去向、活依赖、新建禁区全文 | 扫描实现 → `_Docs\test\`；何时清 → `QC.md` |
 | `library-taxonomy.md` | L1 | 库分类 L1/L2、三库分工、批件 / 期刊池契约 | 归并脚本 → 技能 `db-library` |
+| `project-fact-lookup.md` | L1 | 开工、改稿、内审必查：通讯作者、伦理号、扫描序列、实验室范围 | 批件分类 → `library-taxonomy.md`；指针落点 → `project-ref-layout.md` |
 | `network-security.md` | L1 | 网段红线、敏感外发、代理、留痕 | 不写执行步骤 |
 | `skills.md` | L1 | 技能仓读边界、按需加载、演进、MY-SKILLS PR | fine-id 路由在技能仓，不在此 |
 | `README.md` | 支撑 | 本文件：仓地图与维护入口 | 不承载规则正文 |
