@@ -70,7 +70,7 @@ routes: [workspace-layout.md, project-ref-layout.md, del-and-harvest.md, library
 | `{doc_root}` / `{lab_root}` | `D:\MyProjects\_Docs` / `D:\MyProjects` |
 | `{memo_dir}` | `C:\Users\loopn\Downloads\备忘录` |
 
-旧名一律不写进正文，映射见 `aliases.yaml`。术语：`A`=批注作者；`00`–`07`=技能层。
+旧名一律不写进正文，映射见 `aliases.yaml`。术语：`A`=助手批注/修订作者；`Adm`=城城本人的修订与批注作者标记（其下订正和批注是重要 harvest 对象）；`00`–`07`=技能层。
 
 # 5 路由表（第一跳）
 | 触发 | 读 | 挂 |

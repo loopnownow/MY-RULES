@@ -47,6 +47,7 @@ up: My rule.md §2（写盘总闸与新建禁区）
 
 # 6 harvest 对象与布局
 - **三类对象**：过程 how-to、判据 / 阈值、模板片段；不含未发表全文、含姓名表、PHI。
+- **城城标记：** Word 中作者标记 **Adm** 下的订正和批注是重要 harvest 对象（只抽标记，不抽全文）。助手作者 **A** 不是城城本人，不当作业主标记来抽。
 - **三桶**：规则候选、技能候选、不抽（→ `harvested`）。
 - fine-id 只作 lane，不预先定技能；抽与 promote 分离，promote 走 `skills.md` §5。
 - **快照不保留**：只收正文 + `MANIFEST.tsv` + `evidence\` + `tools\`；实体镜像不进 `{doc_root}`。
