@@ -235,7 +235,7 @@ description: 本机布局与子工程短针。落点见 My rule.md §3。
 
 ### 其它
 - 其它 csv/xlsx：去重合并→DB；移删先问（D-1）。
-- 脚本：一次性留指针；可复用提案 MY-CODES。
+- 脚本：仅用一次的留指针；功能相近且多次使用的先作 harvest 对象，可复用提案 MY-CODES（权威 → `del-and-harvest.md` §2 / §6）。
 - THESIS/行政（伦理·科教科·财务）与单篇 SCI 分轨。
 - 四条件齐再 archived（含 skill_ref 或 none）；更新 `_DataBase\_index.csv`、`mem\people.csv`（见「archived 冷库」）。
 - syn：`D:\MyProjects`→`E:\Aitor` 仅 `/XD .Del`。
