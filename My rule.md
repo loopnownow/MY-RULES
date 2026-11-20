@@ -46,14 +46,14 @@ routes: [workspace-layout.md, project-ref-layout.md, del-and-harvest.md, library
 | 产物 | 落点 |
 |---|---|
 | 最终交付（稿件 / 终表 / 报告） | 子工程根；无子工程且点名下载 → Downloads；否则 `{DEL}` |
-| 需查看件 / 在做项目的查阅入口 | `{memo_dir}` 只放正在做的项目的 `.lnk`；已完成的不放；原件不搬家、不另存 |
+| 需查看件 / 在做项目的查阅入口 | `{memo_dir}` 不放 `.lnk`；查阅入口是备忘录 HTML 的 `file:///` 链接（指向原件落点）；原件不搬家、不另存 |
 | 报告 / QC（HTML，中间） | 子工程 `ref\` 或阶段夹；否则 `{DEL}` |
 | DOCX 稿件 / XLSX 终表 | 子工程根；稿名见 `project-ref-layout.md`「SCI 稿件文件名」 |
 | 文献全文（PDF / HTML） | `{doc_root}\_library\references\<L1>\<L2>\`；子工程 `ref\refer\` 只留 `DOI_*.md` 指针 |
 | 期刊池 / 批件 | `_library\journals\index.csv`；`_library\ethics\approvals\<L1>\<L2>\`（口径 `library-taxonomy.md`） |
 | 扫描参数 / 实验室参考范围 | `_library\scanner-registry\`；`_library\lab-ref-ranges\`（查找口径 `project-fact-lookup.md`） |
 
-- **备忘录快捷方式（常设）：** 正在做的项目中、需城城查看的文件及其现行终稿，在 `{memo_dir}` 放 Windows 快捷方式（`.lnk`），原件仍留原落点（终稿留子工程根）。已完成的项目不要在该夹放 `.lnk`，完成时删去对应快捷方式。禁止把原件复制进该夹（避免双份分叉）。新终稿替换后须更新或替换对应快捷方式，勿留指向旧版的死链。中间件默认不放，仅当轮需查看的才建。此条是 Downloads 点名的常设例外，只授权建/更新/删除快捷方式，不授权改原件。
+- **备忘录夹：** `{memo_dir}` 不放 Windows 快捷方式（`.lnk`）。禁止在该夹新建、更新或保留 `.lnk`；若发现已有 `.lnk`，应删除（此条只授权删除快捷方式，不授权改原件或备忘录正文）。查阅入口是备忘录 HTML 中的 `file:///` 链接，指向原件落点（终稿留子工程根）。禁止把原件复制进该夹（避免双份分叉）。此条不再构成 Downloads 点名的常设例外。
 - **备忘录正文（HTML）：** 更新 `{memo_dir}` 下备忘录页时，已完成与下一步的每一条，凡有对应文件或文件夹，须给出可点击的 `file:///` 链接（指向原件落点，不另存一份）。仅口头、无对应文件的条目可不放链接。已完成从简，下一步稍详。更新前先读相关会话再改页。版式以该夹现行「近三天工作备忘」HTML 为样例。
 - **单档 ≤1 GiB**；预计超限直接分 900 MiB 字节卷 + `分卷说明.md`，不先造大档再拆（细则 `workspace-layout.md`）。
 - **Word / 稿件**：未当轮点名禁改 `.docx` / `.pdf` 版式；**所有助手改稿只许用 Track Changes 增量合并**，禁大段覆盖；城城已改先问，禁覆盖或改回；城城手改后去掉已确认修订标记的文字视为已定稿，**禁止重新打修订标记**（不得用旧稿对照再标红，不得把已接受的修订再打回去）；**任何回滚须当轮点名授权**（手改识别 → `project-ref-layout.md`）；**无稿不造空件**（无 docx 就记「无 docx」）。
