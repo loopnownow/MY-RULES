@@ -19,7 +19,7 @@ routes: [workspace-layout.md, project-ref-layout.md, del-and-harvest.md, library
 - 单项目约定写在子工程内（`<project>\_Docs\` / `ref\`），不写全局 `{RULES}` / `{SKILLS}`。
 
 ## 1.2 硬闸五类
-1. **写盘授权**：只读不用授权；任何写盘先获当轮点名（§2）。
+1. **写盘授权**：只读不用授权（`{doc_root}\mem\` 除外，见 §2）；任何写盘先获当轮点名（§2）。
 2. **禁删**：清理只移 `{DEL}` 并保相对路径（§2）。
 3. **新建禁区**：默认只许 `{DEL}`（§2；全文 `del-and-harvest.md`）。
 4. **网络红线**：禁止网段默认拒绝；敏感外发先说明再获同意（`network-security.md`）。
@@ -28,7 +28,8 @@ routes: [workspace-layout.md, project-ref-layout.md, del-and-harvest.md, library
 另有 **PII 边界**：姓名 / 电话只可写本机 `_DataBase` 家族 SQLite（`<family>db`，不进 GitHub）；身份证与地址默认不进，除非当轮新授权；均不得写进任何仓、回执或聊天。
 
 # 2 写盘与授权
-**总闸：只读不用授权；任何新建 / 编辑 / 覆盖 / 移动 / 删除前，须用户当轮点名该项或明确同意；未获授权即停，不静默落盘。**
+**总闸：只读不用授权（`{doc_root}\mem\` 查阅见下条）；任何新建 / 编辑 / 覆盖 / 移动 / 删除前，须用户当轮点名该项或明确同意；未获授权即停，不静默落盘。**
+- **mem 查阅：** 未经当轮点名，`{doc_root}\mem\` 下只许读 `README.md` 与 `SENSITIVE.md`；其余文件与子夹（含列出、打开、检索）即使只读，也须用户当轮点名该文件、路径或该项任务。写盘仍按本条总闸，须当轮点名。
 - **授权按项按轮**：点名 A 只授权 A 的该处；「继续」「好」「你看着办」不等于写盘许可。须问条款（D-1 移底表、网络、MY-SKILLS PR/merge、Word 城城已改先问、稿件回滚须授权）继续有效。
 - **禁删**：旧稿 / 旧产物移入 `{DEL}`（`_by-project` / `_by-function`），保留相对路径；禁止静默永久删除。
 - **新建**：默认只许 `{DEL}`；常设例外仅限 bot 记忆导出（`_Docs\mem\`）、子工程 `ref\tmp\`、用户当轮同意；例外只是新建路径，不构成编辑许可。一次性脚本 / 小补丁只落 `{DEL}`，不进主目录、`.grok\tmp`、课题根。
@@ -106,4 +107,4 @@ routes: [workspace-layout.md, project-ref-layout.md, del-and-harvest.md, library
 # 8 汇报
 - 说明 / QC 中文；期刊英文稿英文；时区 `Asia/Shanghai`；「；」=两任务，「|」=同任务并列；状态用表格或列表。
 - **标点**：允许 U+2212 `−`；禁 em dash 与 spaced `--`（仅英文稿件 / 对外英文；中文「——」不受限）；STE → `{SKILLS}\05_manuscript\base\vocab\L3\lab-ste.md`。
-- **mem**：bot 记忆只放隐私与可变 SSOT（如 JCR xlsx）；运营口径进本仓，技能口径进 `{SKILLS}`；导出落 `{doc_root}\mem\`。
+- **mem**：bot 记忆只放隐私与可变 SSOT（如 JCR xlsx）；运营口径进本仓，技能口径进 `{SKILLS}`；导出落 `{doc_root}\mem\`；查阅授权见 §2。
