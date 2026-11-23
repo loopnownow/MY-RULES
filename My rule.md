@@ -76,7 +76,7 @@ routes: [workspace-layout.md, project-ref-layout.md, del-and-harvest.md, library
 # 5 路由表（第一跳）
 | 触发 | 读 | 挂 |
 |---|---|---|
-| 盘面 / 阶段夹 / 家族桶 / `_share` / `_db` / 冷库 / accepted 收工 | `workspace-layout.md` | `db-library` |
+| 盘面 / 阶段夹 / 家族桶 / `_share` / `_db` / 项目业务表 / 冷库 / accepted 收工 | `workspace-layout.md` | `db-library` |
 | 项目 `ref\` 地图 / 稿名 / 手改识别 / 幂等 | `project-ref-layout.md` | — |
 | `{DEL}` / harvest / 清理 / 活依赖 | `del-and-harvest.md` | `00_orchestrator` harvest |
 | 网络 / 敏感外发 / 代理 / 留痕 | `network-security.md` | — |
