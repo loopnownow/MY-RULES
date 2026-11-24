@@ -105,48 +105,59 @@ description: 本机布局与子工程短针。落点见 My rule.md §3。
 
 可选：数据课题也可在上述子工程树内自建文件夹；约定写在该子工程内，不进全局 rules/skills。
 
-### 家族库 `_db\`
+### 家族库 `_db\\` 与子工程库（1+N）
 
-- **位置（三层）**：`_DataBase\<family>\_db\<family>db`。自 `_DataBase` 起总深 3；`_DataBase\_db\` 已退役，也不建 `<family>\_db\<short_code>\` 子夹；`_db` 内只放库文件与 `目录说明.md`，不建 `raw\` / `originals\` / 日期子夹。
-- **一族一库**：同家族全部短码共用一个 `<family>db`；短码靠 `project` 表与 `doc.rel_path` 区分，只表示项目归属，不是个体主索引；家族拆分时整库随 `<family>` 走。
-- **现役骨架（core-6t）**：实表为 `meta` / `project` / `src` / `item` / `val` / `person` / `person_key`（七张），另有只读兼容视图 `doc` / `sheet` / `sheet_dup` / `entity` / `fact`。不得为压缩业务表数量而删并这些实表或拆除 `person` / `person_key`。每项目「至多长表与宽表各一」约束的是「项目业务表」，不是这套骨架。
-- **命名**：库文件 `<family>db`（无扩展名；实例 `MHE_ANdb` / `MHE_PAdb`）；同目录只放 `目录说明.md`（口径 / 表结构 / 查询示例 / 重建步骤 / 限制）。
-- **只收表格（去重合并结果）**：xlsx / xls / csv 等可解析的原始行列数据入库；入库即按「散表归并」去重合并（文件 sha → 整表 → 行级，及「去重合并」），同格式多份并入同一 project（`doc.rel_path` 区分）；非原始数据不入库，口径 → 见「项目业务表（每项目至多两张：长表与宽表）」。`_db` 不是散表仓，不存原件、不存合并中间簿。**压缩档内的表格同样入库**：解出到 staging 后按同一条去重合并，档本身仍归 `_share`。
+- **位置（1+N，三层）**：家族库 `_DataBase\\<family>\\_db\\<family>db`；子工程库 `_DataBase\\<family>\\<slug>\\<slug>db`（**扁平**，不建 `<slug>\\_db\\` 或 `<family>\\_db\\<short_code>\\` 子夹）。自 `_DataBase` 起两者总深 3；`_DataBase\\_db\\` 已退役。
+- **目录内容**：`_db` 内只放家族库 `<family>db`、并存期冻结旧库 `<family>db_6t` 与 `目录说明.md`；子工程叶内只放 `<slug>db` 与 `目录说明.md`。两处都不建 `raw\\` / `originals\\` / 日期子夹；并存期结束、旧库归档后，`_db` 回到「一库一说明」。
+- **1+N：一库一工程**：每家族恰一个家族库 `<family>db`；每个子工程恰一个子库 `<slug>db`。短码 = 子工程 slug，靠 `ref_project` 与子库 `src` 区分，只表示项目归属，不是个体主索引；家族拆分时整树随 `<family>` 走。
+- **可独立处理**：家族库与子库可分别备份 / VACUUM；子库在 D28「零 PHI」通过后可单独外发，家族库含 PHI 一律不得外发。
+- **跨库唯一引用**：只靠 `family_uid`（形如 `ACN-000137`）。SQLite 无跨库外键，父子一致性由 `verify_db` 的 ATTACH 检查（D27/D34）承担。
+- **现役骨架（5t）**：家族库实表 `meta` / `id` / `id_number` / `dict` / `ref_project`（五张）；子库实表 `meta` / `src` / `person` / `clin` / `modal_<mod>`（有模态数据则 ≥1 张）/ `qc`（六类）。`id` / `id_number` 是唯一 PHI 落点；`person` 是**无 PHI 占位表**（`family_uid` / `subject_label` / `id_status`），不存姓名 / 身份证 / 电话 / 地址。
+- **家族库五表口径**：`id` 存姓名 / 电话 / 身份证 / 地址 / `family_uid`（`^[A-Z0-9_]+-\\d{6}$`）；各类号走 `id_number(kind, value)`（住院号 / 门诊号 / 影像号 / 病理号 / 样本号）；`dict` 登记变量（`role='phi'` 只许 `scope='family'`）；`ref_project` 登记子库清单与 `db_rel_path` / `built_at` / `sha256`。
+- **`ref_project` 四个计数**：`person_count`（person 行数，含占位）/ `clin_person_n`（有 ≥1 条 clin 行的人数 = **队列人数口径**）/ `longitudinal_n`（有 ≥2 个不同 `period_month` 的人数）/ `multi_record_n`（有 >1 条 clin 行的人数）。四列由门禁实时重算比对，任一不等即 **P0**（D35）；**对外只报 `clin_person_n`**。
+- **家族级人数不报**：`id` 行数 ≠ 患者数，`person_count` 也不是队列人数。跨子库未解析时只报项目级 `clin_person_n`；`id` 行数只允许作「身份行数」出现在方法学附注（D36）。试点实测：LC 家族库 `id` 3,050 行，四个项目 `clin_person_n` 合计 2,234 人；非姓名证据判同一人为 0，故不提供家族级合计。
+- **冻结旧库（core-6t）**：旧七表 `meta` / `project` / `src` / `item` / `val` / `person` / `person_key` 与兼容视图 `doc` / `sheet` / `sheet_dup` / `entity` / `fact` 只在 `<family>db_6t` 内保留，**只读**，供迁移对账；不得在旧库继续建表 / 改数，也不再按此骨架新建库。旧库 `meta.source_db` + `sha256` 须指向原始旧库并校验（D33）。
+- **命名**：库文件 `<family>db` / `<slug>db`（均无扩展名；实例 `MHE_ANdb`、`lxj_ACNdb`）；冻结旧库 `<family>db_6t`（同目录、无扩展名、只读）。`_db` 与子工程叶内均只放「库文件 + `目录说明.md`」；说明须含口径 / 表结构 / 查询示例 / 重建步骤 / 限制 / `source_db` 对应关系（旧库名 + sha256）。
+- **只收表格（去重合并结果）**：xlsx / xls / csv 等可解析的原始行列数据入库；入库即按「散表归并」去重合并（文件 sha → 整表 → 行级），同格式多份并入对应子库（`src.rel_path` + `src.sha256` 区分）；非原始数据不入库，口径 → 见「项目业务表（`clin` + `modal_<mod>` + `qc`）」。库不是散表仓，不存原件、不存合并中间簿。**压缩档内的表格同样入库**：解出到 staging 后按同一条去重合并，档本身仍归 `_share`。
 - **压缩档本身不进 db、不留叶**：`*.tar.zst`、`7z`、`zip`、`gz`、`rar` 等归档一律进 `<family>\_share\`（归位见「`_share` 家族原始件池」）；**档内表格文件须解出、按「散表归并」入库**，档内非表格件（原始图 / 记录 / 文档）不入库；解包树校验后移 `{DEL}`，readme / 移动台账记「档→表」映射。
-- **叶内只留 readme**：原表入库并校验后，叶内只留 `目录说明.md`（写入库日 / 项目 slug / 原件去向 / 未入库例外）；不得留散表。未入库件（PHI 花名册、模板、解析失败件）留叶并在 readme 写明原因，不得另存副本。
+- **叶内只留 readme + 子库**：原表入库并校验后，叶内只留 `<slug>db` 与 `目录说明.md`（写入库日 / 项目 slug / 原件去向 / 未入库例外 / `source_db`+sha256）；不得留散表。未入库件（PHI 花名册、模板、解析失败件）留叶并在 readme 写明原因，不得另存副本；**PHI 花名册只作迁移证据，不得并入子库**（迁移后按 D28 复核）。
 - **原件留痕**：建库并校验通过后，原件移 `{DEL}\_by-function\<batch>\originals\<code>\<family>\<leaf>\`，写 `*-MOVED-YYYYMMDD.tsv`（相对路径 / 字节 / sha256）；原件不回流。
-- **门禁**：`_db` 是 `_` 前缀桶，不参与 S23 桶/叶后缀校验；`structure_check.py` S25 校验落点与库文件（`<family>db` + `目录说明.md`、库头 SQLite、核心表齐、`_DataBase\_db` 不复活）；建库 / 迁移前后仍须全门 PASS。
-- 细则（去重层级、schema、QA 清单、重建命令）→ skill `db-library`。
+- **门禁**：`_db` 是 `_` 前缀桶，不参与 S23 桶/叶后缀校验。`structure_check.py` **S25** 校验家族库/子库落点与库文件（`<family>db` / `<slug>db` / 冻结 `<family>db_6t`、库头 SQLite、按 `meta.kind` + `schema_version` 分派 5t 家族五表 / 子库六类表、`_DataBase\\_db` 不复活）；**S26** 允许叶内 `<slug>db`；**S27** 确认 `_share` 不收库文件。`verify_db.py` 先按 `schema_version` 分派：旧 core-6t 仍跑 D1–D22，5t 跑 D23–D45（含跨库 ATTACH）。建库 / 迁移前后仍须全门 PASS。
+- 细则（去重层级、5t/6t schema、`family_uid` 分配、QA 清单、重建命令、旧库对账）→ skill `db-library`。
 
 ### 散表归并与表格入库
 
 - **触发**：家族根 / 叶根散落表格（同项目多份、`(n)` 版本、一簿多 sheet）需要「去重 → 对齐 → 合并成一个 Excel」或「入 `_db`」时。
-- **项目粒度 = 叶 slug**（家族根直放的用家族名）；合并产物 `<项目名>_merged_YYYYMMDD.xlsx` **不落**叶根 / 家族根：同格式多份直接入库 `_db\<family>db`，确需中间簿只暂存 `{DEL}\_by-function\<batch>\`；`_share\` 内不动。
+- **项目粒度 = 叶 slug**；合并产物 `<项目名>_merged_YYYYMMDD.xlsx` **不落**叶根 / 家族根：同格式多份直接入库对应子库 `<slug>\\<slug>db`（家族级身份映射另登记家族库 `id` / `id_number`），确需中间簿只暂存 `{DEL}\\_by-function\\<batch>\\`；`_share\\` 内不动。
 - **去重三层**：① 文件级 sha256；② 整表级（表头 + 行哈希集合全等 = 重复；真子集 = subset，只记边、不存第二份字节）；③ 行级 / 实体级（自然键整行全等才去重；跨项目映射只人工建）。
 - **对齐**：列名词典 + 表头驱动解析；**不按 mtime 判新旧**（迁移会刷新 mtime，本轮 239/258 张挤在 13 个分钟桶）；版本簇（`(n)` / `copy`）只作线索，须开表核对。
 - **去重合并**：行名或行键一致时按列合并去重，以较新数据为准，旧表独有列回填，不得编造数值或列名。列名一致时按行合并去重，以较新数据为准，旧表独有行保留。较新指同一版本链中较后的来源（版本标记、`(n)`、`copy`、新旧线索）；mtime 判定 → 见上「对齐」。
 - **合并冲突**：若较后的表明显更小、覆盖会缩小队列，则保留更完整的表，较小者只记 subset，不得覆盖。新旧无法判定时，重叠行保留非空单元格最多的一行，并列时取原行序更前的；被丢行只回填空位。表头缺失、双层或把数据行误当表头时，须先修好再合并。
 - **留痕**：原件移 `{DEL}\_by-function\<batch>\originals\<code>\<family>\<leaf>\`，写 `*-MOVED-YYYYMMDD.tsv`（件数 / 字节 / sha256 100% 核验）；结果与限制写叶 / 家族 `目录说明.md` 追加段 + `_index.csv` note；批次报告 `<batch>-REPORT.md`。
 - **闸**：改动前后 `structure_check.py` 全门 PASS；手工删除 / 清除须主人确认后写 `REVOKED-YYYYMMDD.tsv`，不得静默。
-- 策展后每叶只留一份现行源文件，内含长表与宽表（每表最多 5 个工作单）；库内至多长表与宽表各一，口径见「项目业务表（每项目至多两张：长表与宽表）」。
+- 策展后每叶只留一份现行源文件，内含长表与宽表（每表最多 5 个工作单）；子库内 `clin` 一张 + `modal_<mod>` 按模态/特征域各一张（逐张登记 `dict`）+ `qc` 一张，口径见「项目业务表（`clin` + `modal_<mod>` + `qc`）」。
 - 细则（三类型判定、表头驱动解析、坑位清单、合并簿 sheet 约定）→ skill `db-library`。
 
-### 项目业务表（每项目至多两张：长表与宽表）
+### 项目业务表（`clin` + `modal_<mod>` + `qc`；不再按长/宽各一限表）
 
-- **范围**：约束的是每个短码（叶 slug）在家族库中的现行业务表，不是家族库物理骨架。库内每项目至多两张：一张长表与一张宽表，不得另开第三张现行业务表。
-- **现行源文件**：每个叶只保留一份现行源文件，且须是一份工作簿，不得长表、宽表各放一个文件。该文件内为长表与宽表；无内容的一侧省略，不硬凑。每张表最多 5 个工作单；`clin` / `modal` / `qc` / `analysis` / `dict` 可用作工作单名，但不是库内五张业务表。
+- **范围**：约束的是每个**子工程库**的业务表，不是家族库骨架。家族库只存身份、号、字典与子库登记（`id` / `id_number` / `dict` / `ref_project`），不存项目业务表。子库业务表 = `clin` 一张 + `modal_<mod>` N 张（每模态/特征域一张，须在 `dict` 登记）+ `qc` 一张；`person` 是占位表，不是业务表。「每项目至多长表与宽表各一」不再适用。
+- **现行源文件**：每个叶只保留一份现行源文件，且须是一份工作簿，不得长表、宽表各放一个文件。该文件内为长表与宽表；无内容的一侧省略，不硬凑。每张表最多 5 个工作单；工作单名可用 `clin` / `modal_<mod>` / `qc` / `analysis`，入子库后固定落到 `clin` / `modal_<mod>` / `qc`，**不得按工作单另开表**。
 - **长表与宽表**：
 
 | 表 | 内容 |
 |---|---|
-| 长表 | 一行一条记录的临床 / 检验 / 病理 / 行为等。随访与结局叠入长表并带时点或拆分列，不单立第三张表。可保留敏感临床字段；身份证与地址仍按 `My rule.md` §1.2，默认不进，除非当轮新授权。 |
-| 宽表 | 不宜强行拉长的矩阵（组学 / 影像组学 / 谱图 / ICC 或相关矩阵）。 |
+| `clin` | 一行一条「受试者 × 时点 × visit」记录（`family_uid` / `period_month` / `month_ix` / `visit_ix`）。随访与结局叠入本表并带时点或拆分列，不单立第三张表。临床敏感字段可留；**姓名 / 身份证 / 电话 / 地址只进家族库 `id`，`clin` 不得出现**（D28）。 |
+| `modal_<mod>` | 不宜强行拉长的矩阵（组学 / 影像组学 / 谱图 / ICC 或相关矩阵）按模态或特征域建表，如 `modal_radiomics` / `modal_us` / `modal_mri`。组学走 `modal_radiomics(exam_uid, roi, feature, value)` 长表，**不建千列宽表**。 |
+| `qc` | 门禁结果与人工裁决（`scope` / `code` / `severity` / `status`）；是正式表，不是业务数据表。 |
 
-- **只收原始行列数据**：入库 `.db` 的只是原始矩形数据（行 × 列）。论文统计与作图结果、伦理材料、通讯录、汇报稿、方法说明及其他非原始数据不进 `.db`。路径清单、变量字典与 QC 日志不得占用第三张库内表。伦理材料另见「伦理材料留存」（`verify_db` D19）。
-- **版本链**：计算 / 校正 / old / copy 等版本只把现行长表 / 宽表纳入定稿，其余留 `raw` 源。
-- **角色与源表**：`src.role`（兼容视图为 `sheet.role`）只许 `raw`、`curated`、`derived`。长表 / 宽表定稿标 `curated`；来源表留 `raw`，不得删除 `src` 的 blob。若库内出现 `derived` 表，只留 blob，不写 `val` / `fact` 行（`verify_db` D22）。
-- **写库**：把长表 / 宽表写入家族库或 `{RAW}`，以及 `--apply` / `--move`，须当轮点名；缺省 dry-run。写盘总闸见 `My rule.md` §2。
-- **外发边界**：业务表中的敏感字段与记录键不得写入聊天、记忆、备忘录、规则正文或回执（见 `My rule.md` §1.2）。
+- **时点粒度（`period_unit`）**：以月为原子，`period_month` = `YYYY-MM`，`month_ix` = year*12+month-1，`bin_ix` = `month_ix` // `period_unit`（派生不落盘）。三种情形：① 源表无日期 → `period_unit` 为 `NULL`，`clin` 全 `UNK`；② 有日期且能连成序列 → 声明 `1` / `3` / `6`。
+- **有日期但逐人归组未定**（如 `qrx_LUNG_his`：808 行中 253 行带日期、每人仅 1 行）→ 照常声明粒度，并记 `qc(LONGITUDINAL_UNAVAILABLE)`（P2）+ `identity_state='unresolved'`。`NULL` 只表示「库里没有时间」，**不得**表示「有时间但连不成序列」（D37/D38）；`unknown` 不得有 `month_ix`，也不得用假日期填充（D29）。
+
+- **只收原始行列数据**：入库的只是原始矩形数据（行 × 列）。论文统计与作图结果、伦理材料、通讯录、汇报稿、方法说明及其他非原始数据不进库。**`dict`（变量字典）与 `qc`（门禁日志）自 5t 起是正式表，不受「不得占用第三张库内表」限制**；但只登记字典与门禁结果，不得借道塞业务数据。伦理材料仍不进库（旧 core-6t 由 D19 拦；5t 库里伦理材料不得进入 `dict.source` / `ref_project.slug` / 子库 `src.rel_path`）。
+- **版本链**：计算 / 校正 / old / copy 等版本只把现行 `clin` / `modal_<mod>` 纳入定稿，其余留子库 `src.kind='workbook'` 的源表（保留 `rel_path` + `sha256`）。
+- **角色与源表**：5t 子库 `src.kind` 只许 `old_db`、`workbook`、`archive_member`，保留 `rel_path` + `sha256`，不得删除 `src` 行。冻结旧库的 `src.role`（兼容视图 `sheet.role`）仍只许 `raw` / `curated` / `derived`，定稿标 `curated`、来源留 `raw`、`derived` 只留 blob 不写 `val` / `fact`（`verify_db` D22，仅旧库适用）。
+- **写库**：把 `clin` / `modal_<mod>` 写入子库（身份字段写家族库 `id` / `id_number`）或 `{RAW}`，以及 `--apply` / `--move`，须当轮点名；缺省 dry-run。写盘总闸见 `My rule.md` §2。
+- **外发边界**：家族库含 PHI，**一律不得外发**；子库在 D28「零 PHI」通过后才可单独外发。业务表中的敏感字段与记录键不得写入聊天、记忆、备忘录、规则正文或回执（见 `My rule.md` §1.2）。
 
 ## 阶段夹与课题名
 
