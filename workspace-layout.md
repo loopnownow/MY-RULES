@@ -109,6 +109,7 @@ description: 本机布局与子工程短针。落点见 My rule.md §3。
 
 - **位置（1+N，三层）**：家族库 `_DataBase\\<family>\\_db\\<family>db`；子工程库 `_DataBase\\<family>\\<slug>\\<slug>db`（**扁平**，不建 `<slug>\\_db\\` 或 `<family>\\_db\\<short_code>\\` 子夹）。自 `_DataBase` 起两者总深 3；`_DataBase\\_db\\` 已退役。
 - **目录内容**：`_db` 内只放家族库 `<family>db`、并存期冻结旧库 `<family>db_6t` 与 `目录说明.md`；子工程叶内只放 `<slug>db` 与 `目录说明.md`。两处都不建 `raw\\` / `originals\\` / 日期子夹；并存期结束、旧库归档后，`_db` 回到「一库一说明」。
+- **构建收尾与边车**：缺 `目录说明.md` = 构建未完成，不是可选项；build 脚本收尾按模板写骨架（家族库写管什么 / 五表 / PHI 只在此处；子库写零 PHI / 时点口径 / 可选模态）。SQLite 边车 `<库>db-wal` 与 `-shm` 同在 = 库正被打开 / 未 checkpoint（构建中，放行）；只有 `-wal` 无 `-shm`、跨一次构建仍在 = 上次写坏残留，记 **P1**（S25/S26）。
 - **1+N：一库一工程**：每家族恰一个家族库 `<family>db`；每个子工程恰一个子库 `<slug>db`。短码 = 子工程 slug，靠 `ref_project` 与子库 `src` 区分，只表示项目归属，不是个体主索引；家族拆分时整树随 `<family>` 走。
 - **可独立处理**：家族库与子库可分别备份 / VACUUM；子库在 D28「零 PHI」通过后可单独外发，家族库含 PHI 一律不得外发。
 - **跨库唯一引用**：只靠 `family_uid`（形如 `ACN-000137`）。SQLite 无跨库外键，父子一致性由 `verify_db` 的 ATTACH 检查（D27/D34）承担。
