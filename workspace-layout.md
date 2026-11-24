@@ -159,6 +159,55 @@ description: 本机布局与子工程短针。落点见 My rule.md §3。
 - **写库**：把 `clin` / `modal_<mod>` 写入子库（身份字段写家族库 `id` / `id_number`）或 `{RAW}`，以及 `--apply` / `--move`，须当轮点名；缺省 dry-run。写盘总闸见 `My rule.md` §2。
 - **外发边界**：家族库含 PHI，**一律不得外发**；子库在 D28「零 PHI」通过后才可单独外发。业务表中的敏感字段与记录键不得写入聊天、记忆、备忘录、规则正文或回执（见 `My rule.md` §1.2）。
 
+### 库门禁码表（D1–D45）
+
+- **现行码（core-6t）**：`verify_db.py` 实有 `D1`–`D9`、`D19`–`D22`；判级细节以脚本为准，本表只记口径。
+- **`D10`–`D18` 不存在**：总览里的 `D10` / `D12` / `D13` / `D14` 是人工注记码，脚本无实现；新码从 `D23` 起编，**不回填**旧号。
+- **`D21` 判级已升为 P0**：明文 PHI 不再只是提示；**PHI 只许出现在家族库**，子库任何位置命中即 P0（`D28` / `D44`）。
+- **分派**：旧 core-6t 库跑 `D1`–`D9`、`D19`–`D22`；5t 库按 `meta.schema_version` 跑 `D23`–`D45`。同一库不得混跑两套。
+
+| 码 | 名称 | 判级 | 判据摘要 |
+|---|---|---|---|
+| D1 | 库可打开 / 完整性 | 沿用现行 | `PRAGMA integrity_check`；打不开即 FAIL |
+| D2 | 骨架与 schema | 沿用现行 | 按 profile 判定 7t / 6t，表与索引齐 |
+| D3 | 行数自洽 | 沿用现行 | `val` / `fact` / `entity` 计数互证 |
+| D4 | `meta` 必填键 | 沿用现行 | 缺键或值为空 |
+| D5 | 孤儿行 | 沿用现行 | 子表引用父表不存在的键 |
+| D6 | `doc.n_sheets` | 沿用现行 | 与 `sheet` 实际行数不符 |
+| D7 | `entity` 覆盖 | 沿用现行 | 无实体行比例；>5% 升 P0 |
+| D8 | 移动台账 | 沿用现行 | `*-MOVED-*.tsv` 与原件去向 |
+| D9 | 叶 / `_share` 落点 | 沿用现行 | 库文件与 `目录说明.md` 位置 |
+| D19 | 伦理材料不进库 | P0 | `doc.rel_path` / `project.slug,leaf` / `sheet.name` 命中伦理词 |
+| D20 | 表头契约 | P1 | 表头与固定列 / `dict` 一致 |
+| D21 | 明文 PHI | **P0** | 手机 / 身份证正则命中且不在家族库 `id` / `id_number`；越界即 P0 |
+| D22 | `sheet.role` 值域 | P2 | 只许 `raw` / `curated` / `derived`；`derived` 不写 `val` / `fact` |
+| D23 | 落点与骨架 | P0 | 家族库 / 子库路径、库头 SQLite、五表 / 六类表齐 |
+| D24 | `family_uid` 格式与唯一 | P0 | 正则 `^[A-Z0-9_]+-\d{6}$`；家族库内唯一、非空 |
+| D25 | `id_number` 号种 | P1 | `kind` 落白名单；同 `(kind, value)` 不重复、不裸号连接 |
+| D26 | `dict` 与 PHI 越界 | P0 | `role='phi'` 只许 `scope='family'`；子库 `dict` 不得出现 PHI 列 |
+| D27 | 子库 `person` ⊆ 家族 `id` | P0 | ATTACH 家族库，`person.family_uid` 必须命中 `id` |
+| D28 | 子库零 PHI | P0 | 列名与内容扫姓名 / 身份证（18 位）/ 手机（11 位）/ 地址 |
+| D29 | 时点合法 | P0（行级 P1） | `month_ix` 与 `period_month` 一致；`unit ∈ {1,3,6}`；`unknown` 无 `month_ix` |
+| D30 | `dict` 列覆盖率 | P1 | `clin` / `modal_*` 每列在 `dict` 登记，覆盖率须 100% |
+| D31 | `modal_*` 主键与 FK | P0 / P1 | `exam_uid` 唯一为 P0；`radiomics` 长表孤儿为 P1 |
+| D32 | 最新 `qc` 无未决 P0 | P0 | 每库最新一轮 `qc` 不得留 `status='open'` 的 P0 |
+| D33 | 旧库并存留痕 | P1 | 新库 `meta` 记 `source_db` 路径 + `sha256`，且与旧库实算一致 |
+| D34 | `ref_project` 双向 | P1 | 子库清单 ↔ 盘上 `<slug>db` 双向一致，`sha256` 可核 |
+| D35 | `ref_project` 四计数镜像 | P0 | `person_count` / `clin_person_n` / `longitudinal_n` / `multi_record_n` 与子库实时重算逐一相等 |
+| D36 | 身份行数不得作样本量 | P0（文档级） | 报告 / 说明不得用 `id` 行数当患者数；家族级人数默认不报 |
+| D37 | 无日期 ⇒ `period_unit` NULL | P0 | 无日期列必须 `NULL` 且 `clin` 全 `UNK`；反之亦然 |
+| D38 | 有日期 ≠ 有纵向 | P1 | `longitudinal_n=0` 而库内有日期时须有 `qc(LONGITUDINAL_UNAVAILABLE)` |
+| D39 | 同人多条无日期记录 | P1 | `multi_record_n>0` 且全 `UNK` 须有 `qc(UNK_MULTI_RECORD)` 定性 |
+| D40 | 裸号 join 禁止 | P0 | 按号关联必须 `(kind, number)` 成对，不得单号跨命名空间连接 |
+| D41 | 姓名不是键 | P0 | 不得用姓名合并身份行；匿名占位符须置 `NULL` |
+| D42 | 全空列留痕 | P2 | 源列 100% 空时逐列记 `qc(COLUMN_EMPTY)` |
+| D43 | sheet 重复视图三条件 | P1 | 行数同 + 列集为子集 + 共有列逐格相等，缺一不得标 `dup_of` |
+| D44 | PHI 写前拦截 | P0 | `qc(PHI_COLUMN)` 与值级扫描 0 命中两条都要有 |
+| D45 | 普查覆盖 `src.blob` 宽表 | P0（口径级） | `is_wide=1` 的表不进 EAV，普查只扫行即无效 |
+
+- **机器点**：`D1`–`D22` 在 `verify_db.py`（`{code_root}\tools\db-library\verify_db.py`）；`D23`–`D45` 的 5t 实现同期落该脚本，跨库项用 `ATTACH` 只读打开家族库。
+- **判级**：P0 阻断（退出码 1），P1 应修，P2 提示；同一问题按最高级只报一次。
+
 ## 阶段夹与课题名
 
 课题路径：`D:\MyProjects\<stage>\<project>`。
