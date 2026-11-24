@@ -25,7 +25,7 @@ routes: [workspace-layout.md, project-ref-layout.md, del-and-harvest.md, library
 4. **网络红线**：禁止网段默认拒绝；敏感外发先说明再获同意（`network-security.md`）。
 5. **三仓写边界**：`{RULES}` / `{SKILLS}` 只读，变更走 PR；可写代码只在 `{code_root}`。
 
-另有 **PII 边界**：姓名 / 电话只可写本机 `_DataBase` 家族 SQLite（`<family>db`，不进 GitHub）；身份证与地址默认不进，除非当轮新授权；均不得写进任何仓、回执或聊天。
+另有 **PII 边界**：姓名 / 电话 / 身份证 / 地址只许落本机 `_DataBase\<family>\_db\<family>db` 的 `id` 表（不进 GitHub）；子工程库 `<slug>\<slug>db` 零 PHI；跨库引用一律用 `family_uid`，不以姓名为键。身份证与地址一并允许落家族库 `id` 表；PHI 不得写进任何仓、回执或聊天。
 
 # 2 写盘与授权
 **总闸：只读不用授权（`{doc_root}\mem\` 查阅见下条）；任何新建 / 编辑 / 覆盖 / 移动 / 删除前，须用户当轮点名该项或明确同意；未获授权即停，不静默落盘。**
