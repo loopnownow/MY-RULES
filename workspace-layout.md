@@ -235,6 +235,17 @@ description: 本机布局与子工程短针。落点见 My rule.md §3。
 - **机器点**：`D1`–`D22` 在 `verify_db.py`（`{code_root}\tools\db-library\verify_db.py`）；`D23`–`D72` 的 5t 实现落 `{code_root}\tools\db-library\db5t\gates.py`（跨库项用只读 `ATTACH` / `file:?mode=ro` 打开家族库），判据用的 SCHEMA 由 `db5t\paths.py` 解析（`DB5T_BATCH` / `DB5T_ROOT` / `DB5T_SCHEMA` 三个环境变量）。
 - **判级**：P0 阻断（退出码 1），P1 应修，P2 提示；同一问题按最高级只报一次。
 
+**建库工程约束**（每条都对应一次实测事故，改门禁或写 build 时逐条对照）：
+
+1. **改判据必须自带正反 fixture**：改动门禁判据时同批提两张最小库（该报的、不该报的），否则「改完变绿」分不清是修对了还是判据失效。
+2. **门禁只读、先写完库再算 sha**：`mode=ro` 打开，跑完不得写任何东西；`meta` / `sha256` 在最后一次写库之后计算，且连跑两遍结果不变（幂等）。
+3. **计数一律 SQL 现算**：`meta` 与 `ref_project` 的人数/行数不得用「总数 − 已知数」构造（`7,656 − 210` 这类减法在两个库上各错 5 与 1）。
+4. **清值 / 删行先 dry-run**：先把将被改动的行导出 csv 再执行；判据按该 `kind` 的合法形态写，禁「长度 < 4 当垃圾」这种复用 PHI 阈值的规则（曾删掉 8 家 357 条合法短号）。
+5. **`src_row` 只在同一 `src_id` 内唯一**：`UPDATE … WHERE src_row = ?` 会跨表命中，必须带 `src_id`。
+6. **DDL 逐字读时只剥行首注释符**：含 `**` 的散文行曾被整行吃掉，导致 `ref_project` 少一列而门禁全绿。
+7. **`entity` / `feature` 一维一字段**：不许把两个维度拼进一个字符串（`<样本>|<靶标>`）；拼接后的同名重复会被主键 `INSERT OR REPLACE` 静默吃掉（实测 16,586 格塌成 5,436 格）。
+8. **不是身份键的正确落点是「换一张表」**：从 `id_number` 撤下的号码进 `clin` 的 `*_seq_no` / `label_id` 等 `role='aux'` 列并留痕，**不删**——删把已知变未知，而库最贵的是还能查回去。
+
 ## 阶段夹与课题名
 
 课题路径：`D:\MyProjects\<stage>\<project>`。
