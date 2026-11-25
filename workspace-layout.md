@@ -229,9 +229,10 @@ description: 本机布局与子工程短针。落点见 My rule.md §3。
 | D67 | `VALUE_CONFLICT` 未持久化须标红 | 换库前必修 | 存在 `meta.value_conflict_state='not_persisted'` 时报告标红并列入换库前必修；重建须逐格写 `qc(VALUE_CONFLICT)`。零冲突与「根本没记」在库里同形，照写「冲突 0」会被读成「没有冲突」（同 D44/D52「没扫过与零命中同形」） |
 | D68 | `period_month` 不得溯源自 `src.mtime` | P0 | `period_month` 可追溯到文件 mtime ⇒ P0。实测 EC 77 张表 mtime 全在同一天、LC 只有 2 天：mtime 是「拷入本机的日子」，写进时点会让整批人落在同一个月且库里看不出是假的。mtime 只进 `meta.ingest_batch` 且只用于查重；估算日期进 `period_month_est` + `period_source='approx'` |
 | D69 | 同批重复副本须留痕 | P2 | 同 `ingest_batch` 内两表列名重叠 ≥50%、**共有列 ≥5**、行可匹配 ⇒ `qc(DUP_BATCH_SUSPECT,P2)`；共有列 <5 的判据全是噪声（`ID/group/result` 三列表两两都「重叠 100%」）。重跑前先删旧 qc 行，否则重复叠加 |
-| D70 | 库内表结构须与 SCHEMA 一致 | P0 | 把 SCHEMA 两段 DDL 在空内存库执行一遍取 `pragma table_info`，与目标库逐表比：缺表 / 缺列 / 类型不符即 P0。**不许手写解析 DDL 文本**（会被散文行与注释骗）。实测某库缺 `dict.aliases`、`src.status`、`clin.cohort`：建得出来、门禁也过，只在按 `status` 过滤时崩 |
+| D70 | 库内表结构须与 SCHEMA 一致 | P0 | 把 SCHEMA 两段 DDL 在空内存库执行一遍取 `pragma table_info`，与目标库逐表比：缺表 / 缺列 / 类型不符即 P0。**不许手写解析 DDL 文本**（会被散文行与注释骗）。实测某库缺 `dict.aliases`、`src.status`、`clin.cohort`：建得出来、门禁也过，只在按 `status` 过滤时崩 || D71 | 9 段纯度（只对患者级种类提示） | 只报数 | 9 段（`9xxxxx`）是「无患者级号码」的占位段；若其中某身份持有 `kind ∈ {inpatient, outpatient, mrn, pathology}` 的号码，则两者矛盾，提示「若该号唯一指向一人，可升 0 段」。**不判失败**：§8.1 明文允许 9 段带 `sample` 等样本级号（样本号不识别到人），判红等于罚自己的条文 |
+| D72 | 身份段位 ↔ 粒度相容 | P1 | 每个项目必须在 `meta.identity_grain` 声明 `person` / `specimen` / `exam` / `sample` / `label` / `mixed`。`person` ⇒ **有姓名或有患者级号码**的身份必须在 0/8 段，9 段只许「既无姓名也无号」的占位（`mixed` 需 `grain_note`，只报数；非 person 粒度下 0 段有名身份只报数）。判据是**粒度**不是「有没有名字」：SCC 一个身份就是一个病理标本，标本行当然带病人姓名——实测 11,724 个 9 段身份里 8,502 个有姓名，按「9 段=无姓名」判会把整个标本级队列判成全错。缺声明即 P1 |
 
-- **机器点**：`D1`–`D22` 在 `verify_db.py`（`{code_root}\tools\db-library\verify_db.py`）；`D23`–`D70` 的 5t 实现同期落该脚本，跨库项用 `ATTACH` 只读打开家族库。
+- **机器点**：`D1`–`D22` 在 `verify_db.py`（`{code_root}\tools\db-library\verify_db.py`）；`D23`–`D72` 的 5t 实现落 `{code_root}\tools\db-library\db5t\gates.py`（跨库项用只读 `ATTACH` / `file:?mode=ro` 打开家族库），判据用的 SCHEMA 由 `db5t\paths.py` 解析（`DB5T_BATCH` / `DB5T_ROOT` / `DB5T_SCHEMA` 三个环境变量）。
 - **判级**：P0 阻断（退出码 1），P1 应修，P2 提示；同一问题按最高级只报一次。
 
 ## 阶段夹与课题名
