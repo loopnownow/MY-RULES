@@ -218,6 +218,9 @@ description: 本机布局与子工程短针。落点见 My rule.md §3。
 | D56 | DICOM 头 PHI 只进家族库 | P0 | `PatientName`/`PatientID`/`OtherPatientIDs`/`AccessionNumber`/`PatientBirthDate`/`PatientAddress`/`PatientTelephoneNumbers` 只许落 `id` / `id_number`；子库出现即 P0 |
 | D57 | DICOM 伪匿名与身份冲突 | P1 | `name_quality='pseudonymized'`（`ANON*`/`XXX`/`TEST`/纯数字/单字符重复）不得当真名；一 ID 多姓名或一姓名多 ID 各建身份并记 qc，禁合并 |
 | D58 | 结局未产生不得预建 | P2（文档级） | `meta.outcome_status ∈ not_collected / collected`；未产生时不建结局列、`dict` 不出现 `role='outcome'`；结局到来另建表，不追加进 `clin` |
+| D59 | 批次可追溯 | P1 | 每行 `modal_*` 必须经 `batch_id` 定到一台设备：家族库 `ref_batch(batch_id, vendor, model, field_strength, kvp, kernel, slice_thickness, site, n_series, date_from, date_to)`；`batch_id` 悬空或设备字段全空即 P1 |
+| D60 | 特征抽取参数不一致不得并池 | P0 | 同一 `feature` 在不同批次登记了不同抽取参数（bin width / resample / 软件与版本 / ROI 来源）却同表并存，即 P0；参数逐批次落 `ref_batch.extraction_params` |
+| D61 | 批次混杂须报 | P2 | 含 `batch_id` 的库须给 `batch × 结局/关键协变量` 交叉表；某批次独占某一结局水平时须写明「无法分离设备效应」，不得直接 ComBat 后当作校正完成 |
 
 - **机器点**：`D1`–`D22` 在 `verify_db.py`（`{code_root}\tools\db-library\verify_db.py`）；`D23`–`D58` 的 5t 实现同期落该脚本，跨库项用 `ATTACH` 只读打开家族库。
 - **判级**：P0 阻断（退出码 1），P1 应修，P2 提示；同一问题按最高级只报一次。
