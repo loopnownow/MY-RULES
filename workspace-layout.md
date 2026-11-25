@@ -205,8 +205,21 @@ description: 本机布局与子工程短针。落点见 My rule.md §3。
 | D43 | sheet 重复视图三条件 | P1 | 行数同 + 列集为子集 + 共有列逐格相等，缺一不得标 `dup_of` |
 | D44 | PHI 写前拦截 | P0 | `qc(PHI_COLUMN)` 与值级扫描 0 命中两条都要有 |
 | D45 | 普查覆盖 `src.blob` 宽表 | P0（口径级） | `is_wide=1` 的表不进 EAV，普查只扫行即无效 |
+| D46 | 身份不可得显式声明 | P2 | `id` 0 行时 `meta.identity_state='unavailable'` + `qc(IDENTITY_UNAVAILABLE)`；不得与 `unresolved` 混用 |
+| D47 | `exam_uid` ≠ 一次检查 | P1 | 模态表一行 = 一个病灶 / 一次检测，报告不得称「一次检查 / 一次随访」 |
+| D48 | `clin` 无后缀族 | P0 | 列名禁 `_\d+$`；同义多列先映射规范名再合并 |
+| D49 | 半套变量两行 | P1 | 两行非空列集只交系统列 ⇒ 同一事件被拆两行，须合并 |
+| D50 | `Σmerged_n` 守恒 | P1 | 必须等于实际取出的源记录数，差一条都要定位 |
+| D51 | 特征名折叠后同名多值 | P0 | `*_val.feature` 全小写、去尾点、`Shape.`→`shape_` 后不得再出现同名 |
+| D52 | 被排除列留痕 | P2 | `meta.excluded_columns` 结构化（列/原因/源表/非空行数），且不得再现于任何表 |
+| D53 | 占位行静默清空 | P1 | 占位 `uid` 对应源行有非空值而 `clin` 值列全空 ⇒ 写库时丢值 |
+| D54 | 子库列值与家族 PHI 值集相交 | P0（号码列 P1） | 命中 `id.phone`/`id_card`/`address` 值集即 PHI 越界；命中 `id_number` 值集须登记用途 |
+| D55 | 相对时间须有零点 | P1 | 相对列缺 `dict.unit` 或 `time_origin` → P1；声明「只有相对量」却给非 `UNK` 的 `period_month` → P0 |
+| D56 | DICOM 头 PHI 只进家族库 | P0 | `PatientName`/`PatientID`/`OtherPatientIDs`/`AccessionNumber`/`PatientBirthDate`/`PatientAddress`/`PatientTelephoneNumbers` 只许落 `id` / `id_number`；子库出现即 P0 |
+| D57 | DICOM 伪匿名与身份冲突 | P1 | `name_quality='pseudonymized'`（`ANON*`/`XXX`/`TEST`/纯数字/单字符重复）不得当真名；一 ID 多姓名或一姓名多 ID 各建身份并记 qc，禁合并 |
+| D58 | 结局未产生不得预建 | P2（文档级） | `meta.outcome_status ∈ not_collected / collected`；未产生时不建结局列、`dict` 不出现 `role='outcome'`；结局到来另建表，不追加进 `clin` |
 
-- **机器点**：`D1`–`D22` 在 `verify_db.py`（`{code_root}\tools\db-library\verify_db.py`）；`D23`–`D45` 的 5t 实现同期落该脚本，跨库项用 `ATTACH` 只读打开家族库。
+- **机器点**：`D1`–`D22` 在 `verify_db.py`（`{code_root}\tools\db-library\verify_db.py`）；`D23`–`D58` 的 5t 实现同期落该脚本，跨库项用 `ATTACH` 只读打开家族库。
 - **判级**：P0 阻断（退出码 1），P1 应修，P2 提示；同一问题按最高级只报一次。
 
 ## 阶段夹与课题名
