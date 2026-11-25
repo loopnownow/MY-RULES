@@ -160,12 +160,12 @@ description: 本机布局与子工程短针。落点见 My rule.md §3。
 - **写库**：把 `clin` / `modal_<mod>` 写入子库（身份字段写家族库 `id` / `id_number`）或 `{RAW}`，以及 `--apply` / `--move`，须当轮点名；缺省 dry-run。写盘总闸见 `My rule.md` §2。
 - **外发边界**：家族库含 PHI，**一律不得外发**；子库在 D28「零 PHI」通过后才可单独外发。业务表中的敏感字段与记录键不得写入聊天、记忆、备忘录、规则正文或回执（见 `My rule.md` §1.2）。
 
-### 库门禁码表（D1–D45）
+### 库门禁码表（D1–D70）
 
 - **现行码（core-6t）**：`verify_db.py` 实有 `D1`–`D9`、`D19`–`D22`；判级细节以脚本为准，本表只记口径。
 - **`D10`–`D18` 不存在**：总览里的 `D10` / `D12` / `D13` / `D14` 是人工注记码，脚本无实现；新码从 `D23` 起编，**不回填**旧号。
 - **`D21` 判级已升为 P0**：明文 PHI 不再只是提示；**PHI 只许出现在家族库**，子库任何位置命中即 P0（`D28` / `D44`）。
-- **分派**：旧 core-6t 库跑 `D1`–`D9`、`D19`–`D22`；5t 库按 `meta.schema_version` 跑 `D23`–`D45`。同一库不得混跑两套。
+- **分派**：旧 core-6t 库跑 `D1`–`D9`、`D19`–`D22`；5t 库按 `meta.schema_version` 跑 `D23`–`D70`。同一库不得混跑两套。
 
 | 码 | 名称 | 判级 | 判据摘要 |
 |---|---|---|---|
@@ -193,7 +193,7 @@ description: 本机布局与子工程短针。落点见 My rule.md §3。
 | D31 | `modal_*` 主键与 FK | P0 / P1 | `exam_uid` 唯一为 P0；`radiomics` 长表孤儿为 P1 |
 | D32 | 最新 `qc` 无未决 P0 | P0 | 每库最新一轮 `qc` 不得留 `status='open'` 的 P0 |
 | D33 | 旧库并存留痕 | P1 | 新库 `meta` 记 `source_db` 路径 + `sha256`，且与旧库实算一致 |
-| D34 | `ref_project` 双向 | P1 | 子库清单 ↔ 盘上 `<slug>db` 双向一致，`sha256` 可核 |
+| D34 | `ref_project` 双向登记 | **P0** | 两个方向都查：① 每个含 `<slug>db` 的目录在 `ref_project` 必须有行；② `ref_project` 每行必须有对应库文件。任一方向缺即 P0，输出 `ref_project_missing.md`。镜像门只遍历「已有的行」时，少写一行会让其余计数照样自洽、全门绿——**缺席比错值更难发现**，与「blob 指针指空不报错」同型 |
 | D35 | `ref_project` 四计数镜像 | P0 | `person_count` / `clin_person_n` / `longitudinal_n` / `multi_record_n` 与子库实时重算逐一相等 |
 | D36 | 身份行数不得作样本量 | P0（文档级） | 报告 / 说明不得用 `id` 行数当患者数；家族级人数默认不报 |
 | D37 | 无日期 ⇒ `period_unit` NULL | P0 | 无日期列必须 `NULL` 且 `clin` 全 `UNK`；反之亦然 |
@@ -208,12 +208,12 @@ description: 本机布局与子工程短针。落点见 My rule.md §3。
 | D46 | 身份不可得显式声明 | P2 | `id` 0 行时 `meta.identity_state='unavailable'` + `qc(IDENTITY_UNAVAILABLE)`；不得与 `unresolved` 混用 |
 | D47 | `exam_uid` ≠ 一次检查 | P1 | 模态表一行 = 一个病灶 / 一次检测，报告不得称「一次检查 / 一次随访」 |
 | D48 | `clin` 无后缀族 | P0 | 列名禁 `_\d+$`；同义多列先映射规范名再合并 |
-| D49 | 半套变量两行 | P1 | 两行非空列集只交系统列 ⇒ 同一事件被拆两行，须合并 |
+| D49 | 同一人多行须证明是多个事件 | P1 | 三支：① 同人同月多行 → P1；② 半套变量拆两行（四条件同时成立）→ P1，须合并；③ 其余 → P2 报数并写 `meta.multi_record_reason`。半套变量的四条件是：同一人同时存在有日期行与 `UNK` 行；任两行各自非空变量 ≥20；交集/较小侧 <30%；两行非空列不带互不相同的 `prefix__` 命名块（`ct1__` vs `mrfinal__` 是不同测量矩阵，不算拆行）。单用「交集低即 P1」会误报重复检查（实测误报 1,533 + 46 人） |
 | D50 | `Σmerged_n` 守恒 | P1 | 必须等于实际取出的源记录数，差一条都要定位 |
 | D51 | 特征名折叠后同名多值 | P0 | `*_val.feature` 全小写、去尾点、`Shape.`→`shape_` 后不得再出现同名 |
 | D52 | 被排除列留痕 | P2 | `meta.excluded_columns` 结构化（列/原因/源表/非空行数），且不得再现于任何表 |
 | D53 | 占位行静默清空 | P1 | 占位 `uid` 对应源行有非空值而 `clin` 值列全空 ⇒ 写库时丢值 |
-| D54 | 子库列值与家族 PHI 值集相交 | P0（号码列 P1） | 命中 `id.phone`/`id_card`/`address` 值集即 PHI 越界；命中 `id_number` 值集须登记用途 |
+| D54 | 子库 PHI 按行级对齐判 | P0 | 某格值 == **本行 `family_uid` 名下**的 `id_number.value`／`id.phone`/`id_card`/`address` ⇒ **P0（1 格也算）**；等于**别人**的号码 ⇒ P2 只计数。泄漏本质是跟着人走，不是值出现几次——按「值出现 ≥2 次」判会两头都错（真泄漏可只 1 格；`age=60` 撞某人住院号 `60` 出现百次仍是巧合）。键列从 `dict.role='key'` 读，**不许写死列名**；`dict` 的 `family` 与 `proj:` 两种 scope 必须一起读（只读一种会造假 P0）。须自带正反 fixture |
 | D55 | 相对时间须有零点 | P1 | 相对列缺 `dict.unit` 或 `time_origin` → P1；声明「只有相对量」却给非 `UNK` 的 `period_month` → P0 |
 | D56 | DICOM 头 PHI 只进家族库 | P0 | `PatientName`/`PatientID`/`OtherPatientIDs`/`AccessionNumber`/`PatientBirthDate`/`PatientAddress`/`PatientTelephoneNumbers` 只许落 `id` / `id_number`；子库出现即 P0 |
 | D57 | DICOM 伪匿名与身份冲突 | P1 | `name_quality='pseudonymized'`（`ANON*`/`XXX`/`TEST`/纯数字/单字符重复）不得当真名；一 ID 多姓名或一姓名多 ID 各建身份并记 qc，禁合并 |
@@ -221,8 +221,17 @@ description: 本机布局与子工程短针。落点见 My rule.md §3。
 | D59 | 批次可追溯 | P1 | 每行 `modal_*` 必须经 `batch_id` 定到一台设备：家族库 `ref_batch(batch_id, vendor, model, field_strength, kvp, kernel, slice_thickness, site, n_series, date_from, date_to)`；`batch_id` 悬空或设备字段全空即 P1 |
 | D60 | 特征抽取参数不一致不得并池 | P0 | 同一 `feature` 在不同批次登记了不同抽取参数（bin width / resample / 软件与版本 / ROI 来源）却同表并存，即 P0；参数逐批次落 `ref_batch.extraction_params` |
 | D61 | 批次混杂须报 | P2 | 含 `batch_id` 的库须给 `batch × 结局/关键协变量` 交叉表；某批次独占某一结局水平时须写明「无法分离设备效应」，不得直接 ComBat 后当作校正完成 |
+| D62 | 跨族 blob 指针自带容器身份 | P1 | `src.rel_path` 形如 `blob:<容器库文件名>@<构建日>:src_id=<旧 src_id>#<sheet>`，`src.sha256` 等于容器内该 sheet 实际哈希；容器在盘、`src_id` 可查、sha 相符，任一不满足即 P1。切库日旧库改名 `<family>db_6t`，只写路径的老式指针会**指空且不报错**；放宽只限「原件确已不在磁盘」，且逐行记 `qc(SOURCE_SNAPSHOT_ONLY,P2)`；**原件在盘而 sha 不符仍 P0** |
+| D63 | 身份段位 ↔ 类型 ↔ 状态三元一致 | P1 | `family_uid` 段：`0xxxxx` 人真实身份（`keyed_full`/`keyed_partial`）、`8xxxxx` 动物真实受试者（`keyed_animal`）、`9xxxxx` 占位（`label_only`/`label_only_omics`）；`meta.uid_ranges` 须为结构化 JSON。三元不一致即 P1；写成一个三元检查，不拆两条（两条会各自漂移） |
+| D64 | 表头行位置按需登记 | P1 | `src.header` 为空 / 含 `#n` / 含 `__nohdr__`，或 `note` 记「表头行丢失」「首行即数据」时，必须有 `meta.header_rows[("<src_id>#<sheet>")] = <1 基行号>`；`src` 无 `header` 列的老库不判。「说了已记但键不存在」是实测事故，交付须附该 meta 键的查询输出 |
+| D65 | 有日期但不知是哪件事必须可数 | 只报数 | `period_month <> 'UNK' AND period_origin IS NULL` 的行数逐项目进报告。`period_source`（`exact/approx/unknown`）= 有多准，`period_origin`（`exam_date/surgery_date/admission_date/report_date/derived/unknown`）= 是哪件事；两列不可合并，否则下游按它算随访间隔必然混 |
+| D66 | 两侧人数相等却无共享键 | P2 | 某项目 `clin_person_n` 与某模态 exam 数**恰好相等**且两者无任何共享键列 ⇒ `qc(KEY_ABSENT_EQUAL_N,P2)`。按行序对齐会整表挂错人，而人数、外键、PHI、dict 全通过——专挡「看起来能连」 |
+| D67 | `VALUE_CONFLICT` 未持久化须标红 | 换库前必修 | 存在 `meta.value_conflict_state='not_persisted'` 时报告标红并列入换库前必修；重建须逐格写 `qc(VALUE_CONFLICT)`。零冲突与「根本没记」在库里同形，照写「冲突 0」会被读成「没有冲突」（同 D44/D52「没扫过与零命中同形」） |
+| D68 | `period_month` 不得溯源自 `src.mtime` | P0 | `period_month` 可追溯到文件 mtime ⇒ P0。实测 EC 77 张表 mtime 全在同一天、LC 只有 2 天：mtime 是「拷入本机的日子」，写进时点会让整批人落在同一个月且库里看不出是假的。mtime 只进 `meta.ingest_batch` 且只用于查重；估算日期进 `period_month_est` + `period_source='approx'` |
+| D69 | 同批重复副本须留痕 | P2 | 同 `ingest_batch` 内两表列名重叠 ≥50%、**共有列 ≥5**、行可匹配 ⇒ `qc(DUP_BATCH_SUSPECT,P2)`；共有列 <5 的判据全是噪声（`ID/group/result` 三列表两两都「重叠 100%」）。重跑前先删旧 qc 行，否则重复叠加 |
+| D70 | 库内表结构须与 SCHEMA 一致 | P0 | 把 SCHEMA 两段 DDL 在空内存库执行一遍取 `pragma table_info`，与目标库逐表比：缺表 / 缺列 / 类型不符即 P0。**不许手写解析 DDL 文本**（会被散文行与注释骗）。实测某库缺 `dict.aliases`、`src.status`、`clin.cohort`：建得出来、门禁也过，只在按 `status` 过滤时崩 |
 
-- **机器点**：`D1`–`D22` 在 `verify_db.py`（`{code_root}\tools\db-library\verify_db.py`）；`D23`–`D58` 的 5t 实现同期落该脚本，跨库项用 `ATTACH` 只读打开家族库。
+- **机器点**：`D1`–`D22` 在 `verify_db.py`（`{code_root}\tools\db-library\verify_db.py`）；`D23`–`D70` 的 5t 实现同期落该脚本，跨库项用 `ATTACH` 只读打开家族库。
 - **判级**：P0 阻断（退出码 1），P1 应修，P2 提示；同一问题按最高级只报一次。
 
 ## 阶段夹与课题名
