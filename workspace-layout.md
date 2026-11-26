@@ -165,7 +165,9 @@ description: 本机布局与子工程短针。落点见 My rule.md §3。
 | `modal_<mod>` | 不宜强行拉长的矩阵（组学 / 影像组学 / 谱图 / ICC 或相关矩阵）按模态或特征域建表，如 `modal_radiomics` / `modal_us` / `modal_mri`。组学走 `modal_radiomics(exam_uid, roi, feature, value)` 长表，**不建千列宽表**。 |
 | `qc` | 门禁结果与人工裁决（`scope` / `code` / `severity` / `status`）；是正式表，不是业务数据表。 |
 
-- **「不收」要分层登记，不许静默丢**：整张工作单不入库 → `meta.excluded_sheets`，每条结构化 `{slug, src_id, rel_path, sheet, rows, cols, reason}`，`reason ∈ {no_individual_key, empty, duplicate, phi_only, title_page}`；**每一行必须能唯一定位到一条 `src_id`**（否则十几张同名的 `Sheet1` 无法查证，登记表只是清单不是账）。「重复」（`duplicate`：同一份数据的另一种切法、0 个新列）与「没键」（`no_individual_key`：数据无法归人）是两件事，写错会让后来的人以为被标 `duplicate` 的表还有独立数据。单列不入库 → `meta.excluded_columns`（`{column, reason, source_sheet, rows_nonnull}`）。两者之外还要留「扫过」的证据（如 `qc(TEXT_SCANNED)`）——**零命中与没扫过在库里长得一样**。
+- **「不收」要分层登记，不许静默丢**：整张工作单不入库 → `meta.excluded_sheets`，每条结构化 `{slug, src_id, rel_path, sheet, rows, cols, reason}`，`reason ∈ {no_individual_key, empty, duplicate, phi_only, title_page}`；**每一行必须能唯一定位到一条 `src_id`**（否则十几张同名的 `Sheet1` 无法查证，登记表只是清单不是账）。
+- 「重复」（`duplicate`：同一份数据的另一种切法、0 个新列）与「没键」（`no_individual_key`：数据无法归人）是两件事，写错会让后来的人以为被标 `duplicate` 的表还有独立数据。
+- 单列不入库 → `meta.excluded_columns`（`{column, reason, source_sheet, rows_nonnull}`）。两者之外还要留「扫过」的证据（如 `qc(TEXT_SCANNED)`）——**零命中与没扫过在库里长得一样**。
 - **粒度必须与表对应**：`clin` 一行 = 一个受试者 × 一个月。exam 级数据（一次检查 / 一个样本 / 一张谱）**不得进 `clin`**，只能进 `modal_<mod>`，或按 `meta.modal_exam_policy='deferred_until_requested'` 显式声明延后建表。keyless 宽表（有数据、无个体键）整表进 `excluded_sheets`，**不许把行号当身份塞进 `clin`**——实测一张 906 行的 `clin` 里 269 行是 exam 占位，报告里的「442 人」因此不是真人数（真数 173）。
 
 - **时点粒度（`period_unit`）**：以月为原子，`period_month` = `YYYY-MM`，`month_ix` = year*12+month-1，`bin_ix` = `month_ix` // `period_unit`（派生不落盘）。三种情形：① 源表无日期 → `period_unit` 为 `NULL`，`clin` 全 `UNK`；② 有日期且能连成序列 → 声明 `1` / `3` / `6`。
@@ -247,7 +249,7 @@ description: 本机布局与子工程短针。落点见 My rule.md §3。
 | D68 | `period_month` 不得溯源自 `src.mtime` | P0 | `period_month` 可追溯到文件 mtime ⇒ P0。实测 EC 77 张表 mtime 全在同一天、LC 只有 2 天：mtime 是「拷入本机的日子」，写进时点会让整批人落在同一个月且库里看不出是假的。mtime 只进 `meta.ingest_batch` 且只用于查重；估算日期进 `period_month_est` + `period_source='approx'` |
 | D69 | 同批重复副本须留痕 | P2 | 同 `ingest_batch` 内两表列名重叠 ≥50%、**共有列 ≥5**、行可匹配 ⇒ `qc(DUP_BATCH_SUSPECT,P2)`；共有列 <5 的判据全是噪声（`ID/group/result` 三列表两两都「重叠 100%」）。重跑前先删旧 qc 行，否则重复叠加 |
 | D70 | 库内表结构须与 SCHEMA 一致 | P0 | 把 SCHEMA 两段 DDL 在空内存库执行一遍取 `pragma table_info`，与目标库逐表比：缺表 / 缺列 / 类型不符即 P0。**不许手写解析 DDL 文本**（会被散文行与注释骗）。实测某库缺 `dict.aliases`、`src.status`、`clin.cohort`：建得出来、门禁也过，只在按 `status` 过滤时崩 |
-| D71 | 9 段纯度（只对患者级种类提示） | 只报数 | 9 段（`9xxxxx`）是「无患者级号码」的占位段；若其中某身份持有 `kind ∈ {inpatient, outpatient, mrn, pathology}` 的号码，则两者矛盾，提示「若该号唯一指向一人，可升 0 段」。**不判失败**：§8.1 明文允许 9 段带 `sample` 等样本级号（样本号不识别到人），判红等于罚自己的条文 |
+| D71 | 9 段纯度（只对患者级种类提示） | 只报数 | 9 段（`9xxxxx`）是「无患者级号码」的占位段；若其中某身份持有 `kind ∈ {inpatient, outpatient, mrn, pathology}` 的号码，则两者矛盾，提示「若该号唯一指向一人，可升 0 段」。**不判失败**：SCHEMA 的 8.1 节明文允许 9 段带 `sample` 等样本级号（样本号不识别到人），判红等于罚自己的条文 |
 | D72 | 身份段位 ↔ 粒度相容 | P1 | 每个项目必须在 `meta.identity_grain` 声明 `person` / `specimen` / `exam` / `sample` / `label` / `mixed`。`person` ⇒ **有姓名或有患者级号码**的身份必须在 0/8 段，9 段只许「既无姓名也无号」的占位（`mixed` 需 `grain_note`，只报数；非 person 粒度下 0 段有名身份只报数）。判据是**粒度**不是「有没有名字」：SCC 一个身份就是一个病理标本，标本行当然带病人姓名——实测 11,724 个 9 段身份里 8,502 个有姓名，按「9 段=无姓名」判会把整个标本级队列判成全错。缺声明即 P1 |
 | D73 | `id.name` 不得是合成标签 | 只报数 | 姓名格出现 `subject/sub/case/sample/patient/pt/p/s/mice/rat/no` + 数字（`Subject1`、`Sample_03`）即提示：**有人名 ≠ 有身份**，把工具标签写进姓名字段，报告里会出现「患者 Subject1」这种假人。只报数不判级——标签本身可以合法存在，只是不该叫 `name` |
 | D74 | 家族库 `meta` 必备键 | 只报数 | 家族库 `meta` 须有 `schema_version` / `family` / `built_at`；缺则列名。三键是「这个库按哪版 SCHEMA、属于哪家、什么时候建的」的唯一答案，缺了只能靠文件名猜 |
