@@ -323,11 +323,20 @@ entries:
     since: '2026-11-27'
     note: '原始件池：按子工程分夹放压缩档与随档非表格件；伦理 / 学位两支已拆到 `_ethics` / `_thesis`。'
   - old: 'D:\MyProjects\_DataBase\<family>\_share\ethics'
-    new: 'D:\MyProjects\_DataBase\<family>\_ethics'
+    tokens: ['_ethics']
+    new: 'D:\MyProjects\_Docs\_library\ethics'
     kind: ref_dir
+    status: retired
+    since: '2026-11-27'
+    note: '伦理材料不进 `_DataBase`：申请包 / 方案 / 知情同意归 `_Docs\_library\ethics\sections\`，写作模式提取物归 `extract\`，批件 PDF 与索引在 `approvals\`；抽完即退役，剩余件随 harvest 进 `{DEL}`。'
+  - old: 'modal_<mod>'
+    tokens: ['modal_']
+    new: '_modules_<mod>'
+    kind: file
     status: renamed
     since: '2026-11-27'
-    note: '伦理申请包 / 知情同意 / 方案原件；批件 PDF 索引仍在 `_Docs\_library\ethics\approvals\`。'
+    note: '子库业务表名前缀（不是文件名）：`modal_radi` → `_modules_radi`，`meta.modal_exam_policy` 同步改 `meta.modules_exam_policy`；旧前缀出现在规则 / 盘面 / 库内即 QC 发现。'
+
   - old: 'D:\MyProjects\_DataBase\<family>\_share\thesis'
     new: 'D:\MyProjects\_DataBase\<family>\_thesis'
     kind: ref_dir
