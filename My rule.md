@@ -26,7 +26,7 @@ routes: [workspace-layout.md, project-ref-layout.md, del-and-harvest.md, library
 4. **网络红线**：禁止网段默认拒绝；敏感外发先说明再获同意（`network-security.md`）。
 5. **三仓写边界**：`{RULES}` / `{SKILLS}` 只读，变更走 PR；可写代码只在 `{code_root}`。
 
-另有 **PII 边界**：姓名 / 电话 / 身份证 / 地址只许落本机 `_DataBase\<family>\_db\<family>db` 的 `id` 表（不进 GitHub）；子工程库 `<slug>\<slug>db` 零 PHI；跨库引用一律用 `family_uid`，不以姓名为键。身份证与地址一并允许落家族库 `id` 表；PHI 不得写进任何仓、回执或聊天。
+另有 **PII 边界**：姓名 / 电话 / 身份证 / 地址只许落本机 `_DataBase\<family>\_PHI\<family>db` 的 `id` 表（不进 GitHub）；子工程库 `<slug>\<slug>db` 零 PHI；跨库引用一律用 `family_uid`，不以姓名为键。身份证与地址一并允许落家族库 `id` 表；PHI 不得写进任何仓、回执或聊天。
 
 **DICOM 来源的 PHI**：以 DICOM 头为源，只进家族库——`PatientName`→`id.name`、`PatientID` / `OtherPatientIDs` / `AccessionNumber`→`id_number`、`PatientBirthDate`→`id.birth_date`、`PatientSex`→`id.sex`、`PatientAddress`→`id.address`、`PatientTelephoneNumbers`→`id.phone`。
 - `InstitutionName` / `ReferringPhysicianName` / `OperatorsName` 不进子库；子库只留模态、扫描参数与 UID。
@@ -85,7 +85,7 @@ routes: [workspace-layout.md, project-ref-layout.md, del-and-harvest.md, library
 # 5 路由表（第一跳）
 | 触发 | 读 | 挂 |
 |---|---|---|
-| 盘面 / 阶段夹 / 家族桶 / `_share` / `_db` / 项目业务表 / 冷库 / accepted 收工 | `workspace-layout.md` | `db-library` |
+| 盘面 / 阶段夹 / 家族桶 / `_PHI` / `__zip` / 项目业务表 / 冷库 / accepted 收工 | `workspace-layout.md` | `db-library` |
 | 项目 `ref\` 地图 / 稿名 / 手改识别 / 幂等 | `project-ref-layout.md` | — |
 | `{DEL}` / harvest / 清理 / 活依赖 | `del-and-harvest.md` | `00_orchestrator` harvest |
 | 本机覆盖层 / 多机位路径分工 | `local-overlay.md` | — |
