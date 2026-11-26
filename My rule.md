@@ -1,7 +1,7 @@
 ---
 name: My rule
 description: L0 常驻层：裁决顺序、硬闸、交付落点、路由第一跳、QC 频率。
-routes: [workspace-layout.md, project-ref-layout.md, del-and-harvest.md, library-taxonomy.md, network-security.md, skills.md, QC.md, project-fact-lookup.md]
+routes: [workspace-layout.md, project-ref-layout.md, del-and-harvest.md, library-taxonomy.md, network-security.md, skills.md, QC.md, project-fact-lookup.md, local-overlay.md]
 ---
 
 # 0 本仓与阅读顺序
@@ -15,6 +15,7 @@ routes: [workspace-layout.md, project-ref-layout.md, del-and-harvest.md, library
 # 1 权威与硬闸
 ## 1.1 裁决顺序
 用户当轮 > 硬闸 > L1 领域契约 > 本文件一般条款 > 子工程内约定 > 技能默认写法。只有用户当轮能放宽硬闸；L1 更具体，可以压 L0 的一般条款，但压不了硬闸。
+- 多机位可另设本机覆盖层：只收紧、不放宽；路径与授权分工、冲突先报再执行 → `local-overlay.md`。不得用本机表覆盖本文件 §4 别名。
 - **Rules 必须挂载并遵守；Skills 仅在派具体 fine id / 工作包时附加。**「Skills 未挂载」不是跳过 Rules 的理由；冲突裁决 Rules > Skills。
 - 单项目约定写在子工程内（`<project>\_Docs\` / `ref\`），不写全局 `{RULES}` / `{SKILLS}`。
 
@@ -33,7 +34,7 @@ routes: [workspace-layout.md, project-ref-layout.md, del-and-harvest.md, library
 **总闸：只读不用授权（`{doc_root}\mem\` 查阅见下条）；任何新建 / 编辑 / 覆盖 / 移动 / 删除前，须用户当轮点名该项或明确同意；未获授权即停，不静默落盘。**
 - **mem 查阅：** 未经当轮点名，`{doc_root}\mem\` 下只许读 `README.md` 与 `SENSITIVE.md`；其余文件与子夹（含列出、打开、检索）即使只读，也须用户当轮点名该文件、路径或该项任务。写盘仍按本条总闸，须当轮点名。
 - **授权按项按轮**：点名 A 只授权 A 的该处；「继续」「好」「你看着办」不等于写盘许可。须问条款（D-1 移底表、网络、MY-SKILLS PR/merge、Word 城城已改先问、稿件回滚须授权）继续有效。
-- **禁删**：旧稿 / 旧产物移入 `{DEL}`（`_by-project` / `_by-function`），保留相对路径；禁止静默永久删除。
+- **禁删**：旧稿 / 旧产物移入 `{DEL}`（`_by-project` / `_by-function`），保留相对路径；禁止静默永久删除。 `{DEL}` 只能由主人手动清空（空目录、就地 `_Del` 等细则 → `del-and-harvest.md` §1）。
 - **新建**：默认只许 `{DEL}`；常设例外仅限 bot 记忆导出（`_Docs\mem\`）、子工程 `ref\tmp\`、用户当轮同意；例外只是新建路径，不构成编辑许可。一次性脚本 / 小补丁只落 `{DEL}`，不进主目录、`.grok\tmp`、课题根。
 - 默认禁止直接改 `{RULES}`、`{SKILLS}`、`_Docs`、子工程已有文件；**改已有文件同样须当轮点名**，含 `_Docs\harvest\*`、`_Docs\mem\*`、已有稿（含 Track Changes）。
 - 默认禁在 `{doc_root}` 下 mkdir；目录名一律 ASCII 英文，中文只进索引列。
@@ -81,6 +82,7 @@ routes: [workspace-layout.md, project-ref-layout.md, del-and-harvest.md, library
 | 盘面 / 阶段夹 / 家族桶 / `_share` / `_db` / 项目业务表 / 冷库 / accepted 收工 | `workspace-layout.md` | `db-library` |
 | 项目 `ref\` 地图 / 稿名 / 手改识别 / 幂等 | `project-ref-layout.md` | — |
 | `{DEL}` / harvest / 清理 / 活依赖 | `del-and-harvest.md` | `00_orchestrator` harvest |
+| 本机覆盖层 / 多机位路径分工 | `local-overlay.md` | — |
 | 网络 / 敏感外发 / 代理 / 留痕 | `network-security.md` | — |
 | 技能库 / PR 同步 / 演进 | `skills.md` | `skills` |
 | 库分类 L1–L2 / 三库 / 批件 / 期刊池 | `library-taxonomy.md` | `find-journal` |
@@ -104,6 +106,7 @@ routes: [workspace-layout.md, project-ref-layout.md, del-and-harvest.md, library
 - **科研**：文献只引真实来源；统计不为跑通改 outcome / 纳入 / cutoff / 协变量 / 缺失 / 模型（细则 → `{SKILLS}\02_data-processing\qc\`）。
 - **工程决策** R1 需求优先 · R2 证据排错 · R3 有序简化 · R4 风险比例 · R5 保护不变量 · R6 闭环验证；**重大变更门**（改结构 / 改 ID / 删目录）先给假设清单与影响并获批。
 - **长任务交接**：执行长任务（后台或预计超过 2 分钟）时，须提醒城城写交接文档并开新对话。
+- **大任务 `HANDOFF.md`**：满足任一即须维护——跨会话或预计超过 1 天；≥3 个脚本或 ≥2 次搬盘 / 迁移；需多轮验收或返工。落点在子工程根 `HANDOFF.md`（与 `ref\` 同级）；不放到处理盘工程根的白名单之外。活文档原地更新；留档时旧版进 `ref\tmp\HANDOFF-<YYYYMMDD>.md`，不并列多份。必填：现状数字、盘面与路径、运行 / 常用命令、验收判据、已知坑、已完成 / 待办、决策记录、台账索引。只写已发生与待办，不写尚未发生的计划，不复制规则正文。小任务不强制。
 - 细节（模板、阶梯、docstring、断点做法、冒烟与后台监控、并行与 CUDA）→ `{SKILLS}\02_data-processing\advanced\coding.md`。
 
 # 8 汇报

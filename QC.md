@@ -31,6 +31,8 @@ up: My rule.md §6
 | R11 活文档不陈旧 | `_DataBase` / `_Docs` 的 `目录说明.md` 与 README 里作为现行指令的绝对路径必须可解析（无停用根、无失效阶段指针）；计数与日期主张须与实盘一致；史证须同句带标记词 | `{doc_root}\test\structure_check.py` S30 + `audit_readme_counts.py` | 已机器（_Docs 侧）+ H2 人门 |
 | R12 备份垃圾不进阶段工程 | `*.bak` / `*.bk` / `~$*` / `- copy` / `副本` 不得留在阶段工程；旧配置与旧稿移 `ref\tmp\` 或 `{DEL}`，移动留台账 | `{doc_root}\test\structure_check.py` S32 | 已机器 |
 
+项目数据件（csv / tsv / ini / py 等）的旧路径门与 R11 同方向，范围见 `workspace-layout.md`「改名 / 搬迁后的旧路径门」；R11 机器点仍只覆盖 `_DataBase` / `_Docs` 的说明与 README。
+
 # 3 失败处置
 - 先修到过门；不能过门就改规则，但**须用户点头**。
 - 不得用 skip / archived 绕过，不得把未跑说成通过；报绿必须附命令与输出。
