@@ -9,7 +9,7 @@
 | 文件 | 层 | 做什么 | 边界 |
 |---|---|---|---|
 | `My rule.md` | L0 | 裁决顺序、硬闸、交付落点、路由第一跳、QC 频率 | 不写领域细节 / 步骤 / 史 |
-| `workspace-layout.md` | L1 | 盘面、阶段夹、家族桶、`_share`、`_db`、项目业务表、冷库、accepted 收工 | `{DEL}` → `del-and-harvest.md`；稿名 → `project-ref-layout.md` |
+| `workspace-layout.md` | L1 | 盘面、阶段夹、家族桶、`_PHI`、`__zip`、项目业务表、冷库、accepted 收工 | `{DEL}` → `del-and-harvest.md`；稿名 → `project-ref-layout.md` |
 | `project-ref-layout.md` | L1 | 项目 `ref\` 地图、稿名、手改识别、幂等 | 落点总则 → `My rule.md` §3；版式 → 技能 |
 | `del-and-harvest.md` | L1 | `{DEL}` 三档、harvest 去向、活依赖、新建禁区全文 | 扫描实现 → `_Docs\test\`；何时清 → `QC.md` |
 | `library-taxonomy.md` | L1 | 库分类 L1/L2、三库分工、批件 / 期刊池契约 | 归并脚本 → 技能 `db-library` |

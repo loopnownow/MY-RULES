@@ -11,7 +11,7 @@ description: 本机布局与子工程短针。落点见 My rule.md §3。
 
 | 根 | 角色 |
 |---|---|
-| `D:\MyProjects\_DataBase`（`{RAW}`） | 课题原始件（`<family>\<prefix_suffix>`，家族桶；家族原始件池 `<family>\_share\`（`ethics\` / `thesis\` / 原始件档））+ `_` 非课题归档分支 + `_lab` 历史档只读；除 `_index.csv`/`_diseases.csv` 外只读除非点名；细则见下节 |
+| `D:\MyProjects\_DataBase`（`{RAW}`） | 课题原始件（`<family>\<prefix_suffix>`，家族桶；身份桶 `<family>\_PHI\`、原始件池 `<family>\__zip\`、学位桶 `<family>\_thesis\`）+ `_` 非课题归档分支 + `_lab` 历史档只读；除 `_index.csv`/`_diseases.csv` 外只读除非点名；细则见下节 |
 | `D:\MyProjects\.Del`（`{DEL}`） | AI 可操作临时/移出区（`_by-project` / `_by-function`）；**syn 不同步**（`/XD .Del`） |
 | `D:\MyProjects\_Docs` | 语料 + 可复用代码；live tops：`_library`（含 `references` 文献全文、`lit-bank` 书目、`journals` 期刊池与选刊侧私有、`ethics\approvals` 批件、`lab-ref-ranges`、`glossary` 自有语料+四层（words/sentences/paragraphs + sections 指针页；`GLOSSARY_ROOT`）） / `templates` / `mem` / `GitHub` / `test` / `harvest` / `harvest-sources-park`（已瘦身：方法原文 6 件 + 入口散件；抢救文本已退役）（+ 根 md；`_bank` 已并入 `_library\glossary`，`_code` 已退役） |
 | `D:\MyProjects\_Docs\mem` | bot 记忆导出/更新落点（城城）；**仅隐私** + 可变数据 SSOT（如 find-journal JCR xlsx）；站立政策不进 mem；查阅授权 → `My rule.md` §2 |
@@ -35,13 +35,13 @@ description: 本机布局与子工程短针。落点见 My rule.md §3。
   - 不另造第三个 raw 根。**更正活引用 ≠ 搬迁磁盘树**：不 bulk 迁移旧根；两边若都在，维持原状，等主人另批搬迁。
 - **禁止进 git：** 原始影像二进制**不要**进 git（含 Git LFS）或任何 GitHub remote（DICOM 头含 PHI；二进制无有效 delta）。可选轻量清单（相对路径 + 大小 + SHA-256 + 入库日）可放子工程 `ref/pipeline/`（同 `hashes.tsv` / `MANIFEST.md` 思路）。该清单若需版本，可用**无 remote 的本地 git**；备份 = 拷到另一块盘，不是 git。
 - **进 `_DataBase` 多文件先压缩：** 进 `D:\MyProjects\_DataBase\…`（或其 E 镜）时，若某目录内「单独文件」≥20，或明显是大量小文件堆（DICOM 序列、切片导出、逐例中间件、碎日志），先压成**一个**归档再入库；单文件或本来就少的目录不压。
-  - **格式与落点：** 优先 `7z`（`-mx=5`；固态 DICOM 可 `-m0=LZMA2`）；无 7z 用 `zip`。归档名=`<原目录名>.7z`，**唯一落点 = `<family>\_share\<leaf>\`**（叶内与家族根禁归档，见「`_share` 家族原始件池」）；`<名>.files.txt`（相对路径清单）**随档同放** `_share\<leaf>\`。
+  - **格式与落点：** 优先 `7z`（`-mx=5`；固态 DICOM 可 `-m0=LZMA2`）；无 7z 用 `zip`。归档名=`<原目录名>.7z`，**唯一落点 = `<family>\__zip\<leaf>\`**（叶内与家族根禁归档，见「`__zip` 原始件池」）；`<名>.files.txt`（相对路径清单）**随档同放** `__zip\<leaf>\`。
   - **原目录：** 压缩校验通过（文件数/抽样 hash）后，原散目录移入 `D:\MyProjects\.Del`；不要两边长期并存。工作中的热数据先不压；定稿/冷存再压。
   - **例外不压：** 根上索引与表（`settings.ini`、`*.xlsx`、`console.html`、README）；已是单一大文件（`.nii.gz`、整包 `.dcm`、现成 `.7z/.zip`）；主人点名要随时打开的活数据集。
   - **单元粒度：** 优先按 subject / session / modality（或一次采集单元）一档，**不要**整 slug 打成一个 mega-zip。
   - **值得 deflate：** 未压缩 DICOM 夹、未压缩 `.nii`、BMP/TIFF 栈。已压缩对象（JPEG/JPEG-LS/JPEG2000 DICOM、PNG 等）若只需容器，用 zip **store**（不二次压缩）；避免 zip-in-zip。
   - **归档后：** 不要在 `_DataBase` 或 `D:\MyProjects` 下再留第二份解压树。处理仍走 copy-on-need：需要时抽到工作区，**不要**长期解压在 archive 旁。
-  - **清单：** `_share\<leaf>\` 内 `<名>.files.txt` 为相对路径清单，随档同放；课题 `ref/pipeline/` 可选再记 archive（相对路径 + 大小 + SHA-256 + 入库日）。
+  - **清单：** `__zip\<leaf>\` 内 `<名>.files.txt` 为相对路径清单，随档同放；课题 `ref/pipeline/` 可选再记 archive（相对路径 + 大小 + SHA-256 + 入库日）。
   - 归档只是打包，**不是**加密；DICOM 头 PHI 与禁止进 git/LFS 仍适用。**不**强制密码。本条为**今后入库闸**；本票不 bulk 转换已有解压树。
   - **syn：** 压完后 `_DataBase` 仍随主树同步；`syn` 仅 `/XD .Del`。
 - **单档 ≤1 GiB / 分卷：** 进 `{RAW}`、交付或归档打包时，**单个文件 ≤1 GiB（1,073,741,824 B）**；预计超限就**先分卷**，不要造出大档再拆。
@@ -75,25 +75,25 @@ description: 本机布局与子工程短针。落点见 My rule.md §3。
 - **同源聚合：** `<family>` 按**同源数据**聚合，不是按病名近义随便并。
   1. 同一影像/队列母集、同一纳排、或多篇稿共用一批 raw/底表 → 同一 `family`。
   2. 同病但非同源（独立采集 / 独立伦理 / raw 不可互指）→ 可自家族；若仅临床谱系同桶仍分叶，**文件不得跨叶混放**。
-  3. 叶夹仍是 `<prefix_suffix>`。共用 raw **只存一份**：优先 `_DataBase\<family>\_share\`（或钉死的主叶）；其它课题经 `ref/settings.ini`（或 README）指针；禁止整树复制进多叶。
-  4. **`_share` 家族原始件池：** 课题的原始数据 / 原始记录 / 原始图片一律进 `<family>\_share\`，不再按叶分散。
-     - **三类固定**（自 `_share` 起 ≤2 层，D1 最终口径）：`_share\<leaf>\<文件>` 放该叶原始件压缩档（`tar.zst` 原样，**不就地解压**，解压树用完即移 `{DEL}`）；`_share\ethics\<CODE>__<文件>` 放伦理申请材料 / 原始件（留存口径 →「伦理材料留存」；**批件 PDF 索引仍归** `_Docs\_library\ethics\approvals\`）；`_share\thesis\<slug>__<文件>` 放学位论文 / 博士后材料。
-     - **一级结构：** 仅上述三类 + `目录说明.md`（`_share` 存在必须自带 `_share\目录说明.md`；无叶家族例外 `_share\<family>\` 直放，须在家族 `目录说明.md` 登记）；其下**一层平铺**，不建 `raw\` / `cohort\` 子夹。
+  3. 叶夹仍是 `<prefix_suffix>`。共用 raw **只存一份**：优先 `_DataBase\<family>\__zip\`（或钉死的主叶）；其它课题经 `ref/settings.ini`（或 README）指针；禁止整树复制进多叶。
+  4. **`__zip` 原始件池：** 课题的原始数据 / 原始记录 / 原始图片一律进 `<family>\__zip\`，不再按叶分散。
+     - **各类固定**（自各桶起 ≤2 层，D1 最终口径）：`__zip\<leaf>\<文件>` 放该叶原始件压缩档（`tar.zst` 原样，**不就地解压**，解压树用完即移 `{DEL}`）；`_thesis\<slug>__<文件>` 放学位论文 / 博士后材料。
+     - **一级结构：** 仅上述三桶（`_PHI` / `__zip` / `_thesis`）+ `目录说明.md`（`__zip` 存在必须自带 `__zip\目录说明.md`；无叶家族例外 `__zip\<family>\` 直放，须在家族 `目录说明.md` 登记）；其下**一层平铺**，不建 `raw\` / `cohort\` 子夹。
      - **家族根：** `<family>` 根放 `目录说明.md` 记件清单 / 使用者 / PHI；搬入前先 grep 全库按路径引用；迁移记 `MOVED-*.tsv`（件数 / 字节 / sha 校验），原叶留指针；压缩档与解压树并存时**只留档**（先验档为解压树超集再移树）。
-     - **唯一落点与层级：** `_share` 为压缩档唯一落点（收的是原始件压缩档；档内表格按「家族库 `_db\`」条解出入库，原档仍留 `_share`），叶内与家族根不得留任何归档；`_share` 下文件层级 ≤2（`_share\<类>\<文件>`），不再加中间夹。
-     - **存量：** 首个实例 = `_DataBase\ACN\_share\`（`人-血浆-171 - 0.7z`、`2026碳纤维部数据-- (3).xls`）；20 个家族已建 `_share\`（伦理 48 项 + 学位论文 7 项 + 原始件档 13 个）。叶内非表格 raw 按一级目录 / loose 单元压 `<PREFIX>__<leaf>__<unit>-raw-<YYYY-MM-DD>.tar.zst` 上收 `_share\<leaf>\`（不整叶 mega-zip）；原件移 `{DEL}\_by-function\<batch>\originals\<code>\<family>\<leaf>\`，写 tsv（相对路径 / 字节 / sha256），叶 `目录说明.md` 记「raw→档」映射。
-  5. SSOT = `_diseases.csv` 的 `family` 列（L1 桶名以此为准；`family` 留空 = 该基码即自家族）；改挂靠先改表再搬盘；`OTHERS` 仅兜底。`_share` 为保留名（下划线前缀），与 `_lab` 同类例外：`structure_check.py` S23 **已实现**桶内 `_` / `.` 前缀叶跳过叶后缀校验。
-  6. **短码夹层级：** 短码夹位于 `_DataBase\<family>\<prefix_suffix>`（自 `_DataBase` 起总深 3）；**叶内目录 ≤3 层**，超深链条按 `<父>_<子>` 合并为单层名（实例：`DER\zyx_H`，原 8 层 / 1,188 个超深目录 → 3 层）；派生件（期刊成图 / 投稿包 / 汇报稿）不进叶内 raw，`_未标天数` 这类纯归档中间层不保留；表格入库后叶内只留 `目录说明.md`（见「家族库 `_db\`」）。
+     - **唯一落点与层级：** `__zip` 为压缩档唯一落点（收的是原始件压缩档；档内表格按「家族库 `_PHI\`」条解出入库，原档仍留 `__zip`），叶内与家族根不得留任何归档；`__zip` 下文件层级 ≤2（`__zip\<类>\<文件>`），不再加中间夹。
+     - **存量：** 首个实例 = `_DataBase\ACN\__zip\`（`人-血浆-171 - 0.7z`、`2026碳纤维部数据-- (3).xls`）；20 个家族已建 `__zip\`（伦理 48 项 + 学位论文 7 项 + 原始件档 13 个）。叶内非表格 raw 按一级目录 / loose 单元压 `<PREFIX>__<leaf>__<unit>-raw-<YYYY-MM-DD>.tar.zst` 上收 `__zip\<leaf>\`（不整叶 mega-zip）；原件移 `{DEL}\_by-function\<batch>\originals\<code>\<family>\<leaf>\`，写 tsv（相对路径 / 字节 / sha256），叶 `目录说明.md` 记「raw→档」映射。
+  5. SSOT = `_diseases.csv` 的 `family` 列（L1 桶名以此为准；`family` 留空 = 该基码即自家族）；改挂靠先改表再搬盘；`OTHERS` 仅兜底。`_PHI` / `__zip` / `_thesis` 为保留名（下划线前缀），与 `_lab` 同类例外：`structure_check.py` S23 **已实现**桶内 `_` / `.` 前缀叶跳过叶后缀校验。
+  6. **短码夹层级：** 短码夹位于 `_DataBase\<family>\<prefix_suffix>`（自 `_DataBase` 起总深 3）；**叶内目录 ≤3 层**，超深链条按 `<父>_<子>` 合并为单层名（实例：`DER\zyx_H`，原 8 层 / 1,188 个超深目录 → 3 层）；派生件（期刊成图 / 投稿包 / 汇报稿）不进叶内 raw，`_未标天数` 这类纯归档中间层不保留；表格入库后叶内只留 `目录说明.md`（见「家族库 `_PHI\`」）。
   7. 与 archived 同构：冷库 L1 仍跟同一 `family`；本条**不**改 accepted 收工硬留清单。
-- **文档支：** 学位论文 / 标书 / 伦理申请材料不再设 `_DataBase` 顶层 `_thesis`、`_grants\_misc`、`_ethics\_misc` 三夹；改落家族池 `<family>\_share\thesis\<slug>__<文件>` 与 `<family>\_share\ethics\<CODE>__<文件>`，标书原件归 `_DataBase\_grants\<year>\`。原三夹已解散（`_grants\_misc` 移 `{DEL}`）；遗留例外：`_grants\2025\_ethics-forms\`（申报随附伦理表）。
+- **文档支：** 学位论文 / 标书 / 伦理申请材料不建 `_DataBase` 顶层 `_thesis`、`_grants\_misc`、`_ethics\_misc` 三夹；改落家族池 `<family>\_thesis\<slug>__<文件>`，标书原件归 `_DataBase\_grants\<year>\`；伦理申请材料不进 `_DataBase`，按「伦理材料留存」归 `_Docs\_library\ethics\`。原三夹已解散（`_grants\_misc` 移 `{DEL}`）；遗留例外：`_grants\2025\_ethics-forms\` 不重建（申报随附伦理表，随清理批次移 `{DEL}`）。
 
 
 ### 伦理材料留存
 
-短码/家族伦理落点 = `_DataBase\<family>\_share\ethics\`（与「`_share` 家族原始件池」同构；`<family>` 取 `_diseases.csv` 的 `family` 列）。本条定**留存口径**；盘面大搬由 Bai 执行，本票（Rules encode）**不**搬盘。
+伦理材料落点 = `_Docs\_library\ethics\`（申请包 / 方案 → `sections\protocol`，知情同意 → `sections\icf`，写作模式提取物 → `extract\briefs` / `extract\phrases`，批件 PDF → `approvals\<L1>\<L2>\`）。`_DataBase` 侧不设伦理夹：抽完写作模式即退役，剩余件按 harvest 流程走 `harvest-park` → `harvested`。本条定**留存口径**；盘面大搬由 Bai 执行，本票（Rules encode）**不**搬盘。
 
-1. **批件原件**：仅保留**日期 ≥ 2023-11-10** 的进短码/家族伦理夹（`_DataBase\<family>\_share\ethics\`）。日期取批件批准日 / 文件标注日（能确定者）；**早于 2023-11-10** 的批件原件 → `.Del`（不进短码夹）。库侧已批批件 PDF + 索引仍落 `_Docs\_library\ethics\approvals\`（`library-taxonomy.md` §3）；本条不另造 approvals 路径。
-2. **临床研究方案 + 知情同意书**：**全部保留**进短码/家族伦理夹（`_DataBase\<family>\_share\ethics\`），**无**日期下限。
+1. **批件原件**：仅保留**日期 ≥ 2023-11-10** 的进 `_Docs\_library\ethics\approvals\<L1>\<L2>\`，并在 `approvals-index.xlsx` 登记。日期取批件批准日 / 文件标注日（能确定者）；**早于 2023-11-10** 的批件原件 → `{DEL}`。分类口径见 `library-taxonomy.md` §3，本条不另造 approvals 路径。
+2. **临床研究方案 + 知情同意书**：**全部保留**，方案 → `_Docs\_library\ethics\sections\protocol\`，知情同意 → `sections\icf\`，**无**日期下限；文件名保留 `<CODE>__` 前缀便于回溯。
 3. **`_DataBase\_lab\ethics` 废弃**：该树不再作为活伦理落点；内容进 `.Del`（搬迁由 Bai 执行）。`_lab` 根其它历史档只读口径不变，唯 ethics 子树按本条退役。
 
 挂靠：短码 ↔ 家族靠 `_diseases.csv`；ethics/references 的 library L1/L2 对照不变。
@@ -101,7 +101,6 @@ description: 本机布局与子工程短针。落点见 My rule.md §3。
 | 分支 | 放 | 不放 |
 |---|---|---|
 | `_teach\<topic-slug>\` | 教学语料（课件/病例/试题/模板）；slug 用英文小写连字符 | 课题原始影像 |
-| `_ethics\<code>\` | 伦理申报包与表格原件 | 批件 PDF（实体在 `_library\ethics\approvals`，只挂指针） |
 | `_med\{gcp,meeting,year-end,rules}\` | 医疗行政 | 科研数据 |
 | `_books\<year>\` | 书稿/章节 | 课题原稿 |
 | `_grants\<year>\` | 课题申请包（进行中与已结题；原 `R&P` 申请侧） | 本组期刊稿（走四阶段） |
@@ -119,64 +118,80 @@ description: 本机布局与子工程短针。落点见 My rule.md §3。
 
 可选：数据课题也可在上述子工程树内自建文件夹；约定写在该子工程内，不进全局 rules/skills。
 
-### 家族库 `_db\\` 与子工程库（1+N）
+### 家族桶三类落点（`_PHI` / `__zip` / `_thesis`）
 
-- **位置（1+N，三层）**：家族库 `_DataBase\\<family>\\_db\\<family>db`；子工程库 `_DataBase\\<family>\\<slug>\\<slug>db`（**扁平**，不建 `<slug>\\_db\\` 或 `<family>\\_db\\<short_code>\\` 子夹）。自 `_DataBase` 起两者总深 3；`_DataBase\\_db\\` 已退役。
-- **目录内容**：`_db` 内放家族库 `<family>db`、并存期冻结旧库 `<family>db_6t`、`目录说明.md`，以及常驻、可重建的预览页；子工程叶内放 `<slug>db`、`目录说明.md`，同样允许可重建预览页。两处都不建 `raw\\` / `originals\\` / 日期子夹；并存期结束、旧库归档后，回到「库 + 说明 + 可重建预览」。预览页由库重生成，不是第二份库，也不得代替库文件；改库后必须重生成，否则页面数字是旧账。预览若含本地文件名或姓名，只留本机并标明禁止外发；不因页面做了脱敏开关就认为库已脱敏。
+- **一句话**：一个家族 = 身份桶 `_PHI\` + 原始件池 `__zip\` + 学位桶 `_thesis\` + 每个子工程叶内一个子库 `<slug>db`；三桶与叶同在 `<family>\` 下，自 `_DataBase` 起总深 3。
+- **`<family>\_PHI\`（唯一 PHI 落点）**：放家族库 `<family>db`（`meta` / `id` / `id_number` / `dict` / `ref_project` 五表 = 身份与各类号、变量词典、子库登记）、冻结旧库 `<family>db_6t`、`目录说明.md`、可重建预览页；**不存业务表**。整桶不得外发、不得进任何仓、不得压包外送；外发只走子库（D28 零 PHI 通过后）。
+- **`<family>\__zip\`（原始件池）**：按子工程分夹 `<family>\__zip\<leaf>\`，放该叶原始件压缩档与随档清单 `<名>.files.txt`；随档非表格件（原始图 / 扫描记录 / 说明）同夹一层平铺，不建 `raw\` / `cohort\` 子夹。档内表格解出按「散表归并」入库，原档留本桶；桶根须自带 `目录说明.md`。
+- **伦理材料不进 `_DataBase`**：申请包 / 方案 / 知情同意 / 批件按「伦理材料留存」归 `_Docs\_library\ethics\`；写作模式抽完后 `_DataBase` 侧不留伦理原件，剩余件随 harvest 进 `{DEL}`，本树不设伦理桶。
+- **`<family>\_thesis\<slug>\`**：学位论文 / 博士后 / 汇报稿原件。
+- **越界即 P1**：库文件出现在 `__zip` / `_thesis` 或叶根散落归档；PHI 出现在 `_PHI` 以外的落点；`_PHI` 里的家族库出现 `clin` / `qc` / `_modules_<mod>` 业务表。
+- **写侧只认本节桶名**：不设兼容分支、不按别名兜底。旧桶名与旧表前缀出现在盘面或库内即 **P1 QC 发现**，按清理对象处理；`aliases.yaml` 的映射只用于识别与清理，不是读侧开关。
+- **迁移先试点一个家族**：首批 `ACN`（压缩档与非归档件同时在册、`src` 表路径耦合最多）。单家族搬完 → 重写库内字面路径 → 复算 `src.sha256` → `gates.py <family> --cutover` 与 `align_check.py` 全 PASS → 台账登记（`family` / 桶 / 完成日 / 门禁结果 / 回滚点）→ 再按家族铺开；试点未过不批量搬。
+- **库内路径随桶改名同批改**：`src.rel_path`（`blob:<family>/<桶>/…`）、`meta.source_db`、`meta.excluded_columns.source_sheet` 存的是字面路径，改名后须同批重写并复算 `src.sha256`；只搬目录不改这些值 = 悬挂引用（P0）。
+
+### 家族库 `_PHI\\` 与子工程库（1+N）
+
+- **位置（1+N，三层）**：家族库 `_DataBase\\<family>\\_PHI\\<family>db`；子工程库 `_DataBase\\<family>\\<slug>\\<slug>db`（**扁平**，不建 `<slug>\\_PHI\\` 或 `<family>\\_PHI\\<short_code>\\` 子夹）。自 `_DataBase` 起两者总深 3；根级 `_DataBase` 下不设库桶。
+- **目录内容**：`_PHI` 内放家族库 `<family>db`、并存期冻结旧库 `<family>db_6t`、`目录说明.md`，以及常驻、可重建的预览页；子工程叶内放 `<slug>db`、`目录说明.md`，同样允许可重建预览页。两处都不建 `raw\\` / `originals\\` / 日期子夹；并存期结束、旧库归档后，回到「库 + 说明 + 可重建预览」。预览页由库重生成，不是第二份库，也不得代替库文件；改库后必须重生成，否则页面数字是旧账。预览若含本地文件名或姓名，只留本机并标明禁止外发；不因页面做了脱敏开关就认为库已脱敏。
 - **构建收尾与边车**：缺 `目录说明.md` = 构建未完成，不是可选项；build 脚本收尾按模板写骨架（家族库写管什么 / 五表 / PHI 只在此处；子库写零 PHI / 时点口径 / 可选模态）。SQLite 边车 `<库>db-wal` 与 `-shm` 同在 = 库正被打开 / 未 checkpoint（构建中，放行）；只有 `-wal` 无 `-shm`、跨一次构建仍在 = 上次写坏残留，记 **P1**（S25/S26）。
 - **1+N：一库一工程**：每家族恰一个家族库 `<family>db`；每个子工程恰一个子库 `<slug>db`。短码 = 子工程 slug，靠 `ref_project` 与子库 `src` 区分，只表示项目归属，不是个体主索引；家族拆分时整树随 `<family>` 走。
 - **可独立处理**：家族库与子库可分别备份 / VACUUM；子库在 D28「零 PHI」通过后可单独外发，家族库含 PHI 一律不得外发。
 - **跨库唯一引用**：只靠 `family_uid`（形如 `ACN-000137`）。SQLite 无跨库外键，父子一致性由 `verify_db` 的 ATTACH 检查（D27/D34）承担。
-- **现役骨架（5t）**：家族库实表 `meta` / `id` / `id_number` / `dict` / `ref_project`（五张）；子库实表 `meta` / `src` / `person` / `clin` / `modal_<mod>`（有模态数据则 ≥1 张）/ `qc`（六类）。`id` / `id_number` 是唯一 PHI 落点；`person` 是**无 PHI 占位表**（`family_uid` / `subject_label` / `id_status`），不存姓名 / 身份证 / 电话 / 地址。
+- **现役骨架（5t）**：家族库实表 `meta` / `id` / `id_number` / `dict` / `ref_project`（五张）；子库实表 `meta` / `src` / `person` / `clin` / `_modules_<mod>`（有模态数据则 ≥1 张）/ `qc`（六类）。`id` / `id_number` 是唯一 PHI 落点；`person` 是**无 PHI 占位表**（`family_uid` / `subject_label` / `id_status`），不存姓名 / 身份证 / 电话 / 地址。
 - **家族库五表口径**：`id` 存姓名 / 电话 / 身份证 / 地址 / `family_uid`（`^[A-Z0-9_]+-\\d{6}$`）；各类号走 `id_number(kind, value)`（住院号 / 门诊号 / 影像号 / 病理号 / 样本号）；`dict` 登记变量（`role='phi'` 只许 `scope='family'`）；`ref_project` 登记子库清单与 `db_rel_path` / `built_at` / `sha256`。
 - **`ref_project` 四个计数**：`person_count`（person 行数，含占位）/ `clin_person_n`（有 ≥1 条 clin 行的人数 = **队列人数口径**）/ `longitudinal_n`（有 ≥2 个不同 `period_month` 的人数）/ `multi_record_n`（有 >1 条 clin 行的人数）。四列由门禁实时重算比对，任一不等即 **P0**（D35）；**对外只报 `clin_person_n`**。
 - **家族级人数不报**：`id` 行数 ≠ 患者数，`person_count` 也不是队列人数。跨子库未解析时只报项目级 `clin_person_n`；`id` 行数只允许作「身份行数」出现在方法学附注（D36）。试点实测：LC 家族库 `id` 3,050 行，四个项目 `clin_person_n` 合计 2,234 人；非姓名证据判同一人为 0，故不提供家族级合计。
 - **冻结旧库（core-6t）**：旧七表 `meta` / `project` / `src` / `item` / `val` / `person` / `person_key` 与兼容视图 `doc` / `sheet` / `sheet_dup` / `entity` / `fact` 只在 `<family>db_6t` 内保留，**只读**，供迁移对账；不得在旧库继续建表 / 改数，也不再按此骨架新建库。旧库 `meta.source_db` + `sha256` 须指向原始旧库并校验（D33）。
-- **命名**：库文件 `<family>db` / `<slug>db`（均无扩展名；实例 `MHE_ANdb`、`lxj_ACNdb`）；冻结旧库 `<family>db_6t`（同目录、无扩展名、只读）。`_db` 与子工程叶内放「库文件 + `目录说明.md` + 可重建预览页」；说明须含口径 / 表结构 / 查询示例 / 重建步骤 / 限制 / `source_db` 对应关系（旧库名 + sha256）。
-- **只收表格（去重合并结果）**：xlsx / xls / csv 等可解析的原始行列数据入库；入库即按「散表归并」去重合并（文件 sha → 整表 → 行级），同格式多份并入对应子库（`src.rel_path` + `src.sha256` 区分）；非原始数据不入库，口径 → 见「项目业务表（`clin` + `modal_<mod>` + `qc`）」。库不是散表仓，不存原件、不存合并中间簿。**压缩档内的表格同样入库**：解出到 staging 后按同一条去重合并，档本身仍归 `_share`。
-- **压缩档本身不进 db、不留叶**：`*.tar.zst`、`7z`、`zip`、`gz`、`rar` 等归档一律进 `<family>\_share\`（归位见「`_share` 家族原始件池」）；**档内表格文件须解出、按「散表归并」入库**，档内非表格件（原始图 / 记录 / 文档）不入库；解包树校验后移 `{DEL}`，readme / 移动台账记「档→表」映射。
+- **命名**：库文件 `<family>db` / `<slug>db`（均无扩展名；实例 `MHE_ANdb`、`lxj_ACNdb`）；冻结旧库 `<family>db_6t`（同目录、无扩展名、只读）。`_PHI` 与子工程叶内放「库文件 + `目录说明.md` + 可重建预览页」；说明须含口径 / 表结构 / 查询示例 / 重建步骤 / 限制 / `source_db` 对应关系（旧库名 + sha256）。
+- **只收表格（去重合并结果）**：xlsx / xls / csv 等可解析的原始行列数据入库；入库即按「散表归并」去重合并（文件 sha → 整表 → 行级），同格式多份并入对应子库（`src.rel_path` + `src.sha256` 区分）；非原始数据不入库，口径 → 见「项目业务表（`clin` + `_modules_<mod>` + `qc`）」。库不是散表仓，不存原件、不存合并中间簿。**压缩档内的表格同样入库**：解出到 staging 后按同一条去重合并，档本身仍归 `__zip`。
+- **压缩档本身不进 db、不留叶**：`*.tar.zst`、`7z`、`zip`、`gz`、`rar` 等归档一律进 `<family>\__zip\`（归位见「`__zip` 原始件池」）；**档内表格文件须解出、按「散表归并」入库**，档内非表格件（原始图 / 记录 / 文档）不入库；解包树校验后移 `{DEL}`，readme / 移动台账记「档→表」映射。
 - **叶内只留 readme + 子库**：原表入库并校验后，叶内只留 `<slug>db` 与 `目录说明.md`（写入库日 / 项目 slug / 原件去向 / 未入库例外 / `source_db`+sha256）；不得留散表。未入库件（PHI 花名册、模板、解析失败件）留叶并在 readme 写明原因，不得另存副本；**PHI 花名册只作迁移证据，不得并入子库**（迁移后按 D28 复核）。
 - **原件留痕**：建库并校验通过后，原件移 `{DEL}\_by-function\<batch>\originals\<code>\<family>\<leaf>\`，写 `*-MOVED-YYYYMMDD.tsv`（相对路径 / 字节 / sha256）；原件不回流。
-- **门禁**：`_db` 是 `_` 前缀桶，不参与 S23 桶/叶后缀校验。`structure_check.py` **S25** 校验家族库/子库落点与库文件（`<family>db` / `<slug>db` / 冻结 `<family>db_6t`、库头 SQLite、按 `meta.kind` + `schema_version` 分派 5t 家族五表 / 子库六类表、`_DataBase\\_db` 不复活）；**S26** 允许叶内 `<slug>db`；**S27** 确认 `_share` 不收库文件。`verify_db.py` 先按 `schema_version` 分派：旧 core-6t 仍跑 D1–D22，5t 跑 D23–D45（含跨库 ATTACH）。建库 / 迁移前后仍须全门 PASS。
+- **门禁**：`_PHI` 是 `_` 前缀桶，不参与 S23 桶/叶后缀校验。`structure_check.py` **S25** 校验家族库/子库落点与库文件（`<family>db` / `<slug>db` / 冻结 `<family>db_6t`、库头 SQLite、按 `meta.kind` + `schema_version` 分派 5t 家族五表 / 子库六类表、根级 `_DataBase` 下不得出现库桶）；**S26** 允许叶内 `<slug>db`；**S27** 确认 `__zip` 不收库文件。`verify_db.py` 先按 `schema_version` 分派：旧 core-6t 仍跑 D1–D22，5t 跑 D23–D45（含跨库 ATTACH）。建库 / 迁移前后仍须全门 PASS。
 - 细则（去重层级、5t/6t schema、`family_uid` 分配、QA 清单、重建命令、旧库对账）→ skill `db-library`。
 
 ### 散表归并与表格入库
 
-- **触发**：家族根 / 叶根散落表格（同项目多份、`(n)` 版本、一簿多 sheet）需要「去重 → 对齐 → 合并成一个 Excel」或「入 `_db`」时。
-- **项目粒度 = 叶 slug**；合并产物 `<项目名>_merged_YYYYMMDD.xlsx` **不落**叶根 / 家族根：同格式多份直接入库对应子库 `<slug>\\<slug>db`（家族级身份映射另登记家族库 `id` / `id_number`），确需中间簿只暂存 `{DEL}\\_by-function\\<batch>\\`；`_share\\` 内不动。
+- **触发**：家族根 / 叶根散落表格（同项目多份、`(n)` 版本、一簿多 sheet）需要「去重 → 对齐 → 合并成一个 Excel」或「入 `_PHI`」时。
+- **项目粒度 = 叶 slug**；合并产物 `<项目名>_merged_YYYYMMDD.xlsx` **不落**叶根 / 家族根：同格式多份直接入库对应子库 `<slug>\\<slug>db`（家族级身份映射另登记家族库 `id` / `id_number`），确需中间簿只暂存 `{DEL}\\_by-function\\<batch>\\`；`__zip\\` 内不动。
 - **去重三层**：① 文件级 sha256；② 整表级（表头 + 行哈希集合全等 = 重复；真子集 = subset，只记边、不存第二份字节）；③ 行级 / 实体级（自然键整行全等才去重；跨项目映射只人工建）。
 - **对齐**：列名词典 + 表头驱动解析；**不按 mtime 判新旧**（迁移会刷新 mtime，本轮 239/258 张挤在 13 个分钟桶）；版本簇（`(n)` / `copy`）只作线索，须开表核对。
 - **去重合并**：行名或行键一致时按列合并去重，以较新数据为准，旧表独有列回填，不得编造数值或列名。列名一致时按行合并去重，以较新数据为准，旧表独有行保留。较新指同一版本链中较后的来源（版本标记、`(n)`、`copy`、新旧线索）；mtime 判定 → 见上「对齐」。
 - **合并冲突**：若较后的表明显更小、覆盖会缩小队列，则保留更完整的表，较小者只记 subset，不得覆盖。新旧无法判定时，重叠行保留非空单元格最多的一行，并列时取原行序更前的；被丢行只回填空位。表头缺失、双层或把数据行误当表头时，须先修好再合并。
 - **留痕**：原件移 `{DEL}\_by-function\<batch>\originals\<code>\<family>\<leaf>\`，写 `*-MOVED-YYYYMMDD.tsv`（件数 / 字节 / sha256 100% 核验）；结果与限制写叶 / 家族 `目录说明.md` 追加段 + `_index.csv` note；批次报告 `<batch>-REPORT.md`。
 - **闸**：改动前后 `structure_check.py` 全门 PASS；手工删除 / 清除须主人确认后写 `REVOKED-YYYYMMDD.tsv`，不得静默。
-- 策展后每叶只留一份现行源文件，内含长表与宽表（每表最多 5 个工作单）；子库内 `clin` 一张 + `modal_<mod>` 按模态/特征域各一张（逐张登记 `dict`）+ `qc` 一张，口径见「项目业务表（`clin` + `modal_<mod>` + `qc`）」。
+- 策展后每叶只留一份现行源文件，内含长表与宽表（每表最多 5 个工作单）；子库内 `clin` 一张 + `_modules_<mod>` 按模态/特征域各一张（逐张登记 `dict`）+ `qc` 一张，口径见「项目业务表（`clin` + `_modules_<mod>` + `qc`）」。
 - 细则（三类型判定、表头驱动解析、坑位清单、合并簿 sheet 约定）→ skill `db-library`。
 
-### 项目业务表（`clin` + `modal_<mod>` + `qc`；不再按长/宽各一限表）
+### 项目业务表（`clin` + `_modules_<mod>` + `qc`；不再按长/宽各一限表）
 
-- **范围**：约束的是每个**子工程库**的业务表，不是家族库骨架。家族库只存身份、号、字典与子库登记（`id` / `id_number` / `dict` / `ref_project`），不存项目业务表。子库业务表 = `clin` 一张 + `modal_<mod>` N 张（每模态/特征域一张，须在 `dict` 登记）+ `qc` 一张；`person` 是占位表，不是业务表。「每项目至多长表与宽表各一」不再适用。
-- **现行源文件**：每个叶只保留一份现行源文件，且须是一份工作簿，不得长表、宽表各放一个文件。该文件内为长表与宽表；无内容的一侧省略，空席不垫。现行骨架仍是本文件的 5t（家族五表 / 子库 `clin` / `modal_<mod>` / `qc` 等），不得用精简登记册或 blob 库骨架替换。每张表最多 5 个工作单；工作单名可用 `clin` / `modal_<mod>` / `qc` / `analysis`，入子库后固定落到 `clin` / `modal_<mod>` / `qc`，**不得按工作单另开表**。
+- **范围**：约束的是每个**子工程库**的业务表，不是家族库骨架。家族库只存身份、号、字典与子库登记（`id` / `id_number` / `dict` / `ref_project`），不存项目业务表。子库业务表 = `clin` 一张 + `_modules_<mod>` N 张（每模态/特征域一张，须在 `dict` 登记）+ `qc` 一张；`person` 是占位表，不是业务表。「每项目至多长表与宽表各一」不再适用。
+- **现行源文件**：每个叶只保留一份现行源文件，且须是一份工作簿，不得长表、宽表各放一个文件。该文件内为长表与宽表；无内容的一侧省略，空席不垫。现行骨架仍是本文件的 5t（家族五表 / 子库 `clin` / `_modules_<mod>` / `qc` 等），不得用精简登记册或 blob 库骨架替换。每张表最多 5 个工作单；工作单名可用 `clin` / `_modules_<mod>` / `qc` / `analysis`，入子库后固定落到 `clin` / `_modules_<mod>` / `qc`，**不得按工作单另开表**。
+- **表族三组、各管一段**：`clin` 是唯一「人 × 时点」主表；`_modules_<mod>` 只收不宜拉长的矩阵（组学 / 谱图 / ICC / 相关矩阵 / 影像组学）；`qc` 只收门禁结果与人工裁决。三组之外要建表，先在本节登记再建，不靠临时命名。
+- **横断面一张、纵向按波次分张**：横断面研究 `clin` 一张。纵向研究若各波次变量集不同或列不能对齐，按波次分表 `clin_t0` / `clin_t1` …，序号按时间先后；模块同法 `_modules_<mod>_t<k>`。变量集相同、只是采集时间不同 → **仍是一张长表**加 `period_month`，不按波次拆。
+- **波次须显式登记**：分波次时子库 `meta` 记 `clin_layout='wave'`、`wave_map`（`{"t0": {"period_from": "...", "period_to": "...", "crf": "...", "src_id": 1}}`）、`business_tables`（数组，列全部业务表名）。校验按 `business_tables` 枚举，**不得**用 `_t\d+` 或 `_1` / `_2` 猜表名、猜波次；同一张表用后缀列（`var_1` / `var_2`）承载不同波次同样禁止。
+- **一人一波一行**：第 `k` 波次表一行 = 一个受试者 × 该波次一次采集；同一人跨波各一行，靠 `family_uid` + 波次号对齐，不得把两个波次的列并进同一行。
 - **长表与宽表**：
 
 | 表 | 内容 |
 |---|---|
 | `clin` | 一行一条「受试者 × 时点 × visit」记录（`family_uid` / `period_month` / `month_ix` / `visit_ix`）。随访与结局叠入本表并带时点或拆分列，不单立第三张表。临床敏感字段可留；**姓名 / 身份证 / 电话 / 地址只进家族库 `id`，`clin` 不得出现**（D28）。 |
-| `modal_<mod>` | 不宜强行拉长的矩阵（组学 / 影像组学 / 谱图 / ICC 或相关矩阵）按模态或特征域建表，如 `modal_radiomics` / `modal_us` / `modal_mri`。组学走 `modal_radiomics(exam_uid, roi, feature, value)` 长表，**不建千列宽表**。 |
+| `_modules_<mod>` | 不宜强行拉长的矩阵（组学 / 影像组学 / 谱图 / ICC 或相关矩阵）按模态或特征域建表，如 `_modules_radiomics` / `_modules_us` / `_modules_mri`。组学走 `_modules_radiomics(exam_uid, roi, feature, value)` 长表，**不建千列宽表**。 |
 | `qc` | 门禁结果与人工裁决（`scope` / `code` / `severity` / `status`）；是正式表，不是业务数据表。 |
 
 - **「不收」要分层登记，不许静默丢**：整张工作单不入库 → `meta.excluded_sheets`，每条结构化 `{slug, src_id, rel_path, sheet, rows, cols, reason}`，`reason ∈ {no_individual_key, empty, duplicate, phi_only, title_page}`；**每一行必须能唯一定位到一条 `src_id`**（否则十几张同名的 `Sheet1` 无法查证，登记表只是清单不是账）。
 - 「重复」（`duplicate`：同一份数据的另一种切法、0 个新列）与「没键」（`no_individual_key`：数据无法归人）是两件事，写错会让后来的人以为被标 `duplicate` 的表还有独立数据。
 - 单列不入库 → `meta.excluded_columns`（`{column, reason, source_sheet, rows_nonnull}`）。两者之外还要留「扫过」的证据（如 `qc(TEXT_SCANNED)`）——**零命中与没扫过在库里长得一样**。
-- **粒度必须与表对应**：`clin` 一行 = 一个受试者 × 一个月。exam 级数据（一次检查 / 一个样本 / 一张谱）**不得进 `clin`**，只能进 `modal_<mod>`，或按 `meta.modal_exam_policy='deferred_until_requested'` 显式声明延后建表。keyless 宽表（有数据、无个体键）整表进 `excluded_sheets`，**不许把行号当身份塞进 `clin`**——实测一张 906 行的 `clin` 里 269 行是 exam 占位，报告里的「442 人」因此不是真人数（真数 173）。
+- **粒度必须与表对应**：`clin` 一行 = 一个受试者 × 一个月。exam 级数据（一次检查 / 一个样本 / 一张谱）**不得进 `clin`**，只能进 `_modules_<mod>`，或按 `meta.modules_exam_policy='deferred_until_requested'` 显式声明延后建表。keyless 宽表（有数据、无个体键）整表进 `excluded_sheets`，**不许把行号当身份塞进 `clin`**——实测一张 906 行的 `clin` 里 269 行是 exam 占位，报告里的「442 人」因此不是真人数（真数 173）。
 
 - **时点粒度（`period_unit`）**：以月为原子，`period_month` = `YYYY-MM`，`month_ix` = year*12+month-1，`bin_ix` = `month_ix` // `period_unit`（派生不落盘）。三种情形：① 源表无日期 → `period_unit` 为 `NULL`，`clin` 全 `UNK`；② 有日期且能连成序列 → 声明 `1` / `3` / `6`。
 - **有日期但逐人归组未定**（如 `qrx_LUNG_his`：808 行中 253 行带日期、每人仅 1 行）→ 照常声明粒度，并记 `qc(LONGITUDINAL_UNAVAILABLE)`（P2）+ `identity_state='unresolved'`。`NULL` 只表示「库里没有时间」，**不得**表示「有时间但连不成序列」（D37/D38）；`unknown` 不得有 `month_ix`，也不得用假日期填充（D29）。
 
 - **只收原始行列数据**：入库的只是原始矩形数据（行 × 列）。论文统计与作图结果、伦理材料、通讯录、汇报稿、方法说明及其他非原始数据不进库。**`dict`（变量字典）与 `qc`（门禁日志）自 5t 起是正式表，不受「不得占用第三张库内表」限制**；但只登记字典与门禁结果，不得借道塞业务数据。伦理材料仍不进库（旧 core-6t 由 D19 拦；5t 库里伦理材料不得进入 `dict.source` / `ref_project.slug` / 子库 `src.rel_path`）。
-- **版本链**：计算 / 校正 / old / copy 等版本只把现行 `clin` / `modal_<mod>` 纳入定稿，其余留子库 `src.kind='workbook'` 的源表（保留 `rel_path` + `sha256`）。
+- **版本链**：计算 / 校正 / old / copy 等版本只把现行 `clin` / `_modules_<mod>` 纳入定稿，其余留子库 `src.kind='workbook'` 的源表（保留 `rel_path` + `sha256`）。
 - **角色与源表**：5t 子库 `src.kind` 只许 `old_db`、`workbook`、`archive_member`，保留 `rel_path` + `sha256`，不得删除 `src` 行。冻结旧库的 `src.role`（兼容视图 `sheet.role`）仍只许 `raw` / `curated` / `derived`，定稿标 `curated`、来源留 `raw`、`derived` 只留 blob 不写 `val` / `fact`（`verify_db` D22，仅旧库适用）。
-- **写库**：把 `clin` / `modal_<mod>` 写入子库（身份字段写家族库 `id` / `id_number`）或 `{RAW}`，以及 `--apply` / `--move`，须当轮点名；缺省 dry-run。写盘总闸见 `My rule.md` §2。
+- **写库**：把 `clin` / `_modules_<mod>` 写入子库（身份字段写家族库 `id` / `id_number`）或 `{RAW}`，以及 `--apply` / `--move`，须当轮点名；缺省 dry-run。写盘总闸见 `My rule.md` §2。
 - **外发边界**：家族库含 PHI，**一律不得外发**；子库在 D28「零 PHI」通过后才可单独外发。业务表中的敏感字段与记录键不得写入聊天、记忆、备忘录、规则正文或回执（见 `My rule.md` §1.2）。
 
 ### 库门禁码表（D1–D70）
@@ -196,7 +211,7 @@ description: 本机布局与子工程短针。落点见 My rule.md §3。
 | D6 | `doc.n_sheets` | 沿用现行 | 与 `sheet` 实际行数不符 |
 | D7 | `entity` 覆盖 | 沿用现行 | 无实体行比例；>5% 升 P0 |
 | D8 | 移动台账 | 沿用现行 | `*-MOVED-*.tsv` 与原件去向 |
-| D9 | 叶 / `_share` 落点 | 沿用现行 | 库文件与 `目录说明.md` 位置 |
+| D9 | 叶 / `__zip` 落点 | 沿用现行 | 库文件与 `目录说明.md` 位置 |
 | D19 | 伦理材料不进库 | P0 | `doc.rel_path` / `project.slug,leaf` / `sheet.name` 命中伦理词 |
 | D20 | 表头契约 | P1 | 表头与固定列 / `dict` 一致 |
 | D21 | 明文 PHI | **P0** | 手机 / 身份证正则命中且不在家族库 `id` / `id_number`；越界即 P0 |
@@ -208,8 +223,8 @@ description: 本机布局与子工程短针。落点见 My rule.md §3。
 | D27 | 子库 `person` ⊆ 家族 `id` | P0 | ATTACH 家族库，`person.family_uid` 必须命中 `id` |
 | D28 | 子库零 PHI | P0 | 列名与内容扫姓名 / 身份证（18 位）/ 手机（11 位）/ 地址 |
 | D29 | 时点合法 | P0（行级 P1） | `month_ix` 与 `period_month` 一致；`unit ∈ {1,3,6}`；`unknown` 无 `month_ix` |
-| D30 | `dict` 列覆盖率 | P1 | `clin` / `modal_*` 每列在 `dict` 登记，覆盖率须 100% |
-| D31 | `modal_*` 主键与 FK | P0 / P1 | `exam_uid` 唯一为 P0；`radiomics` 长表孤儿为 P1 |
+| D30 | `dict` 列覆盖率 | P1 | `clin` / `_modules_*` 每列在 `dict` 登记，覆盖率须 100% |
+| D31 | `_modules_*` 主键与 FK | P0 / P1 | `exam_uid` 唯一为 P0；`radiomics` 长表孤儿为 P1 |
 | D32 | 最新 `qc` 无未决 P0 | P0 | 每库最新一轮 `qc` 不得留 `status='open'` 的 P0 |
 | D33 | 旧库并存留痕 | P1 | 新库 `meta` 记 `source_db` 路径 + `sha256`，且与旧库实算一致 |
 | D34 | `ref_project` 双向登记 | **P0** | 两个方向都查：① 每个含 `<slug>db` 的目录在 `ref_project` 必须有行；② `ref_project` 每行必须有对应库文件。任一方向缺即 P0，输出 `ref_project_missing.md`。镜像门只遍历「已有的行」时，少写一行会让其余计数照样自洽、全门绿——**缺席比错值更难发现**，与「blob 指针指空不报错」同型 |
@@ -237,7 +252,7 @@ description: 本机布局与子工程短针。落点见 My rule.md §3。
 | D56 | DICOM 头 PHI 只进家族库 | P0 | `PatientName`/`PatientID`/`OtherPatientIDs`/`AccessionNumber`/`PatientBirthDate`/`PatientAddress`/`PatientTelephoneNumbers` 只许落 `id` / `id_number`；子库出现即 P0 |
 | D57 | DICOM 伪匿名与身份冲突 | P1 | `name_quality='pseudonymized'`（`ANON*`/`XXX`/`TEST`/纯数字/单字符重复）不得当真名；一 ID 多姓名或一姓名多 ID 各建身份并记 qc，禁合并 |
 | D58 | 结局未产生不得预建 | P2（文档级） | `meta.outcome_status ∈ not_collected / collected`；未产生时不建结局列、`dict` 不出现 `role='outcome'`；结局到来另建表，不追加进 `clin` |
-| D59 | 批次可追溯 | P1 | 每行 `modal_*` 必须经 `batch_id` 定到一台设备：家族库 `ref_batch(batch_id, vendor, model, field_strength, kvp, kernel, slice_thickness, site, n_series, date_from, date_to)`；`batch_id` 悬空或设备字段全空即 P1 |
+| D59 | 批次可追溯 | P1 | 每行 `_modules_*` 必须经 `batch_id` 定到一台设备：家族库 `ref_batch(batch_id, vendor, model, field_strength, kvp, kernel, slice_thickness, site, n_series, date_from, date_to)`；`batch_id` 悬空或设备字段全空即 P1 |
 | D60 | 特征抽取参数不一致不得并池 | P0 | 同一 `feature` 在不同批次登记了不同抽取参数（bin width / resample / 软件与版本 / ROI 来源）却同表并存，即 P0；参数逐批次落 `ref_batch.extraction_params` |
 | D61 | 批次混杂须报 | P2 | 含 `batch_id` 的库须给 `batch × 结局/关键协变量` 交叉表；某批次独占某一结局水平时须写明「无法分离设备效应」，不得直接 ComBat 后当作校正完成 |
 | D62 | 跨族 blob 指针自带容器身份 | P1 | `src.rel_path` 形如 `blob:<容器库文件名>@<构建日>:src_id=<旧 src_id>#<sheet>`，`src.sha256` 等于容器内该 sheet 实际哈希；容器在盘、`src_id` 可查、sha 相符，任一不满足即 P1。切库日旧库改名 `<family>db_6t`，只写路径的老式指针会**指空且不报错**；放宽只限「原件确已不在磁盘」，且逐行记 `qc(SOURCE_SNAPSHOT_ONLY,P2)`；**原件在盘而 sha 不符仍 P0**。容器整体丢失（如旧库被误覆盖、无备份）时，须逐条落 `qc(SNAPSHOT_CONTAINER_LOST)`（`scope='src'`、`column_name='<src_id>'`）显式记账，记账后该指针只报数、不判 P1——**允许损失，不允许无声损失** |
@@ -389,7 +404,7 @@ description: 本机布局与子工程短针。落点见 My rule.md §3。
 
 - **L1 = 家族根：** 冷库按疾病家族/文档类型分桶，桶名 = `_diseases.csv` 的 `family` 列（留空 = 自家族，即基码本身；挂靠按同源聚合，见上文「同源聚合」）。例：`archived\EGVB\js_CN`、`archived\MHE\ly_SCH_HE`、`archived\OTHERS\lxj_BMP6`。
 - **叶夹名后缀 = 病种基码：** `archived\<family>\<prefix>_<suffix>[_<n>]\`；`<suffix>` 仍是基码（去末尾 `_\d+`；`SSD_DKI`、`SCH_HE` 等语义复合整段保留），实例号只留在叶子夹名（例 `archived\CC\fyh_CAC_1\`）。
-- **两树同构：** `_DataBase` 与 `archived` 都用同一个 `<family>` 桶；靠 `_diseases.csv` 的 `suffix`/`family` 对应，S23 同时校验两树桶名与叶后缀。家族池 `_share\` 与 `_lab` 仅存在于 `_DataBase`，冷库不设。
+- **两树同构：** `_DataBase` 与 `archived` 都用同一个 `<family>` 桶；靠 `_diseases.csv` 的 `suffix`/`family` 对应，S23 同时校验两树桶名与叶后缀。家族桶 `_PHI` / `__zip` / `_thesis` 与 `_lab` 仅存在于 `_DataBase`，冷库不设。
 - **疾病短码 SSOT：** `_DataBase\_diseases.csv`（UTF-8；列 `suffix,name_en,name_zh,l1,l2,aliases,family`）。`suffix` = 基码；`family` = 家族根（留空 = 自家族）；编号形式进 `aliases`（如 `SSD_1`）。中英文全称**只**进本表（及 `_index.csv` 可抄空值）；路径规则不写长病名。
 - **ethics / references** 仍用 library L1/L2（`library-taxonomy.md`）；靠 `_diseases.csv` 的 `suffix`↔`l1`/`l2` 对照，不另造路径层。
 

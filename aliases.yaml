@@ -307,3 +307,39 @@ entries:
     status: retired
     since: '2026-11-14'
     note: '抢救文本与已吸收页原件已在 `_DataBase\_lab\doc-word\` 或 `0doc-corpus.db`；park 只留方法原文与入口散件。'
+  # ── 家族桶四类落点 2026-11-27 ─────────────────────────────────────
+  - old: 'D:\MyProjects\_DataBase\<family>\_db'
+    tokens: ['_db']
+    new: 'D:\MyProjects\_DataBase\<family>\_PHI'
+    kind: dir
+    status: renamed
+    since: '2026-11-27'
+    note: '家族身份桶：家族库五表 + 冻结旧库 + 目录说明 + 可重建预览；唯一 PHI 落点，不存业务表，整桶不外发。'
+  - old: 'D:\MyProjects\_DataBase\<family>\_share'
+    tokens: ['_share']
+    new: 'D:\MyProjects\_DataBase\<family>\__zip'
+    kind: dir
+    status: renamed
+    since: '2026-11-27'
+    note: '原始件池：按子工程分夹放压缩档与随档非表格件；伦理 / 学位两支已拆到 `_ethics` / `_thesis`。'
+  - old: 'D:\MyProjects\_DataBase\<family>\_share\ethics'
+    tokens: ['_ethics']
+    new: 'D:\MyProjects\_Docs\_library\ethics'
+    kind: ref_dir
+    status: retired
+    since: '2026-11-27'
+    note: '伦理材料不进 `_DataBase`：申请包 / 方案 / 知情同意归 `_Docs\_library\ethics\sections\`，写作模式提取物归 `extract\`，批件 PDF 与索引在 `approvals\`；抽完即退役，剩余件随 harvest 进 `{DEL}`。'
+  - old: 'modal_<mod>'
+    tokens: ['modal_']
+    new: '_modules_<mod>'
+    kind: file
+    status: renamed
+    since: '2026-11-27'
+    note: '子库业务表名前缀（不是文件名）：`modal_radi` → `_modules_radi`，`meta.modal_exam_policy` 同步改 `meta.modules_exam_policy`；旧前缀出现在规则 / 盘面 / 库内即 QC 发现。'
+
+  - old: 'D:\MyProjects\_DataBase\<family>\_share\thesis'
+    new: 'D:\MyProjects\_DataBase\<family>\_thesis'
+    kind: ref_dir
+    status: renamed
+    since: '2026-11-27'
+    note: '学位论文 / 博士后 / 汇报稿原件。'
