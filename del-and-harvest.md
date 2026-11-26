@@ -14,9 +14,12 @@ up: My rule.md §2（写盘总闸与新建禁区）
 | `harvest-park` | 可能抽出 how-to 的批次 | 条件可弃 | 抽完或判 H2 后移 `harvested` |
 | `harvested` | 已抽完 / 不需要抽的剩余件 | 可弃 | 达保留期由城城手动清 |
 
-- 三档一律**平铺**，不再新增层级；旧档名映射见 `aliases.yaml`（`kind: del_tier`）。
+- 三档一律**平铺**，不再新增层级；旧档名映射见 `aliases.yaml`（`kind: del_tier`）。harvest 轮次夹是三档下的分类目录，不是新的可弃度档。
 - **harvest 剩余件**：一次 harvest 之后应进 `{DEL}` 的剩余件一律落 `harvested`，含原可进 `_by-project` 或 `harvest-park` 的收尾件；非 harvest 的三档落点不变。
 - **禁止活指针引用 `{DEL}`**：不得留 junction / link / 写死路径指向 `{DEL}` 内文件（实例：DSH profile `link:` 项指向 `.Del\_by-function\…\bundle`）。
+- **只能主人清空**：`{DEL}`（含就地 `_Del`）只能由主人手动清空；执行方不得清空、批量删除或「压缩后删除」。主人逐项点名删除时，须先备份台账与报告。
+- **空目录**：确认目录内文件已全部落位、文件数为 0 后，才可移除该空目录。
+- **大数据盘就地隔离**：影像 / 数据盘上的淘汰件落该盘自己的 `_Del\_by-function\<批次>\`，不跨盘复制到系统盘 `{DEL}`；该 `_Del` 同样只能主人清空。不把外机盘符写进本仓。
 
 # 2 先判 harvest 再定落点（H1–H4）
 | 类 | 判据 | 动作 |
@@ -28,7 +31,7 @@ up: My rule.md §2（写盘总闸与新建禁区）
 
 - **多次使用的一次性脚本：** 功能相近、已被多次使用的一次性脚本视为 harvest 对象，按 H1 抽可复用做法、接口与陷阱，并提案进 MY-CODES；不得因文件名或落点是「一次性」就直接判 H2。仅用一次、不再重复的修补脚本仍属 H2。
 - `park` **不是长期仓**，禁止积压；批次进 park 当轮就要分到 H1–H4。
-- 已 promote 或判 H2 的轮次不留活层：整轮移 `harvested\rounds\<round>\`，台账只留一行。
+- 已 promote 或判 H2 的轮次不留活层：整轮从 `{DEL}\harvest-park\rounds\<round>\` 移 `harvested\rounds\<round>\`，`{doc_root}\harvest\LEDGER.tsv` 只留一行。内容已进规则 / 技能后，这些轮次目录可由主人删除。
 
 # 3 落 `harvested` 前三查
 1. **无活引用**：grep 字面路径、`DEL_ROOT`、`DEFAULT_BATCH`、`--del-root`、`link:`，确认无命中。
@@ -53,7 +56,8 @@ up: My rule.md §2（写盘总闸与新建禁区）
 - **三桶**：规则候选、技能候选、不抽（→ `harvested`）。
 - fine-id 只作 lane，不预先定技能；抽与 promote 分离，promote 走 `skills.md` §5。
 - **快照不保留**：只收正文 + `MANIFEST.tsv` + `evidence\` + `tools\`；实体镜像不进 `{doc_root}`。
-- 布局固定：`{doc_root}\harvest\<lane>\`；一次 harvest 一个 lane，不跨 lane 合并。
+- **轮次工作目录**落 `{DEL}\harvest-park\rounds\<YYYYMMDD><letter>-<slug>\`（必含 `HARVEST-*.md` / `INDEX.md` / `MANIFEST.tsv` / `evidence\`；`tools\` 可选）。不在 `{doc_root}\harvest\` 下建 `rounds\` 或 lane 活层，也不把 `harvest\rounds` + `by-fine-id` 写成活 SSOT。一次 harvest 一个 lane；lane = `registry.yaml` 里的现行 fine id，只作分类列与文件名，不建目录。
+- 收集标准仍是 `{doc_root}\harvest\HARVEST-STANDARD.md`；轮次台账 `{doc_root}\harvest\LEDGER.tsv`（一行一轮，属耐久层，不进 `{DEL}`）。`by-fine-id` 笔记只落 `{DEL}`（§7）。内容进规则 / 技能后，轮次目录可由主人删除。
 
 # 7 附录：新建禁区（原 standing 正文并入）
 1. 全部新建只许 `{DEL}` 的 `_by-project\` / `_by-function\`。
