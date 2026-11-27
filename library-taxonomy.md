@@ -23,7 +23,7 @@ description: 库分类 L1/L2、三库分工、批件与期刊池契约。
 | `cardio-vascular` | coronary, vascular, **cardiac**（结构/心耳等非冠脉非血管病变） |
 | `gastro` | UGIB, GI-non-tumor |
 | `guidelines` | hepatology, neuropsych, obgyn, other |
-| `other` | methods, **dermatology**, **occupational**, **chest** |
+| `other` | methods, **dermatology**, **occupational**, **chest**, **endocrine** |
 
 归类规则：
 
