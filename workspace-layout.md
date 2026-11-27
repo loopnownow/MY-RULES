@@ -171,6 +171,10 @@ description: 本机布局与子工程短针。落点见 My rule.md §3。
 - **范围**：约束的是每个**子工程库**的业务表，不是家族库骨架。家族库只存身份、号、字典与子库登记（`id` / `id_number` / `dict` / `ref_project`），不存项目业务表。子库业务表 = `clin` 一张 + `_modules_<mod>` N 张（每模态/特征域一张，须在 `dict` 登记）+ `qc` 一张；`person` 是占位表，不是业务表。「每项目至多长表与宽表各一」不再适用。
 - **现行源文件**：每个叶只保留一份现行源文件，且须是一份工作簿，不得长表、宽表各放一个文件。该文件内为长表与宽表；无内容的一侧省略，空席不垫。现行骨架仍是本文件的 5t（家族五表 / 子库 `clin` / `_modules_<mod>` / `qc` 等），不得用精简登记册或 blob 库骨架替换。每张表最多 5 个工作单；工作单名可用 `clin` / `_modules_<mod>` / `qc` / `analysis`，入子库后固定落到 `clin` / `_modules_<mod>` / `qc`，**不得按工作单另开表**。
 - **表族三组、各管一段**：`clin` 是唯一「人 × 时点」主表；`_modules_<mod>` 只收不宜拉长的矩阵（组学 / 谱图 / ICC / 相关矩阵 / 影像组学）；`qc` 只收门禁结果与人工裁决。三组之外要建表，先在本节登记再建，不靠临时命名。
+- **表名与语义固定**：临床特征表名 `clin`（`cln` 只作别名，不建表）；`_modules_<mod>` 收计算测量（影像、影像组学、谱图、连接 / 网络指标、代谢组）；`<mod>_val` 是 values 长表（`exam_uid` / `entity` / `feature` / `value` / `unit`），与 `_modules_<mod>` 的「一次检查一行」配对，**不是验证子集**——删 `*_val` 等于删全部模块测量值（实测 EC `radi_val` 568,106 行、全库 `*_val` 6,775,401 行），禁止。
+- **量表进 `clin`，指标进模块**：问卷 / 量表 / 认知条目（PSQI、PQSI、TST、SE、SOL 等）是「人 × 时点」临床特征，落 `clin` 列；由影像或信号算出的标量指数（ALPS 等）落 `_modules_<mod>`。同一源表两类列并存时按语义拆表，不混表、不两边并存。
+- **验证组是列不是表**：训练 / 验证划分落 `clin` 的 `group_v`（或 `cohort` / `group_raw` / `group_canon`）列，须在 `dict` 登记 `role='group'`；不建队列表、不删数据、不以文件名区分。
+- **拆表留痕**：按语义拆表须在 `dict` 逐表登记列，并在子库 `meta.business_tables` 列全表名；`src` 源行保留。
 - **横断面一张、纵向按波次分张**：横断面研究 `clin` 一张。纵向研究若各波次变量集不同或列不能对齐，按波次分表 `clin_t0` / `clin_t1` …，序号按时间先后；模块同法 `_modules_<mod>_t<k>`。变量集相同、只是采集时间不同 → **仍是一张长表**加 `period_month`，不按波次拆。
 - **波次须显式登记**：分波次时子库 `meta` 记 `clin_layout='wave'`、`wave_map`（`{"t0": {"period_from": "...", "period_to": "...", "crf": "...", "src_id": 1}}`）、`business_tables`（数组，列全部业务表名）。校验按 `business_tables` 枚举，**不得**用 `_t\d+` 或 `_1` / `_2` 猜表名、猜波次；同一张表用后缀列（`var_1` / `var_2`）承载不同波次同样禁止。
 - **一人一波一行**：第 `k` 波次表一行 = 一个受试者 × 该波次一次采集；同一人跨波各一行，靠 `family_uid` + 波次号对齐，不得把两个波次的列并进同一行。
@@ -190,7 +194,7 @@ description: 本机布局与子工程短针。落点见 My rule.md §3。
 - **时点粒度（`period_unit`）**：以月为原子，`period_month` = `YYYY-MM`，`month_ix` = year*12+month-1，`bin_ix` = `month_ix` // `period_unit`（派生不落盘）。三种情形：① 源表无日期 → `period_unit` 为 `NULL`，`clin` 全 `UNK`；② 有日期且能连成序列 → 声明 `1` / `3` / `6`。
 - **有日期但逐人归组未定**（如 `qrx_LUNG_his`：808 行中 253 行带日期、每人仅 1 行）→ 照常声明粒度，并记 `qc(LONGITUDINAL_UNAVAILABLE)`（P2）+ `identity_state='unresolved'`。`NULL` 只表示「库里没有时间」，**不得**表示「有时间但连不成序列」（D37/D38）；`unknown` 不得有 `month_ix`，也不得用假日期填充（D29）。
 
-- **只收原始行列数据**：入库的只是原始矩形数据（行 × 列）。论文统计与作图结果、伦理材料、通讯录、汇报稿、方法说明及其他非原始数据不进库。**`dict`（变量字典）与 `qc`（门禁日志）自 5t 起是正式表，不受「不得占用第三张库内表」限制**；但只登记字典与门禁结果，不得借道塞业务数据。伦理材料仍不进库（旧 core-6t 由 D19 拦；5t 库里伦理材料不得进入 `dict.source` / `ref_project.slug` / 子库 `src.rel_path`）。
+- **只收原始行列数据**：入库的只是原始矩形数据（行 × 列）。论文统计与作图结果、伦理材料、通讯录、汇报稿、方法说明及其他非原始数据不进库。相关分析系数 / p 值 / 模型指标 / 作图数据等可复现统计内容写 `{DEL}` 交接文档（脚本入口一并登记），不进库、不占 `_modules_<mod>`；库内只留原始测量值与 `dict.source` 派生句（D82）。**`dict`（变量字典）与 `qc`（门禁日志）自 5t 起是正式表，不受「不得占用第三张库内表」限制**；但只登记字典与门禁结果，不得借道塞业务数据。伦理材料仍不进库（旧 core-6t 由 D19 拦；5t 库里伦理材料不得进入 `dict.source` / `ref_project.slug` / 子库 `src.rel_path`）。
 - **版本链**：计算 / 校正 / old / copy 等版本只把现行 `clin` / `_modules_<mod>` 纳入定稿，其余留子库 `src.kind='workbook'` 的源表（保留 `rel_path` + `sha256`）。
 - **角色与源表**：5t 子库 `src.kind` 只许 `old_db`、`workbook`、`archive_member`，保留 `rel_path` + `sha256`，不得删除 `src` 行。冻结旧库的 `src.role`（兼容视图 `sheet.role`）仍只许 `raw` / `curated` / `derived`，定稿标 `curated`、来源留 `raw`、`derived` 只留 blob 不写 `val` / `fact`（`verify_db` D22，仅旧库适用）。
 - **写库**：把 `clin` / `_modules_<mod>` 写入子库（身份字段写家族库 `id` / `id_number`）或 `{RAW}`，以及 `--apply` / `--move`，须当轮点名；缺省 dry-run。写盘总闸见 `My rule.md` §2。
