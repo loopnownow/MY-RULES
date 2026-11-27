@@ -39,7 +39,7 @@ description: 项目 ref/ 地图、稿名与文件命名、城城手改识别、�
 | `ref/refer/` | **文献指针 + NLM 引用与摘要列表**：每篇一个 `DOI_*.md`（`fulltext:` 指向 `_library\references`）；文献清单（原「参考文献」/ `materials/citation` / `materials/refer`）；**亦可**放写作参考 pptx/doc/docx（课题申请书/汇报幻灯/三线表等） | 文献全文实体；审计台账（`CITATION_AUDIT` 等仍在 `citation/`）；**期刊/候选刊**；勿把 locks（hashes/MANIFEST/log）放这里 |
 | `ref/code-gates/` | 脚本/路径说明、补丁指针（无密钥）；`GATE*_report.md`、数字锁定、输入/输出哈希报告 | 现役 `settings.ini`；原始凭据。**原并列的 `code/` 与 `gates/` 不再分夹** |
 | `ref/figures-orig/` | 投稿图**原始可编辑件**（`.ai` `.psd` `.pptx` 原始 `.tif`、未标题导出等）；**QC 登记为允许夹**，按课题保留原形（不改名、不合并、不压包） | 终图（`ref/figures/`）；被替代的旧图件（→ `ref/tmp/`） |
-| `ref/tmp/` | 子工程内**临时/中间**默认落点（**非**先丢 `{DEL}`）：中间 Word/PDF/草稿（Claude diff、被替代的 TC、`-copy`、合并草稿）；**旧版 SCI 稿**（如 `Manuscript_<slug>_V1.docx` / 亦可含 `_R*`）；被合并的期刊/引文散装原稿（如 `journal-archive-<YYYYMMDD>/`）；保留到主人说清理/收工。**未进 `accepted\` 前的临时/中间/旧版/试跑一律留此**：禁止自动进 `{DEL}`、禁止自动删；进 `accepted` 须主人另批 | 现行终稿 / `Manuscript_<slug>_V…` 或 `_R…`（子工程根）；已关闭轮次 changelog（`review/`）；citation / code-gates ledger；密钥 |
+| `ref/tmp/` | 子工程内**临时/中间**默认落点（**非**先丢 `{DEL}`）：中间 Word/PDF/草稿（Claude diff、被替代的 TC、`-copy`、合并草稿）；**旧版 SCI 稿与非最新 tracked**（如 `Manuscript_<slug>_V1.docx` / 旧 `_tracked` 稿）、根上的 PDF 导出；被合并的期刊/引文散装原稿（如 `journal-archive-<YYYYMMDD>/`）；保留到主人说清理/收工。**未进 `accepted\` 前的临时/中间/旧版/试跑一律留此**：禁止自动进 `{DEL}`、禁止自动删；进 `accepted` 须主人另批 | 根上现行的 `_clean` 与最新带版本号稿（子工程根）；已关闭轮次 changelog（`review/`）；citation / code-gates ledger；密钥 |
 
 **已退役（勿再新建）：** `ref/analysis/`、`ref/materials/`、独立 `ref/exec/`、`ref/code/`、`ref/gates/`、`ref/writing-refs/`、`ref/raw-pre/`、`ref/results/`（原名保留作禁令，不算旧名）。
 
@@ -79,15 +79,17 @@ SCI 相关文件统一命名：`<Stem>_<子项目名>_<版本号>`。
 - 优先 `.docx`；若有 md/pdf 伴生件，**同 stem**
 - 例：`Manuscript_lxf_PP_V1.10.docx`（投出稿）；`Manuscript_lxf_PP_R1.1.docx`、`Comments_lxf_PP_R1.1.docx`、`Response_lxf_PP_R1.1.docx`、`Supplementary_lxf_PP_R1.1.docx`
 - **落点：** 无刊名短码的现行通稿 `Manuscript_<slug>_V…` 或 `_R…`（及同号配套）在**子工程根**；**旧版通稿** → `ref/tmp/`。带刊名短码的目标刊格式版不放子工程根，落 `ref/submission-<刊名短码>/`（见下节）。未被接受的历史投稿包仍按上节进 `ref/` / `submission-*`。本条管通稿文件名 + 旧版落点；详 → 上表 `ref/tmp/`。（原 `materials/` 已退役，勿再新建。）
+- **子工程根恰留两份：** ① `Manuscript_<slug>_clean.docx`（最新版、接受全部修订、无痕迹、不带版本号）；② 最新的带版本号稿 `Manuscript_<slug>_{V|R|P}<x>[.<y>][_tracked].docx`（`_tracked` 表示保留修订痕迹）。其余旧版本号稿、旧 tracked、根上的 PDF 导出一律进 `ref/tmp/`，不删、不进 `{DEL}`；进 `{DEL}` 须主人点名。
+- **配套不受 clean 影响：** `Comments` / `Response` / `Supplementary` / `CoverLetter` / `FigureLegends` / `Tables` 仍按同号版本规则命名，不另做 `_clean`。
 - **无稿不造空件：** 子工程若无稿件 docx，记「无 docx」，不得为交差创建空稿。
 
 ### 目标刊格式版（母本不动，按刊另存）
 
 按某本目标刊的作者须知改格式、补声明、准备上传件时：
 
-- **母本不动：** 子工程根上无刊名短码的现行 `Manuscript_<slug>_{V|R|P}…` 是通用通稿（母本），不得覆盖、不得就地改成该刊专用版，也不得把母本改名成带刊名短码的文件。子工程根只放该通稿及同号配套（如 PDF）；不得把带刊名短码的格式版放在子工程根。
+- **母本不动：** 子工程根上无刊名短码的现行 `Manuscript_<slug>_{V|R|P}…` 是通用通稿（母本），不得覆盖、不得就地改成该刊专用版，也不得把母本改名成带刊名短码的文件。子工程根只放该通稿、其 `_clean` 与同号配套（Comments / Response 等），PDF 导出进 `ref/tmp/`；不得把带刊名短码的格式版放在子工程根。
 - **按刊另存：** 为目标刊新建格式版，文件名为 `Manuscript_<slug>_<刊名短码>_V…`（例：`Manuscript_wlz_MCI_RenFail_V1.docx`），**落点为** `ref/submission-<刊名短码>/`（与该刊上传分件同一包）；PDF 等伴生件同 stem、同夹。刊名短码用简短 ASCII（如 `RenFail`、`BMCNeph`），避免空格与 Windows 非法文件名字符。换刊只在新刊投稿包内加新文件，不得覆盖母本，也不得覆盖已有的其他目标刊格式版。
-- **不是唯一现行：** 带刊名短码的文件不是「唯一现行」母本；子工程根的现行仍是无刊名短码的通稿 `Manuscript_<slug>_{V|R|P}…`。
+- **不是唯一现行：** 带刊名短码的文件不是「唯一现行」母本；子工程根的现行是无刊名短码的 `_clean` 与最新带版本号稿。
 - **投稿包：** 该刊上传分件（单图、cover letter、清单等）与格式版稿件正文都落 `ref/submission-<刊名短码>/`（与上节「投稿包」一致）。不要在子工程根再留一份会与投稿包内格式版漂移的带刊名短码正文。图从母本或格式版导出为单文件，不回写母本。
 - **构建脚本：** 若用脚本生成目标刊版，输出路径必须是 `ref/submission-<刊名短码>/` 下的上述目标刊文件名；默认值或错误的目标开关不得写回母本 `Manuscript_<slug>_V…`，也不得写到子工程根。刊差异（声明、通信地址、AI 披露等）只进目标刊版；正文、表、数字与母本共用同一源，避免两版漂移。
 - **版本号：** 仅另存目标刊格式版、母本文字未改时，母本不升号。目标刊格式版自 `V1` 起算，该刊内实质改动再 `+0.1`，并在 `ref/manuscript-revision.md` 追加一行。拒稿换刊：在 `ref/submission-<新刊>/` 另存新短码文件，仍用 V，不得写成 R；旧刊格式版保留在 `ref/submission-<旧刊>/`，不得覆盖。内容为大改、需新母本时，仍按上节可升母本主版本（如 `V2.1`）。
@@ -98,10 +100,10 @@ SCI 相关文件统一命名：`<Stem>_<子项目名>_<版本号>`。
 
 整体 QC 发现 28 件稿件用以下**编辑中间件后缀**，主人裁定**保留并登记**（不强制改名、不批量清）：
 
-- `-formatted`（期刊格式化件）、`-clean`（去痕/清稿件）、`V<n>-reviewed`（同版审阅件）
+- `-formatted`（期刊格式化件）、`-clean`（连字符中间件，非根上 `_clean` 契约稿）、`V<n>-reviewed`（同版审阅件）
 - `_house`（社内格式件）、`_polished`（润色件）、`_revised_pre_html_update`（HTML 同步前修订件）、`submission-ready`（投稿就绪件）
 
-规则：① 这些**都不是现行版**，子工程根仍须唯一现行 `Manuscript_<slug>_{V|R|P}…`；② 优先放 `ref/tmp/`，已在根上者可留至该课题下一次版本收口；③ 不得据其反推版本号、不得与 `R` 轮同号冒充；④ 清理（移 `{DEL}`）须先问主人。
+规则：① 这些**都不是现行版**，子工程根只留现行 `_clean` 与最新带版本号稿（见「SCI 稿件文件名」）；② 优先放 `ref/tmp/`，已在根上者可留至该课题下一次版本收口；③ 不得据其反推版本号、不得与 `R` 轮同号冒充；④ 清理（移 `{DEL}`）须先问主人。
 
 ### 城城手改识别
 
@@ -123,7 +125,7 @@ SCI 相关文件统一命名：`<Stem>_<子项目名>_<版本号>`。
 
 ### accepted 收工硬留
 
-收工精简后课题树硬留：现行 `Manuscript_<slug>_{V|R|P}…`（子工程根**文件**）+ `FinalData_<slug>.xlsx`（或 `ref/README` 钉死的现用 data.xlsx）+ 可选 `ref/settings.ini` 指向 `_DataBase\<family>\<prefix_suffix>\`。
+收工精简后课题树硬留：`Manuscript_<slug>_clean.docx` 与最新的 `Manuscript_<slug>_{V|R|P}…[_tracked].docx`（子工程根**文件**）+ `FinalData_<slug>.xlsx`（或 `ref/README` 钉死的现用 data.xlsx）+ 可选 `ref/settings.ini` 指向 `_DataBase\<family>\<prefix_suffix>\`。
 - 课题树 `R*` / `P*` 整夹（修订包 / 投稿包）收工进 `_DataBase\<family>\<prefix_suffix>\`（≥20 散文件先压）；校验后原夹→`.Del\_by-project\<slug>\`。可复现图 → `.Del\_by-project\<slug>\`；不可复现 → `_DataBase`。
 - 全文落点 → `workspace-layout.md`「accepted 收工」；关系 / harvest 授权 → 同文件「工作区关系：阶段 · 分流 · harvest · 冷库」。本条不复写 closeout 清单。
 
