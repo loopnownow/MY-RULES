@@ -228,7 +228,7 @@ description: 本机布局与子工程短针。落点见 My rule.md §3。
 | 22–23 | `created_on` / `updated_on` | TEXT | `YYYY-MM-DD HH:MM:SS` |
 | 24 | `note` | TEXT | 别名、精度、迁移说明；不放业务信息 |
 
-- **一列一号、余号进 `id_number`**：`id` 每类号只放一个，其余全部落 `id_number(family_uid, kind, issuer, value)`；`kind` 白名单随 v2 扩为 `inpatient` / `outpatient` / `mrn` / `imaging` / `pathology` / `sample` / `study` / `misc`。同号在不同 `issuer` 是不同号（D75）。
+- **一列一号、余号进 `id_number`**：`id` 每类号只放一个，其余全部落 `id_number(family_uid, kind, issuer, value)`；`kind` 白名单随 v2 扩为 `inpatient` / `outpatient` / `mrn` / `imaging` / `pathology` / `sample` / `study` / `other`（`other` 是既有主力号种，实测 8,588 行，**不得改名**；`misc` 只作列名，不作 `kind`）。同号在不同 `issuer` 是不同号（D75）。
 - **`subject_label` 是兼容列不是键空间**：EC 实测 1,447 个非空值里拼音 747、号名混装 326、纯数字 9、其他 365；**禁止**回填、禁止据此 join（D90 兜底）。
 - **只许重建、不许 `ALTER` 改序**：`ADD COLUMN` 只能追加到末尾，物理序 24 列只能靠 `CREATE TABLE id_v2(…)` → `INSERT … SELECT` → 换名 → 重建 `id_number` 外键；动土前 `VACUUM INTO` 全库备份、`PRAGMA integrity_check`、落盘后逐列核行数与空值数（空值数变化 = 搬串列了）。
 
