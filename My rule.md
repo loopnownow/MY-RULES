@@ -96,6 +96,7 @@ routes: [workspace-layout.md, project-ref-layout.md, del-and-harvest.md, library
 | 规则 QC / 清理判据 / 门 | `QC.md` | — |
 | 三仓分工 / 内容该放哪 | `README.md` | — |
 | 派单 / 盯梢 | `{SKILLS}\00_orchestrator\references\ownership-contract.md` / `handoff-monitor.md` | `00_orchestrator` |
+| 墙钟预估 / 子代理加速 | 本文件 §7 | `00_orchestrator` |
 | 盘问 / Plan card | 本文件 §2.1 | `00_orchestrator` |
 | 稿件禁令 | `{SKILLS}\05_manuscript\qc\manuscript-local-qc.md` | `05_manuscript` |
 | 文献 / 选刊 / 统计 / 建模 | — | `03_research` / `find-journal` / `02_data-processing` |
@@ -112,6 +113,7 @@ routes: [workspace-layout.md, project-ref-layout.md, del-and-harvest.md, library
 - **科研**：文献只引真实来源；统计不为跑通改 outcome / 纳入 / cutoff / 协变量 / 缺失 / 模型（细则 → `{SKILLS}\02_data-processing\qc\`）。
 - **工程决策** R1 需求优先 · R2 证据排错 · R3 有序简化 · R4 风险比例 · R5 保护不变量 · R6 闭环验证；**重大变更门**（改结构 / 改 ID / 删目录）先给假设清单与影响并获批。
 - **长任务交接**：执行长任务（后台或预计超过 2 分钟）时，须提醒城城写交接文档并开新对话。
+- **墙钟预估与子代理**：工程 / 任务动工前先预计墙钟运行时间；预计要实事，不得为了开或不开子代理而虚报。短任务仍就地做完。预计超过 1 小时的，由总调度（Aitor）按现行派工体系开子代理加速：把可并行分解的部分派出，缩短墙钟。「子代理」= 总调度派出的专员 bot / 子 agent（含 Loopnow / Victor / Aitee / Lee / Bai 等座位与可并行的执行子代理），不得随意新建帐号或绕过现行座位分工。每份仍一任务一执行方。编码 / 脚本 / MY-CODES 默认仍交 Loopnow；三仓合入仍须主人点名「合 / 推合」；写盘仍须当轮点名。本条不放宽硬闸。做法 → `{SKILLS}\00_orchestrator\SKILL.md` 与 `references\ownership-contract.md`。
 - **大任务 `HANDOFF.md`**：满足任一即须维护——跨会话或预计超过 1 天；≥3 个脚本或 ≥2 次搬盘 / 迁移；需多轮验收或返工。落点在子工程根 `HANDOFF.md`（与 `ref\` 同级）；不放到处理盘工程根的白名单之外。活文档原地更新；留档时旧版进 `ref\tmp\HANDOFF-<YYYYMMDD>.md`，不并列多份。必填：现状数字、盘面与路径、运行 / 常用命令、验收判据、已知坑、已完成 / 待办、决策记录、台账索引。只写已发生与待办，不写尚未发生的计划，不复制规则正文。小任务不强制。
 - 细节（模板、阶梯、docstring、断点做法、冒烟与后台监控、并行与 CUDA）→ `{SKILLS}\02_data-processing\advanced\coding.md`。
 
