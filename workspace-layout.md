@@ -85,16 +85,16 @@ description: 本机布局与子工程短针。落点见 My rule.md §3。
   5. SSOT = `_diseases.csv` 的 `family` 列（L1 桶名以此为准；`family` 留空 = 该基码即自家族）；改挂靠先改表再搬盘；`OTHERS` 仅兜底。`_PHI` / `__zip` / `_thesis` 为保留名（下划线前缀），与 `_lab` 同类例外：`structure_check.py` S23 **已实现**桶内 `_` / `.` 前缀叶跳过叶后缀校验。
   6. **短码夹层级：** 短码夹位于 `_DataBase\<family>\<prefix_suffix>`（自 `_DataBase` 起总深 3）；**叶内目录 ≤3 层**，超深链条按 `<父>_<子>` 合并为单层名（实例：`DER\zyx_H`，原 8 层 / 1,188 个超深目录 → 3 层）；派生件（期刊成图 / 投稿包 / 汇报稿）不进叶内 raw，`_未标天数` 这类纯归档中间层不保留；表格入库后叶内只留 `目录说明.md`（见「家族库 `_PHI\`」）。
   7. 与 archived 同构：冷库 L1 仍跟同一 `family`；本条**不**改 accepted 收工硬留清单。
-- **文档支：** 学位论文 / 标书 / 伦理申请材料不建 `_DataBase` 顶层 `_thesis`、`_grants\_misc`、`_ethics\_misc` 三夹；改落家族池 `<family>\_thesis\<slug>__<文件>`，标书原件归 `_DataBase\_grants\<year>\`；伦理申请材料不进 `_DataBase`，按「伦理材料留存」归 `_Docs\_library\ethics\`。原三夹已解散（`_grants\_misc` 移 `{DEL}`）；遗留例外：`_grants\2025\_ethics-forms\` 不重建（申报随附伦理表，随清理批次移 `{DEL}`）。
+- **文档支：** 学位论文 / 标书 / 伦理申请材料不建 `_DataBase` 顶层 `_thesis`、`_grants\_misc`、`_ethics\_misc` 三夹；改落家族池 `<family>\_thesis\<slug>__<文件>`，标书原件归 `_DataBase\_grants\<year>\`；伦理材料不进 `_DataBase`：批件与写作模式提取物归 `_Docs\_library\ethics\`，方案与知情同意随家族退役进 `{DEL}`。原三夹已解散（`_grants\_misc` 移 `{DEL}`）；遗留例外：`_grants\2025\_ethics-forms\` 不重建（申报随附伦理表，随清理批次移 `{DEL}`）。
 
 
 ### 伦理材料留存
 
-伦理材料落点 = `_Docs\_library\ethics\`（申请包 / 方案 → `sections\protocol`，知情同意 → `sections\icf`，写作模式提取物 → `extract\briefs` / `extract\phrases`，批件 PDF → `approvals\<L1>\<L2>\`）。`_DataBase` 侧不设伦理夹：抽完写作模式即退役，剩余件按 harvest 流程走 `harvest-park` → `harvested`。本条定**留存口径**；盘面大搬由 Bai 执行，本票（Rules encode）**不**搬盘。
+伦理材料落点 = `_Docs\_library\ethics\`，只收两处产物：`approvals\<L1>\<L2>\` + `approvals-index.xlsx`（批件 PDF）、`extract\{briefs,phrases}\`（写作模式提取物，SSOT 层）。`sections\` 是空白表分节的**生成物**，不手放原件。`_DataBase` 侧不设伦理桶：原件按家族落 `{DEL}\retired-ethics\<family>\`，带 sha256 台账。
 
 1. **批件原件**：仅保留**日期 ≥ 2023-11-10** 的进 `_Docs\_library\ethics\approvals\<L1>\<L2>\`，并在 `approvals-index.xlsx` 登记。日期取批件批准日 / 文件标注日（能确定者）；**早于 2023-11-10** 的批件原件 → `{DEL}`。分类口径见 `library-taxonomy.md` §3，本条不另造 approvals 路径。
-2. **临床研究方案 + 知情同意书**：**全部保留**，方案 → `_Docs\_library\ethics\sections\protocol\`，知情同意 → `sections\icf\`，**无**日期下限；文件名保留 `<CODE>__` 前缀便于回溯。
-3. **`_DataBase\_lab\ethics` 废弃**：该树不再作为活伦理落点；内容进 `.Del`（搬迁由 Bai 执行）。`_lab` 根其它历史档只读口径不变，唯 ethics 子树按本条退役。
+2. **临床研究方案 + 知情同意书**：随所在家族整夹退役进 `{DEL}`，不落 `sections\`；文件名保留 `<CODE>__` 前缀便于回溯。harvest 只抽写作模式进 `extract\`，原件不留 `_DataBase`。
+3. **`_DataBase\_lab\ethics` 子树**：不设、不重建；`_lab` 根其它历史档只读口径不变。
 
 挂靠：短码 ↔ 家族靠 `_diseases.csv`；ethics/references 的 library L1/L2 对照不变。
 
@@ -123,7 +123,7 @@ description: 本机布局与子工程短针。落点见 My rule.md §3。
 - **一句话**：一个家族 = 身份桶 `_PHI\` + 原始件池 `__zip\` + 学位桶 `_thesis\` + 每个子工程叶内一个子库 `<slug>db`；三桶与叶同在 `<family>\` 下，自 `_DataBase` 起总深 3。
 - **`<family>\_PHI\`（唯一 PHI 落点）**：放家族库 `<family>db`（`meta` / `id` / `id_number` / `dict` / `ref_project` 五表 = 身份与各类号、变量词典、子库登记）、冻结旧库 `<family>db_6t`、`目录说明.md`、可重建预览页；**不存业务表**。整桶不得外发、不得进任何仓、不得压包外送；外发只走子库（D28 零 PHI 通过后）。
 - **`<family>\__zip\`（原始件池）**：按子工程分夹 `<family>\__zip\<leaf>\`，放该叶原始件压缩档与随档清单 `<名>.files.txt`；随档非表格件（原始图 / 扫描记录 / 说明）同夹一层平铺，不建 `raw\` / `cohort\` 子夹。档内表格解出按「散表归并」入库，原档留本桶；桶根须自带 `目录说明.md`。
-- **伦理材料不进 `_DataBase`**：申请包 / 方案 / 知情同意 / 批件按「伦理材料留存」归 `_Docs\_library\ethics\`；写作模式抽完后 `_DataBase` 侧不留伦理原件，剩余件随 harvest 进 `{DEL}`，本树不设伦理桶。
+- **伦理材料不进 `_DataBase`**：申请包 / 方案 / 知情同意 / 批件按「伦理材料留存」归 `_Docs\_library\ethics\`；`_DataBase` 侧不设伦理桶：原件整夹退役进 `{DEL}`（带 sha256 台账），写作模式入库 `_Docs\_library\ethics\`。
 - **`<family>\_thesis\<slug>\`**：学位论文 / 博士后 / 汇报稿原件。
 - **越界即 P1**：库文件出现在 `__zip` / `_thesis` 或叶根散落归档；PHI 出现在 `_PHI` 以外的落点；`_PHI` 里的家族库出现 `clin` / `qc` / `_modules_<mod>` 业务表。
 - **写侧只认本节桶名**：不设兼容分支、不按别名兜底。旧桶名与旧表前缀出现在盘面或库内即 **P1 QC 发现**，按清理对象处理；`aliases.yaml` 的映射只用于识别与清理，不是读侧开关。
