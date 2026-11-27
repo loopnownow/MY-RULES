@@ -37,6 +37,9 @@ CONTENT = [
     "skills.md",
     "project-fact-lookup.md",
     "local-overlay.md",
+    "execution.md",
+    "manuscript-docx.md",
+    "db-schema.md",
 ]
 ROUTED = CONTENT + ["README.md", "QC.md"]
 ARCHIVE = {"aliases.yaml", "QC.md"}

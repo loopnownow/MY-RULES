@@ -33,6 +33,9 @@ REQUIRED_RULES_MD = (
     "del-and-harvest.md",
     "QC.md",
     "local-overlay.md",
+    "execution.md",
+    "manuscript-docx.md",
+    "db-schema.md",
 )
 # Also scan these for stale path claims (N14).
 SCAN_MD = REQUIRED_RULES_MD + (
