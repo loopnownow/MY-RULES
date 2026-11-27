@@ -134,12 +134,13 @@ description: 本机布局与子工程短针。落点见 My rule.md §3。
 
 - **位置（1+N，三层）**：家族库 `_DataBase\\<family>\\_PHI\\<family>db`；子工程库 `_DataBase\\<family>\\<slug>\\<slug>db`（**扁平**，不建 `<slug>\\_PHI\\` 或 `<family>\\_PHI\\<short_code>\\` 子夹）。自 `_DataBase` 起两者总深 3；根级 `_DataBase` 下不设库桶。
 - **目录内容**：`_PHI` 内放家族库 `<family>db`、并存期冻结旧库 `<family>db_6t`、`目录说明.md`，以及常驻、可重建的预览页；子工程叶内放 `<slug>db`、`目录说明.md`，同样允许可重建预览页。两处都不建 `raw\\` / `originals\\` / 日期子夹；并存期结束、旧库归档后，回到「库 + 说明 + 可重建预览」。预览页由库重生成，不是第二份库，也不得代替库文件；改库后必须重生成，否则页面数字是旧账。预览若含本地文件名或姓名，只留本机并标明禁止外发；不因页面做了脱敏开关就认为库已脱敏。
-- **构建收尾与边车**：缺 `目录说明.md` = 构建未完成，不是可选项；build 脚本收尾按模板写骨架（家族库写管什么 / 五表 / PHI 只在此处；子库写零 PHI / 时点口径 / 可选模态）。SQLite 边车 `<库>db-wal` 与 `-shm` 同在 = 库正被打开 / 未 checkpoint（构建中，放行）；只有 `-wal` 无 `-shm`、跨一次构建仍在 = 上次写坏残留，记 **P1**（S25/S26）。
+- **构建收尾与边车**：缺 `目录说明.md` = 构建未完成，不是可选项；build 脚本收尾按模板写骨架（家族库写管什么 / 五表，无 PHI 家族写三表 / PHI 只在此处；子库写零 PHI / 时点口径 / 可选模态）。SQLite 边车 `<库>db-wal` 与 `-shm` 同在 = 库正被打开 / 未 checkpoint（构建中，放行）；只有 `-wal` 无 `-shm`、跨一次构建仍在 = 上次写坏残留，记 **P1**（S25/S26）。
 - **1+N：一库一工程**：每家族恰一个家族库 `<family>db`；每个子工程恰一个子库 `<slug>db`。短码 = 子工程 slug，靠 `ref_project` 与子库 `src` 区分，只表示项目归属，不是个体主索引；家族拆分时整树随 `<family>` 走。
 - **可独立处理**：家族库与子库可分别备份 / VACUUM；子库在 D28「零 PHI」通过后可单独外发，家族库含 PHI 一律不得外发。
-- **跨库唯一引用**：只靠 `family_uid`（形如 `ACN-000137`）。SQLite 无跨库外键，父子一致性由 `verify_db` 的 ATTACH 检查（D27/D34）承担。
-- **现役骨架（5t）**：家族库实表 `meta` / `id` / `id_number` / `dict` / `ref_project`（五张）；子库实表 `meta` / `src` / `person` / `clin` / `_modules_<mod>`（有模态数据则 ≥1 张）/ `qc`（六类）。`id` / `id_number` 是唯一 PHI 落点；`person` 是**无 PHI 占位表**（`family_uid` / `subject_label` / `id_status`），不存姓名 / 身份证 / 电话 / 地址。
+- **跨库唯一引用（有 PHI 家族）**：只靠 `family_uid`（形如 `ACN-000137`）。SQLite 无跨库外键，父子一致性由 `verify_db` 的 ATTACH 检查（D27/D34）承担。
+- **现役骨架（5t，有 PHI 家族）**：家族库实表 `meta` / `id` / `id_number` / `dict` / `ref_project`（五张）；子库实表 `meta` / `src` / `person` / `clin` / `_modules_<mod>`（有模态数据则 ≥1 张）/ `qc`（六类）。`id` / `id_number` 是唯一 PHI 落点；`person` 是**无 PHI 占位表**（`family_uid` / `subject_label` / `id_status`），不存姓名 / 身份证 / 电话 / 地址。
 - **家族库五表口径**：`id` 存姓名 / 电话 / 身份证 / 地址 / `family_uid`（`^[A-Z0-9_]+-\\d{6}$`）；各类号走 `id_number(kind, value)`（住院号 / 门诊号 / 影像号 / 病理号 / 样本号）；`dict` 登记变量（`role='phi'` 只许 `scope='family'`）；`ref_project` 登记子库清单与 `db_rel_path` / `built_at` / `sha256`。
+- **无 PHI 家族用家族编码：** 家族库无 PHI（如 `OTHERS` 汇编族）不建 `id` / `id_number` 身份表，家族库只留 `meta` / `dict` / `ref_project`；家族级登记改用家族编码（family code）+ `ref_project` 映射，子库在 `meta.family_code` 记所属家族编码，跨库引用用家族编码而非 `family_uid`；PHI 永不下沉子库。`id` / `id_number` / `family_uid` 及依赖它们的 D24 / D27 / D54 / D63 / D75 只约束有 PHI 家族。
 - **`ref_project` 四个计数**：`person_count`（person 行数，含占位）/ `clin_person_n`（有 ≥1 条 clin 行的人数 = **队列人数口径**）/ `longitudinal_n`（有 ≥2 个不同 `period_month` 的人数）/ `multi_record_n`（有 >1 条 clin 行的人数）。四列由门禁实时重算比对，任一不等即 **P0**（D35）；**对外只报 `clin_person_n`**。
 - **家族级人数不报**：`id` 行数 ≠ 患者数，`person_count` 也不是队列人数。跨子库未解析时只报项目级 `clin_person_n`；`id` 行数只允许作「身份行数」出现在方法学附注（D36）。试点实测：LC 家族库 `id` 3,050 行，四个项目 `clin_person_n` 合计 2,234 人；非姓名证据判同一人为 0，故不提供家族级合计。
 - **冻结旧库（core-6t）**：旧七表 `meta` / `project` / `src` / `item` / `val` / `person` / `person_key` 与兼容视图 `doc` / `sheet` / `sheet_dup` / `entity` / `fact` 只在 `<family>db_6t` 内保留，**只读**，供迁移对账；不得在旧库继续建表 / 改数，也不再按此骨架新建库。旧库 `meta.source_db` + `sha256` 须指向原始旧库并校验（D33）。
@@ -355,12 +356,12 @@ description: 本机布局与子工程短针。落点见 My rule.md §3。
 **目标：** 按 closeout 精简 `accepted\<prefix_suffix>\`，再搬进 `archived\<family(suffix)>\<prefix_suffix>\` + `ARCHIVED.md`。accepted 不长期堆满。本条是**落点契约**（closeout）；关系与 harvest 授权见上「工作区关系：阶段 · 分流 · harvest · 冷库」。harvest ≠ closeout。
 
 ### 课题树精简后硬留
-1. 终稿一份：`Manuscript_<slug>_{V|R|P}…`（旧名先问再改名；旧版→`ref/tmp/`）。根上只留这份**文件**，不要把整夹 `R*` / `P*` 留在根。
+1. 终稿两份：`Manuscript_<slug>_clean.docx` 与最新的 `Manuscript_<slug>_{V|R|P}…[_tracked].docx`（旧名先问再改名；旧版→`ref/tmp/`）。根上只留这两份**文件**，不要把整夹 `R*` / `P*` 留在根。
 2. 复现 SSOT：`FinalData_<slug>.xlsx`（或 `ref/README` 钉死的现用 data.xlsx）。
 3. 可选：`ref/settings.ini` 指到 `_DataBase\<family>\<prefix_suffix>\`（影像 raw 不进课题树）。
 
 ### R*/P* 整夹进 `_DataBase`
-课题树内名为 `R*` / `P*` 的夹（修订包、投稿包，如 R1/R2/P1/P1.1）收工时**整夹**进 `_DataBase\<family>\<prefix_suffix>\`。若夹内单独文件 ≥20 或明显小文件堆，先 7z/zip + `.files.txt`（见上节「进 `_DataBase` 多文件先压缩」）。校验通过后，原夹移 `D:\MyProjects\.Del\_by-project\<slug>\`。根上终稿仍只留一份现行 `Manuscript_*_{V|R|P}…`**文件**（不是把整夹留在根）。
+课题树内名为 `R*` / `P*` 的夹（修订包、投稿包，如 R1/R2/P1/P1.1）收工时**整夹**进 `_DataBase\<family>\<prefix_suffix>\`。若夹内单独文件 ≥20 或明显小文件堆，先 7z/zip + `.files.txt`（见上节「进 `_DataBase` 多文件先压缩」）。校验通过后，原夹移 `D:\MyProjects\.Del\_by-project\<slug>\`。根上终稿仍只留 `_clean` 与最新带号稿两份**文件**（不是把整夹留在根）。
 
 ### `_DataBase` 可收
 （≥20 散文件或小文件堆先 7z/zip + `.files.txt`，校验后散目录→`.Del`；见上节「进 `_DataBase` 多文件先压缩」。）
