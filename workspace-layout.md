@@ -43,12 +43,12 @@ up: My rule.md §5
 
 | 名称 | 去向 |
 |---|---|
-| 已退役，不重建：`D:\00ds` / 夹名 `00ds` | 改用 `{RAW}`（`D:\MyProjects\_DataBase`）；活引用算 QC 发现，不得当 legacy 保留 |
-| 已退役，不重建：`D:\0script` / 课题根 `0script\` | 改用 `{code_stats}\tools\<fine-id>\` |
-| 已退役，不重建：活兄弟根 `R&P` | 申请包 → `_DataBase\_grants\<year>\`；评阅 → `_DataBase\_reviews\{peer,grants,thesis}\<year>\`（细则 `zone-database.md`） |
-| 已退役，不重建：`_Docs\_code` | 脚本在 `{code_stats}`；壳与索引移 `{DEL}` |
-| 已退役，不重建：`_DataBase\_lab\ethics` | 不设该子树；批件留存 → `library-taxonomy.md` §3 |
-| 勿建已退役路径 `_code\04-analysis\stats-analysis` | 改用 `{code_stats}` |
-| 已退役，不重建：课题根 `results\` / `analysis\` / `materials\` / `exec\` / `code\` / `gates\` / `writing-refs\` / `raw-pre\` | 改用 `ref\` 地图（`project-ref-layout.md`） |
-| 已退役，不重建：`harvest-sources-park` 已吸收批次夹 | 原件去向见 `aliases.yaml`；勿按旧批次名再建 |
-| 已退役，不重建：`<family>\_share\ethics` / `_DataBase` 伦理桶 | 伦理材料不进 `{RAW}`；批件与提取物 → `{lib_root}\ethics\`（`library-taxonomy.md` §3） |
+| `D:\00ds` / 夹名 `00ds` | 禁止再建；改用 `{RAW}`（`D:\MyProjects\_DataBase`）。活引用算 QC 发现，不得当 legacy 保留 |
+| `D:\0script` / 课题根 `0script\` | 禁止再建；改用 `{code_stats}\tools\<fine-id>\` |
+| 活兄弟根 `R&P` | 禁止再建；申请包 → `_DataBase\_grants\<year>\`；评阅 → `_DataBase\_reviews\{peer,grants,thesis}\<year>\`（细则 `zone-database.md`） |
+| `_Docs\_code` | 禁止再建；脚本在 `{code_stats}`；壳与索引在 `{DEL}` |
+| `_DataBase\_lab\ethics` | 禁止再建该子树；批件留存 → `library-taxonomy.md` §3 |
+| 勿建 `_code\04-analysis\stats-analysis` | 禁止再建；改用 `{code_stats}` |
+| 课题根或 `ref\` 下的 `results\` / `analysis\` / `materials\` / `exec\` / `code\` / `gates\` / `writing-refs\` / `raw-pre\` | 禁止再建；改用 `ref\` 地图（`project-ref-layout.md`） |
+| `harvest-sources-park` 吸收批次夹 | 禁止按旧批次名再建；原件去向见 `aliases.yaml` |
+| `<family>\_share\ethics` / `_DataBase` 伦理桶 | 禁止再建；伦理材料不进 `{RAW}`；批件与提取物 → `{lib_root}\ethics\`（`library-taxonomy.md` §3） |

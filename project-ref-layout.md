@@ -37,11 +37,11 @@ description: 项目 ref/ 地图、稿名与文件命名、幂等；落点总则�
 | `ref/review/` | 每轮 `changelog.md` / `CHANGELOG_*.md`；审稿交接 YAML；Lee 轮次笔记 | 主 Word 变更 ledger（仍用 `manuscript-revision.md`） |
 | `ref/citation/` | **审计台账 + 期刊/候选刊**：`CITATION_AUDIT.json`（或 `.jsonl`）；引用 README / 跳过说明；**期刊/候选刊只用 `journals.csv`（或 `.xlsx`）** + 合并笔记 `_notes.md`；期刊/引用日志（`ref_journal_log.txt`、`CITATION*`） | NLM+摘要列表与文献正文（见 `refer/`）；写作参考草稿；**期刊信息的散装 md/json/html**（合并进 `_notes.md`，被替代原稿进 `ref/tmp/`） |
 | `ref/refer/` | **文献指针 + NLM 引用与摘要列表**：每篇一个 `DOI_*.md`（`fulltext:` 指向 `_library\references`）；文献清单（原「参考文献」/ `materials/citation` / `materials/refer`）；**亦可**放写作参考 pptx/doc/docx（课题申请书/汇报幻灯/三线表等） | 文献全文实体；审计台账（`CITATION_AUDIT` 等仍在 `citation/`）；**期刊/候选刊**；勿把 locks（hashes/MANIFEST/log）放这里 |
-| `ref/code-gates/` | 脚本/路径说明、补丁指针（无密钥）；`GATE*_report.md`、数字锁定、输入/输出哈希报告 | 现役 `settings.ini`；原始凭据。**原并列的 `code/` 与 `gates/` 不再分夹** |
+| `ref/code-gates/` | 脚本/路径说明、补丁指针（无密钥）；`GATE*_report.md`、数字锁定、输入/输出哈希报告 | 现役 `settings.ini`；原始凭据。**`code/` 与 `gates/` 禁止分夹**，统一用本夹 |
 | `ref/figures-orig/` | 投稿图**原始可编辑件**（`.ai` `.psd` `.pptx` 原始 `.tif`、未标题导出等）；**QC 登记为允许夹**，按课题保留原形（不改名、不合并、不压包） | 终图（`ref/figures/`）；被替代的旧图件（→ `ref/tmp/`） |
 | `ref/tmp/` | 子工程内**临时/中间**默认落点（**非**先丢 `{DEL}`）：中间 Word/PDF/草稿（Claude diff、被替代的 TC、`-copy`、合并草稿）；**旧版 SCI 稿与非最新 tracked**（如 `Manuscript_<slug>_V1.docx` / 旧 `_tracked` 稿）、根上的 PDF 导出；被合并的期刊/引文散装原稿（如 `journal-archive-<YYYYMMDD>/`）；保留到主人说清理/收工。**未进 `accepted\` 前的临时/中间/旧版/试跑一律留此**：禁止自动进 `{DEL}`、禁止自动删；进 `accepted` 须主人另批 | 根上现行的 `_clean` 与最新带版本号稿（子工程根）；已关闭轮次 changelog（`review/`）；citation / code-gates ledger；密钥 |
 
-**已退役（勿再新建）：** `ref/analysis/`、`ref/materials/`、独立 `ref/exec/`、`ref/code/`、`ref/gates/`、`ref/writing-refs/`、`ref/raw-pre/`、`ref/results/`（原名保留作禁令，不算旧名）。
+课题根或 `ref\` 下的旧分析壳与并列夹禁止再建（→ 总图退役禁建表）。
 
 ### 三区 / 临时结果区
 
@@ -78,7 +78,7 @@ SCI 相关文件统一命名：`<Stem>_<子项目名>_<版本号>`。
 - 每次实质改动 `+0.1`，不跳号；每次升版在 `ref/manuscript-revision.md` 追加一行。实质改动指结论、数据、结构、段落增删、换刊重写等。**小改不升级版本号：** 错字、标点、纯改字、只加/改批注、不改结论或结构的微调，仍用现行 V/R/P 文件名就地改，不得 `+0.1`，也不得另存新号。
 - 优先 `.docx`；若有 md/pdf 伴生件，**同 stem**
 - 例：`Manuscript_lxf_PP_V1.10.docx`（投出稿）；`Manuscript_lxf_PP_R1.1.docx`、`Comments_lxf_PP_R1.1.docx`、`Response_lxf_PP_R1.1.docx`、`Supplementary_lxf_PP_R1.1.docx`
-- **落点：** 无刊名短码的现行通稿 `Manuscript_<slug>_V…` 或 `_R…`（及同号配套）在**子工程根**；**旧版通稿** → `ref/tmp/`。带刊名短码的目标刊格式版不放子工程根，落 `ref/submission-<刊名短码>/`（见下节）。未被接受的历史投稿包仍按上节进 `ref/` / `submission-*`。本条管通稿文件名 + 旧版落点；详 → 上表 `ref/tmp/`。（原 `materials/` 已退役，勿再新建。）
+- **落点：** 无刊名短码的现行通稿 `Manuscript_<slug>_V…` 或 `_R…`（及同号配套）在**子工程根**；**旧版通稿** → `ref/tmp/`。带刊名短码的目标刊格式版不放子工程根，落 `ref/submission-<刊名短码>/`（见下节）。未被接受的历史投稿包仍按上节进 `ref/` / `submission-*`。本条管通稿文件名 + 旧版落点；详 → 上表 `ref/tmp/`。
 - **子工程根恰留两份：** ① `Manuscript_<slug>_clean.docx`（最新版、接受全部修订、无痕迹、不带版本号）；② 最新的带版本号稿 `Manuscript_<slug>_{V|R|P}<x>[.<y>][_tracked].docx`（`_tracked` 表示保留修订痕迹）。其余旧版本号稿、旧 tracked、根上的 PDF 导出一律进 `ref/tmp/`，不删、不进 `{DEL}`；进 `{DEL}` 须主人点名（§X2）。
 - **配套不受 clean 影响：** `Comments` / `Response` / `Supplementary` / `CoverLetter` / `FigureLegends` / `Tables` 仍按同号版本规则命名，不另做 `_clean`。
 - 无稿不造空件 → §M4（`manuscript-docx.md`）。

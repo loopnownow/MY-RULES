@@ -14,7 +14,7 @@ up: My rule.md §5
 - **子工程只留指针：** 在 `ref/settings.ini` 写 data path；**不要**把原始体拷进 `D:\MyProjects\…` 或三仓（MY-RULES / MY-SKILLS / MY-CODES）。
 - **衍生件仍在课题侧：** 衍生物 / 图 / 表按本文件与 `project-ref-layout.md` 落在子工程；勿塞进 `_DataBase`。
 - **临床底表 ≠ 影像 raw：** Excel/CSV 底表仍落 `ref/` 或 `ref/data/`（D-1：移动前先问）。**不要**把所有「data」都倒进 `_DataBase`。
-- **现行名只写 `_DataBase`；活 `00ds` = QC 对象：** `D:\00ds` / 夹名 `00ds` 已退役。
+- **现行名只写 `_DataBase`；活 `00ds` = QC 对象：** 禁止再建（→ 总图退役禁建表）。
   - 任何活路径、夹名、过滤器 / 默认项仍写 `00ds` 的，视为 QC 发现，**必须更正为 `_DataBase`**；**不要**在活 allowlist / filter 里把 `00ds` 留作「legacy」。
   - 不另造第三个 raw 根。**更正活引用 ≠ 搬迁磁盘树**：不 bulk 迁移旧根；两边若都在，维持原状，等主人另批搬迁。
 - **禁止进 git：** 原始影像二进制**不要**进 git（含 Git LFS）或任何 GitHub remote（DICOM 头含 PHI；二进制无有效 delta）。可选轻量清单（相对路径 + 大小 + SHA-256 + 入库日）可放子工程 `ref/pipeline/`（同 `hashes.tsv` / `MANIFEST.md` 思路）。该清单若需版本，可用**无 remote 的本地 git**；备份 = 拷到另一块盘，不是 git。
@@ -55,7 +55,7 @@ up: My rule.md §5
   5. SSOT = `_diseases.csv` 的 `family` 列（L1 桶名以此为准；`family` 留空 = 该基码即自家族）；改挂靠先改表再搬盘；`OTHERS` 仅兜底。`_PHI` / `__zip` / `_thesis` 为保留名（下划线前缀），与 `_lab` 同类例外：`structure_check.py` S23 **已实现**桶内 `_` / `.` 前缀叶跳过叶后缀校验。
   6. **短码夹层级：** 短码夹位于 `_DataBase\<family>\<prefix_suffix>`（自 `_DataBase` 起总深 3）；**叶内目录 ≤3 层**，超深链条按 `<父>_<子>` 合并为单层名（实例：`DER\zyx_H`，原 8 层 / 1,188 个超深目录 → 3 层）；派生件（期刊成图 / 投稿包 / 汇报稿）不进叶内 raw，`_未标天数` 这类纯归档中间层不保留；表格入库后叶内只留 `目录说明.md`（见「家族库 `_PHI\`」）。
   7. 与 archived 同构：冷库 L1 仍跟同一 `family`；本条**不**改 accepted 收工硬留清单。
-- **文档支：** 学位论文 / 标书 / 伦理申请材料不建 `_DataBase` 顶层 `_thesis`、`_grants\_misc`、`_ethics\_misc` 三夹；改落家族池 `<family>\_thesis\<slug>__<文件>`，标书原件归 `_DataBase\_grants\<year>\`；伦理材料不进 `_DataBase`：批件与写作模式提取物归 `_Docs\_library\ethics\`，方案与知情同意随家族退役进 `{DEL}`。原三夹已解散（`_grants\_misc` 移 `{DEL}`）；遗留例外：`_grants\2025\_ethics-forms\` 不重建（申报随附伦理表，随清理批次移 `{DEL}`）。
+- **文档支：** 学位论文 / 标书 / 伦理申请材料不建 `_DataBase` 顶层 `_thesis`、`_grants\_misc`、`_ethics\_misc` 三夹；改落家族池 `<family>\_thesis\<slug>__<文件>`，标书原件归 `_DataBase\_grants\<year>\`；伦理材料不进 `_DataBase`：批件与写作模式提取物归 `_Docs\_library\ethics\`，方案与知情同意随家族退役进 `{DEL}`。禁止再建 `_grants\2025\_ethics-forms\`（申报随附伦理表，清理时移 `{DEL}`）。
 
 ## 3 非课题 `_` 分支与台账
 | 分支 | 放 | 不放 |
@@ -63,7 +63,7 @@ up: My rule.md §5
 | `_teach\<topic-slug>\` | 教学语料（课件/病例/试题/模板）；slug 用英文小写连字符 | 课题原始影像 |
 | `_med\{gcp,meeting,year-end,rules}\` | 医疗行政 | 科研数据 |
 | `_books\<year>\` | 书稿/章节 | 课题原稿 |
-| `_grants\<year>\` | 课题申请包（进行中与已结题；原 `R&P` 申请侧） | 本组期刊稿（走四阶段） |
+| `_grants\<year>\` | 课题申请包（进行中与已结题；活兄弟根 `R&P` 禁止再建，→ 总图退役禁建表） | 本组期刊稿（走四阶段） |
 | `_reviews\{peer,grants,thesis}\<year>\` | 他人稿 / 标书 / 毕业论文评阅（原 `R&P` 评阅侧） | 本组稿件（走四阶段） |
 | `_personal\` | 个人材料（进修/签证） | 任何课题数据 |
 
@@ -98,7 +98,7 @@ up: My rule.md §5
 - **现役骨架（5t，有 PHI 家族）**：家族库实表 `meta` / `id` / `id_number` / `dict` / `ref_project`（五张）；子库实表 `meta` / `src` / `person` / `clin` / `_modules_<mod>`（有模态数据则 ≥1 张）/ `qc`（六类）。`id` / `id_number` 是唯一 PHI 落点；`person` 是**无 PHI 占位表**（`family_uid` / `subject_label` / `id_status`），不存姓名 / 身份证 / 电话 / 地址。
 - **家族库五表口径**：`id` 存姓名 / 电话 / 身份证 / 地址 / `family_uid`（`^[A-Z0-9_]+-\\d{6}$`）；各类号走 `id_number(kind, value)`（住院号 / 门诊号 / 影像号 / 病理号 / 样本号）；`dict` 登记变量（`role='phi'` 只许 `scope='family'`）；`ref_project` 登记子库清单与 `db_rel_path` / `built_at` / `sha256`。
 - **无 PHI 家族用家族编码：** 家族库无 PHI 不建 `id` / `id_number` 身份表，家族库只留 `meta` / `dict` / `ref_project`；家族级登记改用家族编码（family code）+ `ref_project` 映射，子库在 `meta.family_code` 记所属家族编码，跨库引用用家族编码而非 `family_uid`；PHI 永不下沉子库。`id` / `id_number` / `family_uid` 及依赖它们的 D24 / D27 / D54 / D63 / D75 只约束有 PHI 家族。
-- **汇编族（`OTHERS`）保留家族库、PHI 按子工程放置：** `OTHERS` 跨项目汇编，按有 PHI 家族对待：`_PHI\OTHERSdb` 保留 `id` / `id_number`，是 PHI 唯一落点，身份表不拆进子库；但身份不合并到家族级——每个 uid 恰属一个子工程（归属由子库 `person.family_uid` 唯一决定），不做跨子工程去重 / crosswalk / 统一主索引。家族库 `meta` 记 `family_code='OTHERS'`、`phi_layout='by_project'` 与子工程清单；子库在 `meta.family_code='OTHERS'` 记归属并保持零 PHI。草稿里「子库自带身份表、家族库退役」的判据（D86）作废：与「PHI 永不下沉子库」冲突。
+- **汇编族（`OTHERS`）保留家族库、PHI 按子工程放置：** `OTHERS` 跨项目汇编，按有 PHI 家族对待：`_PHI\OTHERSdb` 保留 `id` / `id_number`，是 PHI 唯一落点，身份表不拆进子库；但身份不合并到家族级——每个 uid 恰属一个子工程（归属由子库 `person.family_uid` 唯一决定），不做跨子工程去重 / crosswalk / 统一主索引。家族库 `meta` 记 `family_code='OTHERS'`、`phi_layout='by_project'` 与子工程清单；子库在 `meta.family_code='OTHERS'` 记归属并保持零 PHI。「子库自带身份表、家族库退役」的判据（D86）不适用，与「PHI 永不下沉子库」冲突。
 - **`ref_project` 四个计数**：`person_count`（person 行数，含占位）/ `clin_person_n`（有 ≥1 条 clin 行的人数 = **队列人数口径**）/ `longitudinal_n`（有 ≥2 个不同 `period_month` 的人数）/ `multi_record_n`（有 >1 条 clin 行的人数）。四列由门禁实时重算比对，任一不等即 **P0**（D35）；**对外只报 `clin_person_n`**。
 - **家族级人数不报**：`id` 行数 ≠ 患者数，`person_count` 也不是队列人数。跨子库未解析时只报项目级 `clin_person_n`；`id` 行数只允许作「身份行数」出现在方法学附注（D36）。试点实测：LC 家族库 `id` 3,050 行，四个项目 `clin_person_n` 合计 2,234 人；非姓名证据判同一人为 0，故不提供家族级合计。
 - **冻结旧库（core-6t）**：旧七表 `meta` / `project` / `src` / `item` / `val` / `person` / `person_key` 与兼容视图 `doc` / `sheet` / `sheet_dup` / `entity` / `fact` 只在 `<family>db_6t` 内保留，**只读**，供迁移对账；不得在旧库继续建表 / 改数，也不再按此骨架新建库。旧库 `meta.source_db` + `sha256` 须指向原始旧库并校验（D33）。
@@ -140,5 +140,5 @@ up: My rule.md §5
 ## 7 `_grants` / `_reviews` 落点
 - **课题申请包** → `_DataBase\_grants\<year>\`
 - **评阅他人稿**（peer / grants / thesis）→ `_DataBase\_reviews\{peer,grants,thesis}\<year>\`
-二者不是稿件流水线阶段：不要写入 `drafting` / `pre-submit` / `reviewing` / `accepted` 阶段表，也不进 `study_folder_stage_aliases`。本组期刊草稿 / R&R / 校样仍走四阶段夹（→ `zone-projects.md`）。`R&P` 活兄弟根勿重建（→ 总图退役禁建表）。
+二者不是稿件流水线阶段：不要写入 `drafting` / `pre-submit` / `reviewing` / `accepted` 阶段表，也不进 `study_folder_stage_aliases`。本组期刊草稿 / R&R / 校样仍走四阶段夹（→ `zone-projects.md`）。`R&P` 活兄弟根禁止再建（→ 总图退役禁建表）。
 

@@ -22,7 +22,7 @@ owns: [Z1, Z2]
 
 - 已有文件夹若仍用旧名 → 按 `aliases.yaml`（`kind: stage`）阅读；**不改写**、**勿重建**。**不新建** `DER` 阶段夹或根目录（`DER` 仅是 `_diseases.csv` 的家族码，不是阶段 / 工作区）。
 
-课题夹名：`lowercase_UPPERCASE`（如 `fyh_CAC`、`xlm_LG`）。旧式 `CAC_fyh`、`lung_xlm` 已退休。
+课题夹名：`lowercase_UPPERCASE`（如 `fyh_CAC`、`xlm_LG`）。禁止 `CAC_fyh`、`lung_xlm` 这类写法。
 
 **命名：** `<prefix>_<suffix>`——`<prefix>` = sub-PI 小写拼音首字母（如 `lxf`），`<suffix>` = 项目短码（大写或约定写法，如 `RC`/`CID`）。一人多题、一题多人都不改名；同后缀多例加 `_1`/`_2`（如 `llj_OV_1`）。中文人名只进台账（`_Docs\mem\people.csv`），路径与正文不写中文名。
 
@@ -136,9 +136,9 @@ owns: [Z1, Z2]
 
 - 写入 `_Docs\`须用户点名「放 _Docs」。
 - 最终 / 中间 / 临时落点与备忘录查阅入口 → `My rule.md` §3；旧版稿与中间件 → §X2。
-- 可复用脚本 → 统计引擎与建模 CLI 在 `{code_stats}`（`modules/` + `model-validation/`），运维/加工脚本在 `{code_stats}\tools\<fine-id>\`（壳与索引已移 `{DEL}`）。`0script\` 已退休，不在课题根重建。长期规则/语料 → `_Docs` 相应层。
+- 可复用脚本 → 统计引擎与建模 CLI 在 `{code_stats}`（`modules/` + `model-validation/`），运维/加工脚本在 `{code_stats}\tools\<fine-id>\`（壳与索引在 `{DEL}`）。长期规则/语料 → `_Docs` 相应层。
 - 根不留临时/草稿/一次性中间件（例外：现行在改稿 / 现行 `Vn`）。旧版稿与中间件落点 → §X2。`_Docs\GitHub\MY-CODES\modules\`增改移须先同意。
-- 数据课题根可留：`rawdata`、`derivatives`、`atlases`、索引/manifest、`ref`。`_Docs` 仅当点名「放 _Docs」。默认从 `derivatives` 拷出要用的结果，原件留在原处。最终交付与不建 `0result\` → `My rule.md` §3。不重建 `0script\`。
+- 数据课题根可留：`rawdata`、`derivatives`、`atlases`、索引/manifest、`ref`。`_Docs` 仅当点名「放 _Docs」。默认从 `derivatives` 拷出要用的结果，原件留在原处。最终交付与不建 `0result\` → `My rule.md` §3。禁止再建 `0script\`（→ 总图退役禁建表）。
 - 同键终表合并为一张（一段说明，值列加前缀）。把原件移出子工程根须先同意。
 - 移脚本或文档前先搜 `import` / `addpath` / `settings.ini` / README。仍有未改引用则不移。移完后改路径与 `_Docs` 示例再测。
 - **改名 / 搬迁后的旧路径门**（与 `QC.md` R11 同方向，范围扩到项目数据件）：先扫描影响面，再定「改引用 / 留史证 / 回滚」，不允许先改目录、引用以后再说。数据件（csv / tsv / ini / py 等）当批改值，改前备份；活文档改指向，不留旧值；史证（交接单 / MOVED 台账 / changelog）可留旧值，但同句必须带标记词（`史证` / `旧布局` / `MOVED` / `已退役`）。通过标准：命中清单里只剩带标记词的史证行。

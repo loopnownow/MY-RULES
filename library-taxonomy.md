@@ -58,7 +58,7 @@ description: 库分类 L1/L2、三库分工、批件与期刊池契约；伦理�
 - **伦理材料落点** = `_Docs\_library\ethics\`，只收两处产物：`approvals\<L1>\<L2>\` + `approvals-index.xlsx`（批件 PDF）、`extract\{briefs,phrases}\`（写作模式提取物，SSOT 层）。`sections\` 是空白表分节的生成物，不手放原件。`_DataBase` 侧不设伦理桶：原件按家族落 `{DEL}\retired-ethics\<family>\`，带 sha256 台账。
 - **批件原件**：仅保留日期 ≥ 2023-11-10 的进 `_Docs\_library\ethics\approvals\<L1>\<L2>\`，并在 `approvals-index.xlsx` 登记。日期取批件批准日 / 文件标注日（能确定者）；**早于 2023-11-10** 的批件原件 → `{DEL}`。分类口径见本节，不另造 approvals 路径。
 - **临床研究方案 + 知情同意书**：随所在家族整夹退役进 `{DEL}`，不落 `sections\`；文件名保留 `<CODE>__` 前缀便于回溯。harvest 只抽写作模式进 `extract\`，原件不留 `_DataBase`。
-- **`_DataBase\_lab\ethics` 子树**：不设、不重建；`_lab` 根其它历史档只读口径不变。
+- **`_DataBase\_lab\ethics` 子树**：禁止再建（→ 总图退役禁建表）；`_lab` 根其它历史档只读口径不变。
 - 申请包/申报原件不是批件：随家族退役进 `{DEL}`，不落 `_library\ethics\sections\`。`_library\ethics` 只收批件 PDF + 索引 + 提取层。
 - `_Docs` 目录命名 → §N2（`zone-docs.md`）。
 

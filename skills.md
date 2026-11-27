@@ -17,7 +17,7 @@ description: 技能库契约、按需加载、演进门、PR 与合并后部署�
 
 ## 2 按需使用
 
-先读 `<skill>/SKILL.md` 再只读其引用；路由 `00` → `02` → `03` → `05` → `06` → `07` → `00` QC（粗 ID = 执行座位）。细则→`00` `SKILL.md`。**索引边界**：技能正文一律用 `{SKILLS}\…` 绝对路径直读；`D:\MyProjects\_Docs\.cursorignore` 排除 `GitHub\`；Cursor IDE 已卸，勿再依赖 Cursor 索引去「找」技能。
+先读 `<skill>/SKILL.md` 再只读其引用；路由 `00` → `02` → `03` → `05` → `06` → `07` → `00` QC（粗 ID = 执行座位）。细则→`00` `SKILL.md`。**索引边界**：技能正文一律用 `{SKILLS}\…` 绝对路径直读；`D:\MyProjects\_Docs\.cursorignore` 排除 `GitHub\`；勿依赖 Cursor 索引去「找」技能。
 
 运行时只按 fine id（如 clean-data）选型；path 与 slug 仅用于定位实体；入口文件名固定为 SKILL.md；不得把目录名或展示名当作第二套运行时键。
 
@@ -31,7 +31,7 @@ description: 技能库契约、按需加载、演进门、PR 与合并后部署�
 - 改 live 技能须城城点名「进skills」（extract ≠ promote）；propose-only 仍适用；不另开 evolution 技能树。
 - **harvest ↔ closeout 关系 / 授权范围**（可在四阶段或 archived / `.Del` 抽，每次须当轮授权；harvest ≠ 搬盘）→ §Z1、§Z2、§Z3。本条不复写。
 
-## 4 单一技能源（勿重建第二条树）
+## 4 单一技能源（禁止再建第二条树）
 
 Live bodies SSOT = MY-SKILLS in-repo `NN_slug/base/`。不得在别处再建第二棵技能树、挂载缓存树或整树副本；
 禁止对任何旧缓存路径 `robocopy /MIR` 或重建包字节。缓存边界→`{SKILLS}\00_orchestrator\references\lifecycle-cache.md`。
@@ -57,7 +57,7 @@ Live bodies SSOT = MY-SKILLS in-repo `NN_slug/base/`。不得在别处再建第�
 
 **指针壳 = QC 清理对象（R10）**：规则侧与技能侧同一口径——正文 ≤5 行且只含 move/pointer 线索，或正文为空，即为 stub，当场删；不留 stub 停放位。
 
-**退役且仅剩指针 = QC 清理对象**：能力已并入现行座位 / fine-id / 路径后，live 树只剩「已退役→见某某」、空 README、SUPERSEDED / retired / page-not-on-disk 等**无实现字节**的壳或单向指针时，与 skip/archived **同档 P0/P1**：删壳、删活引用；必要的一句并入现行文档；若仍有字节则移 `{DEL}`（保相对路径）。**禁止**新造「仅指针」壳当停放。**不算壳（勿误清）**：`legacy_aliases.yaml` 路由表；现行契约指针（如 `DOI_*.md`→`_library/references`、批件指针、`journals.csv`）；`HISTORIC` 审计记录（只标历史、不新建活链到 `{DEL}`）。
+**退役且仅剩指针 = QC 清理对象**：能力由现行座位 / fine-id / 路径承担后，live 树只剩「已退役→见某某」、空 README、SUPERSEDED / retired / page-not-on-disk 等**无实现字节**的壳或单向指针时，与 skip/archived **同档 P0/P1**：删壳、删活引用；必要的一句并入现行文档；若仍有字节则移 `{DEL}`（保相对路径）。**禁止**新造「仅指针」壳当停放。**不算壳（勿误清）**：`legacy_aliases.yaml` 路由表；现行契约指针（如 `DOI_*.md`→`_library/references`、批件指针、`journals.csv`）；`HISTORIC` 审计记录（只标历史、不新建活链到 `{DEL}`）。
 
 - 退休 fine-id **只**保留在 `{SKILLS}\00_orchestrator\legacy_aliases.yaml` → 现行 id；live 路由 / workflow / advanced 只写现行 fine-id 与现存路径。
 - 发现 skip / skipped / archived / 已归档 /「archived … (page not on disk)」等残留 = QC **P0/P1**：当场删除、合并或改写为现行能力，不得再扩散 skipped / archived 标签。

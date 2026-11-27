@@ -54,9 +54,3 @@ up: My rule.md §6
 # 6 与 `skills.md` §6 的分工
 - 技能树的精简 / skip / archived / 退役仅指针 → `skills.md` §6。
 - 规则仓、`_Docs` 盘面、规则 PR 门 → 本文件。
-
-# 7 实施状态
-
-- **已机器**：R1–R7、R9、R10（`qc_rules.py` + `tests/test_rules_qc.py`、`tests/test_stale_path_scan.py`，27 个用例；R4 在 `check_paths.py`）。
-- **R8 已建**：`.github/pull_request_template.md` 把四件事做成勾选项（门全绿 / 正文 why / 改名更新 aliases / 新 L1 同步路由与必检）。
-- **季度**：首轮 2026-11-14 已跑——9 个 live 文件正文史标记 0 处、`aliases.yaml` 41 条无合并项、路由表 12 行与文件一一对应。
