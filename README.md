@@ -48,9 +48,10 @@
 
 ## 开发辅助（`tools/`）
 
-只读、不联网、不进交付物：`grepfile.py`、`scope_check.py`、`extract_inline.py`、`check_html.py`、`smoke_page.js`、`sync_project_page.py`、`fill_start_placeholders.py`。用哪个、何时跑 → `tools/README.md`。
+- **只读检查器**（`tools/qc/`）：不联网、不写盘、不进交付物。`grepfile.py`、`scope_check.py`、`check_html.py`、`smoke_page.js`。
+- **生成器**（`tools/gen/`）：写盘，受 §W1 约束，须当轮点名。`extract_inline.py`、`fill_start_placeholders.py`、`sync_project_page.py`。
 
-改 `modules/console/project.html` 后固定四步：`extract_inline.py` → `node --check` → `smoke_page.js` → `check_html.py`，再 `sync_project_page.py` 同步课题页。
+用哪个、何时跑，以及改 `project.html` 的固定步骤 → `tools/README.md`。
 
 ## Local check (E3)
 
@@ -60,4 +61,4 @@ python -B qc_rules.py              # R1–R3、R5–R7、R9、R10：路由闭合
 python -B -m pytest -q tests       # 门的负向用例（改规则时必跑）
 ```
 
-`check_paths.py` 缺技能根默认 fail loud（exit 1），除非 `--allow-missing-skills`；`qc_rules.py` 的判据与豁免见 [QC.md](<QC.md>)。
+R4 需要本机同时克隆兄弟仓 MY-SKILLS（默认与本仓同级，或设 `SKILLS_ROOT` / `MY_SKILLS`）。`check_paths.py` 缺技能根默认 fail loud（exit 1），除非 `--allow-missing-skills`；`qc_rules.py` 的判据与豁免见 [QC.md](<QC.md>)。不加 CI，检查只在本机跑。

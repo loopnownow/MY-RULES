@@ -1,7 +1,7 @@
 """把 html 里的内联 <script> 抽成 .js，便于 node --check。
 
 用法:
-    python -B extract_inline.py <input.html> <output.js>
+    python -B tools/gen/extract_inline.py <input.html> <output.js>
 """
 import re
 import sys

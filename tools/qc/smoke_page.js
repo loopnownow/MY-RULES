@@ -1,5 +1,5 @@
 // 用假 DOM 跑页面顶层脚本，抓 ReferenceError 这类"删了声明忘了引用"的问题。
-// 用法: node smoke_page.js <inline.js>
+// 用法: node tools/qc/smoke_page.js <inline.js>
 const fs = require("fs");
 const raw = fs.readFileSync(process.argv[2], "utf8");
 // 金版模板里的占位符：serve 时才注入，冒烟里给个空值

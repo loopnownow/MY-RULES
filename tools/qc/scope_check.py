@@ -4,9 +4,9 @@
 import / 参数 / 赋值。内层函数的 import 不会让外层函数"看得见"。
 
 用法:
-    python -B scope_check.py <dir> [alias1 alias2 ...]
+    python -B tools/qc/scope_check.py <dir> [alias1 alias2 ...]
 例:
-    python -B scope_check.py D:/MyProjects/_Docs/GitHub/MY-CODES/modules pd np plt os sys json re
+    python -B tools/qc/scope_check.py D:/MyProjects/_Docs/GitHub/MY-CODES/modules pd np plt os sys json re
 
 退出码: 0 = 无隐患; 1 = 有隐患（或语法/读取错误）; 2 = 用法错误。
 """
@@ -99,7 +99,7 @@ def _check(nodes, inherited: set, aliases: set, label: str, out: list) -> None:
 def main(argv: list[str] | None = None) -> int:
     ap = argparse.ArgumentParser(
         description="静态作用域自查：找出「用了某别名但该作用域没绑定」的 NameError 隐患。",
-        epilog="例: python -B scope_check.py D:/MyProjects/_Docs/GitHub/MY-CODES/modules pd np plt",
+        epilog="例: python -B tools/qc/scope_check.py D:/MyProjects/_Docs/GitHub/MY-CODES/modules pd np plt",
     )
     ap.add_argument("dir", nargs="?", help="要递归扫描的目录（必填）")
     ap.add_argument(

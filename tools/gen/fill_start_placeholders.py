@@ -4,11 +4,11 @@
 `const DEFAULT_MODULES = __MODULES_DEFAULT__;`。课题页若是直接拷金版而没替换，
 内联脚本第一行就 `ReferenceError: __MODULES_DEFAULT__ is not defined`，
 整页初始化中断——所有按钮（含「开启服务」）点了没反应，看着像服务起不来。
-`smoke_page.js` 会把这个占位符自动换成空串，所以抓不到这个错，必须真浏览器复核。
+`tools/qc/smoke_page.js` 会把这个占位符自动换成空串，所以抓不到这个错，必须真浏览器复核。
 
 用法:
-    python -B fill_start_placeholders.py <page.html> <modules_dir>            # dry-run
-    python -B fill_start_placeholders.py <page.html> <modules_dir> --apply    # 写盘
+    python -B tools/gen/fill_start_placeholders.py <page.html> <modules_dir>            # dry-run
+    python -B tools/gen/fill_start_placeholders.py <page.html> <modules_dir> --apply    # 写盘
 
 参数:
     page.html    课题起始页（`<project>/<project>.html`）

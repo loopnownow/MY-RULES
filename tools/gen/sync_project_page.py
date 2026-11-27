@@ -1,7 +1,7 @@
 """把金版 project.html 同步成课题页：注入 modules 默认路径 + build 戳，token 只写 meta。
 
 用法:
-    python -B sync_project_page.py <gold.html> <dest.html> <token|""> <modules_dir>
+    python -B tools/gen/sync_project_page.py <gold.html> <dest.html> <token|""> <modules_dir>
         [--ini <ref/settings.ini>] [--stats-root <MY-CODES 根>] [--apply]
 
 默认 dry-run：只打印将写什么；加 `--apply` 才落盘（批量改写前先试跑）。

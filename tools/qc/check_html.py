@@ -6,8 +6,8 @@
 按目录配平判断，不校验证式 HTML，也不改文件。
 
 用法:
-    python -B check_html.py <file.html> [more.html ...]
-    python -B check_html.py --help
+    python -B tools/qc/check_html.py <file.html> [more.html ...]
+    python -B tools/qc/check_html.py --help
 
 退出码: 0 = 全部通过; 1 = 存在配平错误或读取失败; 2 = 用法错误（未给文件）。
 """
