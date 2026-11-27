@@ -1,6 +1,7 @@
 ---
 name: workspace-layout
 description: 本机布局与子工程短针。落点见 My rule.md §3。
+owns: [N2, Z1, Z2, Z3]
 ---
 
 # 本机布局与子工程
@@ -407,7 +408,7 @@ D87 标准指纹 / D88 `dict` 覆盖 / D89 缩写合规 / D90 空值不挪位 / 
 
 主人确认的工作区关系总图。细则清单仍见「accepted 收工」「archived 冷库」；本节约束**关系**与授权，不复写硬留字节表。
 
-### 两层：活阶段 vs 分流落点
+### **§Z1** 两层：活阶段 vs 分流落点
 
 - **四阶段 = 活课题生命周期：** `drafting` / `pre-submit` / `reviewing` / `accepted`。路径 `D:\MyProjects\<stage>\<prefix_suffix>\`。
 - **分流落点（非阶段）：** `_DataBase` / `_Docs` / `.Del` / `archived`。`archived` **不是**第五阶段（见「archived 冷库」；不进阶段表、不进 `study_folder_stage_aliases`）。
@@ -421,7 +422,7 @@ D87 标准指纹 / D88 `dict` 覆盖 / D89 缩写合规 / D90 空值不挪位 / 
 3. 可脚本重生图 / 热副本 / 过期草稿 → `.Del`
 4. 硬留：终稿 Word + `FinalData_`（或钉死 data）+ 可选 `settings.ini` → `archived\<family>\<prefix_suffix>\` + `ARCHIVED.md`（四条件齐仍有效）
 
-### harvest（抽取）≠ closeout（搬盘）
+### **§Z2** harvest（抽取）≠ closeout（搬盘）
 
 - **harvest：** 抽「怎么做」→ `_Docs\harvest`；仅当主人说「进skills」才进 MY-SKILLS（extract ≠ promote；流程与纳入门禁见 `{SKILLS}\00_orchestrator\harvest\SKILL.md`，00 只调度/门禁/复核；指针见 `skills.md` §3）。
 - **closeout：** 物理落点与精简；**不是** harvest 的替代步骤。
@@ -429,7 +430,7 @@ D87 标准指纹 / D88 `dict` 覆盖 / D89 缩写合规 / D90 空值不挪位 / 
 - **harvest 剩余件 / 先判 H1–H4 / 轮次去留** → `del-and-harvest.md` §1–§3（本文件不复写判据）。
 - 关系总图 / harvest 授权 →「工作区关系：阶段 · 分流 · harvest · 冷库」。harvest 技能只抽「怎么做」；closeout 是落点；勿把 closeout 写成 harvest 步骤。
 
-### harvest 授权范围
+### **§Z3** harvest 授权范围
 
 - 可在 `drafting` / `pre-submit` / `reviewing` / `accepted` / `archived` / `.Del` **任一侧**进行。
 - **每次须主人当轮授权**；不因阶段自动触发。
@@ -563,6 +564,6 @@ D87 标准指纹 / D88 `dict` 覆盖 / D89 缩写合规 / D90 空值不挪位 / 
 
 只许建在 `{DEL}` / `D:\MyProjects\.Del\` 的 `_by-project\`、`_by-function\`。权威与例外 → `My rule.md` §2（含 `_Docs`默认禁止 mkdir、**改已有文件须当轮点名或先问**、一次性脚本不进主目录 / `.grok\tmp` / 课题根）。本段不复写。bot mem 落点例外（`D:\MyProjects\_Docs\mem\`）→ `My rule.md` §2 写盘与授权 + §4 别名。
 
-**目录命名**：`_Docs` 下目录一律 ASCII 英文（`approvals` / `journals` / `jcr`）；中文目录发现即当轮 rename，并在 `_library\MOVED-FROM.md` 记一行。库分类与 L1/L2 → `library-taxonomy.md`。
+**§N2** **目录命名**：`_Docs` 下目录一律 ASCII 英文（`approvals` / `journals` / `jcr`）；中文目录发现即当轮 rename，并在 `_library\MOVED-FROM.md` 记一行。库分类与 L1/L2 → `library-taxonomy.md`。
 
 **`.Del` 内部三档**（park / harvest-park / harvested）与落 harvested 前的 grep 要求 → `del-and-harvest.md`。

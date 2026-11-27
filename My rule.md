@@ -2,6 +2,7 @@
 name: My rule
 description: L0 常驻层：裁决顺序、硬闸、交付落点、路由第一跳、QC 频率。
 routes: [workspace-layout.md, project-ref-layout.md, del-and-harvest.md, library-taxonomy.md, network-security.md, skills.md, QC.md, project-fact-lookup.md, local-overlay.md]
+owns: [W1, W2, W3, W4, W5, W6, X1, N1, P1, P2, P3, S1, S2]
 ---
 
 # 0 本仓与阅读顺序
@@ -24,26 +25,26 @@ routes: [workspace-layout.md, project-ref-layout.md, del-and-harvest.md, library
 2. **禁删**：清理只移 `{DEL}` 并保相对路径（§2）。
 3. **新建禁区**：默认只许 `{DEL}`（§2；全文 `del-and-harvest.md`）。
 4. **网络红线**：禁止网段默认拒绝；敏感外发先说明再获同意（`network-security.md`）。
-5. **三仓写边界**：`{RULES}` / `{SKILLS}` 只读，变更走 PR；可写代码只在 `{code_root}`。
+5. **§S1** **三仓写边界**：`{RULES}` / `{SKILLS}` 只读，变更走 PR；可写代码只在 `{code_root}`。
 
-另有 **PII 边界**：姓名 / 电话 / 身份证 / 地址只许落本机 `_DataBase\<family>\_PHI\<family>db` 的 `id` 表（不进 GitHub）；子工程库 `<slug>\<slug>db` 零 PHI；有 PHI 家族跨库引用一律用 `family_uid`，不以姓名为键。身份证与地址一并允许落家族库 `id` 表；PHI 不得写进任何仓、回执或聊天；无 PHI 家族不建身份表，家族级登记与跨库引用改用家族编码（`meta.family_code`），PHI 永不下沉子库。
+**§P1** 另有 **PII 边界**：姓名 / 电话 / 身份证 / 地址只许落本机 `_DataBase\<family>\_PHI\<family>db` 的 `id` 表（不进 GitHub）；子工程库 `<slug>\<slug>db` 零 PHI；有 PHI 家族跨库引用一律用 `family_uid`，不以姓名为键。身份证与地址一并允许落家族库 `id` 表；PHI 不得写进任何仓、回执或聊天；无 PHI 家族不建身份表，家族级登记与跨库引用改用家族编码（`meta.family_code`），PHI 永不下沉子库。
 
-**DICOM 来源的 PHI**：以 DICOM 头为源，只进家族库——`PatientName`→`id.name`、`PatientID` / `OtherPatientIDs` / `AccessionNumber`→`id_number`、`PatientBirthDate`→`id.birth_date`、`PatientSex`→`id.sex`、`PatientAddress`→`id.address`、`PatientTelephoneNumbers`→`id.phone`。
+**§P2** **DICOM 来源的 PHI**：以 DICOM 头为源，只进家族库——`PatientName`→`id.name`、`PatientID` / `OtherPatientIDs` / `AccessionNumber`→`id_number`、`PatientBirthDate`→`id.birth_date`、`PatientSex`→`id.sex`、`PatientAddress`→`id.address`、`PatientTelephoneNumbers`→`id.phone`。
 - `InstitutionName` / `ReferringPhysicianName` / `OperatorsName` 不进子库；子库只留模态、扫描参数与 UID。
-- 伪匿名标识（`ANON*` / `XXX` / `TEST` / 纯数字 / 单字符重复）不得当真名、不得据此合并身份；一头多姓名或一姓名多头各建身份并记 qc，不合并。
+- **§P3** 伪匿名标识（`ANON*` / `XXX` / `TEST` / 纯数字 / 单字符重复）不得当真名、不得据此合并身份；一头多姓名或一姓名多头各建身份并记 qc，不合并。
 - 像素内烧入的文字属无法自动剥离的 PHI，外发前须人工复核。
 - DICOM 头与院内名单冲突时以头为准并记 `qc(DICOM_NAME_CONFLICT)`。判级见 `workspace-layout.md` 门禁码表 D56–D58。
 
 # 2 写盘与授权
-**总闸：只读不用授权（`{doc_root}\mem\` 查阅见下条）；任何新建 / 编辑 / 覆盖 / 移动 / 删除前，须用户当轮点名该项或明确同意；未获授权即停，不静默落盘。**
-- **mem 查阅：** 未经当轮点名，`{doc_root}\mem\` 下只许读 `README.md` 与 `SENSITIVE.md`；其余文件与子夹（含列出、打开、检索）即使只读，也须用户当轮点名该文件、路径或该项任务。写盘仍按本条总闸，须当轮点名。
-- **授权按项按轮**：点名 A 只授权 A 的该处；「继续」「好」「你看着办」不等于写盘许可。须问条款（D-1 移底表、网络、MY-SKILLS PR/merge、Word 城城已改先问、稿件回滚须授权）继续有效。
-- **禁删**：旧稿 / 旧产物移入 `{DEL}`（`_by-project` / `_by-function`），保留相对路径；禁止静默永久删除。 `{DEL}` 只能由主人手动清空（空目录、就地 `_Del` 等细则 → `del-and-harvest.md` §1）。
-- **新建**：默认只许 `{DEL}`；常设例外仅限 bot 记忆导出（`_Docs\mem\`）、子工程 `ref\tmp\`、用户当轮同意；例外只是新建路径，不构成编辑许可。一次性脚本 / 小补丁只落 `{DEL}`，不进主目录、`.grok\tmp`、课题根。
-- 默认禁止直接改 `{RULES}`、`{SKILLS}`、`_Docs`、子工程已有文件；**改已有文件同样须当轮点名**，含 `_Docs\harvest\*`、`_Docs\mem\*`、已有稿（含 Track Changes）。
+**§W1** **总闸：只读不用授权（`{doc_root}\mem\` 查阅见下条）；任何新建 / 编辑 / 覆盖 / 移动 / 删除前，须用户当轮点名该项或明确同意；未获授权即停，不静默落盘。**
+- **§W3** **mem 查阅：** 未经当轮点名，`{doc_root}\mem\` 下只许读 `README.md` 与 `SENSITIVE.md`；其余文件与子夹（含列出、打开、检索）即使只读，也须用户当轮点名该文件、路径或该项任务。写盘仍按本条总闸，须当轮点名。
+- **§W2** **授权按项按轮**：点名 A 只授权 A 的该处；「继续」「好」「你看着办」不等于写盘许可。须问条款（D-1 移底表、网络、MY-SKILLS PR/merge、Word 城城已改先问、稿件回滚须授权）继续有效。
+- **§X1** **禁删**：旧稿 / 旧产物移入 `{DEL}`（`_by-project` / `_by-function`），保留相对路径；禁止静默永久删除。 `{DEL}` 只能由主人手动清空（空目录、就地 `_Del` 等细则 → `del-and-harvest.md` §1）。
+- **§N1** **新建**：默认只许 `{DEL}`；常设例外仅限 bot 记忆导出（`_Docs\mem\`）、子工程 `ref\tmp\`、用户当轮同意；例外只是新建路径，不构成编辑许可。一次性脚本 / 小补丁只落 `{DEL}`，不进主目录、`.grok\tmp`、课题根。
+- **§W4** 默认禁止直接改 `{RULES}`、`{SKILLS}`、`_Docs`、子工程已有文件；**改已有文件同样须当轮点名**，含 `_Docs\harvest\*`、`_Docs\mem\*`、已有稿（含 Track Changes）。
 - 默认禁在 `{doc_root}` 下 mkdir；目录名一律 ASCII 英文，中文只进索引列。
-- **后果性操作**（投稿 Approve、付费、改稿开跑、接审）与**开工**（目标与验收、假设 ≤3、取舍、谁执行）都先出计划等「同意」；「直接做」不跳过 PR/merge 确认与须批网络。
-## 2.1 盘问 / grill-me（SSOT；技能只指针）
+- **§W5** **后果性操作**（投稿 Approve、付费、改稿开跑、接审）与**开工**（目标与验收、假设 ≤3、取舍、谁执行）都先出计划等「同意」；「直接做」不跳过 PR/merge 确认与须批网络。
+## 2.1 **§W6** 盘问 / grill-me（SSOT；技能只指针）
 - 何时：多节点、新能力、高风险、或用户说 `grill-me` /「盘问」；单节点且无关键未知 → 不问。
 - 一轮批处理；问题编号 + 每题推荐默认；可多选，不限 5 题；能查文件 / 网页的先查再问。
 - 通过后出 Plan card（节点顺序、风险门），等明确点头再派单；`{SKILLS}\00_orchestrator\references\plan-and-grilling.md` 只留 Plan card / Q0–Q3 / 流程图并指回本条。
@@ -104,7 +105,7 @@ routes: [workspace-layout.md, project-ref-layout.md, del-and-harvest.md, library
 # 6 QC
 - **频率**：改规则跑 `python -B check_paths.py --check` + `python -B qc_rules.py`（R1–R3 / R5–R7 / R9 / R10；负向用例 `python -B -m pytest -q tests`；R11 活文档门在 `{doc_root}\test\structure_check.py` S30 与本仓 `audit_readme_counts.py` 同侧）；每季度清一次史。
 - **规则门 R1–R12**（判据 / 豁免 / 失败处置）→ `QC.md`；QC 不得 ignore / skip / 假绿，skip / archived / 退役仅指针不是停放位（技能树 → `skills.md` §6）。
-- **三仓流程**：本地分支 + 测试 → 出示完整变更清单 → 批准开 PR → 不直推 main → 用户说「合」「和」「推合」才 merge；默认 QC 由 Aitor 本人做（点名除外）；MY-SKILLS 细则 → `skills.md` §5。
+- **§S2** **三仓流程**：本地分支 + 测试 → 出示完整变更清单 → 批准开 PR → 不直推 main → 用户说「合」「和」「推合」才 merge；默认 QC 由 Aitor 本人做（点名除外）；MY-SKILLS 细则 → `skills.md` §5。
 
 # 7 执行准则
 - **编程**：简单优先、外科手术式、模块化、不写回退（失败要响）；新脚本 Python 3.13.9；PowerShell 不用 `&&`；配置置顶；注释只写配置含义与运行方式；写计算代码前先读本机 CPU / GPU / RAM，能用则优先多线程和 CUDA。
