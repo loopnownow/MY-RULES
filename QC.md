@@ -5,7 +5,7 @@ up: My rule.md §6
 ---
 # 0 定位与边界
 - 管：规则仓（`{RULES}`）与 `{doc_root}` 盘面的判据、频率、失败处置、豁免。
-- 不管：技能树 QC（→ `skills.md` §6）、harvest 纳入门禁（→ `{SKILLS}\00_orchestrator\harvest\`）、库结构门（→ `{doc_root}\test\structure_check.py`）、归并（→ `db-library`）。`{DEL}` 落点、离场条件与新建禁区 → `zone-del.md`；harvest 对象与布局 → `zone-docs.md`。何时清、扫描实现与永不自动清名单见 §5。
+- 不管：技能树 QC（→ `skills.md` §6）、harvest 纳入门禁（→ `{SKILLS}\00_orchestrator\harvest\`）、库结构门（→ `{doc_root}\test\structure_check.py`）、归并（→ `db-library`）。`{DEL}` 落点、离场条件与新建禁区 → `zone-del.md`；harvest 对象与布局 → `zone-docs.md`。何时清与扫描实现见 §5；永不自动清名单 → `zone-del.md` §6。
 - 原则：**fail-loud**；能机器判的不靠人记；不得 ignore / skip / 假绿。
 
 # 1 频率
@@ -48,8 +48,7 @@ up: My rule.md §6
 - 流程：`cleanup_scan.py` 出候选 → 人工确认 → `cleanup_move.py` 移 `{DEL}`。
 - 三条判据：**过期**（>90 天未被引用）、**重复**（同内容多份）、**无主**（无项目 / 无索引指向）。
 - **指针壳（stub / redirect）**：正文 ≤5 行且含盘符路径或 `moved to` / `已移至` / `→` 的 `.md` 归 pointer-only；零入向引用即候选，不设 90 天门槛（stub 本就不该长期存在）；不校验其命名与正文，R5 / R6 / R9 不覆盖。
-- 默认分级：A 可直接移、B 需确认、C 永不自动清。
-- **永不自动清名单**：`_library`、期刊池、批件、`mem`、harvest 台账。
+- 默认分级：A 可直接移、B 需确认、C 永不自动清（名单 → `zone-del.md` §6）。
 - 清理保相对路径；删除字节归 `{DEL}`（`zone-del.md`）。
 
 # 6 与 `skills.md` §6 的分工

@@ -35,14 +35,14 @@ owns: [Z3, N2]
 - fine-id 只作 lane，不预先定技能；抽与 promote 分离，promote 走 `skills.md` §5。
 - **快照不保留**：只收正文 + `MANIFEST.tsv` + `evidence\` + `tools\`；实体镜像不进 `{doc_root}`。
 - **轮次工作目录**落 `{DEL}\harvest-park\rounds\<YYYYMMDD><letter>-<slug>\`（必含 `HARVEST-*.md` / `INDEX.md` / `MANIFEST.tsv` / `evidence\`；`tools\` 可选）。不在 `{doc_root}\harvest\` 下建 `rounds\` 或 lane 活层，也不把 `harvest\rounds` + `by-fine-id` 写成活 SSOT。一次 harvest 一个 lane；lane = `registry.yaml` 里的现行 fine id，只作分类列与文件名，不建目录。
-- 收集标准仍是 `{doc_root}\harvest\HARVEST-STANDARD.md`；轮次台账 `{doc_root}\harvest\LEDGER.tsv`（一行一轮，属耐久层，不进 `{DEL}`）。`by-fine-id` 笔记只落 `{DEL}`（§N1）。内容进规则 / 技能后，轮次目录可由主人删除。
+- 收集标准 → `skills.md` §3；轮次台账 `{doc_root}\harvest\LEDGER.tsv`（一行一轮，属耐久层，不进 `{DEL}`）。`by-fine-id` 笔记只落 `{DEL}`（§N1）。内容进规则 / 技能后，轮次目录可由主人删除。
 
 # 4 **§Z3** harvest 授权范围
 
 - 可在 `drafting` / `pre-submit` / `reviewing` / `accepted` / `archived` / `.Del` **任一侧**进行。
 - **每次须主人当轮授权**；不因阶段自动触发。
 - `archived` 默认只读：从冷库抽也要当轮点名；不解冻整夹除非另批。
-- **QC 分工：** 库形/完整性→本地库门（`{doc_root}\test\structure_check.py` + `STRUCTURE.md`；`_DataBase` 根说明 + `DB-QC-STANDARD.md`）；纳入门禁→harvest 技能；00 复核通过后才候纳入。指针 → `skills.md` §3。
+- **QC 分三处** → `skills.md` §3。
 
 ### 不进 harvest / 慎进 `_Docs` 公开层
 

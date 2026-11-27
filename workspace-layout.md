@@ -6,7 +6,7 @@ up: My rule.md §5
 
 # 本机布局总图
 
-工作区只有一层（`D:\MyProjects\<stage>\<project>`）；不再有 A/B 双工作区。路径别名见 `My rule.md` §4。各区内部规则按 zone 文件，不在本文件展开。
+工作区只有一层（`D:\MyProjects\<stage>\<project>`）；不再有 A/B 双工作区或挂载缓存树。路径别名见 `My rule.md` §4。各区内部规则按 zone 文件，不在本文件展开。
 
 ## 1 根 → zone
 

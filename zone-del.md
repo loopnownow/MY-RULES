@@ -1,13 +1,13 @@
 ---
 name: zone-del
-description: L1 专题：{DEL} 三档、落 harvested 前三查、活依赖、新建禁区（N1）、旧稿落点（X2）。
+description: L1 专题：{DEL} 三档、落 harvested 前三查、活依赖、新建禁区（N1）、旧稿落点（X2）、永不自动清名单。
 up: My rule.md §5
 owns: [X2, N1]
 ---
 
 # {DEL} 区
-- 管：`{DEL}` 三档怎么落、落 `harvested` 前三查、活依赖怎么解、新建禁区（§N1）、旧稿与中间件落点（§X2）。
-- 不管：harvest 方法与对象（→ `zone-docs.md`）、编辑授权（→ `My rule.md` §2）、扫描实现（→ `{doc_root}\test\cleanup_scan.py`）、何时清（→ `QC.md`）。
+- 管：`{DEL}` 三档怎么落、落 `harvested` 前三查、活依赖怎么解、新建禁区（§N1）、旧稿与中间件落点（§X2）、永不自动清名单。
+- 不管：harvest 方法与对象（→ `zone-docs.md`）、编辑授权（→ `My rule.md` §2）、扫描实现（→ `{doc_root}\test\cleanup_scan.py`）、何时清（→ `QC.md` §5）。
 
 # 1 `{DEL}` 三档
 | 档 | 判据 | 可弃度 | 处置 |
@@ -49,3 +49,6 @@ owns: [X2, N1]
 - 子工程内的旧版稿与中间件 → `ref\tmp\`，保相对路径，不进 `{DEL}`。
 - 离开子工程的清理件和无子工程的一次性件 → `{DEL}` 的 `_by-project` / `_by-function`，保相对路径。
 - 任何情形都不静默永久删除（§X1）。过后把子工程内旧件清出 `ref\tmp\`、移入 `{DEL}`，须当轮先问。
+
+# 6 永不自动清名单
+`_Docs` 清理时下列对象属 C 档，永不自动清：`_library`、期刊池、批件、`mem`、harvest 台账。何时清与扫描实现 → `QC.md` §5。

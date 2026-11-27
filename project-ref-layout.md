@@ -1,6 +1,6 @@
 ---
 name: project-ref-layout
-description: 项目 ref/ 地图、稿名与文件命名、手改识别其余判据、幂等；落点总则见 My rule.md §3；稿件硬闸见 manuscript-docx.md。
+description: 项目 ref/ 地图、稿名与文件命名、幂等；落点总则见 My rule.md §3；稿件硬闸与手改识别见 manuscript-docx.md。
 ---
 
 # 项目 `ref/` 布局（ledger + 产物）
@@ -107,15 +107,7 @@ SCI 相关文件统一命名：`<Stem>_<子项目名>_<版本号>`。
 
 ### 城城手改识别
 
-- 实质手改：城城每次实质手改并保存后，在**文件名**（及文内版本号，若有）抬升 patch（例：`Manuscript_*_V1.2.docx` → `V1.3`；`R` / `P` 同理）。小改可不升号。
-- 助手：子工程**根**上最新的 `Manuscript_*_V…` / `_R…` / `_P…`，若其版本号**大于**该课题上次助手记录的已落地版本，**必须**视为**城城手改 live 稿**（充分条件）。
-- 此时：**禁止**从更旧的 bak / `-org` / collapsed 副本整文件还原或覆盖；**禁止**降低版本号；**禁止**用 bak 整文件替换现行稿。
-- 助手改稿只许 Track Changes 增量合并 → §M1（`manuscript-docx.md`）。
-- **城城的作者标记是 Adm：** Word 修订与批注中，作者标记 **Adm** 是城城本人；该标记下的订正和批注是重要 harvest 对象（只抽判断、措辞、陷阱，不抽全文）。助手改稿仍用作者 **A**，不得把助手的 A 标记当成城城本人，也不得改用 Adm。
-- 禁止重新打修订标记 → §M2（`manuscript-docx.md`）。
-- 任何回滚须当轮点名授权 → §M3（`manuscript-docx.md`）。
-- 未升号不得反推「不是手改」；正文与城城已改文本不同，仍按 `manuscript-docx.md`「城城已改先问」。
-- **不要**为此新建 `OWNER.md`、`.owner.docx`、lock txt 或其它标记文件。
+手改识别与修订模式 → `manuscript-docx.md`「城城手改识别」（§M1–§M3）。
 
 ### 数据底表（D-1）
 
@@ -125,9 +117,7 @@ SCI 相关文件统一命名：`<Stem>_<子项目名>_<版本号>`。
 
 ### accepted 收工硬留
 
-收工精简后课题树硬留：`Manuscript_<slug>_clean.docx` 与最新的 `Manuscript_<slug>_{V|R|P}…[_tracked].docx`（子工程根**文件**）+ `FinalData_<slug>.xlsx`（或 `ref/README` 钉死的现用 data.xlsx）+ 可选 `ref/settings.ini` 指向 `_DataBase\<family>\<prefix_suffix>\`。
-- 课题树 `R*` / `P*` 整夹（修订包 / 投稿包）收工进 `_DataBase\<family>\<prefix_suffix>\`（≥20 散文件先压）；校验后原夹→`.Del\_by-project\<slug>\`。可复现图 → `.Del\_by-project\<slug>\`；不可复现 → `_DataBase`。
-- 全文落点 → `zone-projects.md`「accepted 收工」；关系 / harvest 授权 → §Z1、§Z2、§Z3。本条不复写 closeout 清单。
+硬留清单、`R*` / `P*` 整夹与图分流 → `zone-projects.md`「accepted 收工」。关系 / harvest 授权 → §Z1、§Z2、§Z3。
 
 ### Cleanup（过后可清；两档）
 
