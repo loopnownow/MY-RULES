@@ -232,6 +232,14 @@ description: 本机布局与子工程短针。落点见 My rule.md §3。
 - **`subject_label` 是兼容列不是键空间**：EC 实测 1,447 个非空值里拼音 747、号名混装 326、纯数字 9、其他 365；**禁止**回填、禁止据此 join（D90 兜底）。
 - **只许重建、不许 `ALTER` 改序**：`ADD COLUMN` 只能追加到末尾，物理序 24 列只能靠 `CREATE TABLE id_v2(…)` → `INSERT … SELECT` → 换名 → 重建 `id_number` 外键；动土前 `VACUUM INTO` 全库备份、`PRAGMA integrity_check`、落盘后逐列核行数与空值数（空值数变化 = 搬串列了）。
 
+#### `clin` v2：头 11 列与 legacy 三元组
+
+- **头 11 列固定、按名按序**（D87）：`family_uid` / `observed_on` / `period_month` / `cohort` / `group_v` / `subgroup` / `src_id` / `src_row` / `merged_n` / `unk_seq` / `schema_block`（取值 `clin-v2`）。其后是 legacy 三元组 `month_ix` / `period_source` / `period_origin`，再后才是变量列（小写缩写、按字母序）。
+- **legacy 三元组留在变量区、不删**：`month_ix` 撑着 `ix_clin_month` 与 D29；`period_source` 记时间来源（迁移时放开 `NOT NULL`）；`period_origin` 是唯一证据（OTHERS `ybc_BONETUMOR` 5,052 行 `'0'` 占位，清洗成 NULL 前不得删列）。
+- **`group_v` / `subgroup` 由变量列升为头列**：迁移时同名旧列并值进头列（头列统一 TEXT，`0.0` 记 `'0'`，类型转换行数记 `meta.clin_v2_type_cast`），旧列不再保留；旧 `schema_block` 值被吸收。
+- **15 个 `path_*` 列在重建时一次建空列**，不二次重建宽表；`ihc_*` / `ihc_panel_raw` 待拆列时 `ALTER ADD` 到表尾，不触动头 11 列。
+- **只许重建、不许 `ALTER` 改序**（同 `id` v2）：旧头 → v2 头只能 `CREATE TABLE clin__v2(…)` → `INSERT … SELECT` → 换名 → 重建索引 / 触发器；头列与变量列的顺序漂移由 D87 报数。
+
 #### 病理段：拆分入表，原文不入库
 
 - **落点**：病理与免疫组化结论进子库 `clin` 的 `path_*` / `ihc_*` 列；**病理号进 `id.pathology_no`**（多号进 `id_number`）；报告原件与扫描件留 `__zip\<FAM>\<叶>\`，不拆句进库。家族库不加表（见上）。
