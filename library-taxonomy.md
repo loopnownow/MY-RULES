@@ -55,9 +55,9 @@ description: 库分类 L1/L2、三库分工、批件与期刊池契约。
 - 索引 `approvals-index.xlsx` 19 列：`seq,l1,l2,approval_id,id_year,approval_date,valid_until,project_title,institution,file_name,rel_path,pages,size_kb,sha256,archive_name,original_name_zh,id_source,needs_owner,note`。
 - `approval_date` 与 `valid_until`（**批件有效期**）必录；扫描件无文本层时用本机 OCR 出候选 + **人工确认**，只补空、不覆盖人工值。
 - 子工程只挂指针（批号 + 路径），不存批件副本。
-- **留存分流：** `_DataBase` 短码/家族伦理夹只收日期 ≥ 2023-11-10 的**批件原件**；临床研究方案 + 知情同意书全留；`_DataBase\_lab\ethics` 退役进 `.Del`（Bai 搬盘）。权威 → `workspace-layout.md`「伦理材料留存」。
+- **留存分流：** `_Docs\_library\ethics\approvals\` 只收日期 ≥ 2023-11-10 的**批件原件**；`_DataBase` 侧不设伦理夹，方案 / 知情同意 / 批件随家族退役进 `{DEL}`。权威 → `workspace-layout.md`「伦理材料留存」。
 - _Docs 目录名一律 ASCII 英文；中文原名只留索引列。
-- 申请包/申报原件不是批件：落 `_library\ethics\sections\{protocol,icf,other}\`（留存口径 → `workspace-layout.md`「伦理材料留存」）；`_library\ethics` 收批件 PDF + 索引 + 申请原件 + 提取层，`_DataBase` 侧不留伦理夹。
+- 申请包/申报原件不是批件：随家族退役进 `{DEL}`，不落 `_library\ethics\sections\`（`sections\` 是生成物，留存口径 → `workspace-layout.md`「伦理材料留存」）；`_library\ethics` 只收批件 PDF + 索引 + 提取层，`_DataBase` 侧不留伦理夹。
 
 ## 4 journals 契约
 
