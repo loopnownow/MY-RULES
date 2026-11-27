@@ -203,12 +203,78 @@ description: 本机布局与子工程短针。落点见 My rule.md §3。
 - **写库**：把 `clin` / `_modules_<mod>` 写入子库（身份字段写家族库 `id` / `id_number`）或 `{RAW}`，以及 `--apply` / `--move`，须当轮点名；缺省 dry-run。写盘总闸见 `My rule.md` §2。
 - **外发边界**：家族库含 PHI，**一律不得外发**；子库在 D28「零 PHI」通过后才可单独外发。业务表中的敏感字段与记录键不得写入聊天、记忆、备忘录、规则正文或回执（见 `My rule.md` §1.2）。
 
-### 库门禁码表（D1–D70）
+### 身份表与病理段（`id` v2 · 病理拆分 · 入表前清洗）
+
+家族库 `_PHI\<FAM>db` 仍是五表（`meta` / `id` / `id_number` / `dict` / 家族级 `ref_*`），**不因病理信息加表**：D23 与结构体检按五表校验，加第六表须先改门禁与 SCHEMA，不能顺手建。
+
+#### `id` v2：24 列、物理列序固定
+
+| # | 列 | 类型 | 口径 |
+|---|---|---|---|
+| 01 | `family_uid` | TEXT PK | `^[A-Z0-9_]+-\d{6}$`（D24） |
+| 02 | `patient_id` | TEXT | 家族内业务主键，一人一号、终身不变；不对外、不作 join 键 |
+| 03 | `subject_label` | TEXT | **原样兼容列**：只留迁移时的原值，**不再写新值**，不得承载姓名或新号码 |
+| 04 | `name` | TEXT | 中文姓名，形态见「入表前清洗」 |
+| 05 | `name_pinyin` | TEXT | 大写、单空格分隔；`1-CAO-YAN` 这类「序号-姓名」串拆开，序号进 `patient_id` |
+| 06 | `sex` | TEXT | `M` / `F` / `U`（`男`/`1`→`M`，`女`/`2`→`F`） |
+| 07 | `birth_date` | TEXT | ISO 8601；只有年月写 `YYYY-MM` 并在 `note` 记精度 |
+| 08 | `id_card` | TEXT | 脱敏：前 3 + 11 个 `*` + 后 4；末位 `X` 大写；**不存明文** |
+| 09 | `phone` | TEXT | 脱敏：前 3 + `****` + 后 4；13 位「区号-号码」先规范化再脱敏 |
+| 10 | `address` | TEXT | 只到区 / 县，不存门牌 |
+| 11–18 | `inpatient_no` / `outpatient_no` / `mrn` / `imaging_no` / `pathology_no` / `sample_no` / `study_uid` / `misc_id` | TEXT | 一人一号一位；同种多号、多 issuer 一律进 `id_number`（D25 / D75） |
+| 19 | `id_status` | TEXT | `keyed_full` / `keyed_partial` / `label_only` / `label_only_omics`（沿用 D63 三元） |
+| 20 | `identity_state` | TEXT | `resolved` / `unresolved` |
+| 21 | `source` | TEXT | 本条身份的来源登记（`blob:` 或表名 + 日期） |
+| 22–23 | `created_on` / `updated_on` | TEXT | `YYYY-MM-DD HH:MM:SS` |
+| 24 | `note` | TEXT | 别名、精度、迁移说明；不放业务信息 |
+
+- **一列一号、余号进 `id_number`**：`id` 每类号只放一个，其余全部落 `id_number(family_uid, kind, issuer, value)`；`kind` 白名单随 v2 扩为 `inpatient` / `outpatient` / `mrn` / `imaging` / `pathology` / `sample` / `study` / `misc`。同号在不同 `issuer` 是不同号（D75）。
+- **`subject_label` 是兼容列不是键空间**：EC 实测 1,447 个非空值里拼音 747、号名混装 326、纯数字 9、其他 365；**禁止**回填、禁止据此 join（D90 兜底）。
+- **只许重建、不许 `ALTER` 改序**：`ADD COLUMN` 只能追加到末尾，物理序 24 列只能靠 `CREATE TABLE id_v2(…)` → `INSERT … SELECT` → 换名 → 重建 `id_number` 外键；动土前 `VACUUM INTO` 全库备份、`PRAGMA integrity_check`、落盘后逐列核行数与空值数（空值数变化 = 搬串列了）。
+
+#### 病理段：拆分入表，原文不入库
+
+- **落点**：病理与免疫组化结论进子库 `clin` 的 `path_*` / `ihc_*` 列；**病理号进 `id.pathology_no`**（多号进 `id_number`）；报告原件与扫描件留 `__zip\<FAM>\<叶>\`，不拆句进库。家族库不加表（见上）。
+- **原文为什么不留库**：① 家族库五表不动（D23）；② 子库零 PHI（D28）——EC `EC病理.zip` 508 个成员中 499 张 jpg 的文件名带人名；③ 长文本正是现有门禁的盲区：D54 只比「整格 == 某个号」，D80 只认 ≤60 字的「姓名(号码)」拼接串，**1,200 字的报告全文两边都漏**；④ 全文不可分析，只增加查找负担。回溯靠 `clin` 头已有的 `src_id` + `src_row`，不靠另存一列。
+- **列族（小写 ASCII，按字母序）**：一人多份报告取最近一次进 `clin`，历史份不进库、留原件。
+
+| 列 | 值域 | 说明 |
+|---|---|---|
+| `path_kind` | `curettage` / `surgery` / `biopsy` / `review` | 诊刮 / 手术 / 活检 / 复核 |
+| `path_on` | ISO 日期 | 报告日期（**不是**手术日；手术日另列 `surgery_on`） |
+| `path_histology` | enum | 内膜样腺癌 / 浆液性 / 透明细胞 / 黏液性 / 癌肉瘤 / 其他；源文本映射进 `dict.value_map` |
+| `path_grade` | 1 / 2 / 3 | 组织学分级，源里 `I` / `II` / `高分化` / `1` 一律映射；诊刮与手术分级不一致时并存 `path_grade_curettage` / `path_grade_surgery`，不取其一 |
+| `path_mi` | 0 / 1 / 2 | 无 / 浅（<1/2）/ 深（≥1/2）；毫米值另列 `path_mi_mm` |
+| `path_lvsi` | 0 / 1 | 脉管癌栓 |
+| `path_csi` | 0 / 1 | 宫颈间质浸润 |
+| `path_ln_pos` / `path_ln_total` / `path_lnm` | int / int / 0-1 | 阳性数 / 检出数 / 是否转移；`path_lnm` 必须与 `path_ln_pos > 0` 一致 |
+| `path_eu` | 0 / 1 | 宫外转移（附件 / 腹膜 / 大网膜 / 膀胱直肠） |
+| `path_figo` | `IA` / `IB` / `II` / `IIIA` … | 病理分期；临床分期另列 `clin_figo`，不得同列混装 |
+| `path_dx` | TEXT ≤1000 | **清洗后的诊断结论句**（去姓名 / 号码 / 医师 / 日期）；不是报告全文，超长须继续拆字段并记 `qc(PATH_DX_LONG)` |
+| `path_other` | TEXT ≤200 | 拆不动的合并发现（肌瘤 / 腺肌病 / 囊肿）；不得装大体描述或镜下描述 |
+| `ihc_<marker>` | 0-3 或 `neg` / `pos` | ER / PR / P53 / Ki-67 / P16 / CK7 / Vimentin / MLH1 / MSH2 / MSH6 / PMS2 / PTEN；强度 0-3，百分比进 `ihc_<marker>_pct`，P53 野生 / 突变 / 缺失进 `ihc_p53_state` |
+| `ihc_panel_raw` | TEXT ≤300 | 原始半定量串（如 `CK7(+)/ER(90% 强)/PR(-)`），**只作溯源**；必须有对应 `ihc_*` 列，不得只有它不拆 |
+
+#### 入表前清洗（`id` 与 `clin` 同规）
+
+- **值先归位、再入库**：入表前逐列过「形态 → 枚举 / 数值 / 空」；形态不合法即 NULL + `qc(VALUE_DIRTY, P2)`，不许原样入库等下游猜。EC 实证脏值：`g分级` 混 `I` / `II` / `III` / `高` / `1` / `0`；`lvsi0` 有 `#VALUE!` 108 个与句子碎片；`诊刮` 有 `/`、`无`、`0` 与自由句。
+- **数值列不带单位**：单位进 `dict.unit`，不得写进列名或值；「值 + 单位」拼接串按 D92 报数。
+- **定性列不留自由文本**：值域须在 `dict.value_map` 有映射；映射不上的不许自造枚举，宁可 NULL 并记 `qc(VALUE_UNMAPPED)`。
+- **空值不挪位**：空就是 NULL，不写 `0` / `无` / `/` / `-`，不把 A 列缺失挪进 B 列（D90 从 `id` 扩到 `clin` 全表）。
+- **同义列先归一**：全库 103 个病理同义列（`figo_raw` / `figo_canon` / `figo_stage` / `FIGO stage`、`mi` / `nmi` / `smi` / `肌层1`、`p53` / `p53_status`、`ki67` / `Ki67` / `ki67_status` …）入表前映射到规范名；`*_raw` 只作溯源列，必须有 `*_canon` 配套。
+- **列名规范**：`^[a-z][a-z0-9_]{1,30}$`；禁中文列名、禁 `_数字` 后缀族（D48）、禁 SQL 保留字（D89）。
+- **`dict` 全覆盖**：每列入 `dict`（全称 / 单位 / 参考范围 / 值域 / `source`），缺行即 D88。
+
+#### 门禁
+
+D87 标准指纹 / D88 `dict` 覆盖 / D89 缩写合规 / D90 空值不挪位 / D91 病理长文本报数 / D92 入表清洗报数。初版一律 **report-only**，跑满一个批次无新债后再转 P1。
+
+### 库门禁码表（D1–D92；D76–D86 判级以 `gates.py` 为准）
 
 - **现行码（core-6t）**：`verify_db.py` 实有 `D1`–`D9`、`D19`–`D22`；判级细节以脚本为准，本表只记口径。
 - **`D10`–`D18` 不存在**：总览里的 `D10` / `D12` / `D13` / `D14` 是人工注记码，脚本无实现；新码从 `D23` 起编，**不回填**旧号。
 - **`D21` 判级已升为 P0**：明文 PHI 不再只是提示；**PHI 只许出现在家族库**，子库任何位置命中即 P0（`D28` / `D44`）。
-- **分派**：旧 core-6t 库跑 `D1`–`D9`、`D19`–`D22`；5t 库按 `meta.schema_version` 跑 `D23`–`D70`。同一库不得混跑两套。
+- **分派**：旧 core-6t 库跑 `D1`–`D9`、`D19`–`D22`；5t 库按 `meta.schema_version` 跑 `D23`–`D92`。同一库不得混跑两套。
 
 | 码 | 名称 | 判级 | 判据摘要 |
 |---|---|---|---|
@@ -278,8 +344,15 @@ description: 本机布局与子工程短针。落点见 My rule.md §3。
 | D73 | `id.name` 不得是合成标签 | 只报数 | 姓名格出现 `subject/sub/case/sample/patient/pt/p/s/mice/rat/no` + 数字（`Subject1`、`Sample_03`）即提示：**有人名 ≠ 有身份**，把工具标签写进姓名字段，报告里会出现「患者 Subject1」这种假人。只报数不判级——标签本身可以合法存在，只是不该叫 `name` |
 | D74 | 家族库 `meta` 必备键 | 只报数 | 家族库 `meta` 须有 `schema_version` / `family` / `built_at`；缺则列名。三键是「这个库按哪版 SCHEMA、属于哪家、什么时候建的」的唯一答案，缺了只能靠文件名猜 |
 | D75 | 号码三元唯一性 | P0 | `id_number` 按 `(kind, issuer, value)` 三元判唯一：同一三元被 ≥2 个 `family_uid` 持有 ⇒ 号码冲突。`issuer` 是**命名空间**（`lxj_ACN\|体检编号`），同号在不同命名空间是不同号；`issuer` 为空的号码单独计数（裸号 join 的前置风险）。占位段（`9xxxxx`）共享号码只报数 |
+| D87 | `id` / `clin` 结构指纹 | P1（先 report-only） | 指纹是**列名 + 列序**，不是行数：`id` 24 列、`clin` 头 11 列按名按序逐字比对（`SELECT name FROM pragma_table_info`），`clin.schema_block` 须为 `clin-v2`。列序不符即「物理序没重建」，靠 `ADD COLUMN` 加出来的库一律中招 |
+| D88 | `dict` 覆盖与登记完整 | P1 | `id` / `clin` / `_modules_*` 每列须有 `dict` 行且 `full_name` 非空；定性列须有 `value_map`，数值列须有 `unit`。`clin` 一个 176 列的库只登记 30 行是常态，判据按「列 − 已登记」报数，不按比例 |
+| D89 | 列名缩写合规 | P1 | 正则 `^[a-z][a-z0-9_]{1,30}$`；命中中文 / 大写 / `_\d+$` 后缀族 / SQL 保留字即报；`*_raw` 无 `*_canon` 配套只报数。缩写须在 `dict.full_name` 给全称，不靠猜 |
+| D90 | 空值不挪位 | P2（`subject_label` 越界升 P1） | 统计占位词（`无` / `/` / `-` / `NA` / `?` / `0` 填充）与真 NULL 并存即报；`id.subject_label` 出现迁移后新写的号码或姓名升 P1。**空与「填了个占位词」在库里同形**，与 D44 / D52 同一类陷阱 |
+| D91 | 病理长文本不得入 `clin` | P2 | 除 `path_dx` / `path_other` / `ihc_panel_raw` 外，`clin` 任一 TEXT 列 max 长度 >200 即报；`path_dx` >1000 字须有 `qc(PATH_DX_LONG)`。只报数：先把长列点出来，再决定拆哪一列 |
+| D92 | 入表清洗残留 | P2 | 值内嵌单位（`\d+\s*(mm|cm|%)`）、`值+单位` 与 `号+名` 拼接串、全角数字、`#VALUE!` / `#N/A` 公式残值、行内换行、首尾空白；逐列报数。实测 `lvsi0` 里 108 个 `#VALUE!` 与 `g分级` 的 `I/高/1/0` 混装都属此类 |
 
-- **机器点**：`D1`–`D22` 在 `verify_db.py`（`{code_root}\tools\db-library\verify_db.py`）；`D23`–`D75` 的 5t 实现落 `{code_root}\tools\db-library\db5t\gates.py`（跨库项用只读 `ATTACH` / `file:?mode=ro` 打开家族库），判据用的 SCHEMA 由 `db5t\paths.py` 解析（`DB5T_BATCH` / `DB5T_ROOT` / `DB5T_SCHEMA` 三个环境变量）。**文档编号与代码输出必须逐条对应**：同一含义两个号、或代码打了文档里不存在的号，等于门禁与条文各说各话（本轮修过一次：结构漂移曾被代码叫 D58、文档叫 D70）。
+- **机器点**：`D1`–`D22` 在 `verify_db.py`（`{code_root}\tools\db-library\verify_db.py`）；`D23`–`D92` 的 5t 实现落 `{code_root}\tools\db-library\db5t\gates.py`（跨库项用只读 `ATTACH` / `file:?mode=ro` 打开家族库），判据用的 SCHEMA 由 `db5t\paths.py` 解析（`DB5T_BATCH` / `DB5T_ROOT` / `DB5T_SCHEMA` 三个环境变量）。**文档编号与代码输出必须逐条对应**：同一含义两个号、或代码打了文档里不存在的号，等于门禁与条文各说各话（本轮修过一次：结构漂移曾被代码叫 D58、文档叫 D70）。
+- **`D76`–`D86` 未入表**：`D76`–`D79`（模块派生句 / 旧库迁移句）、`D80`（PHI 拼接串）、`D81`、`D82`（`dict.source` 债）已在 `gates.py` 实现并出报告，本表只记到这里；新码从 `D87` 起编，**不回填** `D76`–`D86` 行，免得文档与脚本各写一套口径。
 - **判级**：P0 阻断（退出码 1），P1 应修，P2 提示；同一问题按最高级只报一次。
 
 **建库工程约束**（每条都对应一次实测事故，改门禁或写 build 时逐条对照）：
