@@ -255,6 +255,13 @@ entries:
     note: '期刊/候选刊只用 journals.csv（或 xlsx）+ 合并笔记。'
 
   # ── 已迁出的规则/说明文件 ───────────────────────────────────────────
+  - old: 'del-and-harvest.md'
+    new: 'zone-del.md ; zone-docs.md'
+    kind: file
+    status: merged
+    since: '2026-11-27'
+    note: '{DEL} 三档 / 三查 / 活依赖 / N1 / X2 进 zone-del.md；H1–H4 / 耐久层 / harvest 对象进 zone-docs.md；与 QC 的分工并入 QC.md §0。'
+
   - old: 'manuscript-and-review.md'
     new: '{SKILLS}\05_manuscript\qc\ · {SKILLS}\06_review\advanced\ · {SKILLS}\07_response\advanced\'
     kind: file

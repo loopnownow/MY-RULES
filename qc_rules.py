@@ -31,7 +31,6 @@ CONTENT = [
     "My rule.md",
     "workspace-layout.md",
     "project-ref-layout.md",
-    "del-and-harvest.md",
     "library-taxonomy.md",
     "network-security.md",
     "skills.md",
@@ -40,6 +39,11 @@ CONTENT = [
     "execution.md",
     "manuscript-docx.md",
     "db-schema.md",
+    "zone-del.md",
+    "zone-database.md",
+    "db-gates.md",
+    "zone-docs.md",
+    "zone-projects.md",
 ]
 ROUTED = CONTENT + ["README.md", "QC.md"]
 ARCHIVE = {"aliases.yaml", "QC.md"}

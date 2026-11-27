@@ -1,6 +1,6 @@
 ---
 name: library-taxonomy
-description: 库分类 L1/L2、三库分工、批件与期刊池契约。
+description: 库分类 L1/L2、三库分工、批件与期刊池契约；伦理材料留存。
 ---
 
 # 库分类与三库契约（L1/L2 SSOT）
@@ -9,7 +9,7 @@ description: 库分类 L1/L2、三库分工、批件与期刊池契约。
 
 `ethics`（批件/提取），以及子工程 `ref\citation` / `ref\refer` 的分工。
 
-权威顺序：用户当轮 > 本文件 > `project-ref-layout.md` > `workspace-layout.md`。
+权威顺序：用户当轮 > 本文件 > `project-ref-layout.md` > `zone-docs.md` / `workspace-layout.md`。
 
 ## 1 共用临床 L1/L2（references / ethics / journals 三处共用）
 
@@ -55,9 +55,12 @@ description: 库分类 L1/L2、三库分工、批件与期刊池契约。
 - 索引 `approvals-index.xlsx` 19 列：`seq,l1,l2,approval_id,id_year,approval_date,valid_until,project_title,institution,file_name,rel_path,pages,size_kb,sha256,archive_name,original_name_zh,id_source,needs_owner,note`。
 - `approval_date` 与 `valid_until`（**批件有效期**）必录；扫描件无文本层时用本机 OCR 出候选 + **人工确认**，只补空、不覆盖人工值。
 - 子工程只挂指针（批号 + 路径），不存批件副本。
-- **留存分流：** `_Docs\_library\ethics\approvals\` 只收日期 ≥ 2023-11-10 的**批件原件**；`_DataBase` 侧不设伦理夹，方案 / 知情同意 / 批件随家族退役进 `{DEL}`。权威 → `workspace-layout.md`「伦理材料留存」。
-- _Docs 目录名一律 ASCII 英文；中文原名只留索引列。
-- 申请包/申报原件不是批件：随家族退役进 `{DEL}`，不落 `_library\ethics\sections\`（`sections\` 是生成物，留存口径 → `workspace-layout.md`「伦理材料留存」）；`_library\ethics` 只收批件 PDF + 索引 + 提取层，`_DataBase` 侧不留伦理夹。
+- **伦理材料落点** = `_Docs\_library\ethics\`，只收两处产物：`approvals\<L1>\<L2>\` + `approvals-index.xlsx`（批件 PDF）、`extract\{briefs,phrases}\`（写作模式提取物，SSOT 层）。`sections\` 是空白表分节的生成物，不手放原件。`_DataBase` 侧不设伦理桶：原件按家族落 `{DEL}\retired-ethics\<family>\`，带 sha256 台账。
+- **批件原件**：仅保留日期 ≥ 2023-11-10 的进 `_Docs\_library\ethics\approvals\<L1>\<L2>\`，并在 `approvals-index.xlsx` 登记。日期取批件批准日 / 文件标注日（能确定者）；**早于 2023-11-10** 的批件原件 → `{DEL}`。分类口径见本节，不另造 approvals 路径。
+- **临床研究方案 + 知情同意书**：随所在家族整夹退役进 `{DEL}`，不落 `sections\`；文件名保留 `<CODE>__` 前缀便于回溯。harvest 只抽写作模式进 `extract\`，原件不留 `_DataBase`。
+- **`_DataBase\_lab\ethics` 子树**：不设、不重建；`_lab` 根其它历史档只读口径不变。
+- 申请包/申报原件不是批件：随家族退役进 `{DEL}`，不落 `_library\ethics\sections\`。`_library\ethics` 只收批件 PDF + 索引 + 提取层。
+- `_Docs` 目录命名 → §N2（`zone-docs.md`）。
 
 ## 4 journals 契约
 

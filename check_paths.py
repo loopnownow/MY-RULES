@@ -30,12 +30,16 @@ REQUIRED_RULES_MD = (
     "skills.md",
     "My rule.md",
     "README.md",
-    "del-and-harvest.md",
     "QC.md",
     "local-overlay.md",
     "execution.md",
     "manuscript-docx.md",
     "db-schema.md",
+    "zone-del.md",
+    "zone-database.md",
+    "db-gates.md",
+    "zone-docs.md",
+    "zone-projects.md",
 )
 # Also scan these for stale path claims (N14).
 SCAN_MD = REQUIRED_RULES_MD + (

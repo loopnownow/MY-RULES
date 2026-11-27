@@ -1,7 +1,7 @@
 ---
 name: My rule
 description: L0 常驻层：裁决顺序、硬闸、授权矩阵、交付落点、路由第一跳、QC。
-routes: [workspace-layout.md, project-ref-layout.md, del-and-harvest.md, library-taxonomy.md, network-security.md, skills.md, QC.md, project-fact-lookup.md, local-overlay.md, execution.md, manuscript-docx.md, db-schema.md]
+routes: [workspace-layout.md, zone-del.md, zone-database.md, db-schema.md, db-gates.md, zone-docs.md, library-taxonomy.md, zone-projects.md, project-ref-layout.md, manuscript-docx.md, project-fact-lookup.md, execution.md, network-security.md, skills.md, local-overlay.md, QC.md, README.md]
 owns: [W1, W2, W3, W4, W5, X1, P1, S1, S2]
 ---
 
@@ -33,7 +33,7 @@ owns: [W1, W2, W3, W4, W5, X1, P1, S1, S2]
 **§W1** **总闸：只读不用授权（`{doc_root}\mem\` 查阅见下条）；任何新建 / 编辑 / 覆盖 / 移动 / 删除前，须用户当轮点名该项或明确同意；未获授权即停，不静默落盘。** 下表只回答「这个位置允许做什么」；所有写盘另须本条。
 - **§W3** **mem 查阅：** 未经当轮点名，`{doc_root}\mem\` 下只许读 `README.md` 与 `SENSITIVE.md`；其余文件与子夹（含列出、打开、检索）即使只读，也须用户当轮点名该文件、路径或该项任务。写盘仍按本条总闸，须当轮点名。
 - **§W2** **授权按项按轮**：点名 A 只授权 A 的该处；「继续」「好」「你看着办」不等于写盘许可。须问条款（D-1 移底表、网络、MY-SKILLS PR/merge、Word 城城已改先问、稿件回滚须授权）继续有效。
-- **§X1** **禁删**：清理只移不删，保留相对路径；禁止静默永久删除。旧稿与中间件落点 → §X2。 `{DEL}` 只能由主人手动清空（空目录、就地 `_Del` 等细则 → `del-and-harvest.md` §1）。
+- **§X1** **禁删**：清理只移不删，保留相对路径；禁止静默永久删除。旧稿与中间件落点 → §X2。 `{DEL}` 只能由主人手动清空（空目录、就地 `_Del` 等细则 → `zone-del.md` §1）。
 - **新建**默认只许 `{DEL}`；显式例外与细则 → §N1。例外只开放新建路径，不构成编辑许可。一次性脚本 / 小补丁只落 `{DEL}`，不进主目录、`.grok\tmp`、课题根。
 - **§W4** 默认禁止直接改 `{RULES}`、`{SKILLS}`、`_Docs`、子工程已有文件；**改已有文件同样须当轮点名**，含 `_Docs\harvest\*`、`_Docs\mem\*`、已有稿（含 Track Changes）。
 - 目录名一律 ASCII 英文，中文只进索引列；`{doc_root}` 下 mkdir 见下表。
@@ -65,7 +65,7 @@ owns: [W1, W2, W3, W4, W5, X1, P1, S1, S2]
 | 期刊池 / 批件 | `{lib_root}\journals\index.csv`；`{lib_root}\ethics\approvals\<L1>\<L2>\`（口径 `library-taxonomy.md`） |
 | 扫描参数 / 实验室参考范围 | `{lib_root}\scanner-registry\`；`{lib_root}\lab-ref-ranges\`（查找口径 `project-fact-lookup.md`） |
 
-- **单档 ≤1 GiB**；预计超限直接分 900 MiB 字节卷 + `分卷说明.md`，不先造大档再拆（细则 `workspace-layout.md`）。
+- **单档 ≤1 GiB**；预计超限直接分 900 MiB 字节卷 + `分卷说明.md`，不先造大档再拆（细则 `zone-database.md`）。
 - **稿件硬闸**：未当轮点名禁改 `.docx` / `.pdf` 版式；助手改稿、手改后禁止重标、回滚、无稿不造空件 → §M1–§M4（`manuscript-docx.md`）。
 - 备忘录夹与备忘录正文 → `execution.md`。
 - 同一分析 `Results*.html` 与 `.xlsx` 冲突 → 以 HTML 为准并写明；清理旧稿 → §X2；长表 → `{SKILLS}\00_orchestrator\references\standing-delivery.md`。
@@ -92,14 +92,18 @@ owns: [W1, W2, W3, W4, W5, X1, P1, S1, S2]
 # 5 路由表（第一跳）
 | 触发 | 读 | 挂 |
 |---|---|---|
-| 盘面 / 总图 / 阶段夹 / 家族桶 / `_PHI` / 冷库 / accepted / D 码 | `workspace-layout.md` | `db-library` |
-| `{DEL}` / 三档 / harvest / 新建禁区 / 旧稿落点 | `del-and-harvest.md` | `00_orchestrator` harvest |
+| 盘面 / 根目录总图 / 退役禁建 | `workspace-layout.md` | — |
+| `{DEL}` / 三档 / 新建禁区 / 旧稿落点 | `zone-del.md` | — |
+| `_DataBase` / 家族桶 / `_PHI` / `__zip` / 家族库 / 子库 | `zone-database.md` | `db-library` |
 | `id` 表 / 病理段 / 入表清洗 / DICOM 映射 | `db-schema.md` | `db-library` |
+| D 码 / 库门禁 | `db-gates.md` | `db-library` |
+| `_Docs` / harvest / `mem` / `_library` | `zone-docs.md` | `00_orchestrator` harvest |
 | 库分类 L1–L2 / 批件 / 期刊池 | `library-taxonomy.md` | `find-journal` |
+| 阶段夹 / closeout / accepted 收工 / archived / 子工程约定 | `zone-projects.md` | — |
 | 项目 `ref\` 地图 / 稿名 / 幂等 | `project-ref-layout.md` | — |
 | Track Changes / 手改 / 回滚 / 无稿不造空件 | `manuscript-docx.md` | `05_manuscript` |
 | 通讯作者 / 伦理号 / 扫描序列 / 实验室范围 | `project-fact-lookup.md` | — |
-| 执行准则 / 汇报 / 备忘录 / 盘问 / 交接 / 墙钟 | `execution.md` | `00_orchestrator` |
+| 执行准则 / 汇报 / 备忘录 / 盘问 / 长任务交接 | `execution.md` | `00_orchestrator` |
 | 网络 / 敏感外发 / 代理 / 留痕 | `network-security.md` | — |
 | 技能库 / PR 同步 / 演进 | `skills.md` | `skills` |
 | 本机覆盖层 | `local-overlay.md` | — |

@@ -5,7 +5,7 @@ up: My rule.md §6
 ---
 # 0 定位与边界
 - 管：规则仓（`{RULES}`）与 `{doc_root}` 盘面的判据、频率、失败处置、豁免。
-- 不管：技能树 QC（→ `skills.md` §6）、harvest 纳入门禁（→ `{SKILLS}\00_orchestrator\harvest\`）、库结构门（→ `{doc_root}\test\structure_check.py`）、归并（→ `db-library`）。
+- 不管：技能树 QC（→ `skills.md` §6）、harvest 纳入门禁（→ `{SKILLS}\00_orchestrator\harvest\`）、库结构门（→ `{doc_root}\test\structure_check.py`）、归并（→ `db-library`）。`{DEL}` 落点、离场条件与新建禁区 → `zone-del.md`；harvest 对象与布局 → `zone-docs.md`。何时清、扫描实现与永不自动清名单见 §5。
 - 原则：**fail-loud**；能机器判的不靠人记；不得 ignore / skip / 假绿。
 
 # 1 频率
@@ -31,7 +31,7 @@ up: My rule.md §6
 | R11 活文档不陈旧 | `_DataBase` / `_Docs` 的 `目录说明.md` 与 README 里作为现行指令的绝对路径必须可解析（无停用根、无失效阶段指针）；计数与日期主张须与实盘一致；史证须同句带标记词 | `{doc_root}\test\structure_check.py` S30 + `audit_readme_counts.py` | 已机器（_Docs 侧）+ H2 人门 |
 | R12 备份垃圾不进阶段工程 | `*.bak` / `*.bk` / `~$*` / `- copy` / `副本` 不得留在阶段工程；旧配置与旧稿移 `ref\tmp\` 或 `{DEL}`，移动留台账 | `{doc_root}\test\structure_check.py` S32 | 已机器 |
 
-项目数据件（csv / tsv / ini / py 等）的旧路径门与 R11 同方向，范围见 `workspace-layout.md`「改名 / 搬迁后的旧路径门」；R11 机器点仍只覆盖 `_DataBase` / `_Docs` 的说明与 README。
+项目数据件（csv / tsv / ini / py 等）的旧路径门与 R11 同方向，范围见 `zone-projects.md`「改名 / 搬迁后的旧路径门」；R11 机器点仍只覆盖 `_DataBase` / `_Docs` 的说明与 README。
 
 # 3 失败处置
 - 先修到过门；不能过门就改规则，但**须用户点头**。
@@ -50,7 +50,7 @@ up: My rule.md §6
 - **指针壳（stub / redirect）**：正文 ≤5 行且含盘符路径或 `moved to` / `已移至` / `→` 的 `.md` 归 pointer-only；零入向引用即候选，不设 90 天门槛（stub 本就不该长期存在）；不校验其命名与正文，R5 / R6 / R9 不覆盖。
 - 默认分级：A 可直接移、B 需确认、C 永不自动清。
 - **永不自动清名单**：`_library`、期刊池、批件、`mem`、harvest 台账。
-- 清理保相对路径；删除字节归 `{DEL}`（`del-and-harvest.md`）。
+- 清理保相对路径；删除字节归 `{DEL}`（`zone-del.md`）。
 
 # 6 与 `skills.md` §6 的分工
 - 技能树的精简 / skip / archived / 退役仅指针 → `skills.md` §6。
