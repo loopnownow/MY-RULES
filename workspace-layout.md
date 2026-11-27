@@ -402,7 +402,7 @@ D87 标准指纹 / D88 `dict` 覆盖 / D89 缩写合规 / D90 空值不挪位 / 
 | 痕迹 | 版本推进、搬件、改名、`.bak` 处置都写 `ref\manuscript-revision.md`；台账追加，不覆盖。 |
 | 判据 | 骨架 / 命名 / 数据口径 → `{doc_root}\test\STAGE-QC-STANDARD.md`；机器门 S32–S34（`structure_check.py`）每轮 QC 必跑。 |
 
-**`archived` 不是第五阶段：** 不进上表、不进 `study_folder_stage_aliases`；见「archived 冷库」。关系总图见下「工作区关系：阶段 · 分流 · harvest · 冷库」。
+**`archived` 不是第五阶段：** 不进上表、不进 `study_folder_stage_aliases`；见「archived 冷库」。关系总图 → §Z1、§Z2、§Z3。
 
 ## 工作区关系：阶段 · 分流 · harvest · 冷库
 
@@ -428,7 +428,7 @@ D87 标准指纹 / D88 `dict` 覆盖 / D89 缩写合规 / D90 空值不挪位 / 
 - **closeout：** 物理落点与精简；**不是** harvest 的替代步骤。
 - **harvest 也不代替搬盘：** 抽完仍须按 closeout 把字节落到 `_DataBase` / `_Docs` / `.Del` / `archived`。
 - **harvest 剩余件 / 先判 H1–H4 / 轮次去留** → `del-and-harvest.md` §1–§3（本文件不复写判据）。
-- 关系总图 / harvest 授权 →「工作区关系：阶段 · 分流 · harvest · 冷库」。harvest 技能只抽「怎么做」；closeout 是落点；勿把 closeout 写成 harvest 步骤。
+- 关系总图 / harvest 授权 → §Z1、§Z2、§Z3。harvest 技能只抽「怎么做」；closeout 是落点；勿把 closeout 写成 harvest 步骤。
 
 ### **§Z3** harvest 授权范围
 
@@ -443,7 +443,7 @@ D87 标准指纹 / D88 `dict` 覆盖 / D89 缩写合规 / D90 空值不挪位 / 
 
 ## accepted 收工
 
-**目标：** 按 closeout 精简 `accepted\<prefix_suffix>\`，再搬进 `archived\<family(suffix)>\<prefix_suffix>\` + `ARCHIVED.md`。accepted 不长期堆满。本条是**落点契约**（closeout）；关系与 harvest 授权见上「工作区关系：阶段 · 分流 · harvest · 冷库」。harvest ≠ closeout。
+**目标：** 按 closeout 精简 `accepted\<prefix_suffix>\`，再搬进 `archived\<family(suffix)>\<prefix_suffix>\` + `ARCHIVED.md`。accepted 不长期堆满。本条是**落点契约**（closeout）；关系与 harvest 授权 → §Z1、§Z2、§Z3。harvest ≠ closeout。
 
 ### 课题树精简后硬留
 1. 终稿两份：`Manuscript_<slug>_clean.docx` 与最新的 `Manuscript_<slug>_{V|R|P}…[_tracked].docx`（旧名先问再改名；旧版→`ref/tmp/`）。根上只留这两份**文件**，不要把整夹 `R*` / `P*` 留在根。
@@ -487,7 +487,7 @@ D87 标准指纹 / D88 `dict` 覆盖 / D89 缩写合规 / D90 空值不挪位 / 
 - THESIS/行政（伦理·科教科·财务）与单篇 SCI 分轨。
 - 四条件齐再 archived（含 skill_ref 或 none）；更新 `_DataBase\_index.csv`、`mem\people.csv`（见「archived 冷库」）。
 - syn：`D:\MyProjects`→`E:\Aitor` 仅 `/XD .Del`。
-- 关系总图 / harvest 授权 →「工作区关系：阶段 · 分流 · harvest · 冷库」。harvest 技能只抽「怎么做」；closeout 是落点；勿把 closeout 写成 harvest 步骤。
+- 关系总图 / harvest 授权 → §Z1、§Z2、§Z3。harvest 技能只抽「怎么做」；closeout 是落点；勿把 closeout 写成 harvest 步骤。
 
 ## archived 冷库
 
@@ -522,7 +522,7 @@ D87 标准指纹 / D88 `dict` 覆盖 / D89 缩写合规 / D90 空值不挪位 / 
 
 | 种类 | 落点 |
 |---|---|
-| 草稿 / 旧稿 / 一次性脚本 | 子工程内临时/中间/旧版稿 → `ref/tmp/`。跨课题或无子工程一次性 → `{DEL}` 的 `_by-project\` / `_by-function\`。`{DEL}` 定期清空，值得长期保留的不放这里。细则 → `My rule.md` §3 / `project-ref-layout.md`。 |
+| 草稿 / 旧稿 / 一次性脚本 | → §X2。值得长期保留的不放 `{DEL}`。 |
 | 共享统计库 | `{code_modules}`（`D:\MyProjects\_Docs\GitHub\MY-CODES\modules`）。入口：`PYTHONPATH={code_stats}` 后 `python -m modules.pipeline`。课题只指向该树，不在课题内再放 `modules\`。未点名则不改该库。技能正文（怎么用、按什么规则）在 `{SKILLS}\02_data-processing\`；本仓只管代码。 |
 | 02 运维（整理 / 清洗 / 同步） | `D:\MyProjects\_Docs\GitHub\MY-CODES\tools\`（`{code_stats}` + `tools/<fine-id>/`；席位夹名不镜像 `02-…`/`03-…`）。统计引擎与建模 CLI 在 `D:\MyProjects\_Docs\GitHub\MY-CODES`。 |
 | 参考包 / 锁定笔记 | 课题 `ref/`。运行键只在 `ref/settings.ini`。可选 `ref/project-state.yaml` 只记设计与稿件进度。 |
@@ -549,7 +549,7 @@ D87 标准指纹 / D88 `dict` 覆盖 / D89 缩写合规 / D90 空值不挪位 / 
 - 写入 `_Docs\`须用户点名「放 _Docs」。
 - **最终**→子工程根；**中间**→`ref/` 地图；**无** `0result\`；子工程内临时 → `ref/tmp/`（非默认 `{DEL}`）；无子工程/跨课题临时进 `{DEL}`；把原件放入 Downloads 仍须点名；`{memo_dir}` 不放快捷方式；备忘录 HTML 条目用 `file:///` 链接指向原件。权威 → `My rule.md` §3。
 - 可复用脚本 → 统计引擎与建模 CLI 在 `{code_stats}`（`modules/` + `model-validation/`），运维/加工脚本在 `{code_stats}\tools\<fine-id>\`（壳与索引已移 `{DEL}`）。`0script\` 已退休，不在课题根重建。长期规则/语料 → `_Docs` 相应层。
-- 根不留临时/草稿/一次性中间件（例外：现行在改稿 / 现行 `Vn`）。旧版稿与中间件进 `ref/tmp/`，不进 `{DEL}`（除非过后清理先问）。`_Docs\GitHub\MY-CODES\modules\`增改移须先同意。
+- 根不留临时/草稿/一次性中间件（例外：现行在改稿 / 现行 `Vn`）。旧版稿与中间件落点 → §X2。`_Docs\GitHub\MY-CODES\modules\`增改移须先同意。
 - 数据课题根可留：`rawdata`、`derivatives`、`atlases`、索引/manifest、`ref`。`_Docs` 仅当点名「放 _Docs」。默认从 `derivatives` 拷出要用的结果，原件留在原处；终稿落子工程根。不建 `0result\`，不重建 `0script\`。
 - 同键终表合并为一张（一段说明，值列加前缀）。把原件移出子工程根须先同意。
 - 移脚本或文档前先搜 `import` / `addpath` / `settings.ini` / README。仍有未改引用则不移。移完后改路径与 `_Docs` 示例再测。
@@ -562,7 +562,7 @@ D87 标准指纹 / D88 `dict` 覆盖 / D89 缩写合规 / D90 空值不挪位 / 
 
 ## 新建文件夹 / 新建文件
 
-只许建在 `{DEL}` / `D:\MyProjects\.Del\` 的 `_by-project\`、`_by-function\`。权威与例外 → `My rule.md` §2（含 `_Docs`默认禁止 mkdir、**改已有文件须当轮点名或先问**、一次性脚本不进主目录 / `.grok\tmp` / 课题根）。本段不复写。bot mem 落点例外（`D:\MyProjects\_Docs\mem\`）→ `My rule.md` §2 写盘与授权 + §4 别名。
+只许建在 `{DEL}` / `D:\MyProjects\.Del\` 的 `_by-project\`、`_by-function\`。权威与例外 → §N1（含 `_Docs` 默认禁止 mkdir、**改已有文件须当轮点名或先问**、一次性脚本不进主目录 / `.grok\tmp` / 课题根）。本段不复写。bot mem 落点例外（`D:\MyProjects\_Docs\mem\`）→ §N1、`My rule.md` §4 别名。
 
 **§N2** **目录命名**：`_Docs` 下目录一律 ASCII 英文（`approvals` / `journals` / `jcr`）；中文目录发现即当轮 rename，并在 `_library\MOVED-FROM.md` 记一行。库分类与 L1/L2 → `library-taxonomy.md`。
 

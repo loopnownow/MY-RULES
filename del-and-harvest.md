@@ -2,10 +2,11 @@
 name: del-and-harvest
 description: L1 专题：{DEL} 三档落点、harvest 前后去向、活依赖与离场判据、新建禁区全文。
 up: My rule.md §2（写盘总闸与新建禁区）
+owns: [X2, N1]
 ---
 # 0 定位与边界
-- 管：`{DEL}` 三档怎么落、harvest 前后怎么走、活依赖怎么解、旧件何时算离场。
-- 不管：新建 / 编辑授权（→ `My rule.md` §2）、harvest 怎么做（→ `{SKILLS}\00_orchestrator\harvest\SKILL.md`）、扫描脚本实现（→ `{doc_root}\test\cleanup_scan.py`）、归并（→ `db-library`）、何时清（→ `QC.md`）。
+- 管：`{DEL}` 三档怎么落、harvest 前后怎么走、活依赖怎么解、旧件何时算离场、旧稿落点（§X2）、新建例外（§N1）。
+- 不管：编辑授权（→ `My rule.md` §2）、harvest 怎么做（→ `{SKILLS}\00_orchestrator\harvest\SKILL.md`）、扫描脚本实现（→ `{doc_root}\test\cleanup_scan.py`）、归并（→ `db-library`）、何时清（→ `QC.md`）。
 
 # 1 `{DEL}` 三档
 | 档 | 判据 | 可弃度 | 处置 |
@@ -60,15 +61,23 @@ up: My rule.md §2（写盘总闸与新建禁区）
 - 收集标准仍是 `{doc_root}\harvest\HARVEST-STANDARD.md`；轮次台账 `{doc_root}\harvest\LEDGER.tsv`（一行一轮，属耐久层，不进 `{DEL}`）。`by-fine-id` 笔记只落 `{DEL}`（§7）。内容进规则 / 技能后，轮次目录可由主人删除。
 
 # 7 附录：新建禁区（原 standing 正文并入）
-1. 全部新建只许 `{DEL}` 的 `_by-project\` / `_by-function\`。
-2. 例外仅限：bot 记忆导出（`_Docs\mem\`）、子工程 `ref\tmp\`、用户当轮明确同意。
+**§N1** **新建**（本条为定义；所有写盘另须 §W1）：
+1. 全部新建默认只许 `{DEL}` 的 `_by-project\` / `_by-function\`。
+2. 显式例外四类：bot 记忆导出（`_Docs\mem\`）、子工程 `ref\tmp\`、`My rule.md` §3 落点表所列的当轮点名交付落点（含子工程根与 `ref\` 各子夹）、用户当轮明确同意的其他路径。
+   例外只开放新建路径，不构成编辑许可。不得把未点名的文件写到子工程根。
+   一次性脚本 / 小补丁只落 `{DEL}`，不进主目录、`.grok\tmp`、课题根。
 3. **改已有文件同问**：`{RULES}` / `{SKILLS}` / `_Docs\harvest\*` / `_Docs\mem\*` / 子工程已有稿（含 Track Changes）都不是自由编辑区。
 4. `{doc_root}` 默认禁 mkdir；唯一例外是用户当轮明确同意。目录名 ASCII 英文。
-5. ACCEPT 备注、digest、by-fine-id lane、笔记、中间件只落 `{DEL}`。
-6. 优先 patch 已有文件；不新建 `ACCEPT.md`，不在课题根 / 主目录新建 `文件`。
-7. 用户点名的终稿落点仍按 `My rule.md` §3（优先改已有终稿）。
+5. ACCEPT 备注、digest、by-fine-id lane、笔记只落 `{DEL}`；子工程内旧版稿与中间件落点 → §X2。
+6. 优先 patch 已有文件；不新建 `ACCEPT.md`；不在课题根 / 主目录新建未点名的文件。
+7. 用户点名的终稿落点仍按 `My rule.md` §3（优先改已有终稿）；该落点属于第 2 条第三类例外。
 
 # 8 与 QC 的分工
 - **何时清**：用户点名或季度巡检时扫 `_Docs`（`QC.md` §5）；扫描实现 `cleanup_scan.py` → `cleanup_move.py`。
 - **永不自动清名单**（`_library`、期刊池、批件、`mem`、harvest 台账）在 `QC.md` 维护。
 - 本文件只定**落点与离场条件**，不定清理频率。
+
+# **§X2** 旧稿与中间件落点
+- 子工程内的旧版稿与中间件 → `ref\tmp\`，保相对路径，不进 `{DEL}`。
+- 离开子工程的清理件和无子工程的一次性件 → `{DEL}` 的 `_by-project` / `_by-function`，保相对路径。
+- 任何情形都不静默永久删除（§X1）。过后把子工程内旧件清出 `ref\tmp\`、移入 `{DEL}`，须当轮先问。

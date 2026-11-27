@@ -29,7 +29,7 @@ description: 技能库契约、按需加载、演进门、PR 与合并后部署�
 - **Harvest 任务流程与纳入门禁**由 harvest 技能管理（`{SKILLS}\00_orchestrator\harvest\SKILL.md`）；00 只留调度、门禁与本轮复核/去路由；收集标准 SSOT→`{doc_root}\harvest\HARVEST-STANDARD.md`。
 - 轮次工作目录落 `{DEL}`，不把 `harvest\rounds` + `by-fine-id` 写成 `{doc_root}` 活层（→ `del-and-harvest.md` §6）。抽取按对象三向沉积：能跑的进 `{code_root}\tools\<fine-id>\`，跨技能硬约束进 `{RULES}`，其余过程 / 判据进 `{SKILLS}`（仍须「进skills」才 promote）。**QC 分三处**：库形/完整性→本地库门（`{doc_root}\test\structure_check.py` + `STRUCTURE.md`；`_DataBase` 根说明 + `DB-QC-STANDARD.md`）；纳入门禁→harvest 技能（当轮授权 / 是否误当 closeout / PHI / 三桶 / 证据可复算 / 去向）；00 复核通过后才候纳入。
 - 改 live 技能须城城点名「进skills」（extract ≠ promote）；propose-only 仍适用；不另开 evolution 技能树。
-- **harvest ↔ closeout 关系 / 授权范围**（可在四阶段或 archived / `.Del` 抽，每次须当轮授权；harvest ≠ 搬盘）→ `workspace-layout.md`「工作区关系：阶段 · 分流 · harvest · 冷库」。本条不复写。
+- **harvest ↔ closeout 关系 / 授权范围**（可在四阶段或 archived / `.Del` 抽，每次须当轮授权；harvest ≠ 搬盘）→ §Z1、§Z2、§Z3。本条不复写。
 
 ## 4 单一技能源（勿重建第二条树）
 

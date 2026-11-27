@@ -80,7 +80,7 @@ SCI 相关文件统一命名：`<Stem>_<子项目名>_<版本号>`。
 - 优先 `.docx`；若有 md/pdf 伴生件，**同 stem**
 - 例：`Manuscript_lxf_PP_V1.10.docx`（投出稿）；`Manuscript_lxf_PP_R1.1.docx`、`Comments_lxf_PP_R1.1.docx`、`Response_lxf_PP_R1.1.docx`、`Supplementary_lxf_PP_R1.1.docx`
 - **落点：** 无刊名短码的现行通稿 `Manuscript_<slug>_V…` 或 `_R…`（及同号配套）在**子工程根**；**旧版通稿** → `ref/tmp/`。带刊名短码的目标刊格式版不放子工程根，落 `ref/submission-<刊名短码>/`（见下节）。未被接受的历史投稿包仍按上节进 `ref/` / `submission-*`。本条管通稿文件名 + 旧版落点；详 → 上表 `ref/tmp/`。（原 `materials/` 已退役，勿再新建。）
-- **子工程根恰留两份：** ① `Manuscript_<slug>_clean.docx`（最新版、接受全部修订、无痕迹、不带版本号）；② 最新的带版本号稿 `Manuscript_<slug>_{V|R|P}<x>[.<y>][_tracked].docx`（`_tracked` 表示保留修订痕迹）。其余旧版本号稿、旧 tracked、根上的 PDF 导出一律进 `ref/tmp/`，不删、不进 `{DEL}`；进 `{DEL}` 须主人点名。
+- **子工程根恰留两份：** ① `Manuscript_<slug>_clean.docx`（最新版、接受全部修订、无痕迹、不带版本号）；② 最新的带版本号稿 `Manuscript_<slug>_{V|R|P}<x>[.<y>][_tracked].docx`（`_tracked` 表示保留修订痕迹）。其余旧版本号稿、旧 tracked、根上的 PDF 导出一律进 `ref/tmp/`，不删、不进 `{DEL}`；进 `{DEL}` 须主人点名（§X2）。
 - **配套不受 clean 影响：** `Comments` / `Response` / `Supplementary` / `CoverLetter` / `FigureLegends` / `Tables` 仍按同号版本规则命名，不另做 `_clean`。
 - **§M4** **无稿不造空件：** 子工程若无稿件 docx，记「无 docx」，不得为交差创建空稿。
 
@@ -128,7 +128,7 @@ SCI 相关文件统一命名：`<Stem>_<子项目名>_<版本号>`。
 
 收工精简后课题树硬留：`Manuscript_<slug>_clean.docx` 与最新的 `Manuscript_<slug>_{V|R|P}…[_tracked].docx`（子工程根**文件**）+ `FinalData_<slug>.xlsx`（或 `ref/README` 钉死的现用 data.xlsx）+ 可选 `ref/settings.ini` 指向 `_DataBase\<family>\<prefix_suffix>\`。
 - 课题树 `R*` / `P*` 整夹（修订包 / 投稿包）收工进 `_DataBase\<family>\<prefix_suffix>\`（≥20 散文件先压）；校验后原夹→`.Del\_by-project\<slug>\`。可复现图 → `.Del\_by-project\<slug>\`；不可复现 → `_DataBase`。
-- 全文落点 → `workspace-layout.md`「accepted 收工」；关系 / harvest 授权 → 同文件「工作区关系：阶段 · 分流 · harvest · 冷库」。本条不复写 closeout 清单。
+- 全文落点 → `workspace-layout.md`「accepted 收工」；关系 / harvest 授权 → §Z1、§Z2、§Z3。本条不复写 closeout 清单。
 
 ### Cleanup（过后可清；两档）
 
