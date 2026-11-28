@@ -56,12 +56,12 @@ Live bodies SSOT = MY-SKILLS in-repo `NN_slug/base/`。不得在别处再建第�
 
 **指针壳 = QC 清理对象（R10）**：规则侧与技能侧同一口径——正文 ≤5 行且只含 move/pointer 线索，或正文为空，即为 stub，当场删；不留 stub 停放位。
 
-**退役且仅剩指针 = QC 清理对象**：能力由现行座位 / fine-id / 路径承担后，live 树只剩「已退役→见某某」、空 README、SUPERSEDED / retired / page-not-on-disk 等**无实现字节**的壳或单向指针时，与 skip/archived **同档 P0/P1**：删壳、删活引用；必要的一句并入现行文档；若仍有字节则移 `{DEL}`（保相对路径）。**禁止**新造「仅指针」壳当停放。**不算壳（勿误清）**：`legacy_aliases.yaml` 路由表；现行契约指针（如 `DOI_*.md`→`_library/references`、批件指针、`journals.csv`）；`HISTORIC` 审计记录（只标历史、不新建活链到 `{DEL}`）。
+**退役且仅剩指针 = QC 清理对象**：能力由现行座位 / fine-id / 路径承担后，live 树只剩「已退役→见某某」、空 README、SUPERSEDED / retired / page-not-on-disk 等**无实现字节**的壳或单向指针时，与 skip/archived **同档 P0/P1**：删壳、删活引用；必要的一句并入现行文档；若仍有字节则移 `{DEL}`（保相对路径）。**禁止**新造「仅指针」壳当停放。**不算壳（勿误清）**：`{SKILLS}\tests\retired_ids.py` 退休 id 清单（不是运行时路由表）；现行契约指针（如 `DOI_*.md`→`_library/references`、批件指针、`journals.csv`）；`HISTORIC` 审计记录（只标历史、不新建活链到 `{DEL}`）。
 
-- 退休 fine-id **只**保留在 `{SKILLS}\00_orchestrator\legacy_aliases.yaml` → 现行 id；live 路由 / workflow / advanced 只写现行 fine-id 与现存路径。
+- 退休 fine-id **只**保留在 `{SKILLS}\tests\retired_ids.py`（不是运行时 id；激发词留在入口正文）；live 路由 / workflow / advanced 只写现行 fine-id 与现存路径。
 - 发现 skip / skipped / archived / 已归档 /「archived … (page not on disk)」等残留 = QC **P0/P1**：当场删除、合并或改写为现行能力，不得再扩散 skipped / archived 标签。
 - 合并优先于新开：重复能力 / 重复座位 / 重复说明先并入现行 fine-id 或现行座位，再删壳。
 - 去旧：过时路由、已退役座位话术（如 enter/Re-enter 01）、已删除 CI / 外部 fine-id 模型等不得作为当前流程再写。
-- 互指：`{SKILLS}` `INTEGRATION_MAP.md` / `00_orchestrator/references/skill-evolution.md`（outcome：keep / revise / rollback / merge·simplify / delete；不再以 skip / archive 为可停留态）。
+- 互指：`{SKILLS}` `CHANGELOG.md` / `00_orchestrator/references/skill-evolution.md`（outcome：keep / revise / rollback / merge·simplify / delete；不再以 skip / archive 为可停留态）。
 
 
