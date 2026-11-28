@@ -122,7 +122,7 @@ up: My rule.md §5
 - **合并冲突**：若较后的表明显更小、覆盖会缩小队列，则保留更完整的表，较小者只记 subset，不得覆盖。新旧无法判定时，重叠行保留非空单元格最多的一行，并列时取原行序更前的；被丢行只回填空位。表头缺失、双层或把数据行误当表头时，须先修好再合并。
 - **留痕**：原件移 `{DEL}\_by-function\<batch>\originals\<code>\<family>\<leaf>\`，写 `*-MOVED-YYYYMMDD.tsv`（件数 / 字节 / sha256 100% 核验）；结果与限制写叶 / 家族 `目录说明.md` 追加段 + `_index.csv` note；批次报告 `<batch>-REPORT.md`。
 - **闸**：改动前后 `structure_check.py` 全门 PASS；手工删除 / 清除须主人确认后写 `REVOKED-YYYYMMDD.tsv`，不得静默。
-- 策展后每叶只留一份现行源文件，内含长表与宽表（每表最多 5 个工作单）；子库内 `clin` 一张 + `_modules_<mod>` 按模态/特征域各一张（逐张登记 `dict`）+ `qc` 一张，口径见 `db-schema.md`。
+- 策展后每叶只留一份现行源文件，内含长表与宽表（同一张表最多 5 个工作单 = 分片上限；工作单名 = 子库表名 `person` / `clin` / `_modules_<mod>` / `<mod>_value` / `qc`）；子库内 `clin` 一张 + `_modules_<mod>` 按模态/特征域各一张（逐张登记 `dict`）+ `qc` 一张，口径见 `db-schema.md`。
 - 细则（三类型判定、表头驱动解析、坑位清单、合并簿 sheet 约定）→ skill `db-library`。
 
 ## 6 `_DataBase` 可收
