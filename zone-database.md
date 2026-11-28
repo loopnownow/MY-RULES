@@ -107,7 +107,7 @@ up: My rule.md §5
 - **命名**：库文件 `<family>db` / `<slug>db`（均无扩展名；实例 `MHE_ANdb`、`lxj_ACNdb`）；冻结旧库 `<family>db_6t`（同目录、无扩展名、只读）。`_PHI` 与子工程叶内放「库文件 + `目录说明.md` + 可重建预览页」；说明须含口径 / 表结构 / 查询示例 / 重建步骤 / 限制 / `source_db` 对应关系（旧库名 + sha256）。
 - **只收表格（去重合并结果）**：xlsx / xls / csv 等可解析的原始行列数据入库；入库即按「散表归并」去重合并（文件 sha → 整表 → 行级），同格式多份并入对应子库（`src.rel_path` + `src.sha256` 区分）；非原始数据不入库，口径 → 见 `db-schema.md`。库不是散表仓，不存原件、不存合并中间簿。**压缩档内的表格同样入库**：解出到 staging 后按同一条去重合并，档本身仍归 `__zip`。
 - **压缩档本身不进 db、不留叶**：`*.tar.zst`、`7z`、`zip`、`gz`、`rar` 等归档一律进 `<family>\__zip\`（归位见「`__zip` 原始件池」）；**档内表格文件须解出、按「散表归并」入库**，档内非表格件（原始图 / 记录 / 文档）不入库；解包树校验后移 `{DEL}`，readme / 移动台账记「档→表」映射。
-- **叶内只留 readme + 子库**：原表入库并校验后，叶内只留 `<slug>db` 与 `目录说明.md`（写入库日 / 项目 slug / 原件去向 / 未入库例外 / `source_db`+sha256）；不得留散表。未入库件（PHI 花名册、模板、解析失败件）留叶并在 readme 写明原因，不得另存副本；**PHI 花名册只作迁移证据，不得并入子库**（迁移后按 D28 复核）。
+- **叶内只留 readme + 子库**：原表入库并校验后，叶内只留 `<slug>db` 与 `目录说明.md`（写入库日 / 项目 slug / 原件去向 / 未入库例外 / `source_db`+sha256）；不得留散表。`map.csv` 属台账例外。未入库件（PHI 花名册、模板、解析失败件）留叶并在 readme 写明原因，不得另存副本；**PHI 花名册只作迁移证据，不得并入子库**（迁移后按 D28 复核）。
 - **原件留痕**：建库并校验通过后，原件移 `{DEL}\_by-function\<batch>\originals\<code>\<family>\<leaf>\`，写 `*-MOVED-YYYYMMDD.tsv`（相对路径 / 字节 / sha256）；原件不回流。
 - **门禁**：`_PHI` 是 `_` 前缀桶，不参与 S23 桶/叶后缀校验。`structure_check.py` **S25** 校验家族库/子库落点与库文件（`<family>db` / `<slug>db` / 冻结 `<family>db_6t`、库头 SQLite、按 `meta.kind` + `schema_version` 分派 5t 家族表 / 子库六类表、根级 `_DataBase` 下不得出现库桶（目标态不留 `dict`，机器门待另批））；**S26** 允许叶内 `<slug>db`；**S27** 确认 `__zip` 不收库文件。`verify_db.py` 先按 `schema_version` 分派：旧 core-6t 仍跑 D1–D22，5t 跑 D23–D45（含跨库 ATTACH）。建库 / 迁移前后仍须全门 PASS。
 - 细则（去重层级、5t/6t schema、`family_uid` 分配、QA 清单、重建命令、旧库对账）→ skill `db-library`。
@@ -148,13 +148,14 @@ up: My rule.md §5
 
 ## 8 台账落点（契约与回填）
 
-建库产生的四类台账，一律不进库内表。路径按目标态书写；现行盘面在迁入 `Family\` 之前，家族级台账仍可能落在 `{RAW}\<family>\_work\`。
+建库产生的契约与台账，一律不进库内表。路径按目标态书写；现行盘面在迁入 `Family\` 之前，家族级台账仍可能落在 `{RAW}\<family>\_work\`。
 
 | 台账 | 落点 | 谁写 | 谁读 |
 |---|---|---|---|
-| `<slug>.map.csv` | `<family>\<slug>\map.csv`（开工时在 `_work\`，收口后随库） | 建库人 | `fill` / D95 |
+| `map.csv` | `_work\map.csv`（收口后随库到 `<family>\<slug>\map.csv`） | 建库人 | `fill` / D95 |
 | `qc_codes.tsv` | `<family>\_work\qc_codes.tsv` | 建库人 | D94 |
 | `REVIEW-QUEUE.csv` | `<family>\_work\REVIEW-QUEUE.csv` | 停列时自动追加 | 用户 / D94 |
 | `dict.db` | `{RAW}\Family\dict.db`（全局唯一） | 建库人 | 所有门禁与脚本 |
+| `schema.sql` | 由 `schema-v1.md` 反编译生成（`db-build-contract.md` 契 1） | 建库人 | 建空库 |
 
 规则：中文映射、单位换算系数、枚举对照只许出现在 `map.csv` 与 `qc_codes.tsv`，不得写进 `dict` / `qc`（`db-build-contract.md` 律 1）。`qc_codes.tsv` 以首发 16 码为底、旧 190 码按 `superseded_by` 归一；完整词表文件待另文件落盘。
