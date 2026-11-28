@@ -8,24 +8,24 @@ up: My rule.md §5
 - 管：`{RAW}` 落点、家族分桶、`_PHI` / `__zip` / `_thesis`、家族库与子库 1+N、散表归并、`_DataBase` 可收、`_grants` / `_reviews`。
 - 不管：表结构与 DICOM 映射（→ `db-schema.md`）；D 码（→ `db-gates.md`）；伦理材料留存（→ `library-taxonomy.md` §3）。
 
-## 1 `{RAW}` = `D:\MyProjects\_DataBase`
+## 1 `{RAW}`
 
-- **落点：** `D:\MyProjects\_DataBase\<family>\<prefix_suffix>\`（`<family>` 取自 `_diseases.csv` 的 `family` 列；按家族分桶）存放该 MyProjects 子工程的**原始数据与原始影像**：DICOM 树、未压缩导出、作为源数据的原始照片、NIfTI/NII.GZ、未处理的 4D/导出包等。衍生图/表/统计仍在课题侧（见下条）。
-- **子工程只留指针：** 在 `ref/settings.ini` 写 data path；**不要**把原始体拷进 `D:\MyProjects\…` 或三仓（MY-RULES / MY-SKILLS / MY-CODES）。
+- **落点：** `{RAW}\<family>\<prefix_suffix>\`（`<family>` 取自 `_diseases.csv` 的 `family` 列；按家族分桶）存放该 MyProjects 子工程的**原始数据与原始影像**：DICOM 树、未压缩导出、作为源数据的原始照片、NIfTI/NII.GZ、未处理的 4D/导出包等。衍生图/表/统计仍在课题侧（见下条）。
+- **子工程只留指针：** 在 `ref\settings.ini` 写 data path；**不要**把原始体拷进 `{lab_root}\…` 或三仓（MY-RULES / MY-SKILLS / MY-CODES）。
 - **衍生件仍在课题侧：** 衍生物 / 图 / 表按本文件与 `project-ref-layout.md` 落在子工程；勿塞进 `_DataBase`。
-- **临床底表 ≠ 影像 raw：** Excel/CSV 底表仍落 `ref/` 或 `ref/data/`（D-1：移动前先问）。**不要**把所有「data」都倒进 `_DataBase`。
+- **临床底表 ≠ 影像 raw：** Excel/CSV 底表仍落 `ref\` 或 `ref\data/`（D-1：移动前先问）。**不要**把所有「data」都倒进 `_DataBase`。
 - **现行名只写 `_DataBase`；活 `00ds` = QC 对象：** 禁止再建（→ 总图退役禁建表）。
   - 任何活路径、夹名、过滤器 / 默认项仍写 `00ds` 的，视为 QC 发现，**必须更正为 `_DataBase`**；**不要**在活 allowlist / filter 里把 `00ds` 留作「legacy」。
   - 不另造第三个 raw 根。**更正活引用 ≠ 搬迁磁盘树**：不 bulk 迁移旧根；两边若都在，维持原状，等主人另批搬迁。
-- **禁止进 git：** 原始影像二进制**不要**进 git（含 Git LFS）或任何 GitHub remote（DICOM 头含 PHI；二进制无有效 delta）。可选轻量清单（相对路径 + 大小 + SHA-256 + 入库日）可放子工程 `ref/pipeline/`（同 `hashes.tsv` / `MANIFEST.md` 思路）。该清单若需版本，可用**无 remote 的本地 git**；备份 = 拷到另一块盘，不是 git。
-- **进 `_DataBase` 多文件先压缩：** 进 `D:\MyProjects\_DataBase\…`（或其 E 镜）时，若某目录内「单独文件」≥20，或明显是大量小文件堆（DICOM 序列、切片导出、逐例中间件、碎日志），先压成**一个**归档再入库；单文件或本来就少的目录不压。
+- **禁止进 git：** 原始影像二进制**不要**进 git（含 Git LFS）或任何 GitHub remote（DICOM 头含 PHI；二进制无有效 delta）。可选轻量清单（相对路径 + 大小 + SHA-256 + 入库日）可放子工程 `ref\pipeline/`（同 `hashes.tsv` / `MANIFEST.md` 思路）。该清单若需版本，可用**无 remote 的本地 git**；备份 = 拷到另一块盘，不是 git。
+- **进 `_DataBase` 多文件先压缩：** 进 `{RAW}\…`（或其 E 镜）时，若某目录内「单独文件」≥20，或明显是大量小文件堆（DICOM 序列、切片导出、逐例中间件、碎日志），先压成**一个**归档再入库；单文件或本来就少的目录不压。
   - **格式与落点：** 优先 `7z`（`-mx=5`；固态 DICOM 可 `-m0=LZMA2`）；无 7z 用 `zip`。归档名=`<原目录名>.7z`，**唯一落点 = `<family>\__zip\<leaf>\`**（叶内与家族根禁归档，见本节「`__zip` 原始件池」）；`<名>.files.txt`（相对路径清单）**随档同放** `__zip\<leaf>\`。
-  - **原目录：** 压缩校验通过（文件数/抽样 hash）后，原散目录移入 `D:\MyProjects\.Del`；不要两边长期并存。工作中的热数据先不压；定稿/冷存再压。
+  - **原目录：** 压缩校验通过（文件数/抽样 hash）后，原散目录移入 `{DEL}`；不要两边长期并存。工作中的热数据先不压；定稿/冷存再压。
   - **例外不压：** 根上索引与表（`settings.ini`、`*.xlsx`、`console.html`、README）；已是单一大文件（`.nii.gz`、整包 `.dcm`、现成 `.7z/.zip`）；主人点名要随时打开的活数据集。
   - **单元粒度：** 优先按 subject / session / modality（或一次采集单元）一档，**不要**整 slug 打成一个 mega-zip。
   - **值得 deflate：** 未压缩 DICOM 夹、未压缩 `.nii`、BMP/TIFF 栈。已压缩对象（JPEG/JPEG-LS/JPEG2000 DICOM、PNG 等）若只需容器，用 zip **store**（不二次压缩）；避免 zip-in-zip。
-  - **归档后：** 不要在 `_DataBase` 或 `D:\MyProjects` 下再留第二份解压树。处理仍走 copy-on-need：需要时抽到工作区，**不要**长期解压在 archive 旁。
-  - **清单：** `__zip\<leaf>\` 内 `<名>.files.txt` 为相对路径清单，随档同放；课题 `ref/pipeline/` 可选再记 archive（相对路径 + 大小 + SHA-256 + 入库日）。
+  - **归档后：** 不要在 `_DataBase` 或 `{lab_root}` 下再留第二份解压树。处理仍走 copy-on-need：需要时抽到工作区，**不要**长期解压在 archive 旁。
+  - **清单：** `__zip\<leaf>\` 内 `<名>.files.txt` 为相对路径清单，随档同放；课题 `ref\pipeline/` 可选再记 archive（相对路径 + 大小 + SHA-256 + 入库日）。
   - 归档只是打包，**不是**加密；DICOM 头 PHI 与禁止进 git/LFS 仍适用。**不**强制密码。本条为**今后入库闸**；本票不 bulk 转换已有解压树。
   - **syn：** 压完后 `_DataBase` 仍随主树同步；`syn` 仅 `/XD .Del`。
 - **单档 ≤1 GiB / 分卷：** 进 `{RAW}`、交付或归档打包时，**单个文件 ≤1 GiB（1,073,741,824 B）**；预计超限就**先分卷**，不要造出大档再拆。
@@ -36,7 +36,7 @@ up: My rule.md §5
 - **只读默认：** `{RAW}` 只读，除非主人点名写入。**不预建空夹**（用到再拷 / copy-on-need）。
 
 ## 2 `{RAW}` 非课题分支与家族分桶
-`D:\MyProjects\_DataBase`内存三类：① 课题原始件（按家族分桶）；② `_lab`；③ `_` 开头的非课题归档分支（新件落这里；**留根**、不分桶）。
+`{RAW}`内存三类：① 课题原始件（按家族分桶）；② `_lab`；③ `_` 开头的非课题归档分支（新件落这里；**留根**、不分桶）。
 - **按家族分桶：** 课题原始件路径为 `_DataBase\<family>\<prefix_suffix>\`（例 `SCH\lxf_RC`、`EGVB\js_CN`、`MHE\ly_SCH_HE`）。
   - `<prefix>` = sub-PI 缩写；`<family>` = `_diseases.csv` 的 `family` 列（留空 = 该基码即家族根）。
   - `<prefix_suffix>` 的**后缀仍是基码**（剥末尾 `_\d+` 实例；语义复合如 `SCH_HE` / `SSD_DKI` 整段保留），实例号只在叶子夹名。
@@ -45,7 +45,7 @@ up: My rule.md §5
 - **同源聚合：** `<family>` 按**同源数据**聚合，不是按病名近义随便并。
   1. 同一影像/队列母集、同一纳排、或多篇稿共用一批 raw/底表 → 同一 `family`。
   2. 同病但非同源（独立采集 / 独立伦理 / raw 不可互指）→ 可自家族；若仅临床谱系同桶仍分叶，**文件不得跨叶混放**。
-  3. 叶夹仍是 `<prefix_suffix>`。共用 raw **只存一份**：优先 `_DataBase\<family>\__zip\`（或钉死的主叶）；其它课题经 `ref/settings.ini`（或 README）指针；禁止整树复制进多叶。
+  3. 叶夹仍是 `<prefix_suffix>`。共用 raw **只存一份**：优先 `_DataBase\<family>\__zip\`（或钉死的主叶）；其它课题经 `ref\settings.ini`（或 README）指针；禁止整树复制进多叶。
   4. **`__zip` 原始件池：** 课题的原始数据 / 原始记录 / 原始图片一律进 `<family>\__zip\`，不再按叶分散。
      - **各类固定**（自各桶起 ≤2 层，D1 最终口径）：`__zip\<leaf>\<文件>` 放该叶原始件压缩档（`tar.zst` 原样，**不就地解压**，解压树用完即移 `{DEL}`）；`_thesis\<slug>__<文件>` 放学位论文 / 博士后材料。
      - **一级结构：** 仅上述三桶（`_PHI` / `__zip` / `_thesis`）+ `目录说明.md`（`__zip` 存在必须自带 `__zip\目录说明.md`；无叶家族例外 `__zip\<family>\` 直放，须在家族 `目录说明.md` 登记）；其下**一层平铺**，不建 `raw\` / `cohort\` 子夹。
@@ -67,10 +67,10 @@ up: My rule.md §5
 | `_reviews\{peer,grants,thesis}\<year>\` | 他人稿 / 标书 / 毕业论文评阅（原 `R&P` 评阅侧） | 本组稿件（走四阶段） |
 | `_personal\` | 个人材料（进修/签证） | 任何课题数据 |
 
-- **硬规则：** 课题原始数据不得进 `_` 分支；`_` 分支不得被课题 `ref/settings.ini` 当数据源。
+- **硬规则：** 课题原始数据不得进 `_` 分支；`_` 分支不得被课题 `ref\settings.ini` 当数据源。
 - **`目录说明.md`：** 每个 `_` 分支根与 `_lab` 根必须有（放什么、谁维护、更新日）；它是**活文档**——正文里作现行指令的路径与计数须与实盘一致，史证须同句带标记词，搬件 / 改名 / 计数变化当轮同步（门 → `QC.md` R11）。
-- **`D:\MyProjects\_DataBase\_diseases.csv`：** 列 `suffix,name_en,name_zh,l1,l2,aliases,family`；`suffix`=基码（无 `_\d+` 实例）；`family`=该基码所属家族根（留空=自家族；家族根必须在 `suffix` 列有本人行，如 `MHE`、`SCC`、`EC`、`THESIS`、`OTHERS`）；编号形式进 `aliases`；library `l1`/`l2` 对照 ethics/references。全称不进路径规则。`_diseases.csv` 复核：`RI` 挂 `SCH`（IR 数据随 SCH 队列）；`SCH\ly_RI` 只留 `目录说明.md` 为最终态（archived 同挂 SCH 口径）。
-- **`D:\MyProjects\_DataBase\_index.csv`（唯一可写台账）：** 一行一个 slug/分支，列 `kind,slug,prefix,suffix,title,l1,l2,stage,owner,indexed_on,note`；新建/改名当轮更新。
+- **`{RAW}\_diseases.csv`：** 列 `suffix,name_en,name_zh,l1,l2,aliases,family`；`suffix`=基码（无 `_\d+` 实例）；`family`=该基码所属家族根（留空=自家族；家族根必须在 `suffix` 列有本人行，如 `MHE`、`SCC`、`EC`、`THESIS`、`OTHERS`）；编号形式进 `aliases`；library `l1`/`l2` 对照 ethics/references。全称不进路径规则。`_diseases.csv` 复核：`RI` 挂 `SCH`（IR 数据随 SCH 队列）；`SCH\ly_RI` 只留 `目录说明.md` 为最终态（archived 同挂 SCH 口径）。
+- **`{RAW}\_index.csv`（唯一可写台账）：** 一行一个 slug/分支，列 `kind,slug,prefix,suffix,title,l1,l2,stage,owner,indexed_on,note`；新建/改名当轮更新。
 - **只读不变：** 除 `_index.csv` 外 `_DataBase` 默认只读；新建分支/子夹属写盘，须当轮点名（`My rule.md` §2 不豁免）。
 - 不预建空夹。
 可选：数据课题也可在上述子工程树内自建文件夹；约定写在该子工程内，不进全局 rules/skills。
@@ -124,7 +124,7 @@ up: My rule.md §5
 - 细则（三类型判定、表头驱动解析、坑位清单、合并簿 sheet 约定）→ skill `db-library`。
 
 ## 6 `_DataBase` 可收
-（≥20 散文件或小文件堆先 7z/zip + `.files.txt`，校验后散目录→`.Del`；见本文件「进 `_DataBase` 多文件先压缩」。）
+（≥20 散文件或小文件堆先 7z/zip + `.files.txt`，校验后散目录→`.Del`；见 §1（多文件先压缩）。）
 - 课题树 `R*` / `P*` 整夹
 - raw 影像/数据
 - 不可复现资料图

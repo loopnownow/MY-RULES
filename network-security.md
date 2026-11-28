@@ -63,7 +63,7 @@ HIS/PACS 登录客户端只留在医院机器。禁止把 Selenium 脚本、HIS 
 
 ## Grok CLI
 
-本机 `grok.exe` 在 `C:\Users\loopn\.grok\bin`；会话按工作目录存在 `C:\Users\loopn\.grok\sessions`。运行 `grok` 前须在该会话设置 `HTTPS_PROXY` 与 `HTTP_PROXY` 为 `http://127.0.0.1:10808`。
+本机 `grok.exe` 与会话目录见 `local-overlay.md` §1。运行 `grok` 前须在该会话设置 `HTTPS_PROXY` 与 `HTTP_PROXY` 为 `http://127.0.0.1:10808`。
 
 ## 机构库检索
 

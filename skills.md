@@ -13,11 +13,11 @@ description: 技能库契约、按需加载、演进门、PR 与合并后部署�
 
 **(a)** 禁止 agent 直接改 `{SKILLS}` 技能树任何文件。内容变更只经主人或 GitHub MY-SKILLS PR/merge（§5）。发现缺失/过时：只报告 + 按 §3 提案。
 
-**(b) 合并后部署同步**：`{SKILLS}` = GitHub 克隆 `D:\MyProjects\_Docs\GitHub\MY-SKILLS`（与 `{skills_runtime}`/`{skills_git}` 同一棵树）。merge 后对该克隆 `git pull`；禁止再拷到第二棵 runtime 树；禁止整树盲盖。细则→`{SKILLS}\00_orchestrator\references\lifecycle-cache.md`。
+**(b) 合并后部署同步**：`{SKILLS}` 即 GitHub 克隆（与 `{skills_runtime}`/`{skills_git}` 同一棵树；盘面见 §4）。merge 后对该克隆 `git pull`；禁止再拷到第二棵 runtime 树；禁止整树盲盖。细则→`{SKILLS}\00_orchestrator\references\lifecycle-cache.md`。
 
 ## 2 按需使用
 
-先读 `<skill>/SKILL.md` 再只读其引用；路由 `00` → `02` → `03` → `05` → `06` → `07` → `00` QC（粗 ID = 执行座位）。细则→`00` `SKILL.md`。**索引边界**：技能正文一律用 `{SKILLS}\…` 绝对路径直读；`D:\MyProjects\_Docs\.cursorignore` 排除 `GitHub\`；勿依赖 Cursor 索引去「找」技能。
+先读 `<skill>/SKILL.md` 再只读其引用；路由 `00` → `02` → `03` → `05` → `06` → `07` → `00` QC（粗 ID = 执行座位）。细则→`00` `SKILL.md`。**索引边界**：技能正文一律用 `{SKILLS}\…` 绝对路径直读；`{doc_root}\.cursorignore` 排除 `GitHub\`；勿依赖 Cursor 索引去「找」技能。
 
 运行时只按 fine id（如 clean-data）选型；path 与 slug 仅用于定位实体；入口文件名固定为 SKILL.md；不得把目录名或展示名当作第二套运行时键。
 
@@ -45,7 +45,7 @@ Live bodies SSOT = MY-SKILLS in-repo `NN_slug/base/`。不得在别处再建第�
 
 ## 6 QC、精简与 skip/archived / 退役仅指针
 
-**QC 精简（站立）**：能合并的合并、能删除的删除、去重、去旧、尽量精简。删除的字节进 `{DEL}`（本机 `D:\MyProjects\.Del`，保留相对路径）；不得只改标签继续堆在 live 树。
+**QC 精简（站立）**：能合并的合并、能删除的删除、去重、去旧、尽量精简。删除的字节进 `{DEL}`（本机 `{DEL}`，保留相对路径）；不得只改标签继续堆在 live 树。
 
 **`{DEL}` 三档落点（站立）**：park / harvest-park / harvested 的落点与可弃度 → `zone-del.md` §1（本条不复写；harvested 只由城城手动清）。一次 harvest 之后应进 `{DEL}` 的剩余件一律落 `harvested\`（平铺；非 harvest 落点不变）→ 同节 §1。
 

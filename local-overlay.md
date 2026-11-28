@@ -10,6 +10,8 @@ up: My rule.md §1.1
 
 # 1 本机覆盖层（可选）
 启用本层时，只做四件事：把 SSOT 别名解析到本机真实盘面；收紧（可加不可减）；记录本机承载与同步口径；记录与 SSOT 冲突的落盘口径。
+- 本机同步目标 `{AITOR}` = `E:\Aitor`（镜像到 Aitor **根**，不是 `E:\Aitor\MyProjects`）；同步入口 `{lab_root}\syn.bat`。
+- 本机 `grok.exe` 在 `C:\Users\loopn\.grok\bin`；会话按工作目录存在 `C:\Users\loopn\.grok\sessions`。
 - 不放宽任何硬闸，不新增许可，不复制 SSOT 正文。
 - 冲突分工：路径 / 盘面类以本机表为准；授权 / 禁删 / 网络类以 `{RULES}` 为准，本机表不得反向放宽。
 - 与 SSOT 新版本冲突时**先报冲突再执行**，不静默择一。本层不得替代 `My rule.md` 的裁决顺序。

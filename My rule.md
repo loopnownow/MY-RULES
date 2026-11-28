@@ -9,7 +9,7 @@ owns: [W1, W2, W3, W4, W5, X1, P1, S1, S2]
 - 本文件 = **L0 常驻层**，每次开工必读。细则按 §5 路由读 L1 专题；做法按派单挂到 MY-SKILLS（L2）。
 - **课题事实：** 开工、改稿、内审须先查 `project-fact-lookup.md`（通讯作者、伦理号、扫描序列、实验室范围）；挂载不等于已查。
 - 层级契约：L0 只写裁决、授权、落点、路由、门；L1 只写「放哪 / 什么算对 / 何时停」；L2 不碰授权、落点、网络、PR、别名、路由。L1 只能收紧硬闸，不能放宽。
-- 生效对象：Aitor、子代理、本机 DSH、Cline、Cloud Agent，一律遵守，无例外、无需再问。云端 prompt 必须写明 `{RULES}`；Skills 按本次任务写入。云端 = Grok Bot 的 box；本地 = 城城本机（`D:\`、Downloads），勿对调。
+- 生效对象：Aitor、子代理、本机 DSH、Cline、Cloud Agent，一律遵守，无例外、无需再问。云端 prompt 必须写明 `{RULES}`；Skills 按本次任务写入。云端 = Grok Bot 的 box；本地 = 城城本机（盘面见 §4），勿对调。
 - 工作区只有一层 → `workspace-layout.md`。
 - 席位分工与一任务一执行方 → `execution.md`。
 
@@ -68,7 +68,7 @@ owns: [W1, W2, W3, W4, W5, X1, P1, S1, S2]
 - **单档 ≤1 GiB**；预计超限直接分 900 MiB 字节卷 + `分卷说明.md`，不先造大档再拆（细则 `zone-database.md`）。
 - **稿件硬闸**：未当轮点名禁改 `.docx` / `.pdf` 版式；助手改稿、手改后禁止重标、回滚、无稿不造空件 → §M1–§M4（`manuscript-docx.md`）。
 - 备忘录夹与备忘录正文 → `execution.md`。
-- 同一分析 `Results*.html` 与 `.xlsx` 冲突 → 以 HTML 为准并写明；清理旧稿 → §X2；长表 → `{SKILLS}\00_orchestrator\references\standing-delivery.md`。
+- 同一分析 `Results*.html` 与 `.xlsx` 冲突 → 以 HTML 为准并写明；清理旧稿 → §X2，长表口径见 `{SKILLS}\00_orchestrator\references\standing-delivery.md`。
 
 # 4 别名与术语
 | 别名 | 值 |

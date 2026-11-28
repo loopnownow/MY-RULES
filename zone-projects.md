@@ -11,7 +11,7 @@ owns: [Z1, Z2]
 
 ## 阶段夹与课题名
 
-课题路径：`D:\MyProjects\<stage>\<project>`。
+课题路径：`{lab_root}\<stage>\<project>`。
 
 | 阶段 | 含义 |
 |---|---|
@@ -44,7 +44,7 @@ owns: [Z1, Z2]
 
 ### **§Z1** 两层：活阶段 vs 分流落点
 
-- **四阶段 = 活课题生命周期：** `drafting` / `pre-submit` / `reviewing` / `accepted`。路径 `D:\MyProjects\<stage>\<prefix_suffix>\`。
+- **四阶段 = 活课题生命周期：** `drafting` / `pre-submit` / `reviewing` / `accepted`。路径 `{lab_root}\<stage>\<prefix_suffix>\`。
 - **分流落点（非阶段）：** `_DataBase` / `_Docs` / `.Del` / `archived`。`archived` **不是**第五阶段（见本文件「archived 冷库」；不进阶段表、不进 `study_folder_stage_aliases`）。
 
 ### closeout（物理落点；绑 accepted 流程结束）
@@ -69,12 +69,12 @@ owns: [Z1, Z2]
 **目标：** 按 closeout 精简 `accepted\<prefix_suffix>\`，再搬进 `archived\<family(suffix)>\<prefix_suffix>\` + `ARCHIVED.md`。accepted 不长期堆满。本条是**落点契约**（closeout）；关系与 harvest 授权 → §Z1、§Z2、§Z3。harvest ≠ closeout。
 
 ### 课题树精简后硬留
-1. 终稿两份：`Manuscript_<slug>_clean.docx` 与最新的 `Manuscript_<slug>_{V|R|P}…[_tracked].docx`（旧名先问再改名；旧版→`ref/tmp/`）。根上只留这两份**文件**，不要把整夹 `R*` / `P*` 留在根。
-2. 复现 SSOT：`FinalData_<slug>.xlsx`（或 `ref/README` 钉死的现用 data.xlsx）。
-3. 可选：`ref/settings.ini` 指到 `_DataBase\<family>\<prefix_suffix>\`（影像 raw 不进课题树）。
+1. 终稿两份：`Manuscript_<slug>_clean.docx` 与最新的 `Manuscript_<slug>_{V|R|P}…[_tracked].docx`（旧名先问再改名；旧版→`ref\tmp/`）。根上只留这两份**文件**，不要把整夹 `R*` / `P*` 留在根。
+2. 复现 SSOT：`FinalData_<slug>.xlsx`（或 `ref\README` 钉死的现用 data.xlsx）。
+3. 可选：`ref\settings.ini` 指到 `_DataBase\<family>\<prefix_suffix>\`（影像 raw 不进课题树）。
 
 ### R*/P* 整夹进 `_DataBase`
-课题树内名为 `R*` / `P*` 的夹（修订包、投稿包，如 R1/R2/P1/P1.1）收工时**整夹**进 `_DataBase\<family>\<prefix_suffix>\`。若夹内单独文件 ≥20 或明显小文件堆，先 7z/zip + `.files.txt`（见 `zone-database.md`「进 `_DataBase` 多文件先压缩」）。校验通过后，原夹移 `D:\MyProjects\.Del\_by-project\<slug>\`。根上终稿仍只留 `_clean` 与最新带号稿两份**文件**（不是把整夹留在根）。
+课题树内名为 `R*` / `P*` 的夹（修订包、投稿包，如 R1/R2/P1/P1.1）收工时**整夹**进 `_DataBase\<family>\<prefix_suffix>\`。若夹内单独文件 ≥20 或明显小文件堆，先 7z/zip + `.files.txt`（见 `zone-database.md` §1（多文件先压缩））。校验通过后，原夹移 `{DEL}\_by-project\<slug>\`。根上终稿仍只留 `_clean` 与最新带号稿两份**文件**（不是把整夹留在根）。
 
 ### 图分流
 可复现图 → `.Del\_by-project\<slug>\`；不可复现 → `_DataBase`。
@@ -89,9 +89,9 @@ owns: [Z1, Z2]
 
 ## archived 冷库
 
-`D:\MyProjects\archived` 放**已完结**项目：`D:\MyProjects\archived\<family>\<prefix_suffix>\`（L1=`<family>` **家族根**短码；`<family>` 取自 `_diseases.csv` 的 `family` 列，与 `_DataBase\<family>\<prefix_suffix>\` 同桶；第二层 = 完整课题夹名）。不按年份分层。
+`{lab_root}\archived` 放**已完结**项目：`{lab_root}\archived\<family>\<prefix_suffix>\`（L1=`<family>` **家族根**短码；`<family>` 取自 `_diseases.csv` 的 `family` 列，与 `_DataBase\<family>\<prefix_suffix>\` 同桶；第二层 = 完整课题夹名）。不按年份分层。
 
-- **L1 = 家族根：** 冷库按疾病家族/文档类型分桶，桶名 = `_diseases.csv` 的 `family` 列（留空 = 自家族，即基码本身；挂靠按同源聚合，见 `zone-database.md`「同源聚合」）。例：`archived\EGVB\js_CN`、`archived\MHE\ly_SCH_HE`、`archived\OTHERS\lxj_BMP6`。
+- **L1 = 家族根：** 冷库按疾病家族/文档类型分桶，桶名 = `_diseases.csv` 的 `family` 列（留空 = 自家族，即基码本身；挂靠按同源聚合，见 `zone-database.md` §2（同源聚合））。例：`archived\EGVB\js_CN`、`archived\MHE\ly_SCH_HE`、`archived\OTHERS\lxj_BMP6`。
 - **叶夹名后缀 = 病种基码：** `archived\<family>\<prefix>_<suffix>[_<n>]\`；`<suffix>` 仍是基码（去末尾 `_\d+`；`SSD_DKI`、`SCH_HE` 等语义复合整段保留），实例号只留在叶子夹名（例 `archived\CC\fyh_CAC_1\`）。
 - **两树同构：** `_DataBase` 与 `archived` 都用同一个 `<family>` 桶；靠 `_diseases.csv` 的 `suffix`/`family` 对应，S23 同时校验两树桶名与叶后缀。家族桶 `_PHI` / `__zip` / `_thesis` 与 `_lab` 仅存在于 `_DataBase`，冷库不设。
 - **疾病短码 SSOT：** `_DataBase\_diseases.csv`（UTF-8；列 `suffix,name_en,name_zh,l1,l2,aliases,family`）。`suffix` = 基码；`family` = 家族根（留空 = 自家族）；编号形式进 `aliases`（如 `SSD_1`）。中英文全称**只**进本表（及 `_index.csv` 可抄空值）；路径规则不写长病名。
@@ -103,7 +103,7 @@ owns: [Z1, Z2]
 - **非阶段：** 不进阶段表、不进 `study_folder_stage_aliases`；`project-state.yaml` 的 `stage` 保持 `accepted`（不加 `archived` 枚举，避免 MY-SKILLS PR）。
 - **与 QC 禁令消歧：** `My rule.md` §6 与 `skills.md` §6 的 skip/archived 禁令只约束**技能树/文档 QC**，**不适用**项目冷库；冷库 = 已完成，不是未处理。
 - **只读默认：** 冷库不参与日常检索/改写；解冻 = 移回对应阶段夹 + 移除 `ARCHIVED.md`（须当轮点名）。
-- **命名：** `name_zh → prefix` 进 `D:\MyProjects\_Docs\mem\people.csv`（`/mem/` 已 gitignore、_Docs 仓无 remote）。
+- **命名：** `name_zh → prefix` 进 `{doc_root}\mem\people.csv`（`/mem/` 已 gitignore、_Docs 仓无 remote）。
 - 不预建空夹；同一 `<prefix_suffix>` 不重复。
 
 ## 文件落点
@@ -116,18 +116,18 @@ owns: [Z1, Z2]
 | 02 运维（整理 / 清洗 / 同步） | `{code_stats}\tools\`（`{code_stats}` + `tools/<fine-id>/`；席位夹名不镜像 `02-…`/`03-…`）。统计引擎与建模 CLI 在 `{code_root}`。 |
 | 参考包 / 锁定笔记 | 课题 `ref\`。运行键只在 `ref\settings.ini`。可选 `ref\project-state.yaml` 只记设计与稿件进度。 |
 | 现行分析数字 | `<project>/<endpoint>/`；成对比较再套 `<positive_display>_vs_<negative_display>/`。稿件活数字只来自该处 `Results*.html`（新写 `Results{subproject}.html`）。旧 `{endpoint}-results.html`、`results.html` 仍可读取。与 `.xlsx` 冲突以 HTML 为准（`My rule.md` §3）。**结果 HTML 不提升到子工程根**。 |
-| 课题 QC | 主 QC：`<project>/ref/qc.html`。外部 QC：`<project>/ref/qc-ext-*.html`（文件名不用 `qc.html`）。 |
+| 课题 QC | 主 QC：`<project>/ref\qc.html`。外部 QC：`<project>/ref\qc-ext-*.html`（文件名不用 `qc.html`）。 |
 
 同夹多份稿件：留与当前 HTML 相符的最新一份；其余仅当用户要求才移入 `{DEL}`。
 
 
-## 控制台与 `ref/settings.ini`
+## 控制台与 `ref\settings.ini`
 
-- 课题侧运行配置只留 console（`{project}.html`）与 `ref/settings.ini`。
+- 课题侧运行配置只留 console（`{project}.html`）与 `ref\settings.ini`。
 - 起始页占位符、生成脚本与冒烟步骤 → 见 `tools/README.md`。
 - 算法只来自 `{code_modules}`。不留课题内 `modules\`，不留长期 `config\settings.py`。
 - `MODULES_DIR` 必须指向已存在的目录。空或不是目录时，console 与 `import modules` 明确报错，不回退到默认或旧路径。
-- `{project}.html` 当次可覆盖 ini；写回更新 `ref/settings.ini`。无覆盖的命令行只读 ini。
+- `{project}.html` 当次可覆盖 ini；写回更新 `ref\settings.ini`。无覆盖的命令行只读 ini。
 
 ## 子工程约定
 
@@ -141,6 +141,6 @@ owns: [Z1, Z2]
 - **改名 / 搬迁后的旧路径门**（与 `QC.md` R11 同方向，范围扩到项目数据件）：先扫描影响面，再定「改引用 / 留史证 / 回滚」，不允许先改目录、引用以后再说。数据件（csv / tsv / ini / py 等）当批改值，改前备份；活文档改指向，不留旧值；史证（交接单 / MOVED 台账 / changelog）可留旧值，但同句必须带标记词（`史证` / `旧布局` / `MOVED` / `已退役`）。通过标准：命中清单里只剩带标记词的史证行。
 - 课题索引用 `.xlsx`，说明用 `.md`。不用 `*.tsv` 当课题索引。
 - 02 整理 / 清洗 / 同步 / 抽取 → `{SKILLS}\02_data-processing\advanced\route.md`（编码 `coding.md`，抽取 `extract.md`）。表先于统计、`exc`、假分类、控制台键位与界面不在本文件展开 → 同目录 `coding.md` / `extract.md`，以及 `{SKILLS}\02_data-processing\advanced\analysis\pipeline.md`。
-- **`ref/` 子目录** → 同仓 `project-ref-layout.md`；技能正文 `{SKILLS}\00_orchestrator\references\project-ref-layout.md`。
+- **`ref\` 子目录** → 同仓 `project-ref-layout.md`；技能正文 `{SKILLS}\00_orchestrator\references\project-ref-layout.md`。
 
-- **工程入口不用 `.bat`**：课题工程根不建、不复制入口 `.bat`；已有的移 `{DEL}` 并留台账。同步入口 `D:\MyProjects\syn.bat` 不在此列。
+- **工程入口不用 `.bat`**：课题工程根不建、不复制入口 `.bat`；已有的移 `{DEL}` 并留台账。同步入口 `{lab_root}\syn.bat` 不在此列。

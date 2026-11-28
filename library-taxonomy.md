@@ -5,7 +5,7 @@ description: 库分类 L1/L2、三库分工、批件与期刊池契约；伦理�
 
 # 库分类与三库契约（L1/L2 SSOT）
 
-**范围**：`D:\MyProjects\_Docs\_library` 下的 `references`（全文）、`lit-bank`（书目）、`journals`（期刊池）、
+**范围**：`{doc_root}\_library` 下的 `references`（全文）、`lit-bank`（书目）、`journals`（期刊池）、
 
 `ethics`（批件/提取），以及子工程 `ref\citation` / `ref\refer` 的分工。
 
@@ -79,5 +79,5 @@ description: 库分类 L1/L2、三库分工、批件与期刊池契约；伦理�
 
 ## 6 迁移与临时件
 
-- 库内改名/移动：保留 `MOVED-FROM.md` 记录；被替代原件进 `D:\MyProjects\.Del\_by-project\<task>\superseded\`。
+- 库内改名/移动：保留 `MOVED-FROM.md` 记录；被替代原件进 `{DEL}\_by-project\<task>\superseded\`。
 - 未进 `accepted\` 前，子工程的临时/中间/旧版/试跑一律 `ref\tmp\`；**禁止自动进 `{DEL}`、禁止自动删**。

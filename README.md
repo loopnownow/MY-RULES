@@ -32,7 +32,7 @@
 
 | 仓 | 放什么 | 不放什么 |
 |---|---|---|
-| **MY-RULES**（本仓） | 运营政策：布局、落点、新建禁区、网络红线、技能库契约、`ref/` 地图 | 专业技能正文、可运行代码 |
+| **MY-RULES**（本仓） | 运营政策：布局、落点、新建禁区、网络红线、技能库契约、`ref\` 地图 | 专业技能正文、可运行代码 |
 | **MY-SKILLS** | 专业技能：`NN_slug/base/` + `advanced/` + `qc/`（正文 SSOT） | 重分析 / 清洗 / 建模代码；患者数据 |
 | **MY-CODES** | 可运行代码：`modules/` + `model-validation/` + `tools/` | 技能正文；课题配置；患者数据 |
 
@@ -57,8 +57,8 @@
 
 ```bash
 python -B check_paths.py --check   # R4：{SKILLS} 席位/文件存在 + 退役路径 live 引用
-python -B qc_rules.py              # R1–R3、R5–R7、R9、R10：路由闭合、正文无史、旧名唯一、无副本、头字段、行长、节号、指针壳
+python -B qc_rules.py              # R1–R3、R5–R7、R9、R10、R13–R17：路由闭合、正文无史、旧名唯一、无副本、头字段、行长、节号、指针壳、体量、锚点、术语表、路径写法、D 码表
 python -B -m pytest -q tests       # 门的负向用例（改规则时必跑）
 ```
 
-R4 需要本机同时克隆兄弟仓 MY-SKILLS（默认与本仓同级，或设 `SKILLS_ROOT` / `MY_SKILLS`）。`check_paths.py` 缺技能根默认 fail loud（exit 1），除非 `--allow-missing-skills`；`qc_rules.py` 的判据与豁免见 [QC.md](<QC.md>)。不加 CI，检查只在本机跑。
+R4 需要本机同时克隆兄弟仓 MY-SKILLS（默认与本仓同级，或设 `SKILLS_ROOT` / `MY_SKILLS`）。`check_paths.py` 缺技能根默认 fail loud（exit 1），除非 `--allow-missing-skills`；`qc_rules.py` 的判据与豁免见 [QC.md](<QC.md>)。不加 CI，检查只在本机跑。R15 不禁「主人」、R13 对 C8 时已超目标的文件只报告不失败，均异于计划原文（D-3 / D-8）。

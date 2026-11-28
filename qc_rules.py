@@ -1,4 +1,4 @@
-"""Rules gates R1-R3, R5-R7, R9-R10 (R4 lives in check_paths.py; R8 is a PR checklist; R11 lives in _Docs test structure_check.py S30).
+"""Rules gates R1-R3, R5-R7, R9-R10, R13-R17 (R4 lives in check_paths.py; R8 is a PR checklist; R11 lives in _Docs test structure_check.py S30).
 
 Usage:
   python -B qc_rules.py            # report only, exit 1 if any gate fails
@@ -6,13 +6,18 @@ Usage:
 
 Gates (see QC.md §2):
   R1 routing closure   every live md is routed from My rule.md §5 and exists
-  R2 no change history t-ids / decision dates / "此前|曾用|更名|formerly|原 §x"
+  R2 no change history t-ids / decision dates / "此前|曾用|更名|formerly|原 §x|已瘦身|已退休|已卸|已并入|已拆出"
   R3 old names only    old-name tokens live in aliases.yaml
-  R5 no copies         >=40-char sentences must not repeat across live files
+  R5 no copies         >=30-char sentences, similarity >=0.80; short §ID pointers exempt
   R6 frontmatter       name + description on every content file
   R7 line length       no live line over 400 characters
   R9 section refs      every §N resolves to a numbered heading in the target file
   R10 no pointer shells a stub, or an empty rule, is not a rule — delete it
+  R13 size report      L0/L1/overview targets; currently-over files report only (D-8)
+  R14 anchors          letter §IDs unique, owns: match, title pointers, up:, routes:
+  R15 glossary         L0 §4 terminology table must exist (does not ban 主人; D-3)
+  R16 path writing     no ref/ outside code/URL; drive letters only in §4 / overlay / aliases
+  R17 D-code table     db-gates.md codes unique and complete vs header exclusions
 
 The alias registry and this file itself are exempt.
 """
@@ -50,11 +55,13 @@ ARCHIVE = {"aliases.yaml", "QC.md"}
 
 T_ID_RE = re.compile(r"(?<![A-Za-z0-9])t\d{3,4}[a-z]?(?![A-Za-z0-9])")
 DATE_RE = re.compile(r"\b20\d{2}-\d{2}-\d{2}\b")
-HISTORY_WORDS = re.compile(r"此前|曾用|更名|formerly|原\s*My rule|原\s*§|旧\s*§", re.I)
+HISTORY_WORDS = re.compile(r"此前|曾用|更名|formerly|原\s*My rule|原\s*§|旧\s*§|已瘦身|已退休|已卸|已并入|已拆出", re.I)
 # Data thresholds are rules, not change history.
 THRESHOLD_CUES = ("≥", ">=", "早于", ">")
 LINE_MAX = 400
-SENTENCE_MIN = 40
+SENTENCE_MIN = 30
+R5_THRESHOLD = 0.80
+R5_POINTER_MAX = 60
 
 # Old names that may legitimately appear as "do not recreate" bans.
 BAN_CUES = ("勿再新建", "已退役", "退役", "禁止", "勿用", "不要",
@@ -142,6 +149,14 @@ def check_r3() -> list[dict]:
     return hits
 
 
+SECTION_ID_RE = re.compile(r"§\s*(?:[A-Z]\d+|\d+(?:\.\d+)*)")
+
+
+def is_r5_pointer_exempt(s: str) -> bool:
+    """Narrow exemption (D-5): <=60 chars, contains → and a §ID."""
+    return len(s) <= R5_POINTER_MAX and "→" in s and bool(SECTION_ID_RE.search(s))
+
+
 def sentences(text: str):
     for raw in re.split(r"(?<=[。；;])|\n", text):
         s = raw.strip()
@@ -149,8 +164,8 @@ def sentences(text: str):
             continue
         if s.startswith(("|", "#", "```", "- **", "  -", "1.", "2.", "3.", "4.", "5.")):
             continue
-        if "→" in s and any(k in s for k in ("见", "同文件", "细则", "权威", "指针", "落点")):
-            continue  # delegation pointers repeat by design (I1)
+        if is_r5_pointer_exempt(s):
+            continue
         norm = re.sub(r"[\s`*_\[\]()（）<>|#>-]", "", s).lower()
         if len(norm) >= SENTENCE_MIN:
             yield s, norm
@@ -166,7 +181,7 @@ def check_r5() -> list[dict]:
                     continue
                 if norm == other_norm:
                     hits.append(fail("R5", f"{name} == {other_name}: {orig[:60]}..."))
-                elif abs(len(norm) - len(other_norm)) <= 12 and SequenceMatcher(None, norm, other_norm).ratio() >= 0.92:
+                elif abs(len(norm) - len(other_norm)) <= 12 and SequenceMatcher(None, norm, other_norm).ratio() >= R5_THRESHOLD:
                     hits.append(fail("R5", f"{name} ~ {other_name} (near-copy): {orig[:60]}..."))
             seen.append((name, orig, norm))
     return hits
@@ -274,6 +289,326 @@ def check_r10() -> list[dict]:
     return hits
 
 
+
+# ---------- R13–R17 ----------
+
+L0_FILE = "My rule.md"
+OVERVIEW_FILE = "workspace-layout.md"
+L0_TARGET = 6000
+L1_TARGET = 12000
+OVERVIEW_TARGET = 3000
+# D-8: files already over target at C8. Measured and printed; do not fail. Pending owner confirmation.
+R13_GRANDFATHER = frozenset({"My rule.md", "zone-database.md"})
+SUPPORT_FILES = frozenset({"README.md", "QC.md"})
+
+LETTER_ID_RE = re.compile(r"§\s*([A-Z]\d+)")
+BOLD_DEF_RE = re.compile(r"\*\*§\s*([A-Z]\d+)\*\*")
+OWN_ID_RE = re.compile(r"([A-Z]\d+)")
+TITLE_PTR_RE = re.compile(
+    r"(?:`([^`]+?\.md)`|本文件|同文件)\s*[「『]([^」』]+)[」』]"
+)
+DRIVE_RE = re.compile(r"(?<![A-Za-z0-9./])([A-Za-z]):(?:\\|/)")
+REF_SLASH_RE = re.compile(r"(?<![A-Za-z0-9_])ref/")
+D_CODE_ROW_RE = re.compile(r"^\|\s*(D\d+)\s*\|", re.M)
+D_RANGE_RE = re.compile(r"D(\d+)\s*[–—-]\s*D?(\d+)")
+
+
+def file_size_kind(name: str) -> tuple[str, int | None]:
+    if name == L0_FILE:
+        return "L0", L0_TARGET
+    if name == OVERVIEW_FILE:
+        return "总图", OVERVIEW_TARGET
+    if name in SUPPORT_FILES or name == "aliases.yaml":
+        return "支撑", None
+    return "L1", L1_TARGET
+
+
+def r13_rows() -> list[dict]:
+    rows = []
+    for name in ROUTED:
+        text = load(name)
+        fm = frontmatter(text)
+        n = len(text)
+        kind, target = file_size_kind(name)
+        generated = fm.get("generated") == "true"
+        over = target is not None and n > target and not generated
+        rows.append({
+            "file": name, "kind": kind, "chars": n, "target": target,
+            "generated": generated, "over": over,
+            "grandfathered": name in R13_GRANDFATHER,
+        })
+    return rows
+
+
+def format_r13_table(rows: list[dict]) -> str:
+    lines = ["R13 size (python len, full file):"]
+    for r in rows:
+        tgt = "—" if r["target"] is None else str(r["target"])
+        if r["generated"]:
+            flag = "exempt-generated"
+        elif r["target"] is None:
+            flag = "n/a"
+        elif not r["over"]:
+            flag = "OK"
+        elif r["grandfathered"]:
+            flag = "OVER (grandfathered, report only; D-8)"
+        else:
+            flag = "OVER"
+        lines.append(f"  {r['file']:28} {r['kind']:4} {r['chars']:6} / {tgt:>6}  {flag}")
+    return "\n".join(lines)
+
+
+def check_r13() -> list[dict]:
+    """Targets stay 6000/12000/3000. Grandfathered over-target files do not fail."""
+    hits = []
+    for r in r13_rows():
+        if r["over"] and not r["grandfathered"] and not r["generated"]:
+            hits.append(fail(
+                "R13",
+                f"{r['file']}: {r['chars']} chars > {r['kind']} target {r['target']}",
+            ))
+    return hits
+
+
+def letter_defs() -> dict[str, list[tuple[str, int, str]]]:
+    """id -> list of (file, line, kind) for owns: and **§ID** definitions."""
+    found: dict[str, list[tuple[str, int, str]]] = {}
+    for name in ROUTED:
+        text = load(name)
+        fm = frontmatter(text)
+        for oid in OWN_ID_RE.findall(fm.get("owns", "")):
+            found.setdefault(oid, []).append((name, 0, "owns"))
+        for i, line in enumerate(text.splitlines(), 1):
+            for m in BOLD_DEF_RE.finditer(line):
+                found.setdefault(m.group(1), []).append((name, i, "bold-def"))
+    return found
+
+
+def heading_texts(name: str) -> list[str]:
+    if not (ROOT / name).exists():
+        return []
+    heads = []
+    for line in load(name).splitlines():
+        m = re.match(r"^#{1,6}\s+(.+)$", line)
+        if m:
+            heads.append(re.sub(r"[`*]", "", m.group(1)).strip())
+    return heads
+
+
+def title_matches(title: str, heads: list[str]) -> bool:
+    tn = re.sub(r"[`*]", "", title).strip()
+    for h in heads:
+        if tn == h or tn in h or h in tn:
+            return True
+    return False
+
+
+def section_numbers_any(name: str) -> set[str]:
+    return section_numbers(name)
+
+
+def check_r14() -> list[dict]:
+    hits = []
+    defs = letter_defs()
+
+    # unique bold-def file; owns: must match bold-def set in that file
+    bold_files: dict[str, set[str]] = {}
+    owns_files: dict[str, set[str]] = {}
+    for oid, locs in defs.items():
+        bold = {f for f, _, k in locs if k == "bold-def"}
+        own = {f for f, _, k in locs if k == "owns"}
+        bold_files[oid] = bold
+        owns_files[oid] = own
+        if len(bold) > 1:
+            hits.append(fail("R14", f"§{oid}: defined in multiple files {sorted(bold)}"))
+        if len(bold) == 1 and own and bold != own:
+            hits.append(fail("R14", f"§{oid}: owns: {sorted(own)} != definition file {sorted(bold)}"))
+        if len(bold) == 1 and not own:
+            hits.append(fail("R14", f"§{oid}: defined in {sorted(bold)[0]} but missing from owns:"))
+        if own and not bold:
+            hits.append(fail("R14", f"§{oid}: listed in owns: {sorted(own)} but no **§{oid}** definition"))
+
+    defined = {oid for oid, locs in defs.items() if any(k == "bold-def" for _, _, k in locs)}
+    for name in ROUTED:
+        for i, line in enumerate(load(name).splitlines(), 1):
+            # skip the definition itself
+            for m in re.finditer(r"§\s*([A-Z]\d+)(?:\s*[–—-]\s*([A-Z]\d+))?", line):
+                ids = [m.group(1)]
+                if m.group(2):
+                    ids.append(m.group(2))
+                for oid in ids:
+                    if oid not in defined:
+                        hits.append(fail("R14", f"{name}:{i}: §{oid} has no unique definition"))
+
+    # title pointers
+    for name in ROUTED:
+        for i, line in enumerate(load(name).splitlines(), 1):
+            for m in TITLE_PTR_RE.finditer(line):
+                target = m.group(1) or name
+                title = m.group(2)
+                if not (ROOT / target).exists():
+                    hits.append(fail("R14", f"{name}:{i}: title pointer target missing: {target}"))
+                    continue
+                if not title_matches(title, heading_texts(target)):
+                    hits.append(fail("R14", f"{name}:{i}: title {title!r} not a heading in {target}"))
+
+    # up:
+    for name in ROUTED:
+        up = frontmatter(load(name)).get("up")
+        if not up:
+            continue
+        m = re.match(r"`?(.+?\.md)`?(?:\s+§\s*(\S+))?\s*$", up)
+        if not m:
+            hits.append(fail("R14", f"{name}: unparsable up: {up!r}"))
+            continue
+        target, secn = m.group(1).strip(), m.group(2)
+        if not (ROOT / target).exists():
+            hits.append(fail("R14", f"{name}: up: target missing: {target}"))
+            continue
+        if secn and re.match(r"^\d", secn):
+            nums = section_numbers_any(target)
+            if secn not in nums and not any(n.startswith(secn + ".") for n in nums):
+                hits.append(fail("R14", f"{name}: up: §{secn} not found in {target}"))
+
+    # routes: vs §5 读 column
+    router = load("My rule.md")
+    fm = frontmatter(router)
+    routes = [x.strip(" []") for x in fm.get("routes", "").split(",") if x.strip()]
+    body = router
+    m5 = re.search(r"^# 5 .+$", body, re.M)
+    m6 = re.search(r"^# 6 .+$", body, re.M)
+    if not m5:
+        hits.append(fail("R14", "My rule.md: missing # 5 routing table"))
+    else:
+        sec5 = body[m5.start(): m6.start() if m6 else len(body)]
+        read_md = []
+        for line in sec5.splitlines():
+            if not line.startswith("|") or re.match(r"^\|\s*-+", line):
+                continue
+            cells = [c.strip() for c in line.strip().strip("|").split("|")]
+            if len(cells) < 2 or cells[0] in {"触发", "触发条件"} or cells[1] in {"读", "读什么"}:
+                continue
+            for fn in re.findall(r"`([A-Za-z0-9_. -]+\.md)`", cells[1]):
+                if (ROOT / fn).exists():
+                    read_md.append(fn)
+        if set(routes) != set(read_md):
+            hits.append(fail(
+                "R14",
+                "routes: != §5 读 column: "
+                f"only-routes={sorted(set(routes)-set(read_md))} "
+                f"only-§5={sorted(set(read_md)-set(routes))}",
+            ))
+    return hits
+
+
+def check_r15() -> list[dict]:
+    """L0 §4 terminology table must exist. Does not ban 主人 (D-3; differs from plan)."""
+    hits = []
+    text = load("My rule.md")
+    m4 = re.search(r"^# 4 .+$", text, re.M)
+    m5 = re.search(r"^# 5 .+$", text, re.M)
+    if not m4:
+        hits.append(fail("R15", "My rule.md: missing # 4 别名与术语"))
+        return hits
+    sec4 = text[m4.start(): m5.start() if m5 else len(text)]
+    if "术语" not in sec4:
+        hits.append(fail("R15", "My rule.md §4: 术语表 missing (need the word 术语)"))
+    # existing terms mentioned in the current glossary
+    for token in ("`A`", "`Adm`", "`00`"):
+        if token not in sec4:
+            hits.append(fail("R15", f"My rule.md §4: glossary missing {token}"))
+    return hits
+
+
+def _mask_exempt_path_spans(text: str) -> str:
+    def sp(m: re.Match) -> str:
+        return re.sub(r"[^\n]", " ", m.group(0))
+    out = re.sub(r"```.*?```", sp, text, flags=re.S)
+    out = re.sub(r"https?://\S+", sp, out)
+    out = re.sub(r"file:///\S+", sp, out)
+    return out
+
+
+def _in_l0_section4(name: str, lineno: int, text: str) -> bool:
+    if name != "My rule.md":
+        return False
+    s4 = s5 = None
+    for i, line in enumerate(text.splitlines(), 1):
+        if re.match(r"^# 4 ", line):
+            s4 = i
+        elif re.match(r"^# 5 ", line) and s4 is not None:
+            s5 = i
+            break
+    return s4 is not None and s4 <= lineno < (s5 or 10**9)
+
+
+def check_r16() -> list[dict]:
+    hits = []
+    allowed_drive_files = {"local-overlay.md", "aliases.yaml"}
+    for name in list(dict.fromkeys(CONTENT + ["README.md", "QC.md"])):
+        raw = load(name)
+        masked = _mask_exempt_path_spans(raw)
+        raw_lines = raw.splitlines()
+        mask_lines = masked.splitlines()
+        for i, (oline, mline) in enumerate(zip(raw_lines, mask_lines), 1):
+            if REF_SLASH_RE.search(mline):
+                hits.append(fail("R16", f"{name}:{i}: ref/ outside code/URL (use ref\\)"))
+            for m in DRIVE_RE.finditer(mline):
+                if name in allowed_drive_files or _in_l0_section4(name, i, raw):
+                    continue
+                hits.append(fail("R16", f"{name}:{i}: drive letter {m.group(0)!r} outside §4 / local-overlay.md / aliases.yaml"))
+    return hits
+
+
+def _parse_declared_d_exclusions(text: str) -> set[int]:
+    """Integers in D1–D92 that the file says are absent or out of the table."""
+    excluded = set()
+    # allow `D10`–`D18` 不存在 and D76–D86 判级以 gates.py 为准
+    rng = r"D(\d+)`?\s*[–—-]\s*`?D?(\d+)`?"
+    for m in re.finditer(rng + r"\s*不存在", text):
+        a, b = int(m.group(1)), int(m.group(2))
+        excluded.update(range(min(a, b), max(a, b) + 1))
+    for m in re.finditer(r"(?<![\d–—-])D(\d+)\s*不存在", text):
+        excluded.add(int(m.group(1)))
+    for m in re.finditer(rng + r"\s*判级以\s*`?gates\.py`?\s*为准", text):
+        a, b = int(m.group(1)), int(m.group(2))
+        excluded.update(range(min(a, b), max(a, b) + 1))
+    return excluded
+
+
+def check_r17() -> list[dict]:
+    """Intra-table D-code uniqueness and completeness vs header (D-6). No bind to gates.py."""
+    hits = []
+    text = load("db-gates.md")
+    rows = D_CODE_ROW_RE.findall(text)
+    seen = {}
+    nums = []
+    for i, code in enumerate(rows, 1):
+        n = int(code[1:])
+        nums.append(n)
+        if code in seen:
+            hits.append(fail("R17", f"db-gates.md: duplicate {code}"))
+        seen[code] = i
+    header = re.search(r"D(\d+)\s*[–—-]\s*D?(\d+)", text)
+    if not header:
+        hits.append(fail("R17", "db-gates.md: header missing D-range declaration"))
+        return hits
+    lo, hi = int(header.group(1)), int(header.group(2))
+    excluded = _parse_declared_d_exclusions(text)
+    for n in nums:
+        if n < lo or n > hi:
+            hits.append(fail("R17", f"db-gates.md: {f'D{n}'} outside declared D{lo}–D{hi}"))
+        if n in excluded:
+            hits.append(fail("R17", f"db-gates.md: {f'D{n}'} is declared excluded but appears in the table"))
+    missing = [n for n in range(lo, hi + 1) if n not in nums and n not in excluded]
+    if missing:
+        sample = ", ".join(f"D{n}" for n in missing[:12])
+        more = f" (+{len(missing)-12})" if len(missing) > 12 else ""
+        hits.append(fail("R17", f"db-gates.md: missing codes vs header (not excluded): {sample}{more}"))
+    return hits
+
+
+
 GATES = {
     "R1": check_r1,
     "R2": check_r2,
@@ -283,6 +618,11 @@ GATES = {
     "R7": check_r7,
     "R9": check_r9,
     "R10": check_r10,
+    "R13": check_r13,
+    "R14": check_r14,
+    "R15": check_r15,
+    "R16": check_r16,
+    "R17": check_r17,
 }
 
 
@@ -301,6 +641,10 @@ def main() -> int:
     if args.json:
         print(json.dumps(hits, ensure_ascii=False, indent=2))
     else:
+        try:
+            print(format_r13_table(r13_rows()))
+        except OSError as exc:
+            print(f"R13 size table unavailable: {exc}")
         if not hits:
             print(f"rules QC OK ({', '.join(GATES)})")
         for h in hits:

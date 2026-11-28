@@ -6,23 +6,23 @@ up: My rule.md §5
 
 # 本机布局总图
 
-工作区只有一层（`D:\MyProjects\<stage>\<project>`）；不再有 A/B 双工作区或挂载缓存树。路径别名见 `My rule.md` §4。各区内部规则按 zone 文件，不在本文件展开。
+工作区只有一层（`{lab_root}\<stage>\<project>`）；不再有 A/B 双工作区或挂载缓存树。路径别名见 `My rule.md` §4。各区内部规则按 zone 文件，不在本文件展开。
 
 ## 1 根 → zone
 
 | 根 | 角色 | 细则 |
 |---|---|---|
-| `D:\MyProjects\_DataBase`（`{RAW}`） | 课题原始件（家族桶：`_PHI` / `__zip` / `_thesis`）+ `_` 非课题分支 + `_lab` 历史档只读；除 `_index.csv` / `_diseases.csv` 外只读除非点名 | `zone-database.md`；表结构 `db-schema.md`；D 码 `db-gates.md` |
-| `D:\MyProjects\.Del`（`{DEL}`） | AI 可操作临时 / 移出区（`_by-project` / `_by-function`）；**syn 不同步**（`/XD .Del`） | `zone-del.md` |
-| `D:\MyProjects\_Docs`（`{doc_root}`） | 语料与可复用层：`_library` / `templates` / `mem` / `GitHub` / `test` / `harvest` | `zone-docs.md`；库分类 `library-taxonomy.md` |
-| `D:\MyProjects\_Docs\mem` | bot 记忆导出（仅隐私 + 可变 SSOT）；查阅授权 → `My rule.md` §2 | `execution.md`（mem 口径） |
-| `D:\MyProjects` | 分阶段子工程工作区（`drafting` / `pre-submit` / `reviewing` / `accepted`） | `zone-projects.md` |
-| `D:\MyProjects\archived` | 已完结项目冷库（非阶段、不进阶段别名） | `zone-projects.md` |
+| `{RAW}` | 课题原始件（家族桶：`_PHI` / `__zip` / `_thesis`）+ `_` 非课题分支 + `_lab` 历史档只读；除 `_index.csv` / `_diseases.csv` 外只读除非点名 | `zone-database.md`；表结构 `db-schema.md`；D 码 `db-gates.md` |
+| `{DEL}` | AI 可操作临时 / 移出区（`_by-project` / `_by-function`）；**syn 不同步**（`/XD .Del`） | `zone-del.md` |
+| `{doc_root}` | 语料与可复用层：`_library` / `templates` / `mem` / `GitHub` / `test` / `harvest` | `zone-docs.md`；库分类 `library-taxonomy.md` |
+| `{doc_root}\mem` | bot 记忆导出（仅隐私 + 可变 SSOT）；查阅授权 → `My rule.md` §2 | `execution.md`（mem 口径） |
+| `{lab_root}` | 分阶段子工程工作区（`drafting` / `pre-submit` / `reviewing` / `accepted`） | `zone-projects.md` |
+| `{lab_root}\archived` | 已完结项目冷库（非阶段、不进阶段别名） | `zone-projects.md` |
 
 ## 2 同步
-- `syn.bat`：`D:\MyProjects` → **`E:\Aitor`**（镜像到 Aitor **根**；**不是** `E:\Aitor\MyProjects`）。
+- `syn.bat`：`{lab_root}` → **`{AITOR}`**（镜像到 Aitor **根**；**不是** `{AITOR}\MyProjects`）。
 - `/XD .Del`：不同步 `.Del`；`_DataBase` 随主树同步。
-- 同步入口只有 `D:\MyProjects\syn.bat`（E 侧镜像 `E:\Aitor`）；无其它同步脚本或快捷方式。
+- 同步入口只有 `{lab_root}\syn.bat`（E 侧镜像 `{AITOR}`）；无其它同步脚本或快捷方式。
 
 ## 3 数据角色与单向流（抽象，不改本机盘符）
 
@@ -43,8 +43,8 @@ up: My rule.md §5
 
 | 名称 | 去向 |
 |---|---|
-| `D:\00ds` / 夹名 `00ds` | 禁止再建；改用 `{RAW}`（`D:\MyProjects\_DataBase`）。活引用算 QC 发现，不得当 legacy 保留 |
-| `D:\0script` / 课题根 `0script\` | 禁止再建；改用 `{code_stats}\tools\<fine-id>\` |
+| `00ds` 旧根 / 夹名 `00ds` | 禁止再建；改用 `{RAW}`。活引用算 QC 发现，不得当 legacy 保留 |
+| `0script` 旧根 / 课题根 `0script\` | 禁止再建；改用 `{code_stats}\tools\<fine-id>\` |
 | 活兄弟根 `R&P` | 禁止再建；申请包 → `_DataBase\_grants\<year>\`；评阅 → `_DataBase\_reviews\{peer,grants,thesis}\<year>\`（细则 `zone-database.md`） |
 | `_Docs\_code` | 禁止再建；脚本在 `{code_stats}`；壳与索引在 `{DEL}` |
 | `_DataBase\_lab\ethics` | 禁止再建该子树；批件留存 → `library-taxonomy.md` §3 |

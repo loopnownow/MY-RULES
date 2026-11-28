@@ -52,7 +52,7 @@ owns: [Z3, N2]
 须当轮点名「放 _Docs」才写；默认禁 mkdir，`mem` 例外（`My rule.md` §2）。
 - `templates\`：空白伦理/SCI骨架/清单/金样/brand
 - `_library\ethics\approvals\`：已批批件 PDF+索引
-- `_library\references\`：文献全文；课题 `ref/refer` 只 DOI 指针
+- `_library\references\`：文献全文；课题 `ref\refer` 只 DOI 指针
 - `_library\lit-bank` / `journals\`：书目、期刊池、投稿 prior
 - `harvest\`：可复用写法/方法句（「进skills」再进 MY-SKILLS）
 - `mem\`：people.csv、JCR 可变、证件/签名（不进 skill 正文）
