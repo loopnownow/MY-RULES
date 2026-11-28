@@ -40,7 +40,9 @@ up: My rule.md §5
 
 1. **`map.csv`**：源列 → 目标列的逐列契约，13 列固定（见下表）。文件名即 `map.csv`（目录名已含 slug）；开工落 `_work\`，收口后随库。
 2. **`qc_codes.tsv`**：`qc.code` 受控词表，家族级台账，新增码必须先在词表登记。
-3. **`schema.sql`**：结构唯一真源，由 `schema-v1.md` 反编译生成；手工改库不算建库。
+3. **`schema.sql`**：结构唯一真源，由 `schema-v1.md` 反编译生成；手工改库不算建库。生成物落
+   `{code_root}\tools\db-library\db5t\schema.sql`，随 MY-CODES 提交；生成与校验用 `mkschema.py`
+   （`--check` 比 `source_sha256`，schema-v1.md 一改就报过期）。家族库段落已剔除 `dict` 表（契 3）。
 
 | 列 | 必填 | 含义 |
 |---|---|---|
@@ -61,6 +63,19 @@ up: My rule.md §5
 `map.csv` 是入库前的台账，不是库内表：中文映射、枚举对照、单位换算系数都写在这里，永不写进 `dict` 或 `qc`（律 1）。台账落点 → `zone-database.md` §8。
 
 `qc_codes.tsv` 口径：以首发 16 码为底（清单见 `{SKILLS}\02_data-processing\base\db-library\references\load-pipeline.md` §1.2），旧 190 码按 `superseded_by` 归一。完整词表文件待另文件落盘，本文件不编造 190 码对照表。
+
+## 契 1b 建库工具（三者都只读盘上现状，产出可复核）
+
+三个脚本落在 `{code_root}\tools\db-library\db5t\`，失败即停、不猜：
+
+| 脚本 | 干什么 | 关键开关 | 何时跑 |
+|---|---|---|---|
+| `mkschema.py` | `schema-v1.md` → `schema.sql`：只认两段 ```sql 围栏，7 个模态展开，家族库剔 `dict`，首行记 `source_sha256` | `--check`（只比对，过期 rc=1） | 改 schema 后；建库前 |
+| `newdb.py` | 按 `schema.sql` 建空库：家族库 + 子库 + `meta` 六键 + `目录说明.md`；目标已存在就跳过，绝不覆盖 | `--family/--slug/--root/--period-unit/--dry-run` | 每次新建子库 |
+| `mkdict.py` | 旧家族 `dict`（11 列）→ 全局 14 列 `dict.db`，补 `scope='stage'` 骨架行，同键异写进冲突报告 | `--dry-run/--out/--report` | dict 真源变更后；新家族入库前 |
+
+`--dry-run` 是默认姿势：先看它要写哪些路径、几行，再跑。三者都不写 `_DataBase` 以外的地方
+（`newdb.py` 默认写 stage，`--root` 显式指真库时才写真库）。
 
 ## 契 2 五条硬律
 
@@ -92,7 +107,25 @@ up: My rule.md §5
 - dict 里没有该列 → 不许 ALTER，先补 dict 行。
 - dict 行通过 `source='map:<slug>#<n>'` 指回 map.csv 行号。
 
-建该全局库待另点名；D95 已按 `DB5T_DICT` 读该表。
+建该全局库**已落**（2026-11-28，`mkdict.py`）：28 家族里 25 个有旧 `dict`（LAA / UGIB / VEGF 为空表，待补），
+旧 11 列补 `unit_si` / `enum_values` / `canonical_id` 三列为 14 列，另追加 116 行 `scope='stage'` 骨架行
+（家族表全列 + `src` / `person` / `qc` 全列 + `clin` 头 11 列与 15 个 `path_*`），合并后 24,329 行，
+43 处同键异写进冲突报告（`id.name` / `id.id_status` / `ref_project.period_unit` 在列）。
+D95 按 `DB5T_DICT` 读该表；旧家族库里的 `dict` 表未删（那是批 C）。
+
+### 过渡期口径（D95 / D96 / D98）
+
+代码已入 `gates.py`，判级先按 report-only：默认输出 `· 待修(report-only)`，`--strict` 或
+`DB5T_GATES_STRICT=1` 才写 `!! P1`。理由：这条判据有三块存量债不是「改完就对」的——
+
+| 码 | 存量（2026-11-28 实测） | 翻 P1 的条件 |
+|---|---|---|
+| D95 | 829 项，主要是旧 `dict.dtype='text'` 与物理 `INTEGER`/`REAL` 矛盾（数值全存 TEXT 的旧账） | 折叠进 L2 清洗回填，逐列改 dtype |
+| D96 | 56 / 80 个子库 `Σ clin.merged_n ≠ Σ src.rows(active)` | 每库重算 src.rows 与 merged_n 并留 dry-run 记录 |
+| D98 | 180,002 格（中文业务值为主，`SCC` 51,634 / `OTHERS` 46,672 / `EC` 16,138） | 按列裁决「该列本就该中文」还是「命名/单位该外置」 |
+
+翻 P1 的时机是试点 B（MM/zy_MM 重建）与试点 A（EC 重放）都跑通之后；在那之前把这三码当 P1 会让
+`gates all` 全线变红，红到看不出新问题。过渡期结束的标志：D95 只剩 0 项、D96 差额清零、D98 有逐列豁免清单。
 
 ### 律 5 不可决即问（六类停列）
 

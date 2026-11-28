@@ -156,6 +156,6 @@ up: My rule.md §5
 | `qc_codes.tsv` | `<family>\_work\qc_codes.tsv` | 建库人 | D94 |
 | `REVIEW-QUEUE.csv` | `<family>\_work\REVIEW-QUEUE.csv` | 停列时自动追加 | 用户 / D94 |
 | `dict.db` | `{RAW}\Family\dict.db`（全局唯一） | 建库人 | 所有门禁与脚本 |
-| `schema.sql` | 由 `schema-v1.md` 反编译生成（`db-build-contract.md` 契 1） | 建库人 | 建空库 |
+| `schema.sql` | `{code_root}\tools\db-library\db5t\schema.sql`（由 `schema-v1.md` 反编译，随代码仓提交） | `mkschema.py` | `newdb.py` |
 
 规则：中文映射、单位换算系数、枚举对照只许出现在 `map.csv` 与 `qc_codes.tsv`，不得写进 `dict` / `qc`（`db-build-contract.md` 律 1）。`qc_codes.tsv` 以首发 16 码为底、旧 190 码按 `superseded_by` 归一；完整词表文件待另文件落盘。
