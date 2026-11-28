@@ -73,8 +73,10 @@ up: My rule.md §5
 | `mkschema.py` | `schema-v1.md` → `schema.sql`：只认两段 ```sql 围栏，7 个模态展开，家族库剔 `dict`，首行记 `source_sha256` | `--check`（只比对，过期 rc=1） | 改 schema 后；建库前 |
 | `newdb.py` | 按 `schema.sql` 建空库：家族库 + 子库 + `meta` 六键 + `目录说明.md`；目标已存在就跳过，绝不覆盖 | `--family/--slug/--root/--period-unit/--dry-run` | 每次新建子库 |
 | `mkdict.py` | 旧家族 `dict`（11 列）→ 全局 14 列 `dict.db`，补 `scope='stage'` 骨架行，同键异写进冲突报告 | `--dry-run/--out/--report` | dict 真源变更后；新家族入库前 |
+| `mkid.py` | 阶段 3：从退役家族库搬 `id`/`id_number`，现算 `longitudinal_n`/`multi_record_n`，写 `ref_project` 与两库 `meta`（`subject_types`/`identity_grain`） | `--from-family-db/--family/--slug/--identity-grain` | 建空库后、回填前 |
+| `fill.py` | 阶段 5：读 13 列 `map.csv` 按依赖序 src→person→clin→`_modules_*`→`*_val` 回填；无 dict 行不 ALTER；重跑先清本 src 旧行 | `--map/--root/--family/--slug/--src-root/--dry-run` | 每个列组一批，先 dry-run |
 
-`--dry-run` 是默认姿势：先看它要写哪些路径、几行，再跑。三者都不写 `_DataBase` 以外的地方
+`--dry-run` 是默认姿势：先看它要写哪些路径、几行，再跑。五者都不写 `_DataBase` 以外的地方
 （`newdb.py` 默认写 stage，`--root` 显式指真库时才写真库）。
 
 ## 契 2 五条硬律
