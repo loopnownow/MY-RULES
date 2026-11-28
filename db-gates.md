@@ -91,7 +91,7 @@ generated: false
 | D91 | 病理长文本不得入 `clin` | P2 | 除 `path_dx` / `path_other` / `ihc_panel_raw` 外，`clin` 任一 TEXT 列 max 长度 >200 即报；`path_dx` >1000 字须有 `qc(PATH_DX_LONG)`。只报数：先把长列点出来，再决定拆哪一列 |
 | D92 | 入表清洗残留 | P2 | 值内嵌单位（`\d+\s*(mm|cm|%)`）、`值+单位` 与 `号+名` 拼接串、全角数字、`#VALUE!` / `#N/A` 公式残值、行内换行、首尾空白；逐列报数。实测 `lvsi0` 里 108 个 `#VALUE!` 与 `g分级` 的 `I/高/1/0` 混装都属此类 |
 | D93 | 参考区间软门 | 只报数（尚未机器化） | 对 `ri_normal` 软判：`OUT_OF_RI` / `UNIT_SUSPECT` / `IMPLAUSIBLE`。单侧区间不得判单位。基线不是失败阈值：121 列 pass 27 / OUT_OF_RI 61 / IMPLAUSIBLE 5 列 71 值。 |
-| D94 | qc.code 受控 | report-only | `qc.code` 须在 `{code_root}\tools\db-library\db5t\qc_codes.tsv`（code/severity/meaning/since）登记。2026-11-28 词表落地 42 码；未登记码只报数、不判级（翻 P1 前先把码补齐）。旧库 190 码中与清洗无关的历史码不强制入表。 |
+| D94 | qc.code 受控 | report-only | `qc.code` 须在 `{code_root}\tools\db-library\db5t\qc_codes.tsv`（code/severity/meaning/since）登记。2026-11-28 词表落地 **189 码**（首版 42 基础上，从退役库 190 个历史码里挑入 147）；另 `qc_codes_retired.tsv` 记 11 个被新码取代（`superseded_by`）与 16 个一次性历史码（`status=retired`，样例保留）。未登记码只报数、不判级（翻 P1 前先把码补齐）；新增码先登记再写库（`db-build-contract.md` 契 11.3）。 |
 | D95 | dict 覆盖契约 | P1（默认 report-only，`--strict` 转 P1） | 物理列（除 `meta` / `dict`）须在 `{RAW}\Family\dict.db` 有行；`dtype` 与存储域不矛盾；scope 解析顺序见 `db-build-contract.md` 契 3。 |
 | D96 | 计数守恒 | P1（默认 report-only，`--strict` 转 P1） | `Σ clin.merged_n = Σ src.rows`（`src.status='active'`）。 |
 | D97 | 列格式纯度 | 尚未机器化 / report-only | 按域判混合；禁 `typeof` 四类占比（曾误报 32 列）。基线：真混合 0 列。 |
