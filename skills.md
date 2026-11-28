@@ -13,7 +13,7 @@ description: 技能库契约、按需加载、演进门、PR 与合并后部署�
 
 **(a)** 禁止 agent 直接改 `{SKILLS}` 技能树任何文件。内容变更只经主人或 GitHub MY-SKILLS PR/merge（§5）。发现缺失/过时：只报告 + 按 §3 提案。
 
-**(b) 合并后部署同步**：`{SKILLS}` 即 GitHub 克隆（与 `{skills_runtime}`/`{skills_git}` 同一棵树；盘面见 §4）。merge 后对该克隆 `git pull`；禁止再拷到第二棵 runtime 树；禁止整树盲盖。细则→`{SKILLS}\00_orchestrator\references\lifecycle-cache.md`。
+**(b) 合并后部署同步**：`{SKILLS}` 即 GitHub 克隆（与 `{skills_runtime}`/`{skills_git}` 同一棵树；盘面见 §4）。merge 后对该克隆 `git pull`；禁止再拷到第二棵 runtime 树；禁止整树盲盖。细则→`{SKILLS}\00_orchestrator\references\session-pick.md`。
 
 ## 2 按需使用
 
@@ -33,8 +33,7 @@ description: 技能库契约、按需加载、演进门、PR 与合并后部署�
 
 ## 4 单一技能源（禁止再建第二条树）
 
-Live bodies SSOT = MY-SKILLS in-repo `NN_slug/base/`。不得在别处再建第二棵技能树、挂载缓存树或整树副本；
-禁止对任何旧缓存路径 `robocopy /MIR` 或重建包字节。缓存边界→`{SKILLS}\00_orchestrator\references\lifecycle-cache.md`。
+Live bodies SSOT = MY-SKILLS in-repo `NN_slug/base/`。不得在别处再建第二棵技能树、挂载缓存树或整树副本。外挂挂载（MOUNTED / PROPOSED / REFERENCE 与包缓存溯源）已正式废除；全部细 id 均在仓内（source: my-skills）。禁止对任何旧缓存路径 `robocopy /MIR` 或重建包字节。
 
 
 **写作语料席位（证据，非判据）**：`GLOSSARY_ROOT` = `_Docs\_library\glossary`。口径与 glossary README 对齐为 **四层**（`words` / `sentences` / `paragraphs` + `sections` 指针页）+ `index.csv`；`banks\` 只作证据。判据 SSOT 在 `{SKILLS}\05_manuscript\base\vocab\`（+ 具名 advanced，如 `preferred-advanced.md` / `ai_patterns.md` / de-AI lexicons）。Rules 只写短指针；细则与路由见 MY-SKILLS `05_manuscript/SKILL.md`。
