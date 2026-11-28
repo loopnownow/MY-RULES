@@ -38,7 +38,7 @@ up: My rule.md §5
 
 新建一个子库，先冻结三份契约，缺一不许建表、不许导数据：
 
-1. **`map.csv`**：源列 → 目标列的逐列契约，13 列固定（见下表）。文件名即 `map.csv`（目录名已含 slug）；开工落 `_work\`，收口后随库。
+1. **`map.csv`**：源列 → 目标列的逐列契约，13 列固定（见下表）。文件名即 `map.csv`（目录名已含 slug）；开工落 `{DEL}\_by-function\<batch>\_work\<slug>\`，收口后随库。
 2. **`qc_codes.tsv`**：`qc.code` 受控词表，家族级台账，新增码必须先在词表登记。
 3. **`schema.sql`**：结构唯一真源，由 `schema-v1.md` 反编译生成；手工改库不算建库。生成物落
    `{code_root}\tools\db-library\db5t\schema.sql`，随 MY-CODES 提交；生成与校验用 `mkschema.py`
@@ -239,7 +239,7 @@ _DataBase\
 │  │  ├─ __zip\thesis\<slug>\ ← 论文原件目标落点（勿再新建 _thesis）
 │  │  └─ <slug>\<slug>db      ← 子工程库：clin / person / qc / src / _modules_* / *_value
 │  └─ …共 28
-└─ _grants\ _lab\ _med\ _reviews\ _teach\ _work\
+└─ _grants\ _lab\ _med\ _reviews\ _teach\        ← 不再新建 _work 类工作区
 ```
 
 - 家族库与子库文件名必须等于所在目录名 + `db`。

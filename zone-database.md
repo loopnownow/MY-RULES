@@ -77,7 +77,7 @@ up: My rule.md §5
 
 ## 4 家族桶落点（`_PHI` / `__zip`）
 
-- **一句话（目标态，已落地）**：课题家族进 `{RAW}\Family\<family>\`。一个家族 = 身份桶 `_PHI\` + 原始件池 `__zip\` + 每个子工程叶内一个子库 `<slug>db`。全局词典唯一落点 `{RAW}\Family\dict.db`。学位原件目标落点 `__zip\thesis\<slug>\`；勿再新建 `_thesis`。`_PHI` 只放身份。非家族目录（`_grants` / `_lab` / `_med` / `_reviews` / `_teach` / `_work` 等）留 `_DataBase` 根，不进 `Family\`。
+- **一句话（目标态，已落地）**：课题家族进 `{RAW}\Family\<family>\`。一个家族 = 身份桶 `_PHI\` + 原始件池 `__zip\` + 每个子工程叶内一个子库 `<slug>db`。全局词典唯一落点 `{RAW}\Family\dict.db`。学位原件目标落点 `__zip\thesis\<slug>\`；勿再新建 `_thesis`。`_PHI` 只放身份。非家族目录（`_grants` / `_lab` / `_med` / `_reviews` / `_teach` 等）留 `_DataBase` 根，不进 `Family\`；**`_work` 类工作区不再新建**，临时件一律落 `{DEL}`。
 - **现行盘面（2026-11-28 已转正）**：26 个家族已在 `{RAW}\Family\<family>\`；`VEGF` 仅有家族库（`meta.no_data=1`，无子库）；`dict.db` 在 `{RAW}\Family\dict.db`。旧家族树已整体移入 `{DEL}\_by-function\db5t-build-20261128\retired-20261128\`；论文实体改挂 `__zip\thesis` 仍待另点名。
 - **`<family>\_PHI\`（唯一 PHI 落点）**：放家族库 `<family>db`（有 PHI 家族：`meta` / `id` / `id_number` / `ref_project` 及既有 `ref_*`；**不留 `dict` 表**，格式真源改读全局 `{RAW}\Family\dict.db`）、冻结旧库 `<family>db_6t`、`目录说明.md`、可重建预览页；**不存业务表**。整桶不得外发、不得进任何仓、不得压包外送；外发只走子库（D28 零 PHI 通过后）。现行 D23 / S25 仍按旧五表（含家族 `dict`）做机器校验，待另批改 MY-CODES。
 - **`<family>\__zip\`（原始件池）**：按子工程分夹 `<family>\__zip\<leaf>\`，放该叶原始件压缩档与随档清单 `<名>.files.txt`；随档非表格件（原始图 / 扫描记录 / 说明）同夹一层平铺，不建 `raw\` / `cohort\` 子夹。档内表格解出按「散表归并」入库，原档留本桶；桶根须自带 `目录说明.md`。
@@ -148,14 +148,14 @@ up: My rule.md §5
 
 ## 8 台账落点（契约与回填）
 
-建库产生的契约与台账，一律不进库内表。路径按目标态书写；建库过程中的临时台账落 `{DEL}\_by-function\<batch>\`（如 `db5t-build-20261128`），不留在家族目录。
+建库产生的契约与台账，一律不进库内表。路径按目标态书写；建库过程中的临时台账落 `{DEL}\_by-function\<batch>\`（如 `db5t-build-20261128`），不留在家族目录。**库根与家族目录下不得新建 `_work`**：台账开工落批次目录，收口时只有 `map.csv` 随库进叶（叶内仍只留 `<slug>db`、`map.csv`、`目录说明.md`）。
 
 | 台账 | 落点 | 谁写 | 谁读 |
 |---|---|---|---|
-| `map.csv` | `_work\map.csv`（收口后随库到 `<family>\<slug>\map.csv`） | 建库人 | `fill` / D95 |
-| `qc_codes.tsv` | `<family>\_work\qc_codes.tsv` | 建库人 | D94 |
-| `REVIEW-QUEUE.csv` | `<family>\_work\REVIEW-QUEUE.csv` | 停列时自动追加 | 用户 / D94 |
+| `map.csv` | 开工 `{DEL}\_by-function\<batch>\_work\<slug>\map.csv`；收口后随库到 `<family>\<slug>\map.csv` | 建库人 | `fill` / D95 |
+| `qc_codes.tsv` | `{DEL}\_by-function\<batch>\_work\<family>\qc_codes.tsv` | 建库人 | D94 |
+| `REVIEW-QUEUE.csv` | `{DEL}\_by-function\<batch>\_work\<family>\REVIEW-QUEUE.csv` | 停列时自动追加 | 用户 / D94 |
 | `dict.db` | `{RAW}\Family\dict.db`（全局唯一） | 建库人 | 所有门禁与脚本 |
 | `schema.sql` | `{code_root}\tools\db-library\db5t\schema.sql`（由 `schema-v1.md` 反编译，随代码仓提交） | `mkschema.py` | `newdb.py` |
 
-规则：中文映射、单位换算系数、枚举对照只许出现在 `map.csv` 与 `qc_codes.tsv`，不得写进 `dict` / `qc`（`db-build-contract.md` 律 1）。`qc_codes.tsv` 以首发 16 码为底、旧 190 码按 `superseded_by` 归一；完整词表文件待另文件落盘。
+规则：中文映射、单位换算系数、枚举对照只许出现在 `map.csv` 与 `qc_codes.tsv`，不得写进 `dict` / `qc`（`db-build-contract.md` 律 1）。`qc_codes.tsv` 已落盘 `{code_root}\tools\db-library\db5t\qc_codes.tsv`（2026-11-28，189 码），退役库 190 个历史码的去向记同目录 `qc_codes_retired.tsv`（`superseded_by` / `retired`）；新增码先登记再写库（`db-build-contract.md` 契 11.3）。
