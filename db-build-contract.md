@@ -56,7 +56,7 @@ up: My rule.md §5
 | `dtype` | 是 | `REAL` / `INTEGER` / `TEXT` / `DATE` / `enum` |
 | `unit` | 否 | 目标单位代码（外置，不写进列名）；无单位写 `-` |
 | `enum_values` | 否 | 英文枚举，竖线分隔（如 `M\|F\|U`）；非枚举写 `-` |
-| `missing_rule` | 是 | `null` / `na` / `pending` |
+| `missing_rule` | 是 | **源侧缺值标记**（`NA\|NR\|.`，竖线分隔）：命中即写 `NULL`。留空=只把空串当缺；`keep`=不判缺、原文照写；`stop`=空就停（契 6，整组不写）。与 `dict.missing_rule` 的**语义**三值（`null`/`na`/`pending`，契 8）不是同一个东西 |
 | `transform` | 否 | 声明式变换，见契 2；无变换写 `-` |
 | `expect_rows` | 是 | 该源列期望落库的非空行数，收口时对账用（契 6） |
 
@@ -64,9 +64,9 @@ up: My rule.md §5
 
 `qc_codes.tsv` 口径：以首发 16 码为底（清单见 `{SKILLS}\02_data-processing\base\db-library\references\load-pipeline.md` §1.2），旧 190 码按 `superseded_by` 归一。完整词表文件待另文件落盘，本文件不编造 190 码对照表。
 
-## 契 1b 建库工具（三者都只读盘上现状，产出可复核）
+## 契 1b 建库工具（六者都只读盘上现状，产出可复核）
 
-三个脚本落在 `{code_root}\tools\db-library\db5t\`，失败即停、不猜：
+六个脚本落在 `{code_root}\tools\db-library\db5t\`，失败即停、不猜：
 
 | 脚本 | 干什么 | 关键开关 | 何时跑 |
 |---|---|---|---|
@@ -74,9 +74,10 @@ up: My rule.md §5
 | `newdb.py` | 按 `schema.sql` 建空库：家族库 + 子库 + `meta` 六键 + `目录说明.md`；目标已存在就跳过，绝不覆盖 | `--family/--slug/--root/--period-unit/--dry-run` | 每次新建子库 |
 | `mkdict.py` | 旧家族 `dict`（11 列）→ 全局 14 列 `dict.db`，补 `scope='stage'` 骨架行，同键异写进冲突报告 | `--dry-run/--out/--report` | dict 真源变更后；新家族入库前 |
 | `mkid.py` | 阶段 3：从退役家族库搬 `id`/`id_number`，现算 `longitudinal_n`/`multi_record_n`，写 `ref_project` 与两库 `meta`（`subject_types`/`identity_grain`） | `--from-family-db/--family/--slug/--identity-grain` | 建空库后、回填前 |
-| `fill.py` | 阶段 5：读 13 列 `map.csv` 按依赖序 src→person→clin→`_modules_*`→`*_val` 回填；无 dict 行不 ALTER；重跑先清本 src 旧行 | `--map/--root/--family/--slug/--src-root/--dry-run` | 每个列组一批，先 dry-run |
+| `fill.py` | 阶段 5：读 13 列 `map.csv` 按依赖序 src→person→clin→`_modules_*`→`*_val` 回填；源 `.xlsx/.xls` 按 sheet+header_row、`.db` 按表名；`transform` 支持 `const:<值>` 与 `mint:<茎>`（发顺序号，同一源值跨 sheet 复用）；`missing_rule` 按源侧标记判缺（`NA` → `NULL`，D97 的修法）；无 dict 行不 ALTER；重跑先清本 src 旧行 | `--map/--root/--family/--slug/--src-root/--dry-run` | 每个列组一批，先 dry-run |
+| `preview.py` | 阶段 7：给刚建好的库出一张只读 HTML 预览（KPI / src 登记 / 表清单 / clin 逐列 dict+NULL+样例 / 抽样 / 门禁摘要），放根目录先给人看；`--gates` 才就地跑门禁 | `--root/--family/--slug/--out/--gates/--sample` | 每个库建完、汇报前 |
 
-`--dry-run` 是默认姿势：先看它要写哪些路径、几行，再跑。五者都不写 `_DataBase` 以外的地方
+`--dry-run` 是默认姿势：先看它要写哪些路径、几行，再跑。除 `preview.py` 只读、`mkdict.py` 写 `{RAW}\Family\dict.db` 外，其余都不写 `_DataBase` 以外的地方
 （`newdb.py` 默认写 stage，`--root` 显式指真库时才写真库）。
 
 ## 契 2 五条硬律
