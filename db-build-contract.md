@@ -4,7 +4,7 @@ description: L1 子页：建库契约（契 1–10、律 1–5）、全局 dict�
 up: My rule.md §5
 ---
 
-# 建库契约（契 1–10）
+# 建库契约（契 1–11）
 
 - 管：新库从零建的硬约束（契 1–10、律 1–5）、全局 `{RAW}\Family\dict.db`、目录目标态、决策基线。
 - 不管：既有表结构细目与 DICOM 映射（→ `db-schema.md`）；D 码正文（→ `db-gates.md`，D93 / D94 / D97 / D99 尚未机器化 / report-only，D95 / D96 / D98 已入 gates.py）；家族桶与台账落点（→ `zone-database.md`）；做法（→ `{SKILLS}\02_data-processing\base\db-library\references\load-pipeline.md`）。
@@ -257,3 +257,32 @@ _DataBase\
 - **D97**：禁止用 `typeof` 四类占比判混合（会把 `INTEGER`+`REAL` 误报 32 列）。基线：真混合 0 列。
 - **D98** 值内糊单位 4 处：`OTHERS/ybc_STWZ.pain_duration`=`300d`、`SLE/mlh_SLE.disease_course`=`<9w`、`HZ/lln_HZ.pain_maximum`=`第一周`、`EGVB/js_TIPS_his.timing_raw`=`After`。另有中文列名 379 个、大写 124、单位内嵌 194 列。
 - **D99** `id.sex`：41,060 NULL + 男1,349 女1,039 男性447 M225 女性212 F211 m15（8 种写法混装，入库时归一）。
+
+## 契 11 入库判据（数据清洗裁定）
+
+来源：2026-11-28 转正后对 27 个家族、68 个子库逐库复核，用户对 12 类「NEEDS-HUMAN」逐条裁定。以后遇到同类情形照此办，不再重复讨论；新情形照「文献—证据—裁定」三段记录到本节。
+
+### 11.1 五条通则
+
+1. **统计结果不入库**：均值±SD、p 值、相关系数、样本量等「对一组病人的汇总」不是患者数据。整列是统计量 → 删列；列里混进统计量 → 该格置 `NULL` 并记 `qc(STAT_NULLED)`。
+2. **PHI 只进家族库**：姓名、院号、身份证、电话、地址出现在业务表即违规。脱敏后写 `id`（`name` / `phone` / `id_card` / `address` / `outpatient_no` …）与 `id_number`，业务列改名 `*_masked` 或整列移走；`person.subject_label` 一律是 uid，不得放姓名。记 `qc(PHI_RELOCATED)`，detail 只写条数，不写姓名。
+3. **同指标双列合并**：同一指标因来源不同拆成两列、且两列互不重叠（无一行同时有值）时，`coalesce` 合并成一列，旧名进 `dict.aliases`，另一列删除。记 `qc(COLS_MERGED)`。
+4. **混合语义列必拆**：一列同时装两种语义（`bmi` 装「身高/体重」、分期码列装整段病理报告）→ 拆到各自语义列，原列删除。真数值进数值列（如 `bmi_value`），长文本进 `*_text`。记 `qc(COLS_SPLIT)` / `qc(CELL_MOVED)`。
+5. **改名不改值**：列名与内容不符（`site` 装皮损描述、`hist_text` 装「4天」）→ 按内容改名，原名进 `aliases`，单位写 `dict.unit`；值只做类型与编码归一，不改语义。记 `qc(COLS_RENAMED)`。
+
+### 11.2 六条具体处理
+
+6. **元组/列表串（错误透视残留）**：取首个非空值——年龄取数字、日期取最早、诊断取最长；列类型改对（`age` → REAL、`first_visit_date` → date、`diagnosis_text` → text）。记 `qc(TUPLE_PARSED)`。
+7. **编码混编归一**：`1/male` → `M`、`0/female` → `F`、`0` → `WBC` 这类按论文口径或值分布归一，映射写 `dict.enum_values` 并记 `qc(ENUM_MAPPED)`。分不清的留 `unknown`，不猜。
+8. **字面 `0` 不擅自置空**：可能是真实取值（如「0 期」）时保留，记 `qc` 待作者确认；只有明确是 Excel 错误值（`#N/A`、`#VALUE!`）才置 `NULL`。
+9. **结局两列错位**：列名与内容互换（`survival_months` 装死亡说明、`died` 装日期）→ 改名 `death_note_text` / `died_date`，并按「手术日（缺则入院日）→ 死亡日」重算 `survival_months`（月精度日期按当月 15 日）。记 `qc(DATE_SEMANTICS)`、`qc(SURVIVAL_RECOMPUTED)`。
+10. **重复读片/重复测量保留**：两位阅片者的独立读数（`*_read_first` / `*_read_second`）是真实测量，不合并；`role='aux'`，`description` 写明是第几位阅片者。
+11. **全空源列**：登记 `dict` 即可，不删不加；若确认无意义（`mriid`/`ctnum` 全空）可删并记 `qc(COLS_DROPPED)`。
+
+### 11.3 每改一库的收尾顺序（硬）
+
+`改数据/dict` → 新 `qc.code` 先登记进 `{code_root}\tools\db-library\db5t\qc_codes.tsv`（D94 认词表） → `PRAGMA wal_checkpoint(TRUNCATE)` → `fix_sha.py <FAM>` → `gates.py <FAM>` 归零 → `preview.py --gates` 重生成叶内预览。缺一步就会出现「sha 旧值」或「门禁读旧 WAL」的假阳性。
+
+### 11.4 作者侧事项（不自行决定）
+
+标签方向与稿件相反（SCHTUM 309/347）、相邻复制行（UGIB 54 对）、同一概念两列键（AKSK 两列病理号）、字面 `0` 的真实含义（LUNG_his stage2）——这四类记 `qc` 并在交付时列成「回告作者」清单，不改数据。
