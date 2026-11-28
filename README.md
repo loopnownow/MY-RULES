@@ -18,8 +18,8 @@
 | `zone-docs.md` | L1 | harvest 对象与布局、H1–H4、harvest 授权（§Z3）、`_Docs` 分桶、目录命名（§N2） | 批件 / 期刊池 → `library-taxonomy.md` |
 | `library-taxonomy.md` | L1 | 库分类 L1/L2、三库分工、批件 / 期刊池、伦理材料留存 | 归并脚本 → 技能 `db-library` |
 | `zone-projects.md` | L1 | 阶段夹、closeout、accepted 收工、archived 冷库、项目内落点、子工程约定 | `ref\` 地图 → `project-ref-layout.md`；稿件硬闸 → `manuscript-docx.md` |
-| `project-ref-layout.md` | L1 | 项目 `ref\` 地图、稿名、幂等 | 落点总则 → `My rule.md` §3；稿件硬闸 / 手改识别 → `manuscript-docx.md` |
-| `manuscript-docx.md` | L1 | Track Changes、手改后禁止重标、回滚、无稿不造空件（§M1–§M4） | 稿名 / 投稿包 / `-org` → `project-ref-layout.md`；版式 → 技能 |
+| `project-ref-layout.md` | L1 | 项目 `ref\` 地图、幂等 | 落点总则 → `My rule.md` §3；稿名 / 投稿包 / 目标刊格式版 → `manuscript-docx.md`；稿件硬闸 / 手改识别 → `manuscript-docx.md` |
+| `manuscript-docx.md` | L1 | Track Changes、手改后禁止重标、回滚、无稿不造空件（§M1–§M4）、稿名 / 投稿包 / 目标刊格式版 | `-org` 落点 → `project-ref-layout.md`；版式 → 技能 |
 | `execution.md` | L1 | 席位、执行准则、E1–E6、交接、汇报、备忘录、盘问 | 授权与落点 → `My rule.md`；做法 → `{SKILLS}` |
 | `project-fact-lookup.md` | L1 | 开工、改稿、内审必查：通讯作者、伦理号、扫描序列、实验室范围 | 批件分类 → `library-taxonomy.md`；指针落点 → `project-ref-layout.md` |
 | `network-security.md` | L1 | 网段红线、敏感外发、代理、留痕 | 不写执行步骤 |
@@ -45,7 +45,7 @@
 - 改规则：三仓流程 → §S2（`My rule.md`）。
 - 提交前跑 `python -B check_paths.py --check`；规则门与频率见 `QC.md`。
 - `aliases.yaml` 是旧名唯一来源，正文不写旧名；变更理由写进 PR 正文，仓内不留史。
-- 技能侧英文镜像只作运行期读本，冲突以本仓中文版为准。
+- 技能侧英文镜像只作运行期读本，冲突以本仓中文版为准。镜像文件须带 `rules-mirror-of` 头，由 `check_paths.py` 的 F15 比对中文源 sha256 前 8 位。
 
 ## 开发辅助（`tools/`）
 
@@ -62,4 +62,4 @@ python -B qc_rules.py              # R1–R3、R5–R7、R9、R10、R13–R17：
 python -B -m pytest -q tests       # 门的负向用例（改规则时必跑）
 ```
 
-R4 需要本机同时克隆兄弟仓 MY-SKILLS（默认与本仓同级，或设 `SKILLS_ROOT` / `MY_SKILLS`）。`check_paths.py` 缺技能根默认 fail loud（exit 1），除非 `--allow-missing-skills`；`qc_rules.py` 的判据与豁免见 [QC.md](<QC.md>)。不加 CI，检查只在本机跑。R15 不禁「主人」、R13 对 C8 时已超目标的文件只报告不失败，均异于计划原文（D-3 / D-8）。
+R4 需要本机同时克隆兄弟仓 MY-SKILLS（默认与本仓同级，或设 `SKILLS_ROOT` / `MY_SKILLS`）。`check_paths.py` 缺技能根默认 fail loud（exit 1），除非 `--allow-missing-skills`；`qc_rules.py` 的判据与豁免见 [QC.md](<QC.md>)。GitHub Actions（`.github/workflows/ci.yml`）在每条 push / PR 上跑 `check_paths.py --check` 与 `tests/`；`qc_rules.py` 仍建议本机跑（R13 对已超目标文件只报告，见 QC.md）。R15 不禁「主人」、R13 对 C8 时已超目标的文件只报告不失败，均异于计划原文（D-3 / D-8）。

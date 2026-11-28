@@ -60,7 +60,7 @@ owns: [W1, W2, W3, W4, W5, X1, P1, S1, S2]
 | 最终交付（稿件 / 终表 / 报告） | 子工程根；无子工程且点名下载 → Downloads；否则 `{DEL}` |
 | 需查看件 / 在做项目的查阅入口 | `{memo_dir}` 不放 `.lnk`；查阅入口与原件不搬家、不另存 → `execution.md` |
 | 报告 / QC（HTML，中间） | 子工程 `ref\` 或阶段夹；否则 `{DEL}` |
-| DOCX 稿件 / XLSX 终表 | 子工程根；稿名见 `project-ref-layout.md`「SCI 稿件文件名」 |
+| DOCX 稿件 / XLSX 终表 | 子工程根；稿名见 `manuscript-docx.md`「SCI 稿件文件名」 |
 | 文献全文（PDF / HTML） | `{lib_root}\references\<L1>\<L2>\`；子工程 `ref\refer\` 只留 `DOI_*.md` 指针 |
 | 期刊池 / 批件 | `{lib_root}\journals\index.csv`；`{lib_root}\ethics\approvals\<L1>\<L2>\`（口径 `library-taxonomy.md`） |
 | 扫描参数 / 实验室参考范围 | `{lib_root}\scanner-registry\`；`{lib_root}\lab-ref-ranges\`（查找口径 `project-fact-lookup.md`） |

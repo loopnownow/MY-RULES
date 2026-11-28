@@ -14,11 +14,12 @@ Exits 0 on success, 1 on missing paths or stale claims.
 
 Fail-loud (no false-green): missing required Rules MD, missing skills root
 (unless --allow-missing-skills), or skipped checks that would otherwise exit 0
-without verifying. No GitHub Actions; local only.
+without verifying. CI runs this check on every push and pull request.
 """
 from __future__ import annotations
 
 import argparse
+import hashlib
 import os
 import re
 import sys
@@ -218,8 +219,50 @@ def check_stale_md_paths() -> list[str]:
     return bad
 
 
+MIRROR_HEADER_RE = re.compile(
+    r"<!--\s*rules-mirror-of:\s*([A-Za-z0-9_.-]+)\s+src-sha256-8:\s*([0-9a-fA-F]{8})\s*-->"
+)
+REQUIRED_MIRRORS = (
+    ("project-ref-layout.md", "00_orchestrator/references/project-ref-layout.md"),
+)
+
+
+def sha256_8(path: Path) -> str:
+    return hashlib.sha256(path.read_bytes()).hexdigest()[:8]
+
+
+def check_f15_mirrors(skills: Path, rules_root: Path | None = None) -> list[str]:
+    """F15: English (or index) mirrors must carry a matching source hash header."""
+    root = rules_root or ROOT
+    bad: list[str] = []
+    seen: set[str] = set()
+    for path in skills.rglob("*.md"):
+        if not path.is_file():
+            continue
+        text = path.read_text(encoding="utf-8")
+        for m in MIRROR_HEADER_RE.finditer(text):
+            src_name, claimed = m.group(1), m.group(2).lower()
+            rel = path.relative_to(skills).as_posix()
+            seen.add(rel)
+            src = root / src_name
+            if not src.is_file():
+                bad.append(f"F15: {rel} mirrors missing source {src_name}")
+                continue
+            actual = sha256_8(src)
+            if actual != claimed:
+                bad.append(f"F15: {rel} header {claimed} != {src_name} {actual}")
+    for src_name, rel in REQUIRED_MIRRORS:
+        target = skills / Path(*rel.split("/"))
+        if not target.is_file():
+            bad.append(f"F15: required mirror missing: {rel}")
+            continue
+        if rel not in seen:
+            bad.append(f"F15: required mirror has no header: {rel}")
+    return bad
+
+
 def check(skills: Path) -> list[str]:
-    return check_skill_cites(skills) + check_stale_md_paths()
+    return check_skill_cites(skills) + check_stale_md_paths() + check_f15_mirrors(skills)
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -227,7 +270,7 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument(
         "--check",
         action="store_true",
-        help="verify Rules cites against MY-SKILLS + stale MD path scan",
+        help="verify Rules cites against MY-SKILLS + stale MD path scan + F15 mirrors",
     )
     ap.add_argument(
         "--allow-missing-skills",

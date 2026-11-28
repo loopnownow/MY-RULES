@@ -51,59 +51,24 @@ description: 项目 ref\ 地图、稿名与文件命名、幂等；落点总则�
 - **分析错分/临时表**：`false_classification*` 与同类 ASL 分析临时表落**当次结果夹** `<project>/<endpoint>/`（或解析出的 OUT_DIR / `SUBPROJECT_BY_OUTCOME` 夹），**不在子工程根**，也**不进 `ref\`**。结果 HTML 同落该结果夹为 `Results*.html`（见 `workspace-layout.md`）；**不**把 `{slug}_results.html` 或旧结果 HTML 提升到子工程根——根上已有的旧副本属错位。
 - **文献全文：** PDF/HTML 实体一律进 `{doc_root}\_library\references\<L1>\<L2>\`（命名、索引、指针契约见该库 `README.md`）；子工程 `ref\refer/` 只写 `DOI_*.md` 指针，`ref\citation/` 不放全文，`_library\lit-bank` 只存书目。
 - **终稿 / 控制台终表**留在子工程根。查阅入口用备忘录 HTML 的 `file:///` 链接（`My rule.md` §3）；`{memo_dir}` 不放快捷方式。不另存一份。
-- **已接受**的最终通稿（无刊名短码）留在子工程根；按刊格式化的再投稿不放根上，进 `ref\submission-*`（见下「投稿包」「目标刊格式版」）。主人点名时，中间 xlsx 也可留在子工程根，勿擅自挪走。
+- **已接受**的最终通稿（无刊名短码）留在子工程根；按刊格式化的再投稿不放根上，进 `ref\submission-*`（见 `manuscript-docx.md`「投稿包」「目标刊格式版」）。主人点名时，中间 xlsx 也可留在子工程根，勿擅自挪走。
 
 ### 投稿包（未被接受 vs 已接受）
 
-- **定义**：某次投稿按期刊要求准备的分件（cover letter、title page、highlights、各类声明、补充表、入稿图件、graphical abstract 等）。
-- **未被接受**（投过未中、历史轮次包）：落在 `ref\` 根；成套（约 5 件及以上）建 `submission-<标识>/`（标识可用原夹名或期刊短名）；单件不成套可直接放 `ref\` 根。
-- **准备中的目标刊包：** 正在按某刊准备、尚未投出或尚未被接受的上传分件，以及按该刊格式化的稿件正文，同样建并落入 `ref\submission-<刊名短码>/`；通稿仍留子工程根，详见下节「目标刊格式版」。
-- **已接受**：子工程根只留通稿（无刊名短码的现行稿，及当前仍在用的修回通稿），不因整理把通稿搬进 `ref\` 投稿夹；也不把带刊名短码的格式版因接收搬回根目录，格式版留在对应 `ref\submission-<刊名短码>/`。
-- **清理**：`ref\` 里的未被接受投稿包，过后清理时可经询问移入 `{DEL}\_by-project\<project>\`；禁止静默删除。
+定义、落点（`ref\submission-*`、通稿留子工程根）与清理 → `manuscript-docx.md`「投稿包」。
 
 ### SCI 稿件文件名（Manuscript / Comments / Response / Supplementary）
 
-SCI 相关文件统一命名：`<Stem>_<子项目名>_<版本号>`。
-
-- **Stem：** `Manuscript` | `Comments` | `Response` | `Supplementary`（仅当确有补充材料时建 Supplementary）
-- **子项目名** = project slug（如 `lxf_PP`）
-- **版本号**两套前缀：
-  - **V** = 投稿前（含投出后、尚未收到审稿意见时的改稿）：`V` + `主`.`次`（`V1.1`、`V1.2`…`V1.10`；小数位不补零，**排序按数值不按字符串**）
-  - **R** = 收到审稿意见之后的修回：`R` + `轮次`.`次`（`R1.1`、`R1.2` 同一轮内再改；下一轮意见到了再 `R2.1`）
-  - **P** = 接收后校样（可选）：`P1` 或 `P1.1`
-- 课题从 `drafting` 挪到 `pre-submit` **不改号**，只换阶段夹。投出的那一版保持原 `V` 名，课题进 `reviewing`（历史别名 `in-review`）。投出后、意见未到若还要改，继续加 V 的小数（如 `V1.11`），**不发明 `R0`**。
-- 审稿意见一到才开 R。该轮必须三件同号：`Manuscript_*_R1.1`、`Comments_*_R1.1`、`Response_*_R1.1`（有补充材料再加同号 `Supplementary_`）。Comments/Response/Supplementary 只与对应 R（或校样 P）同号；投稿前的 V 稿一般不配 Comments/Response。
-- 拒稿后换刊重写仍用 V（可升主版本，如 `V2.1`），直到再次投出；**不要**把换刊稿写成 R。
-- 接收后课题进 `accepted`，文件保持最后那个 R；校样单独留档用 P，不必再涨 V 或 R。
-- 每次实质改动 `+0.1`，不跳号；每次升版在 `ref\manuscript-revision.md` 追加一行。实质改动指结论、数据、结构、段落增删、换刊重写等。**小改不升级版本号：** 错字、标点、纯改字、只加/改批注、不改结论或结构的微调，仍用现行 V/R/P 文件名就地改，不得 `+0.1`，也不得另存新号。
-- 优先 `.docx`；若有 md/pdf 伴生件，**同 stem**
-- 例：`Manuscript_lxf_PP_V1.10.docx`（投出稿）；`Manuscript_lxf_PP_R1.1.docx`、`Comments_lxf_PP_R1.1.docx`、`Response_lxf_PP_R1.1.docx`、`Supplementary_lxf_PP_R1.1.docx`
-- **落点：** 无刊名短码的现行通稿 `Manuscript_<slug>_V…` 或 `_R…`（及同号配套）在**子工程根**；**旧版通稿** → `ref\tmp/`。带刊名短码的目标刊格式版不放子工程根，落 `ref\submission-<刊名短码>/`（见下节）。未被接受的历史投稿包仍按上节进 `ref\` / `submission-*`。本条管通稿文件名 + 旧版落点；详 → 上表 `ref\tmp/`。
-- **子工程根恰留两份：** ① `Manuscript_<slug>_clean.docx`（最新版、接受全部修订、无痕迹、不带版本号）；② 最新的带版本号稿 `Manuscript_<slug>_{V|R|P}<x>[.<y>][_tracked].docx`（`_tracked` 表示保留修订痕迹）。其余旧版本号稿、旧 tracked、根上的 PDF 导出一律进 `ref\tmp/`，不删、不进 `{DEL}`；进 `{DEL}` 须主人点名（§X2）。
-- **配套不受 clean 影响：** `Comments` / `Response` / `Supplementary` / `CoverLetter` / `FigureLegends` / `Tables` 仍按同号版本规则命名，不另做 `_clean`。
-- 无稿不造空件 → §M4（`manuscript-docx.md`）。
+Stem、V/R/P 版本规则、根上两份现行稿与旧版进 `ref\tmp/` → `manuscript-docx.md`「SCI 稿件文件名」。
 
 ### 目标刊格式版（母本不动，按刊另存）
 
-按某本目标刊的作者须知改格式、补声明、准备上传件时：
-
-- **母本不动：** 子工程根上无刊名短码的现行 `Manuscript_<slug>_{V|R|P}…` 是通用通稿（母本），不得覆盖、不得就地改成该刊专用版，也不得把母本改名成带刊名短码的文件。子工程根只放该通稿、其 `_clean` 与同号配套（Comments / Response 等），PDF 导出进 `ref\tmp/`；不得把带刊名短码的格式版放在子工程根。
-- **按刊另存：** 为目标刊新建格式版，文件名为 `Manuscript_<slug>_<刊名短码>_V…`（例：`Manuscript_wlz_MCI_RenFail_V1.docx`），**落点为** `ref\submission-<刊名短码>/`（与该刊上传分件同一包）；PDF 等伴生件同 stem、同夹。刊名短码用简短 ASCII（如 `RenFail`、`BMCNeph`），避免空格与 Windows 非法文件名字符。换刊只在新刊投稿包内加新文件，不得覆盖母本，也不得覆盖已有的其他目标刊格式版。
-- **不是唯一现行：** 带刊名短码的文件不是「唯一现行」母本；子工程根的现行是无刊名短码的 `_clean` 与最新带版本号稿。
-- **投稿包：** 该刊上传分件（单图、cover letter、清单等）与格式版稿件正文都落 `ref\submission-<刊名短码>/`（与上节「投稿包」一致）。不要在子工程根再留一份会与投稿包内格式版漂移的带刊名短码正文。图从母本或格式版导出为单文件，不回写母本。
-- **构建脚本：** 若用脚本生成目标刊版，输出路径必须是 `ref\submission-<刊名短码>/` 下的上述目标刊文件名；默认值或错误的目标开关不得写回母本 `Manuscript_<slug>_V…`，也不得写到子工程根。刊差异（声明、通信地址、AI 披露等）只进目标刊版；正文、表、数字与母本共用同一源，避免两版漂移。
-- **版本号：** 仅另存目标刊格式版、母本文字未改时，母本不升号。目标刊格式版自 `V1` 起算，该刊内实质改动再 `+0.1`，并在 `ref\manuscript-revision.md` 追加一行。拒稿换刊：在 `ref\submission-<新刊>/` 另存新短码文件，仍用 V，不得写成 R；旧刊格式版保留在 `ref\submission-<旧刊>/`，不得覆盖。内容为大改、需新母本时，仍按上节可升母本主版本（如 `V2.1`）。
-- **勿用中间后缀冒充：** 不要用 `-formatted`、`_house`、`submission-ready` 当作目标刊格式版的正式文件名（那些后缀仍按「非契约编辑后缀稿」处理）。
-
+母本不动、按刊另存至 `ref\submission-<刊名短码>/` → `manuscript-docx.md`「目标刊格式版」。
 
 ### 非契约编辑后缀稿（登记保留 · QC）
 
-整体 QC 发现 28 件稿件用以下**编辑中间件后缀**，主人裁定**保留并登记**（不强制改名、不批量清）：
+中间件后缀的登记、落点与清理 → `manuscript-docx.md`「非契约编辑后缀稿」。
 
-- `-formatted`（期刊格式化件）、`-clean`（连字符中间件，非根上 `_clean` 契约稿）、`V<n>-reviewed`（同版审阅件）
-- `_house`（社内格式件）、`_polished`（润色件）、`_revised_pre_html_update`（HTML 同步前修订件）、`submission-ready`（投稿就绪件）
-
-规则：① 这些**都不是现行版**，子工程根只留现行 `_clean` 与最新带版本号稿（见「SCI 稿件文件名」）；② 优先放 `ref\tmp/`，已在根上者可留至该课题下一次版本收口；③ 不得据其反推版本号、不得与 `R` 轮同号冒充；④ 清理（移 `{DEL}`）须先问主人。
 
 ### 城城手改识别
 

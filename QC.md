@@ -21,7 +21,7 @@ up: My rule.md §6
 | R1 路由闭合 | 每个 live md 在 L0 路由表或 `routes:` 出现；目标文件存在 | `qc_rules.py` | 已机器 |
 | R2 正文无史 | 不得出现变更日期、`t<数字>` 变更号、「此前 / 曾用 / 更名 / formerly / 已瘦身 / 已退休 / 已卸 / 已并入 / 已拆出」；「不再」不入词表；数据阈值日期（如批件 ≥ 2023-11-10）除外 | `qc_rules.py` | 已机器 |
 | R3 旧名唯一 | `aliases.yaml` 里作者登记的 `tokens:` 不得出现在正文；「勿再新建 / 已退役 / 原 `」禁名行豁免 | `qc_rules.py` | 已机器 |
-| R4 指针可解析 | `{RULES}` / `{SKILLS}` 路径与 seat 存在 | `check_paths.py` | 已机器 |
+| R4 指针可解析 + F15 | `{RULES}` / `{SKILLS}` 路径与 seat 存在；技能侧 `rules-mirror-of` 头与中文源 sha256 前 8 位一致（缺头或哈希不符即失败） | `check_paths.py` | 已机器 |
 | R5 无副本 | 归一化后 ≥30 字、相似度 ≥0.80 的句子只允许一处；委派指针豁免收窄为：≤60 字且同时含 `→` 与 §ID（D-5） | `qc_rules.py` | 已机器 |
 | R6 头字段 | L1 必含 `name` / `description`；L0 必含 `routes:` | `qc_rules.py` | 已机器 |
 | R7 行长 | 单行 ≤400 字符；表格行与代码块除外 | `qc_rules.py` | 已机器 |

@@ -1,0 +1,25 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  check:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v5
+      - name: checkout MY-SKILLS sibling
+        run: git clone --depth 1 https://github.com/loopnownow/MY-SKILLS.git "$env:RUNNER_WORKSPACE\MY-SKILLS"
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - name: pytest
+        env:
+          SKILLS_ROOT: ${{ runner.workspace }}/MY-SKILLS
+        run: python -B -m pytest -q -p no:cacheprovider tests
+      - name: check_paths
+        env:
+          SKILLS_ROOT: ${{ runner.workspace }}/MY-SKILLS
+        run: python -B check_paths.py --check
