@@ -7,7 +7,7 @@ up: My rule.md §5
 # 建库契约（契 1–10）
 
 - 管：新库从零建的硬约束（契 1–10、律 1–5）、全局 `{RAW}\Family\dict.db`、目录目标态、决策基线。
-- 不管：既有表结构细目与 DICOM 映射（→ `db-schema.md`）；D 码正文（→ `db-gates.md`，D93–D99 尚未机器化）；家族桶与台账落点（→ `zone-database.md`）；做法（→ `{SKILLS}\02_data-processing\base\db-library\references\load-pipeline.md`）。
+- 不管：既有表结构细目与 DICOM 映射（→ `db-schema.md`）；D 码正文（→ `db-gates.md`，D93 / D94 / D97 / D99 尚未机器化 / report-only，D95 / D96 / D98 已入 gates.py）；家族桶与台账落点（→ `zone-database.md`）；做法（→ `{SKILLS}\02_data-processing\base\db-library\references\load-pipeline.md`）。
 - 分工：本节说必须怎样，门禁说怎么判，流水线说怎么做。D93–D99 只在 `db-gates.md` 写判据，本节只引用编号。
 
 本节约束「新库从零建」。现行盘面的家族树、家族库 `dict` 表与 `_thesis` 夹，在另点名搬迁 / 重建之前可以仍在旧位；本文件不把搬盘或重建写成已执行。
@@ -71,7 +71,7 @@ up: My rule.md §5
 - 表名、列名、枚举值、单位代码、`qc.code`、`meta` 的键与值、文件名：ASCII snake_case。
 - 业务表字符串值：100% ASCII。病理 / 量表原文不入库；需要保留原文时，靠 `src_id` + `src_row` 回指源文件。
 - 中文原名只出现在两处：源文件本身、`map.csv` 的 `src_header`。
-- 违反即 P1（D98；该码尚未机器化，report-only）。
+- 违反即 P1（D98）。
 
 ### 律 2 单一格式
 
@@ -92,7 +92,7 @@ up: My rule.md §5
 - dict 里没有该列 → 不许 ALTER，先补 dict 行。
 - dict 行通过 `source='map:<slug>#<n>'` 指回 map.csv 行号。
 
-建该全局库与让既有脚本改读它，待另批改 MY-CODES；本批只定文档口径。
+建该全局库待另点名；D95 已按 `DB5T_DICT` 读该表。
 
 ### 律 5 不可决即问（六类停列）
 
@@ -129,7 +129,7 @@ CREATE TABLE dict (
 
 - `scope` 三级，解析优先级 `proj:<slug>` → `family` → `stage`。
 - `stage` 放所有子库共有的骨架列（`clin` 11 个头列 + 15 个 `path_*`、`person` / `qc` / `src` 全列）。
-- 家族库不再有 `dict` 表；目标态下 D88 / D95 与脚本读全局表（`DB5T_DICT`）。现行 `gates.py` 尚未改读该表。
+- 家族库不再有 `dict` 表；目标态下 D88 / D95 与脚本读全局表（`DB5T_DICT`）。D95 已改读该表；D88 仍读家族库 `dict`（report-only）。
 
 ## 契 4 每格可回溯
 
@@ -152,7 +152,7 @@ CREATE TABLE dict (
 ## 契 6 计数守恒
 
 收口时必须满足：`Σ clin.merged_n` = `Σ src.rows`（`src.status='active'` 的行）。
-不等就是丢行或多行，先查清再收口，不许用「大致相等」放行。判据见 D96（尚未机器化，report-only）。
+不等就是丢行或多行，先查清再收口，不许用「大致相等」放行。判据见 D96。
 
 ## 契 7 冲突一律停列
 

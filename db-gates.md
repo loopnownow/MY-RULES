@@ -1,6 +1,6 @@
 ---
 name: db-gates
-description: L1 子页：库门禁码表 D1–D99（手写口径；D93–D99 尚未机器化 / report-only）。
+description: L1 子页：库门禁码表 D1–D99（手写口径；D95 / D96 / D98 已入 gates.py；D93 / D94 / D97 / D99 仍 report-only）。
 up: My rule.md §5
 generated: false
 ---
@@ -14,7 +14,7 @@ generated: false
 - **现行码（core-6t）**：`verify_db.py` 实有 `D1`–`D9`、`D19`–`D22`；判级细节以脚本为准，本表只记口径。
 - **`D10`–`D18` 不存在**：总览里的 `D10` / `D12` / `D13` / `D14` 是人工注记码，脚本无实现；新码从 `D23` 起编，**不回填**旧号。
 - **`D21` 为 P0**：明文 PHI **只许出现在家族库**，子库任何位置命中即 P0（`D28` / `D44`）。
-- **分派**：旧 core-6t 库跑 `D1`–`D9`、`D19`–`D22`；5t 库按 `meta.schema_version` 跑 `D23`–`D92`。D93–D99 尚未机器化。同一库不得混跑两套。
+- **分派**：旧 core-6t 库跑 `D1`–`D9`、`D19`–`D22`；5t 库按 `meta.schema_version` 跑 `D23`–`D99`（其中 D95 / D96 / D98 已机器化；D93 / D94 / D97 / D99 仍 report-only）。同一库不得混跑两套。
 
 | 码 | 名称 | 判级 | 判据摘要 |
 |---|---|---|---|
@@ -92,13 +92,13 @@ generated: false
 | D92 | 入表清洗残留 | P2 | 值内嵌单位（`\d+\s*(mm|cm|%)`）、`值+单位` 与 `号+名` 拼接串、全角数字、`#VALUE!` / `#N/A` 公式残值、行内换行、首尾空白；逐列报数。实测 `lvsi0` 里 108 个 `#VALUE!` 与 `g分级` 的 `I/高/1/0` 混装都属此类 |
 | D93 | 参考区间软门 | 只报数（尚未机器化） | 对 `ri_normal` 软判：`OUT_OF_RI` / `UNIT_SUSPECT` / `IMPLAUSIBLE`。单侧区间不得判单位。基线不是失败阈值：121 列 pass 27 / OUT_OF_RI 61 / IMPLAUSIBLE 5 列 71 值。 |
 | D94 | qc.code 受控 | 尚未机器化 / report-only | `qc.code` 须在 `qc_codes.tsv` 登记。基线：80 库 190 码 / 6,100 行（`VALUE_DIRTY` 5,054）。词表待另文件落盘。 |
-| D95 | dict 覆盖契约 | 尚未机器化 / report-only | 物理列（除 `meta` / `dict`）须在 `{RAW}\Family\dict.db` 有行；`dtype` 与存储域不矛盾；scope 解析顺序见 `db-build-contract.md` 契 3。 |
-| D96 | 计数守恒 | 尚未机器化 / report-only | `Σ clin.merged_n = Σ src.rows`（`src.status='active'`）。 |
+| D95 | dict 覆盖契约 | P1 | 物理列（除 `meta` / `dict`）须在 `{RAW}\Family\dict.db` 有行；`dtype` 与存储域不矛盾；scope 解析顺序见 `db-build-contract.md` 契 3。 |
+| D96 | 计数守恒 | P1 | `Σ clin.merged_n = Σ src.rows`（`src.status='active'`）。 |
 | D97 | 列格式纯度 | 尚未机器化 / report-only | 按域判混合；禁 `typeof` 四类占比（曾误报 32 列）。基线：真混合 0 列。 |
-| D98 | 命名与外置单位 | 尚未机器化 / report-only | 标识与业务字符串须 ASCII（律 1）；列名不得内嵌单位。基线：中文列名 379、大写 124、单位内嵌 194、值内糊单位 4 处（见契约）。 |
+| D98 | 命名与外置单位 | P1 | 标识与业务字符串须 ASCII（律 1）；列名不得内嵌单位。基线：中文列名 379、大写 124、单位内嵌 194、值内糊单位 4 处（见契约）。 |
 | D99 | 枚举值域 | 尚未机器化 / report-only | 取值须落在 dict `enum_values`。基线：`id.sex` 41,060 NULL 且 8 种写法混装（细分见契约），入库时归一。 |
 
-- **机器点**：`D1`–`D22` 在 `verify_db.py`（`{code_root}\tools\db-library\verify_db.py`）；`D23`–`D92` 的 5t 实现落 `{code_root}\tools\db-library\db5t\gates.py`（跨库项用只读 `ATTACH` / `file:?mode=ro` 打开家族库），判据用的 SCHEMA 由 `db5t\paths.py` 解析（`DB5T_BATCH` / `DB5T_ROOT` / `DB5T_SCHEMA` 三个环境变量）。**文档编号与代码输出必须逐条对应**（已入 `gates.py` 的码）。D93–D99 尚未写入 `gates.py`，只作 report-only，不是已生效 P1，这七码暂不适用该对应要求，待另批改 MY-CODES。
+- **机器点**：`D1`–`D22` 在 `verify_db.py`（`{code_root}\tools\db-library\verify_db.py`）；`D23`–`D92` 的 5t 实现落 `{code_root}\tools\db-library\db5t\gates.py`（跨库项用只读 `ATTACH` / `file:?mode=ro` 打开家族库），判据用的 SCHEMA / 全局 dict 由 `db5t\paths.py` 解析（`DB5T_BATCH` / `DB5T_ROOT` / `DB5T_SCHEMA` / `DB5T_DICT`）。**文档编号与代码输出必须逐条对应**（已入 `gates.py` 的码）。D95 / D96 / D98 为 P1；D93 / D94 / D97 / D99 仍 report-only，不是已生效 P1。
 - **`D76`–`D86` 未入表**：`D76`–`D79`（模块派生句 / 旧库迁移句）、`D80`（PHI 拼接串）、`D81`、`D82`（`dict.source` 债）已在 `gates.py` 实现并出报告，本表只记到这里；新码从 `D87` 起编，**不回填** `D76`–`D86` 行，免得文档与脚本各写一套口径。
 - **判级**：P0 阻断（退出码 1），P1 应修，P2 提示；同一问题按最高级只报一次。
 
