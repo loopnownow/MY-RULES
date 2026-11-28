@@ -321,14 +321,14 @@ entries:
     kind: dir
     status: renamed
     since: '2026-11-27'
-    note: '家族身份桶：家族库五表 + 冻结旧库 + 目录说明 + 可重建预览；唯一 PHI 落点，不存业务表，整桶不外发。'
+    note: '家族身份桶：身份与登记（目标态不留 dict，改读全局 Family\dict.db）+ 冻结旧库 + 目录说明 + 可重建预览；唯一 PHI 落点，不存业务表，整桶不外发。'
   - old: 'D:\MyProjects\_DataBase\<family>\_share'
     tokens: ['_share']
     new: 'D:\MyProjects\_DataBase\<family>\__zip'
     kind: dir
     status: renamed
     since: '2026-11-27'
-    note: '原始件池：按子工程分夹放压缩档与随档非表格件；学位一支在 `_thesis`，伦理一支整夹退役。'
+    note: '原始件池：按子工程分夹放压缩档与随档非表格件；学位一支目标落点 `__zip\thesis\<slug>\`，勿再新建 `_thesis`（实体改挂待另点名）；伦理一支整夹退役。'
   - old: 'D:\MyProjects\_DataBase\<family>\_share\ethics'
     tokens: ['_ethics']
     new: 'D:\MyProjects\_Docs\_library\ethics'
@@ -345,11 +345,17 @@ entries:
     note: '子库业务表名前缀（不是文件名）：`modal_radi` → `_modules_radi`，`meta.modal_exam_policy` 同步改 `meta.modules_exam_policy`；旧前缀出现在规则 / 盘面 / 库内即 QC 发现。'
 
   - old: 'D:\MyProjects\_DataBase\<family>\_share\thesis'
-    new: 'D:\MyProjects\_DataBase\<family>\_thesis'
+    new: 'D:\MyProjects\_DataBase\Family\<family>\__zip\thesis'
     kind: ref_dir
     status: renamed
     since: '2026-11-27'
-    note: '学位论文 / 博士后 / 汇报稿原件。'
+    note: '旧 `_share\thesis` 与家族 `_thesis` 的目标落点均为 `__zip\thesis\<slug>\`；勿再新建 `_thesis`。实体改挂待另点名。'
+  - old: 'D:\MyProjects\_DataBase\<family>\_thesis'
+    new: 'D:\MyProjects\_DataBase\Family\<family>\__zip\thesis'
+    kind: dir
+    status: retired
+    since: '2026-11-28'
+    note: '勿再新建 `_thesis`；学位 / 博士后 / 汇报稿原件目标落点 `__zip\thesis\<slug>\`。实体改挂待另点名。'
 
 # 术语登记（R15 词表；不是禁用表。现行用词「主人」保留，见 L0 §4）
 terms:

@@ -12,7 +12,7 @@ up: My rule.md §5
 
 | 根 | 角色 | 细则 |
 |---|---|---|
-| `{RAW}` | 课题原始件（家族桶：`_PHI` / `__zip` / `_thesis`）+ `_` 非课题分支 + `_lab` 历史档只读；除 `_index.csv` / `_diseases.csv` 外只读除非点名 | `zone-database.md`；表结构 `db-schema.md`；D 码 `db-gates.md` |
+| `{RAW}` | 课题原始件（目标：`Family` 下家族桶 `_PHI` / `__zip`，学位改挂 `__zip\thesis`；勿再新建 `_thesis`）+ `_` 非课题分支 + `_lab` 历史档只读；除 `_index.csv` / `_diseases.csv` 外只读除非点名 | `zone-database.md`；表结构 `db-schema.md`；D 码 `db-gates.md`；建库契约 `db-build-contract.md` |
 | `{DEL}` | AI 可操作临时 / 移出区（`_by-project` / `_by-function`）；**syn 不同步**（`/XD .Del`） | `zone-del.md` |
 | `{doc_root}` | 语料与可复用层：`_library` / `templates` / `mem` / `GitHub` / `test` / `harvest` | `zone-docs.md`；库分类 `library-taxonomy.md` |
 | `{doc_root}\mem` | bot 记忆导出（仅隐私 + 可变 SSOT）；查阅授权 → `My rule.md` §2 | `execution.md`（mem 口径） |

@@ -1,7 +1,7 @@
 ---
 name: My rule
 description: L0 常驻层：裁决顺序、硬闸、授权矩阵、交付落点、路由第一跳、QC。
-routes: [workspace-layout.md, zone-del.md, zone-database.md, db-schema.md, db-gates.md, zone-docs.md, library-taxonomy.md, zone-projects.md, project-ref-layout.md, manuscript-docx.md, project-fact-lookup.md, execution.md, network-security.md, skills.md, local-overlay.md, QC.md, README.md]
+routes: [workspace-layout.md, zone-del.md, zone-database.md, db-schema.md, db-build-contract.md, db-gates.md, zone-docs.md, library-taxonomy.md, zone-projects.md, project-ref-layout.md, manuscript-docx.md, project-fact-lookup.md, execution.md, network-security.md, skills.md, local-overlay.md, QC.md, README.md]
 owns: [W1, W2, W3, W4, W5, X1, P1, S1, S2]
 ---
 
@@ -97,6 +97,7 @@ owns: [W1, W2, W3, W4, W5, X1, P1, S1, S2]
 | `_DataBase` / 家族桶 / `_PHI` / `__zip` / 家族库 / 子库 | `zone-database.md` | `db-library` |
 | `id` 表 / 病理段 / 入表清洗 / DICOM 映射 | `db-schema.md` | `db-library` |
 | D 码 / 库门禁 | `db-gates.md` | `db-library` |
+| 建库契约 / 全局 dict / map.csv | `db-build-contract.md` | `db-library` |
 | `_Docs` / harvest / `mem` / `_library` | `zone-docs.md` | `00_orchestrator` harvest |
 | 库分类 L1–L2 / 批件 / 期刊池 | `library-taxonomy.md` | `find-journal` |
 | 阶段夹 / closeout / accepted 收工 / archived / 子工程约定 | `zone-projects.md` | — |

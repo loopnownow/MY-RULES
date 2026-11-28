@@ -4,16 +4,17 @@
 
 入口永远是 `My rule.md` §5 路由表：先认触发，再读专题。三仓互指只用别名，不复制正文。
 
-## 文件结构（19 个）
+## 文件结构（20 个）
 
 | 文件 | 层 | 做什么 | 边界 |
 |---|---|---|---|
 | `My rule.md` | L0 | 裁决顺序、硬闸、授权矩阵、交付落点、路由第一跳、QC | 不写领域细节 / 步骤 / 史 |
 | `workspace-layout.md` | L1 总图 | 根到 zone 对照、`syn.bat`、数据流向、退役禁建表 | 各区内部规则 → 各 zone 文件 |
 | `zone-del.md` | L1 | `{DEL}` 三档、三查、活依赖、新建禁区（§N1）、旧稿落点（§X2） | harvest 方法 → `zone-docs.md` |
-| `zone-database.md` | L1 | `{RAW}` 落点、家族分桶、`_PHI` / `__zip` / `_thesis`、散表归并、`_grants` / `_reviews` | 表结构 → `db-schema.md`；D 码 → `db-gates.md` |
-| `db-schema.md` | L1 | 家族库 / 子库表结构、`id` v2、`clin` v2、病理段、入表清洗、DICOM 映射（§P2、§P3） | PII 总闸 → `My rule.md` §P1；D 码 → `db-gates.md` |
-| `db-gates.md` | L1 | 库门禁码表 D1–D92（手写口径） | 表结构 → `db-schema.md` |
+| `zone-database.md` | L1 | `{RAW}` 落点、家族分桶、`_PHI` / `__zip`（学位改挂 `__zip\thesis`）、`Family` 目标树、散表归并、`_grants` / `_reviews` | 表结构 → `db-schema.md`；D 码 → `db-gates.md`；建库契约 → `db-build-contract.md` |
+| `db-schema.md` | L1 | 家族库 / 子库表结构、`id` v2、`clin` v2、病理段、入表清洗、DICOM 映射（§P2、§P3） | PII 总闸 → `My rule.md` §P1；D 码 → `db-gates.md`；建库契约 → `db-build-contract.md` |
+| `db-build-contract.md` | L1 | 建库契约（契 1–10、律 1–5）、全局 dict、目录目标态 | 表结构 → `db-schema.md`；D 码 → `db-gates.md`；落点 → `zone-database.md` |
+| `db-gates.md` | L1 | 库门禁码表 D1–D99（手写口径；D93–D99 尚未机器化 / report-only） | 表结构 → `db-schema.md` |
 | `zone-docs.md` | L1 | harvest 对象与布局、H1–H4、harvest 授权（§Z3）、`_Docs` 分桶、目录命名（§N2） | 批件 / 期刊池 → `library-taxonomy.md` |
 | `library-taxonomy.md` | L1 | 库分类 L1/L2、三库分工、批件 / 期刊池、伦理材料留存 | 归并脚本 → 技能 `db-library` |
 | `zone-projects.md` | L1 | 阶段夹、closeout、accepted 收工、archived 冷库、项目内落点、子工程约定 | `ref\` 地图 → `project-ref-layout.md`；稿件硬闸 → `manuscript-docx.md` |

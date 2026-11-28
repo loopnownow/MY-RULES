@@ -35,6 +35,7 @@ REQUIRED_RULES_MD = (
     "execution.md",
     "manuscript-docx.md",
     "db-schema.md",
+    "db-build-contract.md",
     "zone-del.md",
     "zone-database.md",
     "db-gates.md",

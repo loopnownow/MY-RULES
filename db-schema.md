@@ -11,7 +11,7 @@ owns: [P2, P3]
 
 ### 项目业务表（`clin` + `_modules_<mod>` + `qc`；不再按长/宽各一限表）
 
-- **范围**：约束的是每个**子工程库**的业务表，不是家族库骨架。家族库只存身份、号、字典与子库登记（`id` / `id_number` / `dict` / `ref_project`），不存项目业务表。子库业务表 = `clin` 一张 + `_modules_<mod>` N 张（每模态/特征域一张，须在 `dict` 登记）+ `qc` 一张；`person` 是占位表，不是业务表。「每项目至多长表与宽表各一」不再适用。
+- **范围**：约束的是每个**子工程库**的业务表，不是家族库骨架。家族库只存身份、号与子库登记（`id` / `id_number` / `ref_project` 及既有 `ref_*`），不存项目业务表；不留 `dict` 表，格式真源为 `{RAW}\Family\dict.db`（`db-build-contract.md`）。子库业务表 = `clin` 一张 + `_modules_<mod>` N 张（每模态/特征域一张，须在全局 `dict` 登记）+ `qc` 一张；`person` 是占位表，不是业务表。「每项目至多长表与宽表各一」不再适用。
 - **现行源文件**：每个叶只保留一份现行源文件，且须是一份工作簿，不得长表、宽表各放一个文件。该文件内为长表与宽表；无内容的一侧省略，空席不垫。现行骨架仍是本文件的 5t（家族五表 / 子库 `clin` / `_modules_<mod>` / `qc` 等），不得用精简登记册或 blob 库骨架替换。每张表最多 5 个工作单；工作单名可用 `clin` / `_modules_<mod>` / `qc` / `analysis`，入子库后固定落到 `clin` / `_modules_<mod>` / `qc`，**不得按工作单另开表**。
 - **表族三组、各管一段**：`clin` 是唯一「人 × 时点」主表；`_modules_<mod>` 只收不宜拉长的矩阵（组学 / 谱图 / ICC / 相关矩阵 / 影像组学）；`qc` 只收门禁结果与人工裁决。三组之外要建表，先在本节登记再建，不靠临时命名。
 - **表名与语义固定**：临床特征表名 `clin`（`cln` 只作别名，不建表）；`_modules_<mod>` 收计算测量（影像、影像组学、谱图、连接 / 网络指标、代谢组）；`<mod>_val` 是 values 长表（`exam_uid` / `entity` / `feature` / `value` / `unit`），与 `_modules_<mod>` 的「一次检查一行」配对，**不是验证子集**——删 `*_val` 等于删全部模块测量值（实测 EC `radi_val` 568,106 行、全库 `*_val` 6,775,401 行），禁止。
@@ -48,7 +48,7 @@ owns: [P2, P3]
 
 ### 身份表与病理段（`id` v2 · 病理拆分 · 入表前清洗）
 
-家族库 `_PHI\<FAM>db` 仍是五表（`meta` / `id` / `id_number` / `dict` / 家族级 `ref_*`），**不因病理信息加表**：D23 与结构体检按五表校验，加第六表须先改门禁与 SCHEMA，不能顺手建。
+家族库 `_PHI\<FAM>db` 目标态不留 `dict`（改读 `{RAW}\Family\dict.db`），身份与登记为 `meta` / `id` / `id_number` / `ref_project` 及既有 `ref_*`，**不因病理信息加表**。现行 D23 仍按旧五表机器校验，待另批改 MY-CODES。
 
 #### `id` v2：24 列、物理列序固定
 
@@ -59,7 +59,7 @@ owns: [P2, P3]
 | 03 | `subject_label` | TEXT | **原样兼容列**：只留迁移时的原值，**不再写新值**，不得承载姓名或新号码 |
 | 04 | `name` | TEXT | 中文姓名，形态见「入表前清洗」 |
 | 05 | `name_pinyin` | TEXT | 大写、单空格分隔；`1-CAO-YAN` 这类「序号-姓名」串拆开，序号进 `patient_id` |
-| 06 | `sex` | TEXT | `M` / `F` / `U`（`男`/`1`→`M`，`女`/`2`→`F`） |
+| 06 | `sex` | TEXT | `M` / `F` / `U` |
 | 07 | `birth_date` | TEXT | ISO 8601；只有年月写 `YYYY-MM` 并在 `note` 记精度 |
 | 08 | `id_card` | TEXT | 脱敏：前 3 + 11 个 `*` + 后 4；末位 `X` 大写；**不存明文** |
 | 09 | `phone` | TEXT | 脱敏：前 3 + `****` + 后 4；13 位「区号-号码」先规范化再脱敏 |
@@ -71,6 +71,7 @@ owns: [P2, P3]
 | 22–23 | `created_on` / `updated_on` | TEXT | `YYYY-MM-DD HH:MM:SS` |
 | 24 | `note` | TEXT | 别名、精度、迁移说明；不放业务信息 |
 
+- **`sex` 入库归一**：`男` / `1` → `M`，`女` / `2` → `F`，只许 `M` / `F` / `U`；其它停列送审（D99，尚未机器化）。
 - **一列一号、余号进 `id_number`**：`id` 每类号只放一个，其余全部落 `id_number(family_uid, kind, issuer, value)`；`kind` 白名单随 v2 扩为 `inpatient` / `outpatient` / `mrn` / `imaging` / `pathology` / `sample` / `study` / `other`（`other` 是既有主力号种，实测 8,588 行，**不得改名**；`misc` 只作列名，不作 `kind`）。同号在不同 `issuer` 是不同号（D75）。
 - **`subject_label` 是兼容列不是键空间**：EC 实测 1,447 个非空值里拼音 747、号名混装 326、纯数字 9、其他 365；**禁止**回填、禁止据此 join（D90 兜底）。
 - **只许重建、不许 `ALTER` 改序**：`ADD COLUMN` 只能追加到末尾，物理序 24 列只能靠 `CREATE TABLE id_v2(…)` → `INSERT … SELECT` → 换名 → 重建 `id_number` 外键；动土前 `VACUUM INTO` 全库备份、`PRAGMA integrity_check`、落盘后逐列核行数与空值数（空值数变化 = 搬串列了）。
@@ -114,11 +115,15 @@ owns: [P2, P3]
 - **空值不挪位**：空就是 NULL，不写 `0` / `无` / `/` / `-`，不把 A 列缺失挪进 B 列（D90 从 `id` 扩到 `clin` 全表）。
 - **同义列先归一**：全库 103 个病理同义列（`figo_raw` / `figo_canon` / `figo_stage` / `FIGO stage`、`mi` / `nmi` / `smi` / `肌层1`、`p53` / `p53_status`、`ki67` / `Ki67` / `ki67_status` …）入表前映射到规范名；`*_raw` 只作溯源列，必须有 `*_canon` 配套。
 - **列名规范**：`^[a-z][a-z0-9_]{1,30}$`；禁中文列名、禁 `_数字` 后缀族（D48）、禁 SQL 保留字（D89）。
-- **`dict` 全覆盖**：每列入 `dict`（全称 / 单位 / 参考范围 / 值域 / `source`），缺行即 D88。
+- **`dict` 全覆盖**：每列入全局 `{RAW}\Family\dict.db`，缺行即 D88（与尚未机器化的 D95 同读全局表）。
 
 #### 门禁
 
 D87 标准指纹 / D88 `dict` 覆盖 / D89 缩写合规 / D90 空值不挪位 / D91 病理长文本报数 / D92 入表清洗报数。初版一律 **report-only**，跑满一个批次无新债后再转 P1。
+
+# 建库契约
+
+契 1–10、律 1–5 → `db-build-contract.md`。D93–D99 尚未机器化（report-only）。做法 → skill `db-library` 的 `load-pipeline.md`。
 
 # DICOM 与伪匿名
 **§P2** **DICOM 来源的 PHI**：以 DICOM 头为源，只进家族库——`PatientName`→`id.name`、`PatientID` / `OtherPatientIDs` / `AccessionNumber`→`id_number`、`PatientBirthDate`→`id.birth_date`、`PatientSex`→`id.sex`、`PatientAddress`→`id.address`、`PatientTelephoneNumbers`→`id.phone`。
@@ -126,3 +131,4 @@ D87 标准指纹 / D88 `dict` 覆盖 / D89 缩写合规 / D90 空值不挪位 / 
 - **§P3** 伪匿名标识（`ANON*` / `XXX` / `TEST` / 纯数字 / 单字符重复）不得当真名、不得据此合并身份；一头多姓名或一姓名多头各建身份并记 qc，不合并。
 - 像素内烧入的文字属无法自动剥离的 PHI，外发前须人工复核。
 - DICOM 头与院内名单冲突时以头为准并记 `qc(DICOM_NAME_CONFLICT)`。判级见 `db-gates.md` D56–D58。
+
