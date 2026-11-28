@@ -51,7 +51,7 @@ up: My rule.md §5
 | `src_header_row` | 是 | 表头所在行号（1 起）；多行表头写起始行 |
 | `src_header` | 是 | 源列名原文（允许中文，**这是唯一允许中文的地方**） |
 | `src_column` | 否 | 多行表头拼接后的子列定位，如 `行1\|行2` |
-| `target_table` | 是 | `clin` / `person` / `_modules_<mod>` / `<mod>_val` |
+| `target_table` | 是 | `clin` / `person` / `_modules_<mod>` / `<mod>_value` |
 | `target_column` | 是 | 目标列名，ASCII snake_case |
 | `dtype` | 是 | `REAL` / `INTEGER` / `TEXT` / `DATE` / `enum` |
 | `unit` | 否 | 目标单位代码（外置，不写进列名）；无单位写 `-` |
@@ -74,7 +74,7 @@ up: My rule.md §5
 | `newdb.py` | 按 `schema.sql` 建空库：家族库 + 子库 + `meta` 六键 + `目录说明.md`；目标已存在就跳过，绝不覆盖 | `--family/--slug/--root/--period-unit/--dry-run` | 每次新建子库 |
 | `mkdict.py` | 旧家族 `dict`（11 列）→ 全局 14 列 `dict.db`，补 `scope='stage'` 骨架行，同键异写进冲突报告 | `--dry-run/--out/--report` | dict 真源变更后；新家族入库前 |
 | `mkid.py` | 阶段 3：从退役家族库搬 `id`/`id_number`，现算 `longitudinal_n`/`multi_record_n`，写 `ref_project` 与两库 `meta`（`subject_types`/`identity_grain`） | `--from-family-db/--family/--slug/--identity-grain` | 建空库后、回填前 |
-| `fill.py` | 阶段 5：读 13 列 `map.csv` 按依赖序 src→person→clin→`_modules_*`→`*_val` 回填；源 `.xlsx/.xls` 按 sheet+header_row、`.db` 按表名；`transform` 支持 `const:<值>` 与 `mint:<茎>`（发顺序号，同一源值跨 sheet 复用）；`missing_rule` 按源侧标记判缺（`NA` → `NULL`，D97 的修法）；无 dict 行不 ALTER；重跑先清本 src 旧行 | `--map/--root/--family/--slug/--src-root/--dry-run` | 每个列组一批，先 dry-run |
+| `fill.py` | 阶段 5：读 13 列 `map.csv` 按依赖序 src→person→clin→`_modules_*`→`*_value` 回填；源 `.xlsx/.xls` 按 sheet+header_row、`.db` 按表名；`transform` 支持 `const:<值>` 与 `mint:<茎>`（发顺序号，同一源值跨 sheet 复用）；`missing_rule` 按源侧标记判缺（`NA` → `NULL`，D97 的修法）；无 dict 行不 ALTER；重跑先清本 src 旧行 | `--map/--root/--family/--slug/--src-root/--dry-run` | 每个列组一批，先 dry-run |
 | `preview.py` | 阶段 7：给刚建好的库出一张只读 HTML 预览（KPI / src 登记 / 表清单 / clin 逐列 dict+NULL+样例 / 抽样 / 门禁摘要），放根目录先给人看；`--gates` 才就地跑门禁 | `--root/--family/--slug/--out/--gates/--sample` | 每个库建完、汇报前 |
 
 `--dry-run` 是默认姿势：先看它要写哪些路径、几行，再跑。除 `preview.py` 只读、`mkdict.py` 写 `{RAW}\Family\dict.db` 外，其余都不写 `_DataBase` 以外的地方
@@ -183,7 +183,7 @@ CREATE TABLE dict (
 - 伪匿名编号不得当真名；9 段占位可多人共用，不判冲突。
 - `id.sex` / `id.birth_date` 入库时归一：`M` / `F` / `U`，日期 ISO。非 `M` / `F` / `U` 的 `sex` 一律停列送审（D99，尚未机器化）。
 
-**PHI 边界（硬）**：`_PHI\<FAM>db` 的 `id` / `id_number` 是唯一允许放姓名、电话、身份证、地址的表；子库 `clin` / `_modules_*` / `qc` / `*_val` 一律零 PHI，跨表引用只用 `family_uid`。
+**PHI 边界（硬）**：`_PHI\<FAM>db` 的 `id` / `id_number` 是唯一允许放姓名、电话、身份证、地址的表；子库 `clin` / `_modules_*` / `qc` / `*_value` 一律零 PHI，跨表引用只用 `family_uid`。
 
 ## 契 6 计数守恒
 
@@ -237,7 +237,7 @@ _DataBase\
 │  │  ├─ _PHI\<FAM>db         ← 身份：id / id_number / ref_project / 既有 ref_* / meta；不留 dict
 │  │  ├─ __zip\<leaf>\        ← 源压缩包（双下划线，不改名）
 │  │  ├─ __zip\thesis\<slug>\ ← 论文原件目标落点（勿再新建 _thesis）
-│  │  └─ <slug>\<slug>db      ← 子工程库：clin / person / qc / src / _modules_* / *_val
+│  │  └─ <slug>\<slug>db      ← 子工程库：clin / person / qc / src / _modules_* / *_value
 │  └─ …共 28
 └─ _grants\ _lab\ _med\ _reviews\ _teach\ _work\
 ```
